@@ -1,1 +1,2 @@
 Hello Dragons! Modified from Eclipse.
+Commit from shell.
