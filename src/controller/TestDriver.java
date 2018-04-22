@@ -14,8 +14,8 @@ public class TestDriver {
 		/* to create a user and auction
 		   uncomment and add auction name and username */
 		
-		//Auction auction = new Auction("Test Auction 1");
-		//User user = new User("tester", auction);
+		//Auction auction = new Auction("Test Auction 2");
+		//User user = new User("admin", auction);
 		//addUser(user, auction);
 		
 		
@@ -23,7 +23,7 @@ public class TestDriver {
 		   uncomment and change parameter to username */
 		
 		testLoad("tester");
-		//testLoad("admin");
+		testLoad("admin");
 	
 	}
 	
