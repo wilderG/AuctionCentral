@@ -14,63 +14,63 @@ import java.io.Serializable;
 public interface Handler extends Serializable {
 	
 	/**
-	 * 
-	 * @param theAuction
-	 * @return
+	 * Creates an auction
+	 * @param theAuction data that will be used to create an auction.
+	 * @return The serial version UID for the auction
 	 */
 	long createAuction(Auction theAuction);
 	
 	/**
-	 * 
-	 * @param theBid
-	 * @return
+	 * Creates a bid.
+	 * @param theBid data that will be used to create the bid.
+	 * @return The serial version UID for the
 	 */
 	long createBid(Bid theBid);
 	
 	/**
-	 * 
-	 * @param theItem
-	 * @return
+	 * Creates an item.
+	 * @param theItem data that will be used to create an item.
+	 * @return The serial version UID for the
 	 */
 	long createItem(Item theItem);
 	
 	/**
-	 * 
-	 * @param theUser
-	 * @return
+	 * Creates a user.
+	 * @param theUser data that will be used to create the user.
+	 * @return The username for the user.
 	 */
 	String createUser(User theUser);
 	
 	/**
-	 * 
-	 * @param theUUID
-	 * @return
+	 * Returns an auction associated the given serial version UID.
+	 * @param theUID that will be used to retrieve the auction
+	 * @return The Auction associated with the given serial version UID
 	 */
-	Auction getAuction(long theUUID);
+	Auction getAuction(long theUID);
 	
 	/**
-	 * 
-	 * @param theUUID
-	 * @return
+	 * Returns a bid associated the given serial version UID.
+	 * @param theUID associated with theBid that will be returned.
+	 * @return The Bid associated with the given serial version UID.
 	 */
 	Bid getBid(long theUUID);
 	
 	/**
-	 * 
-	 * @param theUUID
-	 * @return
+	 * Returns an item associated the given serial version UID.
+	 * @param theUID associated with theItem that will be returned
+	 * @return The Item associated with the given serial version UID.
 	 */
-	Item getItem(long theUUID);
+	Item getItem(long theUID);
 	
 	/**
-	 * 
-	 * @param theUsername
-	 * @return
+	 * Returns a user associated with the given username.
+	 * @param theUsername that will be used to retrieve the user.
+	 * @return The user associated with the given username.
 	 */
 	User getUser(String theUsername);
 	
 	/**
-	 * 
+	 * Saves the data onto storage.
 	 */
 	void saveData();
 }

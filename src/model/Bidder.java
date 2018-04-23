@@ -14,7 +14,6 @@ public class Bidder extends User {
 	/** Test auction reference. **/
 	private Auction myAuction;
 	
-	/** Constructor takes a username and auction. **/
 	
 	/**
 	 * Constructor that initializes theUser with the given username, name, and auction data.

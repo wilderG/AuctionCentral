@@ -19,10 +19,10 @@ public class Auction implements Serializable {
 	
 	/**
 	 * Constructor that will be used to initialize an auction with the given name.
-	 * @param name
+	 * @param theName that will be associated with the auction
 	 */
-	public Auction(String name) {
-		myName = name;
+	public Auction(String theName) {
+		myName = theName;
 	}
 	
 	/**

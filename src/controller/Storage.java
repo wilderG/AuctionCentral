@@ -65,7 +65,6 @@ public class Storage {
 		return key;
 	}
 	
-	//stores a new user
 	/**
 	 * Stores a new user into myUsers.
 	 * @param theUser who will be added to myUsers
@@ -78,7 +77,6 @@ public class Storage {
 		return key;
 	}
 		
-	//returns a stored user
 	/**
 	 * Returns the user object for the given username.
 	 * @param theUsername that will be used to retrieve a user
