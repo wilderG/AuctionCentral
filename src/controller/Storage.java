@@ -95,7 +95,7 @@ public class Storage {
 			fileIn.close();
 			
 		} catch (IOException i) {
-			i.printStackTrace();
+			//i.printStackTrace();
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -109,7 +109,7 @@ public class Storage {
 			fileIn.close();
 			
 		} catch (IOException i) {
-			i.printStackTrace();
+			//i.printStackTrace();
 		} 
 			catch (ClassNotFoundException e) {
 			e.printStackTrace();
