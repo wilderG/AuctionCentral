@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.UUID;
 import model.Auction;
-import model.User;
+import model.Bidder;
 
 /**
  * Creates an object that loads stored data into memory. Call getUser to get the user
@@ -17,9 +17,27 @@ import model.User;
  *
  */
 public class Storage {
+	
+	/**
+	 * Constant for the file path where the user data will be saved.
+	 */
+	private static String USER_DATA_FILE_PATH = "data/user.dat";
+	
+	
+	/**
+	 * Constant for the file path were the auction data will be saved.
+	 */
+	private static String AUCTION_DATA_FILE_PATH = "data/user.dat";
 
+	/**
+	 * Hashmap for each auction that will be saved and its respective UUID code.
+	 */
 	private HashMap<UUID, Auction> myAuctions;
-	private HashMap<String, User> myUsers;	
+	
+	/**
+	 * Hashmap of each user and its respective username. 
+	 */
+	private HashMap<String, Bidder> myUsers;	
 	
 	public Storage() {
 		//instantiate HashMaps
@@ -30,7 +48,11 @@ public class Storage {
 		loadData();
 	}
 	
-	//stores a new auction
+	/**
+	 * Stores the given auctions data into the myAuctions map.
+	 * @param theAuction for which a UUID will be generated and stored in myAuctions
+	 * @return The generated UUID for theAuction
+	 */
 	public UUID storeAuction(final Auction theAuction) {
 		UUID key;
 		
@@ -44,22 +66,34 @@ public class Storage {
 	}
 	
 	//stores a new user
-	public String storeUser(final User theUser) {
-		String key = theUser.myName;
+	/**
+	 * Stores a new user into myUsers.
+	 * @param theUser who will be added to myUsers
+	 * @return the username for theUser
+	 */
+	public String storeUser(final Bidder theUser) {
+		String key = theUser.getUsername();
 			
 		myUsers.put(key, theUser);
 		return key;
 	}
 		
 	//returns a stored user
-	public User getUser(final String username) {
-		return myUsers.get(username);
+	/**
+	 * Returns the user object for the given username.
+	 * @param theUsername that will be used to retrieve a user
+	 * @return The user associated with the given username
+	 */
+	public Bidder getUser(final String theUsername) {
+		return myUsers.get(theUsername);
 	}
 		
-	//write current data to file
+	/**
+	 * Writes the current data to the output file.
+	 */
 	public void writeData() {
 		try {
-			FileOutputStream fileOut = new FileOutputStream("data/auction.dat");
+			FileOutputStream fileOut = new FileOutputStream(AUCTION_DATA_FILE_PATH);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			
 			out.writeObject(myAuctions);
@@ -71,7 +105,7 @@ public class Storage {
 		}
 		
 		try {
-			FileOutputStream fileOut = new FileOutputStream("data/user.dat");
+			FileOutputStream fileOut = new FileOutputStream(USER_DATA_FILE_PATH);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			
 			out.writeObject(myUsers);
@@ -83,11 +117,13 @@ public class Storage {
 		}
 	}
 		
-	//load data files into memory
+	/**
+	 * Loads the data files into memory.
+	 */
 	@SuppressWarnings("unchecked")
 	private void loadData() {
 		try {
-			FileInputStream fileIn = new FileInputStream("data/auction.dat");
+			FileInputStream fileIn = new FileInputStream(AUCTION_DATA_FILE_PATH);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			
 			myAuctions = (HashMap<UUID, Auction>) in.readObject();
@@ -101,10 +137,10 @@ public class Storage {
 		}
 		
 		try {
-			FileInputStream fileIn = new FileInputStream("data/user.dat");
+			FileInputStream fileIn = new FileInputStream(USER_DATA_FILE_PATH);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			
-			myUsers = (HashMap<String, User>) in.readObject();
+			myUsers = (HashMap<String, Bidder>) in.readObject();
 			in.close();
 			fileIn.close();
 			
