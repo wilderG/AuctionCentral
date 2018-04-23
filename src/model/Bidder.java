@@ -5,7 +5,7 @@ package model;
  * @author Jared Malone
  *
  */
-public class Bidder extends AbstractUser {
+public class Bidder extends User {
 
 	/** Class Serial ID -- Changing this will corrupt the data storage! */
 	private static final long serialVersionUID = 8113376313259596043L;
