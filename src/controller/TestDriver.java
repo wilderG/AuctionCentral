@@ -3,10 +3,16 @@ package controller;
 import model.Auction;
 import model.User;
 
+/**
+ * Test driver for persistent storage. You can create an auction and user the auction belongs to.
+ * Then call addUser to store both objects. If you rerun the program and call testload, both
+ * objects and their relationship will be present in memory.
+ * @author Jared
+ */
 public class TestDriver {
 
 	public static Storage storage;
-	
+			
 	public static void main(String[] args) {
 		storage = new Storage();
 		

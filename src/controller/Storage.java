@@ -10,6 +10,12 @@ import java.util.UUID;
 import model.Auction;
 import model.User;
 
+/**
+ * Creates an object that loads stored data into memory. Call getUser to get the user
+ * and its references to other models will be intact.
+ * @author Jared
+ *
+ */
 public class Storage {
 
 	private HashMap<UUID, Auction> myAuctions;
@@ -28,6 +34,7 @@ public class Storage {
 	public UUID storeAuction(final Auction theAuction) {
 		UUID key;
 		
+		//check for duplicate key before storing in map.
 		do {
 			key = UUID.randomUUID();
 		} while (myAuctions.containsKey(key));
@@ -44,19 +51,12 @@ public class Storage {
 		return key;
 	}
 		
-	
-	//returns a stored auction
-	public Auction getAuction(final UUID theKey) {
-		return myAuctions.get(theKey);
-	}
-	
 	//returns a stored user
 	public User getUser(final String username) {
 		return myUsers.get(username);
 	}
-	
-	
-	//save current HashMap to file
+		
+	//write current data to file
 	public void writeData() {
 		try {
 			FileOutputStream fileOut = new FileOutputStream("data/auction.dat");
@@ -83,7 +83,7 @@ public class Storage {
 		}
 	}
 		
-	//load data file for constructor
+	//load data files into memory
 	@SuppressWarnings("unchecked")
 	private void loadData() {
 		try {
