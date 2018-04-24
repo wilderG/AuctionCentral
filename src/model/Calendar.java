@@ -2,10 +2,12 @@ package model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class Calendar implements Serializable {
 
-	/** Class Serial ID -- Changing this will corrupt the data storage! */
-	private static final long serialVersionUID = 8113376313259596043L;
+	/**
+	 * Calendar
+	 */
+	private static final long serialVersionUID = 1895764042180154001L;
 
 	/** Test string for username. **/	
 	public String myName;
@@ -14,7 +16,7 @@ public class User implements Serializable {
 	public Auction myAuction;
 	
 	/** Constructor takes a username and auction. **/
-	public User(final String username, final Auction theAuction) {
+	public Calendar(final String username, final Auction theAuction) {
 		myName = username;
 		myAuction = theAuction;
 	}

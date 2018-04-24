@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.UUID;
 import model.Auction;
+import model.Calendar;
 import model.User;
 
 /**
@@ -18,30 +19,32 @@ import model.User;
  */
 public class Storage {
 
-	private HashMap<UUID, Auction> myAuctions;
+//	private HashMap<UUID, Auction> myAuctions;
 	private HashMap<String, User> myUsers;	
+	private Calendar myCalendar;
 	
 	public Storage() {
 		//instantiate HashMaps
-		myAuctions = new HashMap<>();
+//		myAuctions = new HashMap<>();
 		myUsers = new HashMap<>();
+		
 		
 		//load files
 		loadData();
 	}
 	
-	//stores a new auction
-	public UUID storeAuction(final Auction theAuction) {
-		UUID key;
-		
-		//check for duplicate key before storing in map.
-		do {
-			key = UUID.randomUUID();
-		} while (myAuctions.containsKey(key));
-		
-		myAuctions.put(key, theAuction);
-		return key;
-	}
+//	//stores a new auction
+//	public UUID storeAuction(final Auction theAuction) {
+//		UUID key;
+//		
+//		//check for duplicate key before storing in map.
+//		do {
+//			key = UUID.randomUUID();
+//		} while (myAuctions.containsKey(key));
+//		
+//		myAuctions.put(key, theAuction);
+//		return key;
+//	}
 	
 	//stores a new user
 	public String storeUser(final User theUser) {
@@ -56,13 +59,26 @@ public class Storage {
 		return myUsers.get(username);
 	}
 		
+	//stores a calendar
+	public void storeCalendar(final Calendar theCalendar) {
+				
+		myCalendar = theCalendar;
+	}
+			
+	//returns a stored user
+	public Calendar getCalendar() {
+		return myCalendar;
+	}
+	
 	//write current data to file
 	public void writeData() {
+		Capsule data = new Capsule(myUsers, myCalendar);
+		
 		try {
 			FileOutputStream fileOut = new FileOutputStream("data/auction.dat");
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			
-			out.writeObject(myAuctions);
+			out.writeObject(data);
 		
 			out.close();
 			fileOut.close();
@@ -70,29 +86,34 @@ public class Storage {
 			i.printStackTrace();
 		}
 		
-		try {
-			FileOutputStream fileOut = new FileOutputStream("data/user.dat");
-			ObjectOutputStream out = new ObjectOutputStream(fileOut);
-			
-			out.writeObject(myUsers);
-		
-			out.close();
-			fileOut.close();
-		} catch (IOException i) {
-			i.printStackTrace();
-		}
+//		try {
+//			FileOutputStream fileOut = new FileOutputStream("data/user.dat");
+//			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+//			
+//			out.writeObject(myUsers);
+//		
+//			out.close();
+//			fileOut.close();
+//		} catch (IOException i) {
+//			i.printStackTrace();
+//		}
 	}
 		
 	//load data files into memory
 	@SuppressWarnings("unchecked")
 	private void loadData() {
+		Capsule data;
+		
 		try {
 			FileInputStream fileIn = new FileInputStream("data/auction.dat");
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			
-			myAuctions = (HashMap<UUID, Auction>) in.readObject();
+			data = (Capsule) in.readObject();
 			in.close();
 			fileIn.close();
+			
+			myUsers = data.users;
+			myCalendar = data.calendar;
 			
 		} catch (IOException i) {
 			//i.printStackTrace();
@@ -100,20 +121,20 @@ public class Storage {
 			e.printStackTrace();
 		}
 		
-		try {
-			FileInputStream fileIn = new FileInputStream("data/user.dat");
-			ObjectInputStream in = new ObjectInputStream(fileIn);
-			
-			myUsers = (HashMap<String, User>) in.readObject();
-			in.close();
-			fileIn.close();
-			
-		} catch (IOException i) {
-			//i.printStackTrace();
-		} 
-			catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			FileInputStream fileIn = new FileInputStream("data/user.dat");
+//			ObjectInputStream in = new ObjectInputStream(fileIn);
+//			
+//			myUsers = (HashMap<String, User>) in.readObject();
+//			in.close();
+//			fileIn.close();
+//			
+//		} catch (IOException i) {
+//			//i.printStackTrace();
+//		} 
+//			catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }

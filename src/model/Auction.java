@@ -8,7 +8,7 @@ public class Auction implements Serializable {
 	private static final long serialVersionUID = -5386584822819727993L;
 	
 	/** Test Field **/
-	private final String myName;
+	public String myName;
 	
 	/** Constructor takes a test string. **/
 	public Auction(String name) {
