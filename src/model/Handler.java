@@ -14,32 +14,32 @@ import java.io.Serializable;
 public interface Handler extends Serializable {
 	
 	/**
-	 * Creates an auction
-	 * @param theAuction data that will be used to create an auction.
+	 * Stores an auction
+	 * @param theAuction data that will be used to store an auction.
 	 * @return The serial version UID for the auction
 	 */
-	long createAuction(Auction theAuction);
+	long storeAuction(Auction theAuction);
 	
 	/**
-	 * Creates a bid.
-	 * @param theBid data that will be used to create the bid.
+	 * Stores a bid.
+	 * @param theBid data that will be used to store the bid.
 	 * @return The serial version UID for the
 	 */
-	long createBid(Bid theBid);
+	long storeBid(Bid theBid);
 	
 	/**
-	 * Creates an item.
-	 * @param theItem data that will be used to create an item.
+	 * Stores an item.
+	 * @param theItem data that will be used to store an item.
 	 * @return The serial version UID for the
 	 */
-	long createItem(Item theItem);
+	long storeItem(Item theItem);
 	
 	/**
-	 * Creates a user.
-	 * @param theUser data that will be used to create the user.
+	 * Stores a user.
+	 * @param theUser data that will be used to store the user.
 	 * @return The username for the user.
 	 */
-	String createUser(User theUser);
+	String storeUser(User theUser);
 	
 	/**
 	 * Returns an auction associated the given serial version UID.
