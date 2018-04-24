@@ -1,26 +1,55 @@
+/**
+ * 
+ */
 package model;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
-
-	/** Class Serial ID -- Changing this will corrupt the data storage! */
-	private static final long serialVersionUID = 8113376313259596043L;
-
-	/** Test string for username. **/	
-	public String myName;
+/**
+ * Provides common implementations of some user behaviors.
+ * @author Jim Rosales
+ */
+public abstract class User implements Serializable {
 	
-	/** Test auction reference. **/
-	private Auction myAuction;
+	/**
+	 * Generated Serial Version UID
+	 */
+	private static final long serialVersionUID = -2193665280820986783L;
 	
-	/** Constructor takes a username and auction. **/
-	public User(final String username, final Auction theAuction) {
-		myName = username;
-		myAuction = theAuction;
+	/**
+	 * The username associated with the user.
+	 */
+	protected String myUsername;
+	
+	/**
+	 * The name of the user
+	 */
+	protected String myName;
+	
+	/**
+	 * Constructs a user.
+	 * @param theUserName The username that the user will be initialized with
+	 */
+	protected User(String theUsername, String theName) {
+		myUsername = theUsername;
+		myName = theName;
 	}
 	
-	public String toString() {
-		return "User: " + myName + ", Auction: " + myAuction.toString();
+	/**
+	 * Returns the username associated with the respective user.
+	 * @return The username for the user.
+	 */
+	public String getUsername() {
+		return myUsername;
 	}
+	
+	/**
+	 * Returns the name of the user.
+	 * @return The name of the user.
+	 */
+	public String getName() {
+		return myName;
+	}
+	
 	
 }
