@@ -1,9 +1,15 @@
 /**
  * 
  */
-package model;
+package controller;
 
 import java.io.Serializable;
+
+import model.NewAuctionRequest;
+import model.NewBidRequest;
+import model.NewItemRequest;
+import model.NewUserRequest;
+import model.User;
 
 /**
  * Outlines the common functionality for a manager.
