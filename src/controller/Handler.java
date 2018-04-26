@@ -1,9 +1,12 @@
 /**
  * 
  */
-package model;
+package controller;
 
 import java.io.Serializable;
+
+import model.Calendar;
+import model.User;
 
 /**
  * Interface for a data handle that outlines all needed functionality.
