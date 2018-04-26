@@ -1,7 +1,7 @@
 package controller;
 
 import model.Auction;
-import model.Calendar;
+import model.AuctionCalendar;
 import model.User;
 
 /**
@@ -17,7 +17,7 @@ public class TestDriver {
 	public static void main(String[] args) {
 		storage = new Storage();
 		User user;
-		Calendar calendar;
+		AuctionCalendar calendar;
 		
 		
 		/* to create a user and auction

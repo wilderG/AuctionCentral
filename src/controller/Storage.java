@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.UUID;
 import model.Auction;
-import model.Calendar;
+import model.AuctionCalendar;
 import model.User;
 
 /**
@@ -21,7 +21,7 @@ public class Storage {
 
 //	private HashMap<UUID, Auction> myAuctions;
 	private HashMap<String, User> myUsers;	
-	private Calendar myCalendar;
+	private AuctionCalendar myCalendar;
 	
 	public Storage() {
 		//instantiate HashMaps
@@ -60,13 +60,13 @@ public class Storage {
 	}
 		
 	//stores a calendar
-	public void storeCalendar(final Calendar theCalendar) {
+	public void storeCalendar(final AuctionCalendar theCalendar) {
 				
 		myCalendar = theCalendar;
 	}
 			
 	//returns a stored user
-	public Calendar getCalendar() {
+	public AuctionCalendar getCalendar() {
 		return myCalendar;
 	}
 	

@@ -2,7 +2,7 @@ package model;
 
 import java.io.Serializable;
 
-public class Calendar implements Serializable {
+public class AuctionCalendar implements Serializable {
 
 	/**
 	 * Calendar
@@ -16,7 +16,7 @@ public class Calendar implements Serializable {
 	public Auction myAuction;
 	
 	/** Constructor takes a username and auction. **/
-	public Calendar(final String username, final Auction theAuction) {
+	public AuctionCalendar(final String username, final Auction theAuction) {
 		myName = username;
 		myAuction = theAuction;
 	}
