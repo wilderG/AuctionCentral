@@ -1,28 +1,32 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.Date;
 
-public class AuctionCalendar implements Serializable {
+public class AuctionCalendar implements Serializable, Calendar {
 
 	/**
-	 * Calendar
+	 * Generate Serial Version UID.
 	 */
-	private static final long serialVersionUID = 1895764042180154001L;
+	private static final long serialVersionUID = -7640027391971367459L;
 
-	/** Test string for username. **/	
-	public String myName;
-	
-	/** Test auction reference. **/
-	public Auction myAuction;
-	
-	/** Constructor takes a username and auction. **/
-	public AuctionCalendar(final String username, final Auction theAuction) {
-		myName = username;
-		myAuction = theAuction;
+	@Override
+	public Collection<Auction> getAuctionsInRange(Date theStart, Date theEnd) {
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
-	public String toString() {
-		return "User: " + myName + ", Auction: " + myAuction.toString();
+
+	@Override
+	public Collection<Auction> getAuctionsOnDate(Date theDate) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addAuction(Date theDate, Auction theAuction) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

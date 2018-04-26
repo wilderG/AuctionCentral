@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Provides common implementations of some user behaviors.
  * @author Jim Rosales
  */
-public abstract class User implements Serializable {
+public class User implements Serializable {
 	
 	/**
 	 * Generated Serial Version UID
@@ -19,18 +19,18 @@ public abstract class User implements Serializable {
 	/**
 	 * The username associated with the user.
 	 */
-	protected String myUsername;
+	private String myUsername;
 	
 	/**
 	 * The displayed name of the user
 	 */
-	protected String myDisplayName;
+	private String myDisplayName;
 	
 	/**
 	 * Constructs a user.
 	 * @param theUserName The username that the user will be initialized with
 	 */
-	protected User(String theUsername, String theDisplayName) {
+	public User(String theUsername, String theDisplayName) {
 		myUsername = theUsername;
 		myDisplayName = theDisplayName;
 	}

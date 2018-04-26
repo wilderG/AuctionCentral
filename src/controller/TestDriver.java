@@ -1,7 +1,5 @@
 package controller;
 
-import model.Auction;
-import model.AuctionCalendar;
 import model.User;
 
 /**
@@ -12,45 +10,20 @@ import model.User;
  */
 public class TestDriver {
 
-	public static Storage storage;
-			
 	public static void main(String[] args) {
-		storage = new Storage();
+		StorageIO storage = new StorageIO();
 		User user;
-		AuctionCalendar calendar;
+				
+		/* to create a user uncomment here */
 		
-		
-		/* to create a user and auction
-		   uncomment and add auction name and username */
-		
-//        Auction auction = new Auction("Test Auction 1");
-//		user = new User("tester", auction);
-//		calendar = new Calendar("Calendar", auction);
-//				
-//		storage.storeUser(user);
-//		storage.storeCalendar(calendar);
-//		storage.writeData();
-		
-		
+		user = new User("tester", "Sam Tester");
+		storage.storeUser("tester", user);
+		storage.writeData();
 		
 		
 		/* to load a user and print details */
-		user = storage.getUser("tester");
-		calendar = storage.getCalendar();
-		System.out.println(user);
-		System.out.println(calendar);
-		
-//		/* change auction name */
-//		user.myAuction.myName = "Changed Name";
-//		storage.writeData();
-
-//		
-//		//get auction from storage using key
 //		user = storage.getUser("tester");
-//		calendar = storage.getCalendar();
-//		
 //		System.out.println(user);
-//		System.out.println(calendar);
 	
 	}
 	
