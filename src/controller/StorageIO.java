@@ -74,7 +74,7 @@ public class StorageIO implements Handler {
 	 * Writes the current state of all data to disk.
 	 */
 	public void writeData() {
-		Capsule data = new Capsule(myUsers, myCalendar);
+		StorageCapsule data = new StorageCapsule(myUsers, myCalendar);
 		
 		try {
 			FileOutputStream fileOut = new FileOutputStream(fileName);
@@ -95,13 +95,13 @@ public class StorageIO implements Handler {
 	 * initializeNewData() is called. 
 	 */
 	private void loadData() {
-		Capsule data;
+		StorageCapsule data;
 		
 		try {
 			FileInputStream fileIn = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			
-			data = (Capsule) in.readObject();
+			data = (StorageCapsule) in.readObject();
 			in.close();
 			fileIn.close();
 			

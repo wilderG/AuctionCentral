@@ -6,7 +6,7 @@ import java.util.HashMap;
 import model.AuctionCalendar;
 import model.User;
 
-public class Capsule implements Serializable {
+public class StorageCapsule implements Serializable {
 
 	/**
 	 * 
@@ -16,7 +16,7 @@ public class Capsule implements Serializable {
 	
 	public AuctionCalendar calendar;
 	
-	public Capsule(HashMap<String, User> theUser, AuctionCalendar theCalendar) {
+	public StorageCapsule(HashMap<String, User> theUser, AuctionCalendar theCalendar) {
 		users = theUser;
 		calendar = theCalendar;
 	}
