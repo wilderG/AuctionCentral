@@ -22,17 +22,17 @@ public abstract class User implements Serializable {
 	protected String myUsername;
 	
 	/**
-	 * The name of the user
+	 * The displayed name of the user
 	 */
-	protected String myName;
+	protected String myDisplayName;
 	
 	/**
 	 * Constructs a user.
 	 * @param theUserName The username that the user will be initialized with
 	 */
-	protected User(String theUsername, String theName) {
+	protected User(String theUsername, String theDisplayName) {
 		myUsername = theUsername;
-		myName = theName;
+		myDisplayName = theDisplayName;
 	}
 	
 	/**
@@ -47,8 +47,8 @@ public abstract class User implements Serializable {
 	 * Returns the name of the user.
 	 * @return The name of the user.
 	 */
-	public String getName() {
-		return myName;
+	public String getDisplayName() {
+		return myDisplayName;
 	}
 	
 	

@@ -13,27 +13,31 @@ import java.io.Serializable;
 public interface Manager extends Serializable {
 	
 	/**
+	 * Returns the stored user.
+	 * @param theUsername the username to return
+	 * @return User object associated with the username
+	 */
+	User getUser(String theUsername);
+	
+	/**
 	 * Submits a new auction using the given auction request.
 	 * @param theAuctionRequest
-	 * @return The ID for the new Auction
 	 */
-	long submitNewAuction(AuctionRequest theAuctionRequest);
+	void submitNewAuctionRequest(NewAuctionRequest theAuctionRequest);
 	
 
 	/**
 	 * Using the provided new user request submits a new user.
 	 * @param theUserRequest
-	 * @return The username for the user.
 	 */
-	String submitNewUser(NewUserRequest theUserRequest);
+	void submitNewUser(NewUserRequest theUserRequest);
 	
 	
 	/**
 	 * Submits a new item using the given request.
 	 * @param theNewItemRequest
-	 * @return The ID for the new Item.
 	 */
-	long submitNewItem(NewItemRequest theNewItemRequest);
+	void submitNewItem(NewItemRequest theNewItemRequest);
 	
 	/**
 	 * Submits a new bid request using the given request.

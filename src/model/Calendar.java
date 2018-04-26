@@ -4,8 +4,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author 
@@ -14,15 +14,24 @@ import java.util.List;
 public interface Calendar extends Serializable {
 	
 	/**
-	 * Returns the upcoming auctions.
-	 * @return A list of all auction ids that are upcoming
+	 * Returns all auctions within a date range.
+	 * @param theStart start date of range (inclusive)
+	 * @param theEnd end date of range (inclusive)
+	 * @return A collection of all auctions that are within the range
 	 */
-	List<AuctionID> getAllFutureAuction();
+	Collection<Auction> getAuctionsInRange(Date theStart, Date theEnd);
 
 	/**
 	 * Returns all the auction from the given date.
 	 * @param theDate whose auctions will be retrieved
-	 * @return A list of all the auctions ids on the given date.
+	 * @return A collection of all the auctions on the given date.
 	 */
-	List<AuctionID> getAuctionsFromDate(Date theDate);
+	Collection<Auction> getAuctionsOnDate(Date theDate);
+	
+	/**
+	 * Adds an auction to the specified date.
+	 * @param theDate the date the auction will be scheduled on.
+	 * @param theAuction the auction to add.
+	 */
+	void addAuction(Date theDate, Auction theAuction);
 }

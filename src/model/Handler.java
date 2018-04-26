@@ -15,10 +15,11 @@ public interface Handler extends Serializable {
 	
 	/**
 	 * Stores a user.
+	 * @param theUsername username to reference the user.
 	 * @param theUser data that will be used to store the user.
-	 * @return The username for the user.
+	 * 
 	 */
-	String storeUser(User theUser);
+	void storeUser(String theUsername, User theUser);
 	
 	
 	/**

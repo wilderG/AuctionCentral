@@ -28,13 +28,4 @@ public class Bid implements Serializable {
 	 */
 	private Bidder theBidder;
 	
-	/**
-	 * The item that will be associated with the Bid.
-	 */
-	private Item theItem;
-	
-	/**
-	 * The Auction in which the bid was placed.
-	 */
-	private Auction theAuction;
 }
