@@ -16,58 +16,42 @@ public class TestDriver {
 			
 	public static void main(String[] args) {
 		storage = new Storage();
+		User user;
+		Calendar calendar;
 		
 		
 		/* to create a user and auction
 		   uncomment and add auction name and username */
 		
-        Auction auction = new Auction("Test Auction 1");
-		User user = new User("tester", auction);
-		Calendar calendar = new Calendar("Calendar", auction);
-		//		User user2 = new User("admin", auction);
-				
+//        Auction auction = new Auction("Test Auction 1");
+//		user = new User("tester", auction);
+//		calendar = new Calendar("Calendar", auction);
+//				
 //		storage.storeUser(user);
 //		storage.storeCalendar(calendar);
 //		storage.writeData();
 		
-//		System.out.println("Added auction: " + auction); 
-//		System.out.println("Added user: " + user);
-//		addUser(user2, auction);
-//		
-		
-		/* to load a user and print auction
-		   uncomment and change parameter to username */
-		
-		testLoad("tester");
-//		testLoad("admin");
-		
-		storage.getUser("tester").myAuction.myName = "Changed NameAgain";
-//				
-		testLoad("tester");
-//		testLoad("admin");
-//		
-		storage.writeData();
 		
 		
-	
-	}
-	
-	//add user and auction to storage
-	public static void addUser(final User user, final Auction auction) {
-//		storage.storeAuction(auction);
-		storage.storeUser(user);
-		storage.writeData();
 		
-//		System.out.println("Added auction: " + auction); 
-		System.out.println("Added user: " + user);
-	}
-
-	public static void testLoad(String theUserName) {
-		//this entry is saved in the file
-		User user = storage.getUser(theUserName);
-		
-		//get auction from storage using key
+		/* to load a user and print details */
+		user = storage.getUser("tester");
+		calendar = storage.getCalendar();
 		System.out.println(user);
-		System.out.println(storage.getCalendar());
+		System.out.println(calendar);
+		
+//		/* change auction name */
+//		user.myAuction.myName = "Changed Name";
+//		storage.writeData();
+
+//		
+//		//get auction from storage using key
+//		user = storage.getUser("tester");
+//		calendar = storage.getCalendar();
+//		
+//		System.out.println(user);
+//		System.out.println(calendar);
+	
 	}
+	
 }
