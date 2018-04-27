@@ -9,22 +9,22 @@ public class NewUserRequest {
 	/**
 	 * The username that will be associated with the new user.
 	 */
-	String myUsername;
+	private String myUsername;
 	
 	/**
 	 * The legal name for the user. ex: John Smith
 	 */
-	String myName;
+	private String myName;
 	
 	/**
 	 * The boolean that will determine whether the new user can place bids.
 	 */
-	Boolean myCanBid;
+	private Boolean myCanBid;
 	
 	/**
 	 * Boolean determines whether the user can sponsor auctions.
 	 */
-	Boolean myCanSponsorAuction;
+	private Boolean myCanSponsorAuction;
 	
 	/**
 	 * Constructor for requests for a new user.

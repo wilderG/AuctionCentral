@@ -11,12 +11,12 @@ public class NewAuctionRequest {
 	/**
 	 * The sponsor for the new auction.
 	 */
-	User mySponsor;
+	private User mySponsor;
 	
 	/**
 	 * The date for the requested auction.
 	 */
-	Date myDate;
+	private Date myDate;
 	
 	/**
 	 * Constructor for a new auction request.

@@ -26,6 +26,8 @@ public class User implements Serializable {
 	 */
 	private String myDisplayName;
 	
+	
+	
 	/**
 	 * Constructs a user.
 	 * @param theUserName The username that the user will be initialized with

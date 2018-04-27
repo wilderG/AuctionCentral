@@ -11,17 +11,17 @@ public class NewItemRequest {
 	/**
 	 * The description of the new item.
 	 */
-	String myDescription;
+	private String myDescription;
 	
 	/**
 	 * The minimum value that will be accepted for any bids placed for the new item.
 	 */
-	BigDecimal myMinimumBid;
+	private BigDecimal myMinimumBid;
 	
 	/**
 	 * The auction that will be associated with the new item.
 	 */
-	Auction myAuction;
+	private Auction myAuction;
 	
 	
 	/**
