@@ -22,9 +22,6 @@ public final class Auction implements Serializable {
 	/** The maximum number of bids allowed from a single bidder. **/
 	private int myMaximumBidsFromUniqueBidder;
 	
-	/** The number of days before the auction date to stop taking bids. **/
-	private int myBidCutoffDays;
-	
 	/** The date of this auction. **/
 	private final Date myDate;
 	
@@ -39,14 +36,11 @@ public final class Auction implements Serializable {
 	 * @param theDate date of the auction.
 	 * @param theMaxItemCount the maximum number of items allowed.
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
-	 * @param theBidCutOff the number of days before the auction to stop accepting bids.
 	 */
-	public Auction(final Date theDate, final int theMaxItemCount, final int theMaxBidCount,
-			final int theBidCutOff) {
+	public Auction(final Date theDate, final int theMaxItemCount, final int theMaxBidCount) {
 		myDate = theDate;
 		myMaximumItems = theMaxItemCount;
 		myMaximumBidsFromUniqueBidder = theMaxBidCount;
-		myBidCutoffDays = theBidCutOff;
 		
 		myItems = new HashSet<>();
 		myBids = new HashMap<>();
@@ -84,7 +78,8 @@ public final class Auction implements Serializable {
 	}
 	
 	/**
-	 * Checks if the bidder has already placed the maximum allowed number of bids.
+	 * Checks if the auction is open for bids, and if the bidder has
+	 * already placed the maximum allowed number of bids.
 	 * @param theBidder to check against
 	 * @return true if the bidder may add another
 	 */
@@ -100,15 +95,27 @@ public final class Auction implements Serializable {
 		}
 	}
 	
-	
+	/**
+	 * Checks if the auction is allowing new items.
+	 * @return true if a new item may be added.
+	 */
 	public boolean isAllowingNewItem() {
 		return (myItems.size() <= myMaximumItems);
 	}
 	
+	/**
+	 * Returns a collection of items for this auction.
+	 * @return the items
+	 */
 	public Collection<Item> getAllItems() {
 		return myItems;
 	}
 	
+	/**
+	 * Returns a collection of items that the bidder has bid on.
+	 * @param theBidder to reference
+	 * @return a collection of items the bidder has bid on.
+	 */
 	public Collection<Item> getAllItemsWithBidder(final Bidder theBidder) {
 		Collection<Item> bidderItems = new HashSet<>();
 		
@@ -118,7 +125,12 @@ public final class Auction implements Serializable {
 		return bidderItems;
 	}
 	
+	/**
+	 * Returns the date of this auction.
+	 * @return the date
+	 */
 	public Date getDate() {
 		return myDate;
 	}
+
 }
