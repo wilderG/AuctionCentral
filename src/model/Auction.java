@@ -91,7 +91,7 @@ public final class Auction implements Serializable {
 		if (!myBids.containsKey(theBidder)) {
 			return true;
 		} else {
-			return (myBids.get(theBidder).size() <= myMaximumBidsFromUniqueBidder);
+			return (myBids.get(theBidder).size() < myMaximumBidsFromUniqueBidder);
 		}
 	}
 	
@@ -100,7 +100,7 @@ public final class Auction implements Serializable {
 	 * @return true if a new item may be added.
 	 */
 	public boolean isAllowingNewItem() {
-		return (myItems.size() <= myMaximumItems);
+		return (myItems.size() < myMaximumItems);
 	}
 	
 	/**
