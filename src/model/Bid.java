@@ -24,8 +24,16 @@ public class Bid implements Serializable {
 	private BigDecimal theValue;
 	
 	/**
-	 * The bidder who placed the respective bid.
+	 * The item bid on.
 	 */
-	private Bidder theBidder;
+	private Item theItem;
+
 	
+	public BigDecimal getAmount() {
+		return null;
+	}
+	
+	public Item getItem() {
+		return theItem;
+	}
 }

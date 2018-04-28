@@ -14,24 +14,23 @@ import java.util.Date;
 public interface Calendar extends Serializable {
 	
 	/**
-	 * Returns all auctions within a date range.
-	 * @param theStart start date of range (inclusive)
-	 * @param theEnd end date of range (inclusive)
-	 * @return A collection of all auctions that are within the range
+	 * Checks if the calendar is allowing future auctions to be scheduled.
+	 * @return True if calendar is not at capacity
 	 */
-	Collection<Auction> getAuctionsInRange(Date theStart, Date theEnd);
+	Boolean isAllowingNewAuctions();
 
 	/**
-	 * Returns all the auction from the given date.
-	 * @param theDate whose auctions will be retrieved
-	 * @return A collection of all the auctions on the given date.
+	 * Returns all future auctions from today until the end of range.
+	 * @return A collection of all future auctions.
 	 */
-	Collection<Auction> getAuctionsOnDate(Date theDate);
+	Collection<Auction> getFutureAuctions();
 	
 	/**
-	 * Adds an auction to the specified date.
+	 * Adds an auction to the specified date. Will check calendar rules and
+	 * throw exception if auction cannot be added on specified date.
 	 * @param theDate the date the auction will be scheduled on.
 	 * @param theAuction the auction to add.
+	 * @param theUser the nonprofit contact associated with the auction.
 	 */
-	void addAuction(Date theDate, Auction theAuction);
+	void addAuction(Date theDate, Auction theAuction, NonProfitContact theUser);
 }

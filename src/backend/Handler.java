@@ -1,7 +1,7 @@
 /**
  * 
  */
-package controller;
+package backend;
 
 import java.io.Serializable;
 
@@ -44,4 +44,5 @@ public interface Handler extends Serializable {
 	 * Saves the data onto storage.
 	 */
 	void writeData();
+	
 }

@@ -4,6 +4,7 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * 
@@ -17,4 +18,7 @@ public class Item implements Serializable {
 	 */
 	private static final long serialVersionUID = -8055041786068385780L;
 
+	public BigDecimal getMinimumValue() {
+		return null;
+	}
 }
