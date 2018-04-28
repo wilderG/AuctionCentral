@@ -16,14 +16,14 @@ public class TestDriver {
 				
 		/* to create a user uncomment here */
 		
-		user = new User("tester", "Sam Tester");
-		storage.storeUser("tester", user);
-		storage.writeData();
+//		user = new User("tester", "Sam Tester");
+//		storage.storeUser("tester", user);
+//		storage.writeData();
 		
 		
 		/* to load a user and print details */
-//		user = storage.getUser("tester");
-//		System.out.println(user);
+		user = storage.getUser("tester");
+		System.out.println(user);
 	
 	}
 	

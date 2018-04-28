@@ -49,8 +49,16 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public Collection<Auction> getAvailableAuctions(Bidder theBidder) {
-		// TODO Auto-generated method stub
-		return null;
+		// get all future auctions
+		Collection<Auction> result = myCalendar.getFutureAuctions();
+		
+		// remove auctions such that bidder is not allowed
+		for (Auction e : result) {
+			if (!e.isAllowingNewBid(theBidder))
+				result.remove(e);
+		}
+				
+		return result;
 	}
 
 	/**
@@ -58,7 +66,10 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public boolean isNewAuctionRequestAllowed(NonProfitContact theUser) {
-		// TODO Auto-generated method stub
+		// check if previous auction was too recent
+		
+		// check if future auction is scheduled
+		
 		return false;
 	}
 
@@ -85,7 +96,8 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public boolean isNewItemRequestAllowed(Auction theAuction) {
-		// TODO Auto-generated method stub
+		// check auction
+		theAuction.isAllowingNewItem();
 		return false;
 	}
 
@@ -100,11 +112,20 @@ public class AuctionManager implements Manager {
 
 	/**
 	 * {@inheritDoc}
+	 * Checks if the auction is allowing bids from the bidder. Checks if
+	 * the bidder is allowed to make new bids.
 	 */
 	@Override
 	public boolean isNewBidRequestAllowed(Auction theAuction, Bidder theBidder) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result;
+		
+		// check auction status
+		result = theAuction.isAllowingNewBid(theBidder);
+						
+		// check bidder status
+		result = result && theBidder.isNewBidAllowed();
+		
+		return result;
 	}
 
 	/**

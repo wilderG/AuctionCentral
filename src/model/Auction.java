@@ -58,6 +58,10 @@ public class Auction implements Serializable {
 		return false;
 	}
 	
+	public boolean isAllowingNewItem() {
+		return false;
+	}
+	
 	public Collection<Item> getAllItems() {
 		return myItems;
 	}
