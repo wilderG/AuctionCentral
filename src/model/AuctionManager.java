@@ -1,14 +1,6 @@
-package controller;
+package model;
 
-import model.Auction;
-import model.AuctionCalendar;
-import model.Bid;
-import model.Item;
-import model.NewAuctionRequest;
-import model.NewBidRequest;
-import model.NewItemRequest;
-import model.NewUserRequest;
-import model.User;
+import java.util.Collection;
 
 /**
  * Manages new object requests from the front-end and 
@@ -23,27 +15,21 @@ public class AuctionManager implements Manager {
 	/** The default number of bids a bidder may place in any one auction. **/
 	private static final int MAXIMUM_BIDDER_BIDS_PER_AUCTION = 4;
 		
-	/** The maximum number of future auctions that may be scheduled. **/
-	private static final int MAXIMUM_FUTURE_AUCTIONS = 25;
-	
-	/** The maximum number of auctions allowed on any day. **/
-	private static final int MAXIMUM_AUCTIONS_PER_DAY = 2;
-	
-	/** The maximum number of days in the future that a new auction may be scheduled. **/
-	private static final int MAXIMUM_DAYS_OUT = 60;
-	
-	/** The minimum number of days in the future that a new auction may be scheduled. **/
-	private static final int MINIMUM_DAYS_OUT = 14;
-		
 	/** The maximum number of bids a bidder may place. **/
 	private static final int MAXIMUM_BIDDER_BIDS = 10;
 		
+	/** The minimum days between two auctions for the same non-profit. **/
+	private static final int MINIMUM_DAYS_BETWEEN_USER_AUCTIONS = 365;
+	
 	/** The schedule of all past and future auctions. **/
 	private AuctionCalendar myCalendar;
 	
 	/** Generated Serial Version UID. */
 	private static final long serialVersionUID = 4646613498773772086L;
 
+	/**
+	 * Constructs a new manager object.
+	 */
 	public AuctionManager() {
 		// not connected to StorageIO
 		myCalendar = new AuctionCalendar(); 
@@ -57,12 +43,12 @@ public class AuctionManager implements Manager {
 		// not connected to StorageIO
 		return new User(theUsername, "Test User");
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Auction submitNewAuctionRequest(NewAuctionRequest theAuctionRequest) {
+	public Collection<Auction> getAvailableAuctions(Bidder theBidder) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -71,16 +57,16 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User submitNewUser(NewUserRequest theUserRequest) {
-		// not connected to StorageIO
-		return new User(theUserRequest.getMyUsername(), "Test User"); 
+	public boolean isNewAuctionRequestAllowed(NonProfitContact theUser) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Item submitNewItem(NewItemRequest theNewItemRequest) {
+	public Auction processNewAuctionRequest(NewAuctionRequest theAuctionRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -89,7 +75,43 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Bid submitNewBid(NewBidRequest theNewBidRequest) {
+	public User processNewUser(NewUserRequest theUserRequest) {
+		// not connected to StorageUI
+		return getUser(theUserRequest.getMyUsername());
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isNewItemRequestAllowed(Auction theAuction) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Item processNewItem(NewItemRequest theNewItemRequest) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean isNewBidRequestAllowed(Auction theAuction, Bidder theBidder) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Bid processNewBid(NewBidRequest theNewBidRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}
