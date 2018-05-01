@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package model;
 
 import java.io.Serializable;
@@ -28,10 +27,6 @@ public class Auction implements Serializable {
 	}
 	
 }
-=======
-package model;
-
-import static org.junit.Assert.assertNotNull;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -44,61 +39,129 @@ import java.util.HashSet;
  * @author Jared Malone
  *
  */
-public class Auction implements Serializable {
+public final class Auction implements Serializable {
 
-	/** Class Serial ID -- Changing this will corrupt the data storage! */
+	/** Generated Serial ID **/
 	private static final long serialVersionUID = -5386584822819727993L;
 	
-	/** The maximum number of items allowed. **/
+	/** The maximum number of items allowed for this auction. **/
 	private int myMaximumItems;
 	
 	/** The maximum number of bids allowed from a single bidder. **/
-	private int myMaximumBidsFromSingleBidder;
+	private int myMaximumBidsFromUniqueBidder;
+
 	
 	/** The date of this auction. **/
 	private final Date myDate;
 	
 	/** The collection of items for this auction. **/
-	private Collection<Item> myItems;
+	private HashSet<AuctionItem> myItems;
 	
 	/** The collection of bids for this auction. **/
-	private HashMap<Bidder, Collection<Bid>> myBids;
+	private HashMap<Bidder, HashSet<Bid>> myBids;
 	
 	/**
-	 * Constructor that will be used to initialize an auction.
-	 * 
+	 * Creates a new auction.
+	 * @param theDate date of the auction.
+	 * @param theMaxItemCount the maximum number of items allowed.
+	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
+
 	 */
 	public Auction(final Date theDate, final int theMaxItemCount, final int theMaxBidCount) {
 		myDate = theDate;
 		myMaximumItems = theMaxItemCount;
-		myMaximumBidsFromSingleBidder = theMaxBidCount;
+		myMaximumBidsFromUniqueBidder = theMaxBidCount;
+
 		
 		myItems = new HashSet<>();
 		myBids = new HashMap<>();
 	}
 	
-	public void addItem(final Item theItem) {
-		
+	/**
+	 * Adds an item to the auction if auction is allowing new items.
+	 * @param theItem
+	 */
+	public void addItem(final AuctionItem theItem) {
+		if (isAllowingNewItem()) {
+			myItems.add(theItem);
+		}
 	}
 	
+	/**
+	 * Adds a bid to the auction if the bidder has not already bid on the maximum allowed
+	 * number of items.
+	 * @param theBidder making the bid
+	 * @param theBid being placed in the auction
+	 */
 	public void addBid(final Bidder theBidder, final Bid theBid) {
+		if (isAllowingNewBid(theBidder)) {
+			
+			// new bidder instantiate empty set of bids
+			if (!myBids.containsKey(theBidder)) {
+				myBids.put(theBidder, new HashSet<>());
+			}
 		
+			// should we check for duplicate bid?
+		
+			// add this bid to set
+			myBids.get(theBidder).add(theBid);
+		}
 	}
 	
+	/**
+	 * Checks if the auction is open for bids, and if the bidder has
+	 * already placed the maximum allowed number of bids.
+	 * @param theBidder to check against
+	 * @return true if the bidder may add another
+	 */
 	public boolean isAllowingNewBid(final Bidder theBidder) {
-		return false;
+		
+		// we need to check if the cut-off time for new bids has passed.
+		
+		// assuming time is okay then check if bidder is at limit.
+		if (!myBids.containsKey(theBidder)) {
+			return true;
+		} else {
+			return (myBids.get(theBidder).size() < myMaximumBidsFromUniqueBidder);
+		}
 	}
 	
+	/**
+	 * Checks if the auction is allowing new items.
+	 * @return true if a new item may be added.
+	 */
 	public boolean isAllowingNewItem() {
-		return false;
+		return (myItems.size() < myMaximumItems);
 	}
 	
-	public Collection<Item> getAllItems() {
+	/**
+	 * Returns a collection of items for this auction.
+	 * @return the items
+	 */
+	public Collection<AuctionItem> getAllItems() {
 		return myItems;
 	}
 	
-	public Collection<Item> getAllItemsWithBidder(final Bidder theBidder) {
-		return null;
+	/**
+	 * Returns a collection of items that the bidder has bid on.
+	 * @param theBidder to reference
+	 * @return a collection of items the bidder has bid on.
+	 */
+	public Collection<AuctionItem> getAllItemsWithBidder(final Bidder theBidder) {
+		Collection<AuctionItem> bidderItems = new HashSet<>();
+		
+		for (Bid e : myBids.get(theBidder)) {
+			bidderItems.add(e.getAuctionItem());
+		}
+		return bidderItems;
 	}
+	
+	/**
+	 * Returns the date of this auction.
+	 * @return the date
+	 */
+	public Date getDate() {
+		return myDate;
+	}
+
 }
->>>>>>> branch 'master' of https://github.com/wilderG/Checkin1.git

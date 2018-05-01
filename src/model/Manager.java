@@ -57,7 +57,7 @@ public interface Manager extends Serializable {
 	 * Submits a new item using the given request.
 	 * @param theNewItemRequest
 	 */
-	Item processNewItem(NewItemRequest theNewItemRequest);
+	AuctionItem processNewItem(NewItemRequest theNewItemRequest);
 	
 	/**
 	 * Pre-check if a new bid request is allowed for a given auction and bidder.	
