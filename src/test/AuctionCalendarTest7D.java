@@ -6,7 +6,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class AuctionCalendarTest {
+public class AuctionCalendarTest7D {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {

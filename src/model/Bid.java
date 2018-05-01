@@ -31,13 +31,9 @@ public class Bid implements Serializable {
 	/**
 	 * The item that will be associated with the Bid.
 	 */
-  private AuctionItem myItem;
+	private AuctionItem myItem;
 
-  /**
-	 * The item bid on.
-	 */
-  private AuctionItem myItem;
-
+  
 	/**
 	 * The Auction in which the bid was placed.
 	 */
@@ -58,12 +54,10 @@ public class Bid implements Serializable {
 	}
 	public AuctionItem getAuctionItem() {
 		return myItem;
+	}
 
-  public BigDecimal getAmount() {
+	public BigDecimal getAmount() {
 		return null;
 	}
 	
-	public Item getItem() {
-		return theItem;
-	}
 }
