@@ -12,7 +12,7 @@ public class TestDriver {
 
 	public static void main(String[] args) {
 		StorageIO storage = new StorageIO();
-		User user;
+		User user, copy;
 				
 		/* to create a user uncomment here */
 		
@@ -25,6 +25,16 @@ public class TestDriver {
 		user = storage.getUser("tester");
 		System.out.println(user);
 	
+		copy = null;
+		
+		try {
+			copy = (User) ObjectCloner.deepCopy(user);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		System.out.println("Cloned user: " + copy);
 	}
 	
 }
