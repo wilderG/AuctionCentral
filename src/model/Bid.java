@@ -24,15 +24,25 @@ public class Bid implements Serializable {
 	private BigDecimal myValue;
 	
 	/**
+<<<<<<< HEAD
 	 * The bidder who placed the respective bid.
 	 */
 	private Bidder myBidder;
 	
 	/**
 	 * The item that will be associated with the Bid.
+=======
+	 * The item bid on.
+>>>>>>> branch 'master' of https://github.com/wilderG/AuctionCentral.git
 	 */
+<<<<<<< HEAD
 	private AuctionItem myItem;
+=======
+	private Item theItem;
+
+>>>>>>> branch 'master' of https://github.com/wilderG/AuctionCentral.git
 	
+<<<<<<< HEAD
 	/**
 	 * The Auction in which the bid was placed.
 	 */
@@ -53,5 +63,13 @@ public class Bid implements Serializable {
 	}
 	public AuctionItem getAuctionItem() {
 		return myItem;
+=======
+	public BigDecimal getAmount() {
+		return null;
+	}
+	
+	public Item getItem() {
+		return theItem;
+>>>>>>> branch 'master' of https://github.com/wilderG/AuctionCentral.git
 	}
 }

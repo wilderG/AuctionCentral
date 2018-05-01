@@ -10,28 +10,21 @@ public class Bidder extends User {
 	/** Class Serial ID -- Changing this will corrupt the data storage! */
 	private static final long serialVersionUID = 8113376313259596043L;
 
+	private static final int MY_MAX_BID_COUNT = 10;
 	
-	/** Test auction reference. **/
-	private Auction myAuction;
+	private int myBidCount;
 	
-	
-	/**
-	 * Constructor that initializes theUser with the given username, name, and auction data.
-	 * @param theUsername The username that will be associated with the user.
-	 * @param theName The name of the user.
-	 * @param theAuction The Auction data associated with the user.
-	 */
-	public Bidder(final String theUsername, final String theName, final Auction theAuction) {
-		super(theUsername, theName);
-		myAuction = theAuction;
+	public Bidder(String theUsername, String theDisplayName) {
+		super(theUsername, theDisplayName);
+		// TODO Auto-generated constructor stub
 	}
 	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public String toString() {
-		return "User: " + myUsername + ", Auction: " + myAuction.toString();
+	public boolean isNewBidAllowed() {
+		return false;
+	}
+	
+	public void incrementBidCount() {
+		
 	}
 	
 }
