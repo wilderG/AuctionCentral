@@ -5,7 +5,7 @@ package backend;
 
 import java.io.Serializable;
 
-import model.Calendar;
+import model.AuctionCalendar;
 import model.User;
 
 /**
@@ -37,7 +37,7 @@ public interface Handler extends Serializable {
 	 * Returns the calendar.
 	 * @return The calendar.
 	 */
-	Calendar getCalendar();
+	AuctionCalendar getCalendar();
 	
 	
 	/**
