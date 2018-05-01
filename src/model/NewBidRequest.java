@@ -22,7 +22,7 @@ public class NewBidRequest {
 	/**
 	 * The item for which a bid was placed.
 	 */
-	private Item myItem;
+	private AuctionItem myItem;
 	
 	/**
 	 * The amount of the bid placed.
@@ -36,7 +36,7 @@ public class NewBidRequest {
 	 * @param theItem that will be associated with the new bid request.
 	 * @param theAmount that will be associated with the new bid request.
 	 */
-	public NewBidRequest(Bidder theBidder, Auction theAuction, Item theItem, BigDecimal theAmount) {
+	public NewBidRequest(Bidder theBidder, Auction theAuction, AuctionItem theItem, BigDecimal theAmount) {
 		myBidder = theBidder;
 		myAuction = theAuction;
 		myItem = theItem;
@@ -63,7 +63,7 @@ public class NewBidRequest {
 	 * Getter for the item associated with the new requested bid.
 	 * @return The item
 	 */
-	public Item getMyItem() {
+	public AuctionItem getMyItem() {
 		return myItem;
 	}
 	

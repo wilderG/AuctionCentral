@@ -105,7 +105,7 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Item processNewItem(NewItemRequest theNewItemRequest) {
+	public AuctionItem processNewItem(NewItemRequest theNewItemRequest) {
 		// TODO Auto-generated method stub
 		return null;
 	}

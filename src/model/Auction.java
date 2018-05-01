@@ -26,7 +26,7 @@ public final class Auction implements Serializable {
 	private final Date myDate;
 	
 	/** The collection of items for this auction. **/
-	private HashSet<Item> myItems;
+	private HashSet<AuctionItem> myItems;
 	
 	/** The collection of bids for this auction. **/
 	private HashMap<Bidder, HashSet<Bid>> myBids;
@@ -50,7 +50,7 @@ public final class Auction implements Serializable {
 	 * Adds an item to the auction if auction is allowing new items.
 	 * @param theItem
 	 */
-	public void addItem(final Item theItem) {
+	public void addItem(final AuctionItem theItem) {
 		if (isAllowingNewItem()) {
 			myItems.add(theItem);
 		}
@@ -107,7 +107,7 @@ public final class Auction implements Serializable {
 	 * Returns a collection of items for this auction.
 	 * @return the items
 	 */
-	public Collection<Item> getAllItems() {
+	public Collection<AuctionItem> getAllItems() {
 		return myItems;
 	}
 	
@@ -116,11 +116,11 @@ public final class Auction implements Serializable {
 	 * @param theBidder to reference
 	 * @return a collection of items the bidder has bid on.
 	 */
-	public Collection<Item> getAllItemsWithBidder(final Bidder theBidder) {
-		Collection<Item> bidderItems = new HashSet<>();
+	public Collection<AuctionItem> getAllItemsWithBidder(final Bidder theBidder) {
+		Collection<AuctionItem> bidderItems = new HashSet<>();
 		
 		for (Bid e : myBids.get(theBidder)) {
-			bidderItems.add(e.getItem());
+			bidderItems.add(e.getAuctionItem());
 		}
 		return bidderItems;
 	}
