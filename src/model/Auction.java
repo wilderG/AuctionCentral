@@ -1,6 +1,34 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Auction implements Serializable {
+
+	/** Class Serial ID -- Changing this will corrupt the data storage! */
+	private static final long serialVersionUID = -5386584822819727993L;
+	
+	public static final int MAX_ITEM_COUNT = 10;
+	//private final Date myDate;
+	
+	//private List<AuctionItem> myInventory;
+	
+	/** Constructor takes a test string. **/
+	public Auction() {
+	    //myDate = theDate;
+	    //myInventory = new LinkedList<>();
+	}
+	
+	@Override
+	public String toString() {
+	    return "";
+	}
+	
+}
+
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -21,6 +49,7 @@ public final class Auction implements Serializable {
 	
 	/** The maximum number of bids allowed from a single bidder. **/
 	private int myMaximumBidsFromUniqueBidder;
+
 	
 	/** The date of this auction. **/
 	private final Date myDate;
@@ -36,11 +65,13 @@ public final class Auction implements Serializable {
 	 * @param theDate date of the auction.
 	 * @param theMaxItemCount the maximum number of items allowed.
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
+
 	 */
 	public Auction(final Date theDate, final int theMaxItemCount, final int theMaxBidCount) {
 		myDate = theDate;
 		myMaximumItems = theMaxItemCount;
 		myMaximumBidsFromUniqueBidder = theMaxBidCount;
+
 		
 		myItems = new HashSet<>();
 		myBids = new HashMap<>();
