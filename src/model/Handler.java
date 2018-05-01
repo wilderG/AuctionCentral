@@ -32,7 +32,7 @@ public interface Handler extends Serializable {
 	 * @param theItem data that will be used to store an item.
 	 * @return The serial version UID for the
 	 */
-	long storeItem(Item theItem);
+	long storeItem(AuctionItem theItem);
 	
 	/**
 	 * Stores a user.
@@ -60,7 +60,7 @@ public interface Handler extends Serializable {
 	 * @param theUID associated with theItem that will be returned
 	 * @return The Item associated with the given serial version UID.
 	 */
-	Item getItem(long theUID);
+	AuctionItem getItem(long theUID);
 	
 	/**
 	 * Returns a user associated with the given username.
