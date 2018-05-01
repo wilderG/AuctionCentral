@@ -1,51 +1,184 @@
+/*
+ * TCSS 360 - Software Development & Quality Techniques
+ * Group 1
+ * AuctionCentral
+ */
 package model;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Date;
+import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
-public class AuctionCalendar implements Serializable, Calendar {
 
-	/** Generate Serial Version UID. */
-	private static final long serialVersionUID = -7640027391971367459L;
 
-	/** The maximum number of future auctions that may be scheduled. **/
-	private static final int MAXIMUM_FUTURE_AUCTIONS = 25;
-	
-	/** The maximum number of auctions allowed on any day. **/
-	private static final int MAXIMUM_AUCTIONS_PER_DAY = 2;
-	
-	/** The maximum number of days in the future that a new auction may be scheduled. **/
-	private static final int MAXIMUM_DAYS_OUT = 60;
-	
-	/** The minimum number of days in the future that a new auction may be scheduled. **/
-	private static final int MINIMUM_DAYS_OUT = 14;
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Boolean isAllowingNewAuctions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public Collection<Auction> getFutureAuctions() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+/**
+ * Represents the system that keeps track of auction dates holding Auctions. Is responsible
+ * for determining if a new auction may be scheduled.
+ * 
+ * @author Steven Golob 
+ * @version April 30, 2018
+ */
+public class AuctionCalendar implements Serializable {
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void addAuction(Date theDate, Auction theAuction, NonProfitContact theUser) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+    /** A generated serialVersion UID for persistent storage. */
+    private static final long serialVersionUID = -800808585738004105L;
+    
+    /** Maximum days out that an auction can be scheduled. */
+    public static final int MAXIMUM_DAYS_OUT = 60;
+    
+    /** Minimum days out that an auction can be scheduled. */
+    public static final int MINIMUM_DAYS_OUT = 14;
+    
+    /** Maximum number of auctions in the future that can be scheduled at a time. */
+    public static final int MAXIMUM_FUTURE_AUCTIONS = 25;
+    
+    /** All of the dates used currently by the calendar. */
+    private final List<AuctionDate> myDates;
+    
+    /** The number of auctions that are in the future, including today. */
+    private int myNumberOfFutureAuctions;
+    
+    /** The current date. */
+    private AuctionDate myCurrentDate;
+    
+    /**
+     * A management system for storing auctions by their dates. Handles rules for 
+     * submitting new auctions.
+     */
+    public AuctionCalendar() {
+        myDates = new LinkedList<>();
+        myNumberOfFutureAuctions = 0;
+        Calendar cal = Calendar.getInstance();
+        myCurrentDate = getAuctionDate(cal.get(Calendar.DAY_OF_MONTH), 
+                                       cal.get(Calendar.MONTH) + 1, 
+                                       cal.get(Calendar.YEAR));
+    }
+    
+    //_________________________________________________________________________________________
+    
+    /**
+     * Schedules a new auction if all the rules are met for scheduling an auction, and the 
+     * date to be scheduled is available for new auctions.
+     * 
+     * @param theAuction the new auction to be scheduled
+     * @param theDay the day of month to add an auction
+     * @param theMonth the month to add an auction
+     * @param theYear the year to add an auction
+     * @throws IllegalArgumentException if date is already at capacity
+     */
+    public void submitAuction(final Auction theAuction, 
+                              final int theDay, final int theMonth, final int theYear) 
+                                                          throws IllegalArgumentException {
+        AuctionDate dateForAuction = getAuctionDate(theDay, theMonth, theYear);
+        if (!isAllowingNewAuction())
+            throw new IllegalArgumentException("Already at maximum amount of auctions!");
+        if (!isDateWithinEligableRange(dateForAuction))
+            throw new IllegalArgumentException("Specified date (" 
+                                + dateForAuction.format() 
+                                + ") out of eligable range");
+        dateForAuction.addAuction(theAuction);
+        myNumberOfFutureAuctions++;
+    }
+    
+    /**
+     * Determines if the schedule is allowing new auctions to be scheduled at this time. 
+     * Determined based on having less than maximum number of auctions.
+     * 
+     * @return whether or not the schedule is at capacity yet
+     */
+    public boolean isAllowingNewAuction() {
+        return myNumberOfFutureAuctions < MAXIMUM_FUTURE_AUCTIONS;
+    }
+    
+    /**
+     * Determines if the given date is within the eligible range for scheduling a new auction.
+     * 
+     * @param theDay the day of month to add an auction
+     * @param theMonth the month to add an auction
+     * @param theYear the year to add an auction
+     * @return whether or not given date is in eligible range to schedule auction
+     * @throws IllegalArgumentException if given date is not valid
+     */
+    public boolean isDateWithinEligableRange(final int theDay, 
+                                             final int theMonth, final int theYear) 
+                                                     throws IllegalArgumentException {
+        AuctionDate date = new AuctionDate(theDay, theMonth, theYear);
+        return isDateWithinEligableRange(date);
+    }
+    /**
+     * Determines if the given date is within the eligible range for scheduling a new auction.
+     * 
+     * @param theDate the date to be considered
+     * @return whether or not given date is in eligible range to schedule auction
+     */
+    private boolean isDateWithinEligableRange(final AuctionDate theDate) {
+        boolean result = true;
+        if (theDate.compareTo(myCurrentDate) > MAXIMUM_DAYS_OUT) 
+            result = false;
+        else if (theDate.compareTo(myCurrentDate) < MINIMUM_DAYS_OUT)
+            result = false;
+        return result;
+    }
+    
+    /**
+     * Updates the current date and current number of future auctions.
+     */
+    public void updateDate() {
+        Calendar now = Calendar.getInstance();
+        myCurrentDate = getAuctionDate(now.get(Calendar.DAY_OF_MONTH), 
+                                       now.get(Calendar.MONTH) + 1, 
+                                       now.get(Calendar.YEAR));
+        myNumberOfFutureAuctions = 0;
+        for (AuctionDate date : myDates) {
+            if (date.compareToToday() >= 0)
+                myNumberOfFutureAuctions += date.getNumberOfAuctions();
+        }
+    }
+    
+    /**
+     * Gets the number of future auctions scheduled, including today.                   //Does max number of auctions include today??
+     * 
+     * @return the number of future auctions
+     */
+    public int getFutureNumberOfAuction() {
+        return myNumberOfFutureAuctions;
+    }
+    
+    /**
+     * This method returns all future auctions, not including today.
+     * 
+     * @return a list of all future auctions after today
+     */
+    public List<Auction> getFutureAuctions() {
+        List<Auction> futureAuctions = new LinkedList<>();
+        for (AuctionDate date : myDates) {
+            if (date.compareToToday() > 0)
+                futureAuctions.addAll(date.getAuctions());
+        }
+        return futureAuctions;
+    }
+    
+    /**
+     * This method returns an auctionDate that can hold auctions. If the date does not yet 
+     * exist in the calendar, it creates a date and adds it to the calendar first.
+     * 
+     * @param theDay the day of the month
+     * @param theMonth the month (1 - 12)
+     * @param theYear the year
+     * @return the auction date that holds auctions
+     * @throws IllegalArgumentException if date is invalid
+     */
+    public AuctionDate getAuctionDate(final int theDay, final int theMonth, final int theYear)
+                                                    throws IllegalArgumentException {
+        AuctionDate newDate = new AuctionDate(theDay, theMonth, theYear);
+        for (AuctionDate date : myDates) {
+            if (newDate.compareTo(date) == 0)
+                // date already exists in calendar
+                return date;
+        }
+        myDates.add(newDate);
+        return newDate;
+    }   
 }
