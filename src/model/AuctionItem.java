@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * TCSS 360 - Software Development & Quality Techniques
+ * Group 1
+ * AuctionCentral
  */
 package model;
 
@@ -10,7 +12,7 @@ import java.util.List;
 import com.sun.xml.internal.ws.api.client.ThrowableInPacketCompletionFeature;
 
 /**
- * This class is for containing AuctionItem information.
+ * The class contains information of Auction Item
  * 
  * @author Yohei Sato
  *

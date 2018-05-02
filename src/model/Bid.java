@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * TCSS 360 - Software Development & Quality Techniques
+ * Group 1
+ * AuctionCentral
  */
 package model;
 
