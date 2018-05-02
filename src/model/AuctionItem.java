@@ -10,8 +10,9 @@ import java.util.List;
 import com.sun.xml.internal.ws.api.client.ThrowableInPacketCompletionFeature;
 
 /**
+ * The class contains information of Auction Item
  * 
- * @author 
+ * @author Yohei Sato
  *
  */
 public class AuctionItem implements Serializable {
