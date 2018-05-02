@@ -14,9 +14,9 @@ import model.Bidder;
  * @author Jim Rosales
  * JUnit Tests
  */
-public class BusRuleTests {
-	Bidder bidderWithMaxBids;
-	Bidder bidderWithBelowMaxBids;
+public class BidderTests {
+	private Bidder bidderWithMaxBids;
+	private Bidder bidderWithBelowMaxBids;
 
 	/**
 	 * Constructs the necessary objects for the executed tests.
