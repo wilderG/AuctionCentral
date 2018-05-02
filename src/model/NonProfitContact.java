@@ -8,6 +8,8 @@ package model;
  * @author Jim Rosales
  */
 public class NonProfitContact extends User {
+	AuctionDate myDate = new AuctionDate();
+
 
 	/**
 	 * {@inheritDoc}
@@ -15,5 +17,19 @@ public class NonProfitContact extends User {
 	public NonProfitContact(String theUsername, String theDisplayName) {
 		super(theUsername, theDisplayName);
 	}
+	
+	/**
+	 * cheking if the priorExist or not.
+	 * @return
+	 */
+	public boolean isPriorExist() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public AuctionDate getPriorDate() {
+		return myDate;
+	}
+	
 
 }
