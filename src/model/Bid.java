@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 /**
  * Class represents a bid that can be placed on an item.
- * @author 
+ * @author Yohei
  *
  */
 public class Bid implements Serializable {

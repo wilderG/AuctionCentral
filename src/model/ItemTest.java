@@ -7,6 +7,8 @@ package model;
 
 import static org.junit.Assert.*;
 
+import javax.print.attribute.standard.JobOriginatingUserName;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -59,7 +61,7 @@ public class AuctionItemTest {
     @Test
     public void placeBid_equalToMinimumBid_bidPlaced() {
         AuctionItem item = new AuctionItem(35);
-        item.placeBid(new Bidder(), 35);
+        item.placeBid(new Bidder("bidder99", "John Smith"), 35);
         assert...
     }
 
@@ -70,7 +72,7 @@ public class AuctionItemTest {
     @Test
     public void placeBid_greaterThanMinimumBid_bidPlaced() {
         AuctionItem item = new AuctionItem(35);
-        item.placeBid(new Bidder(), 35.01);
+        item.placeBid(new Bidder("bidder99", "John Smith"), 35.01);
         assert...
     }
 
@@ -81,7 +83,7 @@ public class AuctionItemTest {
     @Test (expected = IllegalArgumentException.class)
     public void placeBid_lessThanMinimumBid_exceptionThrown() {
         AuctionItem item = new AuctionItem(35);
-        item.placeBid(new Bidder(), 34.99);
+        item.placeBid(new Bidder("bidder99", "John Smith"), 34.99);
     }
 
 }
