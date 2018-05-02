@@ -4,8 +4,8 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author 
@@ -14,15 +14,23 @@ import java.util.List;
 public interface Calendar extends Serializable {
 	
 	/**
-	 * Returns the upcoming auctions.
-	 * @return A list of all auction ids that are upcoming
+	 * Checks if the calendar is allowing future auctions to be scheduled.
+	 * @return True if calendar is not at capacity
 	 */
-	List<AuctionID> getAllFutureAuction();
+	Boolean isAllowingNewAuctions();
 
 	/**
-	 * Returns all the auction from the given date.
-	 * @param theDate whose auctions will be retrieved
-	 * @return A list of all the auctions ids on the given date.
+	 * Returns all future auctions from today until the end of range.
+	 * @return A collection of all future auctions.
 	 */
-	List<AuctionID> getAuctionsFromDate(Date theDate);
+	Collection<Auction> getFutureAuctions();
+	
+	/**
+	 * Adds an auction to the specified date. Will check calendar rules and
+	 * throw exception if auction cannot be added on specified date.
+	 * @param theDate the date the auction will be scheduled on.
+	 * @param theAuction the auction to add.
+	 * @param theUser the nonprofit contact associated with the auction.
+	 */
+	void addAuction(Date theDate, Auction theAuction, NonProfitContact theUser);
 }
