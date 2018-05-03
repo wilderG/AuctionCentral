@@ -10,10 +10,12 @@ import model.AuctionCalendar;
 import model.User;
 
 /**
- * Creates an object that loads stored data into memory. Call getUser to get the user
- * and its references to other models will be intact.
- * @author Jared
- *
+ * Stores an AuctionCalendar and a collection of Users. If the provided filename
+ * does not exist then an empty file will be created. 
+ * 
+ * The method writeData() must be called to save the current state to disk.
+ * 
+ * @author Jared Malone (5/3/2018)
  */
 public class StorageIO implements Handler {
 
@@ -21,7 +23,7 @@ public class StorageIO implements Handler {
 	private static final long serialVersionUID = -6890061097946533747L;
 	
 	/** The local filename to load/save persistent storage. */
-	private static final String fileName = "data/storage.dat";
+	private final String myFileName;
 	
 	/** Collection of users. */
 	private HashMap<String, User> myUsers;	
@@ -32,9 +34,12 @@ public class StorageIO implements Handler {
 	
 	/**
 	 * Creates a persistent storage handler for saving and loading the calendar
-	 * and system users.
+	 * and system users. If the specified file does not exist then it will be
+	 * created. 
+	 * @param theFileName is a file to load/save the data
 	 */
-	public StorageIO() {
+	public StorageIO(final String theFileName) {
+		myFileName = theFileName;
 		loadData();
 	}
 	
@@ -48,6 +53,17 @@ public class StorageIO implements Handler {
 		return myCalendar;
 	}
 
+	
+	/**
+	 * This method overrides any existing AuctionCalendar and stores
+	 * the new one.
+	 * @param theCalendar
+	 */
+	public void setCalendar(final AuctionCalendar theCalendar) {
+		myCalendar = theCalendar;
+		writeData();
+	}
+	
 	
 	/**
 	 * Returns a stored user.
@@ -67,6 +83,7 @@ public class StorageIO implements Handler {
 	@Override
 	public void storeUser(String theUsername, User theUser) {
 		myUsers.put(theUsername, theUser);
+		writeData();
 	}
 	
 	
@@ -77,7 +94,7 @@ public class StorageIO implements Handler {
 		StorageCapsule data = new StorageCapsule(myUsers, myCalendar);
 		
 		try {
-			FileOutputStream fileOut = new FileOutputStream(fileName);
+			FileOutputStream fileOut = new FileOutputStream(myFileName);
 			ObjectOutputStream out = new ObjectOutputStream(fileOut);
 			
 			out.writeObject(data);
@@ -98,7 +115,7 @@ public class StorageIO implements Handler {
 		StorageCapsule data;
 		
 		try {
-			FileInputStream fileIn = new FileInputStream(fileName);
+			FileInputStream fileIn = new FileInputStream(myFileName);
 			ObjectInputStream in = new ObjectInputStream(fileIn);
 			
 			data = (StorageCapsule) in.readObject();
@@ -118,11 +135,13 @@ public class StorageIO implements Handler {
 
 
 	/**
-	 * Instantiates empty data objects.
+	 * This method is called if an existing file can not be read.
+	 * Instantiates empty collections and then saves data to the new file.
 	 */
 	private void initializeNewData() {
 		myUsers = new HashMap<>();
 		myCalendar = new AuctionCalendar();
+		writeData();
 	}
 
 }
