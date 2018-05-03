@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * TCSS 360 - Software Development & Quality Techniques
+ * Group 1
+ * AuctionCentral
  */
 package model;
 
@@ -8,8 +10,7 @@ import java.math.BigDecimal;
 
 /**
  * Class represents a bid that can be placed on an item.
- * @author Yohei
- *
+ * @author Yohei Sato
  */
 public class Bid implements Serializable {
 

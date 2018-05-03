@@ -1,5 +1,7 @@
-/**
- * 
+/*
+ * TCSS 360 - Software Development & Quality Techniques
+ * Group 1
+ * AuctionCentral
  */
 package model;
 
@@ -8,8 +10,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * The class contains information of Auction Item
  * 
- * @author 
+ * @author Yohei Sato
  *
  */
 public class AuctionItem implements Serializable {
