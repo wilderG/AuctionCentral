@@ -44,10 +44,11 @@ public class AuctionDate implements Comparable<AuctionDate>, Serializable {
     /**
      * Determines if given date is valid before instantiating. Initially, has 
      * no auctions scheduled for this date.
-     * 
+     * @precondition: 
      * @param theDay the day of the month 
      * @param theMonth the month
      * @param theYear the year
+     * @throws DateTimeException if the given parameters are invalid
      */
     public AuctionDate(final int theDay, final int theMonth, final int theYear) {        
         try {
@@ -58,7 +59,6 @@ public class AuctionDate implements Comparable<AuctionDate>, Serializable {
         myAuctions = new LinkedList<>();
     }
     
-    //_________________________________________________________________________________________
     
     /**
      * Gets the number of auctions scheduled for this date.

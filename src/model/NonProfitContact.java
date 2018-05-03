@@ -26,6 +26,17 @@ public class NonProfitContact extends User {
 	}
 	
 	/**
+	 * Determines whether or not the given auction can be added for the nonprofit. This is determined by the
+	 * MAX time that must have passed since the nonprofits last auction. 
+	 * @param theRequestedAuction whose date will be evaluted to see if a the required elapsed time has occured
+	 * since the nonprofits last auction.
+	 * @return True if a the required time since the nonprofits last auction has elapsed. False otherwise.
+	 */
+	public boolean isDateForProposedAuctionValid(Auction theRequestedAuction) {
+		return isDateOneYearAfterPreviousAuction(theRequestedAuction.getDate());
+	}
+	
+	/**
 	 * Determines whether the given date is one year after the non profits most recent auction.
 	 * @return True if a year has elapsed for the non profits last auction.
 	 */
@@ -34,7 +45,7 @@ public class NonProfitContact extends User {
 		
 		// Found the most recent date that the non profit had an auction. Add a year to this date
 		// Now theDate has to occur on this date of after for it to be a viable date. 
-		mostRecentDate.plusYears(1); 
+		mostRecentDate = mostRecentDate.plusYears(1); 
 		return mostRecentDate.isEqual(theDate) || theDate.isAfter(mostRecentDate);
 	}
 	
