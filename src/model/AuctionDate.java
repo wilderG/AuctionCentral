@@ -10,7 +10,6 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.sun.webkit.ThemeClient;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -170,15 +169,16 @@ public class AuctionDate implements Comparable<AuctionDate>, Serializable {
      * 
      * @return the number of days between dates
      */
-//    @Override
-//    public int compareTo(final AuctionDate theDate) {
+    @Override
+    public int compareTo(final AuctionDate theDate) {
+    		return 0;
 //        Calendar thisDay = Calendar.getInstance();
 //        Calendar thatDay = Calendar.getInstance();
 //        thisDay.set(myYear, myMonth - 1, myDay);
 //        thatDay.set(theDate.myYear, theDate.myMonth - 1, theDate.myDay);
 //        Long thisTime = thisDay.getTimeInMillis();
 //        Long thatTime = thatDay.getTimeInMillis();
-//        
+        
 //        return (int) ((thisTime - thatTime) / MILLIS_PER_DAY);
-//    }
+    }
 }
