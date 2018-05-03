@@ -26,7 +26,7 @@ public class BidderTests {
 		bidderWithMaxBids = new Bidder("bidder99", "John Smith");
 		bidderWithBelowMaxBids = new Bidder("bidder99", "John Smith");
 	}
-	
+
 	/**
 	 * Tests whether a new bid is able to be placed when a bidder already has the max number of bids allowed.
 	 * The expected outcome is that the bidder is not able to place a new bid.

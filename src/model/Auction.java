@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -24,7 +25,7 @@ public final class Auction implements Serializable {
 
 	
 	/** The date of this auction. **/
-	private final Date myDate;
+	private final LocalDate myDate;
 	
 	/** The collection of items for this auction. **/
 	private HashSet<AuctionItem> myItems;
@@ -39,7 +40,7 @@ public final class Auction implements Serializable {
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
 
 	 */
-	public Auction(final Date theDate, final int theMaxItemCount, final int theMaxBidCount) {
+	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount) {
 		myDate = theDate;
 		myMaximumItems = theMaxItemCount;
 		myMaximumBidsFromUniqueBidder = theMaxBidCount;
@@ -89,6 +90,7 @@ public final class Auction implements Serializable {
 	public boolean isAllowingNewBid(final Bidder theBidder) {
 		
 		// we need to check if the cut-off time for new bids has passed.
+		// we should use LocalTime
 		
 		// assuming time is okay then check if bidder is at limit.
 		if (!myBids.containsKey(theBidder)) {
@@ -132,7 +134,7 @@ public final class Auction implements Serializable {
 	 * Returns the date of this auction.
 	 * @return the date
 	 */
-	public Date getDate() {
+	public LocalDate getDate() {
 		return myDate;
 	}
 
