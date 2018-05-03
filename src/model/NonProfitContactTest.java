@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * 
+ * @author Yohei Sato
+ * @author Jim Rosales
+ */
 public class NonProfitContactTest {
 	private NonProfitContact myNonProfitWithAPreviousAuction;
 	private NonProfitContact myNonProfitWithNoPreviousAuction;
