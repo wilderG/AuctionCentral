@@ -14,6 +14,11 @@ public class NonProfitContact extends User {
 
 
 	/**
+	 * Generated Serial Version UID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * {@inheritDoc}
 	 */
 	public NonProfitContact(String theUsername, String theDisplayName) {
