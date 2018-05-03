@@ -11,7 +11,6 @@ import java.math.BigDecimal;
 /**
  * Class represents a bid that can be placed on an item.
  * @author Yohei Sato
- *
  */
 public class Bid implements Serializable {
 
