@@ -32,13 +32,13 @@ public class AuctionCalendarTests {
 		
 		acceptableDateMinimumDaysOutAndWithinMaximumDaysOut = 
 				new AuctionDate(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + AuctionCalendar.MINIMUM_DAYS_OUT,
-				currentDate.get(Calendar.getInstance().get(Calendar.MONTH)), currentDate.get(Calendar.YEAR));
+				currentDate.get(Calendar.getInstance().get(Calendar.MONTH)) + 1, currentDate.get(Calendar.YEAR));
 		acceptableDatePastMinimumDaysOutAndWithinMaximumDaysOut = 
 				new AuctionDate(currentDate.get(Calendar.DAY_OF_MONTH) + AuctionCalendar.MINIMUM_DAYS_OUT + 1,
-				currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR));
+				currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
 		acceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut = 
 				new AuctionDate(currentDate.get(Calendar.DAY_OF_MONTH) + AuctionCalendar.MINIMUM_DAYS_OUT - 1,
-				currentDate.get(Calendar.MONTH), currentDate.get(Calendar.YEAR));
+				currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
 		theCalendar = new AuctionCalendar();
 	}
 
