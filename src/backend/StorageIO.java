@@ -13,8 +13,6 @@ import model.User;
  * Stores an AuctionCalendar and a collection of Users. If the provided filename
  * does not exist then an empty file will be created. 
  * 
- * The method writeData() must be called to save the current state to disk.
- * 
  * @author Jared Malone (5/3/2018)
  */
 public class StorageIO implements Handler {
