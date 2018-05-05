@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 /**
  * Class that represents a bidder
  * @author Jared Malone
@@ -36,6 +38,7 @@ public class Bidder extends User {
 	 * returns false.
 	 */
 	public boolean isNewBidAllowed() {
+		updateBidCount();
 		return myBidCount < MY_MAX_BID_COUNT;
 	}
 	
@@ -66,5 +69,18 @@ public class Bidder extends User {
 		myBidCount = theBidCount;
 	}
 	
+	/**
+	 * Updates the current bid count for a bidder to reflect only the auctions that are upcoming.
+	 */
+	private void updateBidCount() {
+		int currentBidCount = 0;
+		LocalDate today = LocalDate.now();
+		for (Auction auction: this.getMyAuctions()) {
+			if (auction.getDate().isAfter(today)) {
+				currentBidCount++;
+			}
+		}
+		myBidCount = currentBidCount;
+	}
 	
 }
