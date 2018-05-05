@@ -37,7 +37,7 @@ public class AuctionTest_5C {
 		for (int i = 0; i < MAX_BID_COUNT - 1; i++) {
 			AuctionItem testItem;
 			testItem = new AuctionItem(BigDecimal.valueOf((i+1)), 
-					null, "Test Item " + (i + 1));
+					"Test Item " + (i + 1));
 			auction.addItem(testItem);
 		}
 		
@@ -46,7 +46,7 @@ public class AuctionTest_5C {
 		Collection<AuctionItem> items = auction.getAllItems();
 		for (AuctionItem e : items) {
 			testBid = new Bid(bidder, e, 
-					e.getMinimumBid().add(BigDecimal.valueOf(1)));
+					e.getMinimumAcceptableBidValue().add(BigDecimal.valueOf(1)));
 			auction.addBid(bidder, testBid);
 		}
 	}
@@ -61,7 +61,7 @@ public class AuctionTest_5C {
 		// add one more bid to reach maximum
 		AuctionItem testItem;
 		testItem = new AuctionItem(BigDecimal.valueOf((MAX_BID_COUNT)), 
-				null, "Test Item " + MAX_BID_COUNT);
+				"Test Item " + MAX_BID_COUNT);
 		auction.addItem(testItem);
 		
 		Bid testBid = new Bid(bidder, testItem, 
