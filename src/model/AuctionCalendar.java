@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
@@ -41,7 +42,7 @@ public class AuctionCalendar implements Serializable {
     private int myNumberOfFutureAuctions;
     
     /** The current date. */
-    private AuctionDate myCurrentDate;
+    private LocalDate myCurrentDate;
     
     /**
      * A management system for storing auctions by their dates. Handles rules for 
@@ -50,10 +51,12 @@ public class AuctionCalendar implements Serializable {
     public AuctionCalendar() {
         myDates = new LinkedList<>();
         myNumberOfFutureAuctions = 0;
-        Calendar cal = Calendar.getInstance();
-        myCurrentDate = getAuctionDate(cal.get(Calendar.DAY_OF_MONTH), 
-                                       cal.get(Calendar.MONTH) + 1, 
-                                       cal.get(Calendar.YEAR));
+        myCurrentDate = LocalDate.now();
+//        Calendar cal = Calendar.getInstance();
+//        myCurrentDate = new A
+//        myCurrentDate = getAuctionDate(cal.get(Calendar.DAY_OF_MONTH), 
+//                                       cal.get(Calendar.MONTH) + 1, 
+//                                       cal.get(Calendar.YEAR));
     }
     
     //_________________________________________________________________________________________
@@ -110,15 +113,18 @@ public class AuctionCalendar implements Serializable {
     /**
      * Determines if the given date is within the eligible range for scheduling a new auction.
      * 
-     * @param theDate the date to be considered
+     * @param theAuctionDate the date to be considered
      * @return whether or not given date is in eligible range to schedule auction
      */
-    public boolean isDateWithinEligableRange(final AuctionDate theDate) {
+    public boolean isDateWithinEligableRange(final AuctionDate theAuctionDate) {
         boolean result = true;
-        if (theDate.compareTo(myCurrentDate) > MAXIMUM_DAYS_OUT) 
-            result = false;
-        else if (theDate.compareTo(myCurrentDate) < MINIMUM_DAYS_OUT)
-            result = false;
+        
+        if (theAuctionDate.getDate().isAfter(myCurrentDate.plusDays(MAXIMUM_DAYS_OUT))) {
+        		result = false;
+        } else if (theAuctionDate.getDate().isBefore(myCurrentDate.plusDays(MINIMUM_DAYS_OUT))) {
+        		result = false;
+        }
+
         return result;
     }
     
@@ -126,10 +132,11 @@ public class AuctionCalendar implements Serializable {
      * Updates the current date and current number of future auctions.
      */
     public void updateDate() {
-        Calendar now = Calendar.getInstance();
-        myCurrentDate = getAuctionDate(now.get(Calendar.DAY_OF_MONTH), 
-                                       now.get(Calendar.MONTH) + 1, 
-                                       now.get(Calendar.YEAR));
+//        Calendar now = Calendar.getInstance();
+//        myCurrentDate = getAuctionDate(now.get(Calendar.DAY_OF_MONTH), 
+//                                       now.get(Calendar.MONTH) + 1, 
+//                                       now.get(Calendar.YEAR));
+    		myCurrentDate = LocalDate.now();
         myNumberOfFutureAuctions = 0;
         for (AuctionDate date : myDates) {
             if (date.compareToToday() >= 0)
@@ -174,7 +181,7 @@ public class AuctionCalendar implements Serializable {
                                                     throws IllegalArgumentException {
         AuctionDate newDate = new AuctionDate(theDay, theMonth, theYear);
         for (AuctionDate date : myDates) {
-            if (newDate.compareTo(date) == 0)
+            if (newDate.getDate().compareTo(date.getDate()) == 0)
                 // date already exists in calendar
                 return date;
         }

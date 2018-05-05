@@ -5,6 +5,7 @@ package JUnit;
 
 import static org.junit.Assert.*;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 
 import org.junit.Before;
@@ -21,24 +22,33 @@ public class AuctionCalendarTests {
 	private AuctionCalendar theCalendar;
 	private AuctionDate acceptableDateMinimumDaysOutAndWithinMaximumDaysOut;
 	private AuctionDate acceptableDatePastMinimumDaysOutAndWithinMaximumDaysOut;
-	private AuctionDate acceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut;
+	private AuctionDate nonAcceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut;
 
 	/**
 	 * 
 	 */
 	@Before
 	public void setUp() {
-		Calendar currentDate = Calendar.getInstance();
+		LocalDate today = LocalDate.now();
 		
+		LocalDate todayPlusMinDaysOut = today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
 		acceptableDateMinimumDaysOutAndWithinMaximumDaysOut = 
-				new AuctionDate(Calendar.getInstance().get(Calendar.DAY_OF_MONTH) + AuctionCalendar.MINIMUM_DAYS_OUT,
-				currentDate.get(Calendar.getInstance().get(Calendar.MONTH)) + 1, currentDate.get(Calendar.YEAR));
+				new AuctionDate(todayPlusMinDaysOut.getDayOfMonth(),
+								todayPlusMinDaysOut.getMonthValue(),
+								todayPlusMinDaysOut.getYear());
+		
+		LocalDate oneDayAfterTodayPlusMinDaysOut = today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT + 1);
 		acceptableDatePastMinimumDaysOutAndWithinMaximumDaysOut = 
-				new AuctionDate(currentDate.get(Calendar.DAY_OF_MONTH) + AuctionCalendar.MINIMUM_DAYS_OUT + 1,
-				currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
-		acceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut = 
-				new AuctionDate(currentDate.get(Calendar.DAY_OF_MONTH) + AuctionCalendar.MINIMUM_DAYS_OUT - 1,
-				currentDate.get(Calendar.MONTH) + 1, currentDate.get(Calendar.YEAR));
+				new AuctionDate(oneDayAfterTodayPlusMinDaysOut.getDayOfMonth(),
+								oneDayAfterTodayPlusMinDaysOut.getMonthValue(),
+								oneDayAfterTodayPlusMinDaysOut.getYear());
+		
+		LocalDate oneDayBeforeTodayPlusMinDaysOut = today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT - 1);
+		nonAcceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut =
+				new AuctionDate(oneDayBeforeTodayPlusMinDaysOut.getDayOfMonth(),
+								oneDayBeforeTodayPlusMinDaysOut.getMonthValue(),
+								oneDayBeforeTodayPlusMinDaysOut.getYear());
+
 		theCalendar = new AuctionCalendar();
 	}
 
@@ -57,7 +67,7 @@ public class AuctionCalendarTests {
 	@Test
 	public void isDateWithinEligableRange_DateBeforeTheMinimumDaysOut_False() {
 		assertFalse("The date less than the minumum days out from the current date is acceptable", 
-				theCalendar.isDateWithinEligableRange(acceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut));
+				theCalendar.isDateWithinEligableRange(nonAcceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut));
 	}
 
 }

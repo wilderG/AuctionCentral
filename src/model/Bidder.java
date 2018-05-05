@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+
 /**
  * Class that represents a bidder
  * @author Jared Malone
@@ -36,15 +38,26 @@ public class Bidder extends User {
 	 * returns false.
 	 */
 	public boolean isNewBidAllowed() {
+		updateBidCount();
 		return myBidCount < MY_MAX_BID_COUNT;
 	}
 	
 	/**
 	 * Increments the bid count for the bidder if it is allowed. If not the bid count is not modified.
 	 */
-	public void incrementBidCount() {
+	private void incrementBidCount() {
+		myBidCount++;
+	}
+	
+	/**
+	 * Adds the given auction to the bidders list of associated auctions. Increases the bid count as well.
+	 * @param theAuction that will be associated with the user.
+	 */
+	@Override
+	public void addAuction(Auction theAuction) {
 		if (isNewBidAllowed()) {
-			myBidCount++;
+			incrementBidCount();
+			super.addAuction(theAuction);
 		}
 	}
 	
@@ -54,6 +67,20 @@ public class Bidder extends User {
 	 */
 	public void setBidCount(int theBidCount) {
 		myBidCount = theBidCount;
+	}
+	
+	/**
+	 * Updates the current bid count for a bidder to reflect only the auctions that are upcoming.
+	 */
+	private void updateBidCount() {
+		int currentBidCount = 0;
+		LocalDate today = LocalDate.now();
+		for (Auction auction: this.getMyAuctions()) {
+			if (auction.getDate().isAfter(today)) {
+				currentBidCount++;
+			}
+		}
+		myBidCount = currentBidCount;
 	}
 	
 }

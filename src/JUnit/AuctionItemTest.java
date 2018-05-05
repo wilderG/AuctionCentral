@@ -3,7 +3,7 @@
  * Group 1
  * AuctionCentral
  */
-package model;
+package JUnit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -13,6 +13,10 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import model.AuctionItem;
+import model.Bid;
+import model.Bidder;
 
 
 
