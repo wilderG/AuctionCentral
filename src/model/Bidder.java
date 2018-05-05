@@ -42,9 +42,19 @@ public class Bidder extends User {
 	/**
 	 * Increments the bid count for the bidder if it is allowed. If not the bid count is not modified.
 	 */
-	public void incrementBidCount() {
+	private void incrementBidCount() {
+		myBidCount++;
+	}
+	
+	/**
+	 * Adds the given auction to the bidders list of associated auctions. Increases the bid count as well.
+	 * @param theAuction that will be associated with the user.
+	 */
+	@Override
+	public void addAuction(Auction theAuction) {
 		if (isNewBidAllowed()) {
-			myBidCount++;
+			incrementBidCount();
+			super.addAuction(theAuction);
 		}
 	}
 	
@@ -55,5 +65,6 @@ public class Bidder extends User {
 	public void setBidCount(int theBidCount) {
 		myBidCount = theBidCount;
 	}
+	
 	
 }
