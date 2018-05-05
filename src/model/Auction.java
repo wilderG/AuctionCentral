@@ -139,8 +139,10 @@ public final class Auction implements Serializable {
 	public Collection<AuctionItem> getAllItemsWithBidder(final Bidder theBidder) {
 		Collection<AuctionItem> bidderItems = new HashSet<>();
 		
-		for (Bid e : myBids.get(theBidder)) {
-			bidderItems.add(e.getAuctionItem());
+		if (myBids.containsKey(theBidder)) {
+			for (Bid e : myBids.get(theBidder)) {
+				bidderItems.add(e.getAuctionItem());
+			}
 		}
 		return bidderItems;
 	}
