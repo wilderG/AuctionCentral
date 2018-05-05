@@ -1,6 +1,10 @@
 package model;
 
+import java.io.IOException;
 import java.util.Collection;
+
+import backend.ObjectCloner;
+import backend.StorageIO;
 
 /**
  * Manages new object requests from the front-end and 
@@ -8,7 +12,15 @@ import java.util.Collection;
  *
  */
 public class AuctionManager implements Manager {
+	/** Generated Serial Version UID. */
+	private static final long serialVersionUID = 4646613498773772086L;
 	
+	/** The filename to store persistent data. **/
+	private static final String FILE_NAME = "data/storage.dat";
+	
+	/** The storage object to save and load persistent data. **/
+	private StorageIO storage;
+		
 	/** The default maximum auction items for an auction. **/
 	private static final int MAXIMUM_AUCTION_ITEMS = 10;
 	
@@ -24,24 +36,37 @@ public class AuctionManager implements Manager {
 	/** The schedule of all past and future auctions. **/
 	private AuctionCalendar myCalendar;
 	
-	/** Generated Serial Version UID. */
-	private static final long serialVersionUID = 4646613498773772086L;
-
+	
 	/**
 	 * Constructs a new manager object.
 	 */
 	public AuctionManager() {
-		// not connected to StorageIO
-		myCalendar = new AuctionCalendar(); 
+		storage = new StorageIO(FILE_NAME);
+		myCalendar = storage.getCalendar();
 	}
 	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public User getUser(String theUsername) {
+	public User getUser(String theUsername) throws IllegalArgumentException {
 		// not connected to StorageIO
-		return new User(theUsername, "Test User");
+		// return new User(theUsername, "Test User");
+		
+		User user = storage.getUser(theUsername);
+		User copyOfUser;
+		
+		try {
+			copyOfUser = (User) ObjectCloner.deepCopy(user);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("User not found.");
+		}
+
+		if (copyOfUser == null) {
+			throw new IllegalArgumentException("User not found.");
+		} else {
+			return user;
+		}
 	}
 	
 	/**

@@ -57,6 +57,7 @@ public class StorageIO implements Handler {
 	 * the new one.
 	 * @param theCalendar
 	 */
+	@Override
 	public void setCalendar(final AuctionCalendar theCalendar) {
 		myCalendar = theCalendar;
 		writeData();
@@ -68,7 +69,12 @@ public class StorageIO implements Handler {
 	 * @param theUsername username key for the user.
 	 * @return the User object
 	 */
-	public User getUser(final String theUsername) {
+	@Override
+	public User getUser(final String theUsername) throws IllegalArgumentException {
+		if (!myUsers.containsKey(theUsername)) {
+			throw new IllegalArgumentException("User not found.");
+		}
+		
 		return myUsers.get(theUsername);
 	}
 	
@@ -79,8 +85,8 @@ public class StorageIO implements Handler {
 	 * @param theUser user object
 	 */
 	@Override
-	public void storeUser(String theUsername, User theUser) {
-		myUsers.put(theUsername, theUser);
+	public void storeUser(User theUser) {
+		myUsers.put(theUser.getUsername(), theUser);
 		writeData();
 	}
 	

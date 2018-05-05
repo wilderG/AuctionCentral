@@ -34,12 +34,7 @@ public interface Handler extends Serializable {
 	 */
 	long storeItem(AuctionItem theItem);
 	
-	/**
-	 * Stores a user.
-	 * @param theUser data that will be used to store the user.
-	 * @return The username for the user.
-	 */
-	String storeUser(User theUser);
+	
 	
 	/**
 	 * Returns an auction associated the given serial version UID.
