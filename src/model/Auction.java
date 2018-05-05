@@ -34,18 +34,22 @@ public final class Auction implements Serializable {
 	private HashMap<Bidder, HashSet<Bid>> myBids;
 	
 	/**
+	 * 
+	 */
+	private String myNonProfitName;
+	
+	/**
 	 * Creates a new auction.
 	 * @param theDate date of the auction.
 	 * @param theMaxItemCount the maximum number of items allowed.
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
 
 	 */
-	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount) {
+	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount, String theNonProfit) {
 		myDate = theDate;
 		myMaximumItems = theMaxItemCount;
+		myNonProfitName = theNonProfit;
 		myMaximumBidsFromUniqueBidder = theMaxBidCount;
-
-		
 		myItems = new HashSet<>();
 		myBids = new HashMap<>();
 	}
@@ -58,6 +62,14 @@ public final class Auction implements Serializable {
 		if (isAllowingNewItem()) {
 			myItems.add(theItem);
 		}
+	}
+	
+	/**
+	 * Getter for the name of the non profit that the auction is associated with.
+	 * @return The name of the non profit associated with the non-profit.
+	 */
+	public String getName() {
+		return myNonProfitName;
 	}
 	
 	/**
