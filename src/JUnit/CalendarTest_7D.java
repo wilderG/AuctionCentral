@@ -9,17 +9,14 @@ package JUnit;
  */
 import static org.junit.Assert.*;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import model.Auction;
 import model.AuctionCalendar;
 import model.AuctionDate;
-import model.NonProfitContact;
 
 public class CalendarTest_7D {
 	
