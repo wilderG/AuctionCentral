@@ -124,11 +124,7 @@ public class AuctionCalendar implements Serializable {
         } else if (theAuctionDate.getDate().isBefore(myCurrentDate.plusDays(MINIMUM_DAYS_OUT))) {
         		result = false;
         }
-//        
-//        if (theAuctionDate.getDate().compareTo(myCurrentDate) > MAXIMUM_DAYS_OUT) 
-//            result = false;
-//        else if (theAuctionDate.getDate().compareTo(myCurrentDate) < MINIMUM_DAYS_OUT)
-//            result = false;
+
         return result;
     }
     
