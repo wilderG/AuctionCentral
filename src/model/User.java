@@ -5,6 +5,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -75,7 +76,7 @@ public class User implements Serializable {
 	 * Getter for all the auctions associated with the respective user.
 	 * @return A list of all the auctions associated with the respective user.
 	 */
-	public List<Auction> getMyAuctions() {
+	public Collection<Auction> getMyAuctions() {
 		return myAuctions;
 	}
 	

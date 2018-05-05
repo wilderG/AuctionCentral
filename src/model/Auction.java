@@ -1,14 +1,16 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
- * Class represents an auction 
+ * Represents an Auction event. The object contains a collection of Items and
+ * a collection of Bids. 
  * @author Jared Malone
+ * @version 5/5/2018
  *
  */
 public final class Auction implements Serializable {
@@ -21,10 +23,9 @@ public final class Auction implements Serializable {
 	
 	/** The maximum number of bids allowed from a single bidder. **/
 	private int myMaximumBidsFromUniqueBidder;
-
 	
 	/** The date of this auction. **/
-	private final Date myDate;
+	private final LocalDate myDate;
 	
 	/** The collection of items for this auction. **/
 	private HashSet<AuctionItem> myItems;
@@ -39,7 +40,7 @@ public final class Auction implements Serializable {
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
 
 	 */
-	public Auction(final Date theDate, final int theMaxItemCount, final int theMaxBidCount) {
+	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount) {
 		myDate = theDate;
 		myMaximumItems = theMaxItemCount;
 		myMaximumBidsFromUniqueBidder = theMaxBidCount;
@@ -65,19 +66,34 @@ public final class Auction implements Serializable {
 	 * @param theBidder making the bid
 	 * @param theBid being placed in the auction
 	 */
-	public void addBid(final Bidder theBidder, final Bid theBid) {
-		if (isAllowingNewBid(theBidder)) {
-			
-			// new bidder instantiate empty set of bids
-			if (!myBids.containsKey(theBidder)) {
-				myBids.put(theBidder, new HashSet<>());
-			}
+	public void addBid(final Bidder theBidder, final Bid theBid) 
+			throws IllegalArgumentException {
 		
-			// should we check for duplicate bid?
-		
-			// add this bid to set
-			myBids.get(theBidder).add(theBid);
+		if (!isAllowingNewBid(theBidder)) {
+			throw new IllegalArgumentException("Bidder is not allowed to bid on this auction.");
 		}
+		
+		if (theBid.getAmount().compareTo(theBid.getAuctionItem().
+				getMinimumAcceptableBidValue()) < 0) {
+			throw new IllegalArgumentException(
+					"This bid is below the minimum accepted bid for the item.");
+		}
+		
+		// new bidder instantiate empty set of bids
+		if (!myBids.containsKey(theBidder)) {
+			myBids.put(theBidder, new HashSet<>());
+		}
+		
+		// check for existing bid and remove
+		Collection<Bid> bids = myBids.get(theBidder);
+		
+		for (Bid e : bids) {
+			if (e.getAuctionItem().equals(theBid.getAuctionItem())) {
+				bids.remove(e);
+			}
+		}
+		
+		bids.add(theBid);
 	}
 	
 	/**
@@ -87,15 +103,16 @@ public final class Auction implements Serializable {
 	 * @return true if the bidder may add another
 	 */
 	public boolean isAllowingNewBid(final Bidder theBidder) {
+		boolean result = true;
 		
-		// we need to check if the cut-off time for new bids has passed.
-		
-		// assuming time is okay then check if bidder is at limit.
-		if (!myBids.containsKey(theBidder)) {
-			return true;
-		} else {
-			return (myBids.get(theBidder).size() < myMaximumBidsFromUniqueBidder);
-		}
+		if (myDate.equals(LocalDate.now())) {
+			result = false;
+		} else if (myBids.containsKey(theBidder)) {
+			int bidCount = myBids.get(theBidder).size(); 
+			result = bidCount < myMaximumBidsFromUniqueBidder;
+		} 
+
+		return result;
 	}
 	
 	/**
@@ -125,6 +142,7 @@ public final class Auction implements Serializable {
 		if (myBids.containsKey(theBidder)) {
 		for (Bid e : myBids.get(theBidder)) {
 			bidderItems.add(e.getAuctionItem());
+
 		}
 		}
 		return bidderItems;
@@ -132,9 +150,9 @@ public final class Auction implements Serializable {
 	
 	/**
 	 * Returns the date of this auction.
-	 * @return the date
+	 * @return the date of this auction.
 	 */
-	public Date getDate() {
+	public LocalDate getDate() {
 		return myDate;
 	}
 

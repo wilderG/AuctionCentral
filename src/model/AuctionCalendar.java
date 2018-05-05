@@ -113,7 +113,7 @@ public class AuctionCalendar implements Serializable {
      * @param theDate the date to be considered
      * @return whether or not given date is in eligible range to schedule auction
      */
-    private boolean isDateWithinEligableRange(final AuctionDate theDate) {
+    public boolean isDateWithinEligableRange(final AuctionDate theDate) {
         boolean result = true;
         if (theDate.compareTo(myCurrentDate) > MAXIMUM_DAYS_OUT) 
             result = false;

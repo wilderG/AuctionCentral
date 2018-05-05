@@ -11,7 +11,7 @@ import model.User;
 public class TestDriver {
 
 	public static void main(String[] args) {
-		StorageIO storage = new StorageIO();
+		StorageIO storage = new StorageIO("data/storage.dat");
 		User user, copy;
 				
 		/* to create a user uncomment here */
@@ -23,18 +23,18 @@ public class TestDriver {
 		
 		/* to load a user and print details */
 		user = storage.getUser("tester");
-		System.out.println(user);
+		System.out.println(user.getDisplayName());
 	
-		copy = null;
-		
-		try {
-			copy = (User) ObjectCloner.deepCopy(user);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		System.out.println("Cloned user: " + copy);
+//		copy = null;
+//		
+//		try {
+//			copy = (User) ObjectCloner.deepCopy(user);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		System.out.println("Cloned user: " + copy.getDisplayName());
 	}
 	
 }
