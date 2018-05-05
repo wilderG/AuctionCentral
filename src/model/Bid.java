@@ -38,7 +38,6 @@ public class Bid implements Serializable {
 	/**
 	 * The Auction in which the bid was placed.
 	 */
-	private Auction myAuction;
 	
 	public Bid(Bidder theBidder, AuctionItem theItem, BigDecimal theAmount) {
 		myValue = theAmount;
