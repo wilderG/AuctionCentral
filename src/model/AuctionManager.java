@@ -2,6 +2,7 @@ package model;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 
 import backend.ObjectCloner;
 import backend.StorageIO;
@@ -74,8 +75,13 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public Collection<Auction> getAvailableAuctions(Bidder theBidder) {
-		// get all future auctions
-		Collection<Auction> result = myCalendar.getFutureAuctions();
+		Collection<Auction> result;
+		
+		if (theBidder.isNewBidAllowed()) {
+			result = myCalendar.getFutureAuctions();	
+		} else {
+			result = new HashSet<>();
+		}
 		
 		// remove auctions such that bidder is not allowed
 		for (Auction e : result) {
@@ -90,12 +96,8 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isNewAuctionRequestAllowed(NonProfitContact theUser) {
-		// check if previous auction was too recent
-		
-		// check if future auction is scheduled
-		
-		return false;
+	public boolean isNewAuctionRequestAllowed() {
+		return myCalendar.isAllowingNewAuction();
 	}
 
 	/**
@@ -105,15 +107,6 @@ public class AuctionManager implements Manager {
 	public Auction processNewAuctionRequest(NewAuctionRequest theAuctionRequest) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public User processNewUser(NewUserRequest theUserRequest) {
-		// not connected to StorageUI
-		return getUser(theUserRequest.getMyUsername());
 	}
 
 	/**
