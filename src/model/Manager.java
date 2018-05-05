@@ -28,11 +28,10 @@ public interface Manager extends Serializable {
 	User getUser(String theUsername);
 	
 	/**
-	 * Pre-check if a non-profit contact is permitted to add a new auction.
-	 * @param theUser non-profit contact
-	 * @return true if auction request is allowed for the user
+	 * Pre-check if the schedule is at capacity.
+	 * @return true if the schedule is not full
 	 */
-	boolean isNewAuctionRequestAllowed(NonProfitContact theUser); 
+	boolean isNewAuctionRequestAllowed(); 
 	
 	/**
 	 * Submits a new auction using the given auction request.
@@ -40,12 +39,6 @@ public interface Manager extends Serializable {
 	 */
 	Auction processNewAuctionRequest(NewAuctionRequest theAuctionRequest);
 	
-	/**
-	 * Using the provided new user request submits a new user.
-	 * @param theUserRequest
-	 */
-	User processNewUser(NewUserRequest theUserRequest);
-		
 	/**
 	 * Pre-check if an auction may add another item.
 	 * @param theAuction
