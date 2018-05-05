@@ -5,6 +5,7 @@ package JUnit;
  * a set number of days from the current date.  
  * 
  * @author Jared Malone (5/3/2018)
+ * @author Jim Rosales (5/5/2018)
  */
 import static org.junit.Assert.*;
 
@@ -21,12 +22,6 @@ import model.AuctionDate;
 import model.NonProfitContact;
 
 public class CalendarTest_7D {
-
-	/** 
-	 * The maximum number of days in the future that an
-	 * auction be scheduled.
-	 */
-	private static final int MAXIMUM_DAYS = 60;
 	
 	/** Test fixtures. **/
 	private AuctionCalendar calendar;
@@ -45,12 +40,12 @@ public class CalendarTest_7D {
 	@Test
 	public void 
 	isDateWithinEligableRange_OneDayLessThanMaximumFromCurrentDate_ReturnsTrue() {
-		LocalDate testDate = today.plusDays(MAXIMUM_DAYS - 1);
+		LocalDate testDate = today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT - 1);
 		
 		AuctionDate auctionDateOneDayBeforeMax = 
 				new AuctionDate(testDate.getDayOfMonth(),
 						testDate.getMonthValue(),
-						testDate.getDayOfYear());
+						testDate.getYear());
 		
 		assertTrue(calendar.isDateWithinEligableRange(auctionDateOneDayBeforeMax));
 	}
@@ -59,12 +54,12 @@ public class CalendarTest_7D {
 	@Test
 	public void 
 	isDateWithinEligableRange_DayOfMaximumFromCurrentDate_ReturnsTrue() {
-		LocalDate testDate = today.plusDays(MAXIMUM_DAYS);
+		LocalDate testDate = today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
 		
 		AuctionDate auctionDateDayOfMax = 
 				new AuctionDate(testDate.getDayOfMonth(),
 						testDate.getMonthValue(),
-						testDate.getDayOfYear());
+						testDate.getYear());
 		
 		assertTrue(calendar.isDateWithinEligableRange(auctionDateDayOfMax));
 	}
@@ -73,12 +68,12 @@ public class CalendarTest_7D {
 	@Test
 	public void 
 	isDateWithinEligableRange_OneDayAfterMaximumFromCurrentDate_ReturnsFalse() {
-		LocalDate testDate = today.plusDays(MAXIMUM_DAYS + 1);
+		LocalDate testDate = today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT + 1);
 		
 		AuctionDate auctionDateOneDayAfterMax = 
 				new AuctionDate(testDate.getDayOfMonth(),
 						testDate.getMonthValue(),
-						testDate.getDayOfYear());
+						testDate.getYear());
 		
 		assertFalse(calendar.isDateWithinEligableRange(auctionDateOneDayAfterMax));
 	}

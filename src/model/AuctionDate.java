@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
  * @author Jim Rosales
  * @version May 2, 2018
  */
-public class AuctionDate implements Comparable<AuctionDate>, Serializable {
+public class AuctionDate implements Serializable {
 
     /** A generated serialVersion UID for persistent storage. */
     private static final long serialVersionUID = 609626313571103034L;
@@ -169,16 +169,16 @@ public class AuctionDate implements Comparable<AuctionDate>, Serializable {
      * 
      * @return the number of days between dates
      */
-    @Override
-    public int compareTo(final AuctionDate theDate) {
-    		return 0;
-//        Calendar thisDay = Calendar.getInstance();
-//        Calendar thatDay = Calendar.getInstance();
-//        thisDay.set(myYear, myMonth - 1, myDay);
-//        thatDay.set(theDate.myYear, theDate.myMonth - 1, theDate.myDay);
-//        Long thisTime = thisDay.getTimeInMillis();
-//        Long thatTime = thatDay.getTimeInMillis();
-        
-//        return (int) ((thisTime - thatTime) / MILLIS_PER_DAY);
-    }
+//    @Override
+//    public int compareTo(final AuctionDate theDate) {
+//    		return 0;
+////        Calendar thisDay = Calendar.getInstance();
+////        Calendar thatDay = Calendar.getInstance();
+////        thisDay.set(myYear, myMonth - 1, myDay);
+////        thatDay.set(theDate.myYear, theDate.myMonth - 1, theDate.myDay);
+////        Long thisTime = thisDay.getTimeInMillis();
+////        Long thatTime = thatDay.getTimeInMillis();
+//        
+////        return (int) ((thisTime - thatTime) / MILLIS_PER_DAY);
+//    }
 }
