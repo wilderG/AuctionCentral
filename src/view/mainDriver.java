@@ -103,20 +103,20 @@ public class mainDriver {
 			
 			if (option == 1) {
 				// call auction view passing
-//				theManager.getAvailableAuctions(theUser);
-//				int userResponse = 0;
-//				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
-//				if (userResponse != 0) {
-//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
-//					AuctionItem theChosenItem = items[userResponse + 1];
-//				}
-//				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
-//				if (userResponse != 0) {
-//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
-//					AuctionItem theChosenItem = items[userResponse + 1];
-//				}
-//				
-//			} 
+				theManager.getAvailableAuctions(theUser);
+				int userResponse = 0;
+				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+				if (userResponse != 0) {
+					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+					AuctionItem theChosenItem = items[userResponse + 1];
+				}
+				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+				if (userResponse != 0) {
+					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+					AuctionItem theChosenItem = items[userResponse + 1];
+				}
+				
+			} 
 			
 			if (option ==2) {
 				
@@ -149,7 +149,7 @@ public class mainDriver {
 				// or display all items from all auctions 
 				// merge collection of items and display all with item viewer?
 				
-			} 
+//			} 
 		} while(option!=3);
 		System.out.println("Sesion has ended.");
  	}
