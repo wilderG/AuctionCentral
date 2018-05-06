@@ -292,6 +292,34 @@ public class DemoData {
 		storage.storeUser(bidder2);
 		storage.storeUser(bidder3);
 		storage.storeUser(bidder4);
+		storage.storeUser(nonProfit1);
+		storage.storeUser(nonProfit2);
+		storage.storeUser(nonProfit3);
+		storage.storeUser(nonProfit4);
+		storage.storeUser(nonProfit5);
+		storage.storeUser(nonProfit6);
+		storage.storeUser(nonProfit7);
+		storage.storeUser(nonProfit8);
+		storage.storeUser(nonProfit9);
+		storage.storeUser(nonProfit10);
+		storage.storeUser(nonProfit12);
+		storage.storeUser(nonProfit13);
+		storage.storeUser(nonProfit14);
+		storage.storeUser(nonProfit15);
+		storage.storeUser(nonProfit16);
+		storage.storeUser(nonProfit17);
+		storage.storeUser(nonProfit18);
+		storage.storeUser(nonProfit19);
+		storage.storeUser(nonProfit20);
+		storage.storeUser(nonProfit21);
+		storage.storeUser(nonProfit22);
+		storage.storeUser(nonProfit23);
+		storage.storeUser(nonProfit24);
+		storage.storeUser(nonProfit25);
+		storage.storeUser(nonProfit26);
+		storage.storeUser(nonProfit27);
+		storage.storeUser(nonProfit28);
+		
 		storage.setCalendar(calendar);
 	}
 

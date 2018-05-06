@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
 import model.Bidder;
@@ -104,10 +105,10 @@ public class mainDriver {
 				// call auction view passing
 				theManager.getAvailableAuctions(theUser);
 				int userResponse = 0;
-				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+				userResponse = viewAuctions.showAuctions(scanner, theUser);
 				if (userResponse != 0) {
-					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
-					AuctionItem theChosenItem = items[userResponse + 1];
+					Auction[] auctions = theUser.getMyAuctions().toArray(new Auction[theUser.getMyAuctions().size()]);
+					Auction theChosenAuction = auctions[userResponse + 1];
 				}
 				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
 				if (userResponse != 0) {
