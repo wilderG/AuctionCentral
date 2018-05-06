@@ -16,7 +16,7 @@ import model.NonProfitContact;
 public class DemoData {
 
 	public static void main(String[] args) {
-		String fileName = "data/demo/storage.dat"; //auction manager points to data/storage.dat by default
+		String fileName = "data/storage.dat"; //auction manager points to data/storage.dat by default
 		
 		// make items
 		HashSet<AuctionItem> auction1Items = new HashSet<>();
@@ -111,17 +111,6 @@ public class DemoData {
 		Bidder bidder3 = new Bidder("bidder3", "John Jacob");
 		Bidder bidder4 = new Bidder("bidder4", "Art Vandelay");
 		
-		
-		
-		
-		
-//		// auction 3
-//		HashSet<AuctionItem> itemSet3 = new HashSet<>(); 
-//		itemSet3.add(item5);
-//		itemSet3.add(item6);
-//		itemSet3.add(item7);
-//		itemSet3.add(item8);
-//		itemSet3.add(item9);
 		
 		// Auction 1
 		HashSet<Bid> bidSetbidder1auction1 = new HashSet<>();
@@ -290,16 +279,14 @@ public class DemoData {
 		LocalDate auction5Date = auction5.getDate();
 		LocalDate auction6Date = auction6.getDate();
 		
-		calendar.forceAddAuctionInThePast(auction1, 1);
-		calendar.forceAddAuctionInThePast(auction2, 2);
-		calendar.forceAddAuctionInThePast(auction3, 1);
+		calendar.forceAddAuctionInThePast(auction0, 2018, 3, 20);
+		calendar.forceAddAuctionInThePast(auction1, 2017, 5, 15);
+		calendar.forceAddAuctionInThePast(auction2, 2018, 4, 20);
+		calendar.forceAddAuctionInThePast(auction3, 2018, 4, 20);
 		calendar.submitAuction(auction4, auction4Date.getDayOfMonth(), auction4Date.getMonthValue(), auction4Date.getYear());
 		calendar.submitAuction(auction5, auction5Date.getDayOfMonth(), auction5Date.getMonthValue(), auction5Date.getYear());
 		calendar.submitAuction(auction6, auction6Date.getDayOfMonth(), auction6Date.getMonthValue(), auction6Date.getYear());
-		
-//		LocalDate theDate = auction3.getDate();
-//		calendar.submitAuction(auction3, theDate.getDayOfMonth(), theDate.getMonthValue(), theDate.getYear());
-		
+				
 		//final store
 		storage.storeUser(bidder1);
 		storage.storeUser(bidder2);
