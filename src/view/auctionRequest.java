@@ -1,6 +1,6 @@
 package view;
 
-public class auctionRequest extends mainDriver {
+public class auctionRequest  {
 	public void nonProfitAuctionRequest() {
 		
 	}

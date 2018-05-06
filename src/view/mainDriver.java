@@ -90,6 +90,7 @@ public class mainDriver {
 		Scanner scanner = new Scanner(System.in);
 		ViewItems viewItems = new ViewItems();
 		ViewAuction viewAuctions = new ViewAuction();
+		auctionBidSearch currentBid = new auctionBidSearch();
 
 		
 		do {
@@ -102,25 +103,43 @@ public class mainDriver {
 			
 			if (option == 1) {
 				// call auction view passing
-				theManager.getAvailableAuctions(theUser);
-				int userResponse = 0;
-				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
-				if (userResponse != 0) {
-					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
-					AuctionItem theChosenItem = items[userResponse + 1];
-				}
-				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
-				if (userResponse != 0) {
-					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
-					AuctionItem theChosenItem = items[userResponse + 1];
-				}
-				
-			} 
+//				theManager.getAvailableAuctions(theUser);
+//				int userResponse = 0;
+//				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+//				if (userResponse != 0) {
+//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+//					AuctionItem theChosenItem = items[userResponse + 1];
+//				}
+//				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+//				if (userResponse != 0) {
+//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+//					AuctionItem theChosenItem = items[userResponse + 1];
+//				}
+//				
+//			} 
 			
 			if (option ==2) {
-				//submenu?
-				// story 1 all auctions with bids
-				theUser.getMyAuctions();
+				
+				
+					int userResponse = 0;
+					userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+					if (userResponse != 0) {
+						AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+						AuctionItem theChosenItem = items[userResponse + 1];
+					}
+					userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+					if (userResponse != 0) {
+						AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+						AuctionItem theChosenItem = items[userResponse + 1];
+					}
+					
+				} 
+
+//				//submenu?
+//				// story 1 all auctions with bids
+//				theUser.getMyAuctions();
+//			    System.out.println(currentBid);
+				//System.out.println(theUser.getMyAuctions());
 				
 				// story 2 all items I have bid on in an auction
 				// select an auction and display items with bids?

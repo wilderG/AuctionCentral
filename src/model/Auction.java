@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashMap;
@@ -176,6 +177,12 @@ public final class Auction implements Serializable {
 	 */
 	public LocalDate getDate() {
 		return myDate;
+	}
+	public HashSet<Bid> getMyBids(final Bidder theBidder) {
+		
+		return myBids.get(theBidder);
+		
+		
 	}
 
 }

@@ -25,5 +25,5 @@ public class ViewAuction {
 	
 		return theScanner.nextInt();
 	}
-
+	
 }
