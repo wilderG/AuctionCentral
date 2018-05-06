@@ -1,10 +1,15 @@
 package view;
 
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 import model.Auction;
 import model.AuctionItem;
+import model.Bid;
+import model.Bidder;
 
 public class ViewItems {
 
@@ -24,6 +29,60 @@ public class ViewItems {
 		
 		return theScanner.nextInt();
 		
+	}
+	
+	public void showItemsForNonProfAuction(Scanner theScanner, Auction theAuction) {
+		String theDate = mainDriver.formatDate(theAuction.getDate());
+		System.out.println("Items for your auction on " + theDate + ":");
+		AuctionItem[] indexedItems = 
+				theAuction.getAllItems().toArray(new AuctionItem[theAuction.getAllItems().size()]);
+		for (int count = 0; count < indexedItems.length; count++) {
+			System.out.print("   " + (count + 1) + ". ");
+			AuctionItem item = indexedItems[count];
+			System.out.println(item.getDescription() + " (" + item.getBidCount() + " bids)");
+			System.out.println("\tMinimum bid set at: $" + item.getMinimumAcceptableBidValue());
+			System.out.println("\tItem not auctioned off for: ????" );
+			
+			
+		}
+		System.out.println("\nPress enter to return to the main menu: ");
+		theScanner.next();
+//		return theScanner.nextInt();
+	}
+	
+	public void showBidderAuctions(Scanner theScanner, Bidder theUser) {
+		int count = 0;
+		Collection<Auction> auctionCollection = theUser.getMyAuctions();
+
+		for (Iterator<Auction> i= auctionCollection .iterator();
+				i.hasNext(); ) {
+
+			Auction auction =  i.next();
+			Collection<AuctionItem> auctionItems = auction.getAllItemsWithBidder(theUser);
+			HashSet<Bid> myBids = auction.getMyBids(theUser);
+
+			System.out.println("\t" + (count + 1) + ". With " + auction.getName() + ", " 
+					+ auction.getDate() + " (" + auction.getAllItems().size() + ")");
+
+			int count2 = 0;
+
+			for (Iterator<AuctionItem> j= auctionItems .iterator();
+					j.hasNext(); ) {
+				BigDecimal myBidValue = BigDecimal.ZERO;
+				AuctionItem auctionItem =  j.next();
+				for(Iterator <Bid> p = myBids.iterator(); p.hasNext();) {	
+					Bid bids = p.next();
+					if(bids.getAuctionItem().equals(auctionItem)) {
+						myBidValue = bids.getValue();
+					}
+					System.out.println("\t\t Item" + (count2 + 1) + ": " + auctionItem.getDescription());
+					System.out.println("\t\tMinimum bid:"+ auctionItem.getMinimumAcceptableBidValue() +"\t\tMy bid:" + myBidValue );
+				}
+			}
+
+		}
+
+		System.out.println("Enter 0 to go back");	
 	}
 	
 }

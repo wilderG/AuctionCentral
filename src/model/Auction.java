@@ -182,4 +182,8 @@ public final class Auction implements Serializable {
 		return myMaximumItems - myItems.size();
 	}
 	
+	public HashSet<Bid> getMyBids(final Bidder theBidder) {		
+		return myBids.get(theBidder);
+	}
+	
 }
