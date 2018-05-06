@@ -25,9 +25,12 @@ public class AuctionItem implements Serializable {
 	
 	private String myDescription;
 	
+	private int myBidCount;
+	
 	public AuctionItem(BigDecimal theMinimumBid, String theDescription) {
 		myMinimumAcceptableBidValue = theMinimumBid;
 		myDescription = theDescription;
+		myBidCount = 0;
 	}
 	
 	public BigDecimal getMinimumAcceptableBidValue() {
@@ -45,5 +48,13 @@ public class AuctionItem implements Serializable {
 			return false;
 		}
 	
+	}
+	
+	public void incrementBidCount() {
+		myBidCount++;
+	}
+	
+	public int getBidCount() {
+		return myBidCount;
 	}
 }

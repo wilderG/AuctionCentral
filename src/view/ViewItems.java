@@ -31,6 +31,25 @@ public class ViewItems {
 		
 	}
 	
+	public void showItemsForNonProfAuction(Scanner theScanner, Auction theAuction) {
+		String theDate = mainDriver.formatDate(theAuction.getDate());
+		System.out.println("Items for your auction on " + theDate + ":");
+		AuctionItem[] indexedItems = 
+				theAuction.getAllItems().toArray(new AuctionItem[theAuction.getAllItems().size()]);
+		for (int count = 0; count < indexedItems.length; count++) {
+			System.out.print("   " + (count + 1) + ". ");
+			AuctionItem item = indexedItems[count];
+			System.out.println(item.getDescription() + " (" + item.getBidCount() + " bids)");
+			System.out.println("\tMinimum bid set at: $" + item.getMinimumAcceptableBidValue());
+			System.out.println("\tItem not auctioned off for: ????" );
+			
+			
+		}
+		System.out.println("\nPress enter to return to the main menu: ");
+		theScanner.next();
+//		return theScanner.nextInt();
+	}
+	
 	public void showBidderAuctions(Scanner theScanner, Bidder theUser) {
 		int count = 0;
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();

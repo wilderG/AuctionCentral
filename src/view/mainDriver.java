@@ -42,7 +42,7 @@ public class mainDriver {
 	 * @param theUser a NonProfitContact
 	 */
 	private static void nonProfitContactScreen(final NonProfitContact theUser,
-			final AuctionManager theManager) {
+			final AuctionManager theManager, Scanner theScanner) {
 		int option;
 		
 		do {
@@ -56,6 +56,13 @@ public class mainDriver {
 			option = input.nextInt();
 			
 			if (option == 1) {
+				ViewAuction viewAuctions = new ViewAuction();
+				int userResponse = viewAuctions .showAuctions(theScanner, theUser);
+				if (userResponse != 0) {
+					Auction auction = getAuctionFromUserResponse(theUser, userResponse);
+					ViewItems viewItems = new ViewItems();
+					viewItems.showItemsForNonProfAuction(theScanner, auction);
+				}
 				// get an auction from view screen
 				
 				// call item view screen
@@ -147,8 +154,7 @@ public class mainDriver {
 				int userResponse = 0;
 				userResponse = viewAuctions.showAuctions(scanner, theUser);
 				if (userResponse != 0) {
-					Auction[] auctions = theUser.getMyAuctions().toArray(new Auction[theUser.getMyAuctions().size()]);
-					Auction theChosenAuction = auctions[userResponse + 1];
+					Auction theChosenAuction = getAuctionFromUserResponse(theUser, userResponse);
 				}
 				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
 				if (userResponse != 0) {
@@ -199,7 +205,7 @@ public class mainDriver {
 	private static void userLogon(final AuctionManager theManager) {
 		User user = null;
 		System.out.print("\rPlease enter username to login: ");
-		
+		Scanner scanner = new Scanner(System.in);
 		try {
 			user = theManager.getUser(input.nextLine());
 		} catch (Exception e) {
@@ -212,9 +218,10 @@ public class mainDriver {
 		if (user instanceof model.Bidder) {
 			bidderScreen((Bidder) user, theManager);
 		} else if (user instanceof model.NonProfitContact) {
-			nonProfitContactScreen((NonProfitContact) user, theManager);
+			nonProfitContactScreen((NonProfitContact) user, theManager, scanner);
 		} else {
 			endSession();
+			scanner.close();
 		}
 	}
 	
@@ -232,9 +239,15 @@ public class mainDriver {
 	}
 	
 	
-	private static String formatDate(final LocalDate theDate) {
+	public static String formatDate(final LocalDate theDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
 		return theDate.format(formatter);
 	}
+	
+	private static Auction getAuctionFromUserResponse(User theUser, int theResponse) {
+		Auction[] auctions = theUser.getMyAuctions().toArray(new Auction[theUser.getMyAuctions().size()]);
+		return auctions[theResponse - 1];
+	}
+
 	
 }

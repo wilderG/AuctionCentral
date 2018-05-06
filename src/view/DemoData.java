@@ -277,9 +277,9 @@ public class DemoData {
 		
 		//
 		
-		LocalDate auction1Date = auction1.getDate();
-		LocalDate auction2Date = auction2.getDate();
-		LocalDate auction3Date = auction3.getDate();
+//		LocalDate auction1Date = auction1.getDate();
+//		LocalDate auction2Date = auction2.getDate();
+//		LocalDate auction3Date = auction3.getDate();
 		LocalDate auction4Date = auction4.getDate();
 		LocalDate auction5Date = auction5.getDate();
 		LocalDate auction6Date = auction6.getDate();
