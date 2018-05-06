@@ -113,9 +113,9 @@ public class AuctionCalendar implements Serializable {
     public boolean isDateWithinEligableRange(final AuctionDate theAuctionDate) {
         boolean result = true;
         
-        if (theAuctionDate.getDate().isAfter(myCurrentDate.plusDays(MAXIMUM_DAYS_OUT + 1))) {
+        if (theAuctionDate.getDate().isAfter(myCurrentDate.plusDays(MAXIMUM_DAYS_OUT))) {
         		result = false;
-        } else if (theAuctionDate.getDate().isBefore(myCurrentDate.plusDays(MINIMUM_DAYS_OUT + 1))) {
+        } else if (theAuctionDate.getDate().isBefore(myCurrentDate.plusDays(MINIMUM_DAYS_OUT))) {
         		result = false;
         }
 
