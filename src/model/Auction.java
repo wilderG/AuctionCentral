@@ -54,6 +54,16 @@ public final class Auction implements Serializable {
 		myBids = new HashMap<>();
 	}
 	
+	
+	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount, String theNonProfit,
+			final HashSet<AuctionItem> theItems, final HashMap<Bidder, HashSet<Bid>> theBids) {
+		this(theDate, theMaxItemCount, theMaxBidCount, theNonProfit);
+		myItems = theItems;
+		myBids = theBids;
+	}
+	
+	
+	
 	/**
 	 * Adds an item to the auction if auction is allowing new items.
 	 * @param theItem

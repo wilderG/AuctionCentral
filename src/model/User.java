@@ -45,7 +45,6 @@ public class User implements Serializable {
 		myUsername = theUsername;
 		myDisplayName = theDisplayName;
 		myAuctions = new ArrayList<>();
-		
 	}
 	
 	/**
