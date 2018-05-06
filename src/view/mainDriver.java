@@ -1,98 +1,147 @@
 package view;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
-
 import model.AuctionManager;
 import model.Bidder;
 import model.NonProfitContact;
 import model.User;
 
+
+/**
+ * The Auction Central program...
+ * @author Jared Malone
+ * @author Jim Rosales
+ * @author Steven Kenneth Golob
+ * @author Wilder Emanuel Garcia Y Garcia
+ * @author Yohei Sato
+ * @version 5/8/2018
+ */
 public class mainDriver {
 
 	private static Scanner input = new Scanner(System.in);
 	
+	/** This class should not be constructed. **/
 	private mainDriver() {}
 	
 	public static void main(String[] theArgs) {
-		AuctionManager manager = new AuctionManager();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
+		userLogon(new AuctionManager());
+	}
+	
+	/**
+	 * Presents the menu for a non-profit contact and controls
+	 * their user experience.
+	 * @param theUser a NonProfitContact
+	 */
+	private static void nonProfitContactScreen(final NonProfitContact theUser,
+			final AuctionManager theManager) {
+		int option;
 		
+		do {
+			System.out.println("MAIN MENU:");
+			System.out.println("  1. View all auctions/items for " 
+								+ theUser.getDisplayName());
+			System.out.println("  2. Submit an auction request");
+			System.out.println("  3. Modify auction inventory");
+			System.out.println("  4. Logout");
+			System.out.print("Choice: ");
+			option = input.nextInt();
+			
+			if (option == 1) {
+				// get an auction from view screen
+				
+				// call item view screen
+				
+			} 
+			
+			if (option ==2) {
+				// pre-check with manager
+				theManager.isNewAuctionRequestAllowed(); //handle false
+				
+				// call NewAuctionRequest screen
+				
+			} 
+			
+			if(option ==3) {
+				// get an auction from view screen
+				
+				// pre-check if auction can be added to
+				// someAuction.isAllowingNewItem()
+				
+				// show NewItemRequest screen
+				
+			}
+			
+			} while(option!=4);
+			System.out.println("Sesion has ended.");
+	}
+	
+	
+	/**
+	 * Presents the menu for a bidder and controls their user experience.
+	 * @param theUser a Bidder
+	 */
+	private static void bidderScreen(final Bidder theUser, 
+		final AuctionManager theManager) {
+		int option;
+	
+		do {
+			System.out.println("MAIN MENU:");
+			System.out.println("  1. Search for auctions to bid on");
+			System.out.println("  2. View items I have bid on");
+			System.out.println("  3. Logout");
+			System.out.print("Choice: ");
+			option = input.nextInt();
+			
+			if (option == 1) {
+				// call auction view passing
+				theManager.getAvailableAuctions(theUser);
+			} 
+			
+			if (option ==2) {
+				//submenu?
+				// story 1 all auctions with bids
+				theUser.getMyAuctions();
+				
+				// story 2 all items I have bid on in an auction
+				// select an auction and display items with bids?
+				// someAuction.getAllItemsWithBidder(theUser)
+				
+				
+				// or display all items from all auctions 
+				// merge collection of items and display all with item viewer?
+				
+			} 
+		} while(option!=3);
+		System.out.println("Sesion has ended.");
+ 	}
+
+	
+	/**
+	 * Prompts the user to login and determines if user is a Bidder or
+	 * a NonProfitContact. 
+	 * @param theManager instance of AuctionManager
+	 */
+	private static void userLogon(final AuctionManager theManager) {
 		User user;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
 		
 		System.out.println("Welcome to Auction Central!");
 		System.out.println("--------------------------------");
 		System.out.println("Today is " + LocalDate.now().format(formatter));
 		
 		System.out.print("\rPlease enter username to login: ");
-		user = manager.getUser(input.nextLine());
-		
+		user = theManager.getUser(input.nextLine());
+		System.out.println("Welcome " + user.getDisplayName() + ".");
+				
 		if (user instanceof model.Bidder) {
-			bidderScreen((Bidder) user);
+			bidderScreen((Bidder) user, theManager);
 		} else if (user instanceof model.NonProfitContact) {
-			nonProfitContactScreen((NonProfitContact) user);
+			nonProfitContactScreen((NonProfitContact) user, theManager);
 		} else {
 			System.exit(1);
 		}
-		
 	}
 	
-	private static void nonProfitContactScreen(final NonProfitContact theUser) {
-		int option;
-		System.out.println("Welcome " + theUser.getDisplayName() + ".");
-		
-		
-		do {
-			
-			System.out.println("MAIN MENU:");
-			System.out.println("  1. View all auctions/items for " + theUser.getDisplayName());
-			System.out.println("  2. Submit an auction request");
-			System.out.println("  3. Modify auction inventory");
-			System.out.println("  4. Logout");
-			System.out.print("Choice: ");
-			option = input.nextInt();
-			if (option == 1) {
-				//test2.MenuOption2();
-			} 
-			if (option ==2) {
-				//test.auctionMenu();
-				
-			} 
-			if(option ==3) {
-			}
-			} while(option!=4);
-			System.out.println("Sesion has ended.");
-			
-	}
-	
-	
-	private static void bidderScreen(final Bidder theUser) {
-		int option;
-		System.out.println("\rWelcome " + theUser.getDisplayName() + ".\r");
-				
-		do {
-			
-			
-			System.out.println("MAIN MENU:");
-			System.out.println("  1.Search for auctions to bid on");
-			System.out.println("  2.view current bids");
-			System.out.println("  3.logout");
-			System.out.print("Choice: ");
-			option = input.nextInt();
-			if (option == 1) {
-				//test2.MenuOption2();
-			} 
-			if (option ==2) {
-				//test.auctionMenu();
-				
-			} 
-			if(option ==3) {
-			}
-			} while(option!=3);
-			System.out.println("Sesion has ended.");
- 	}
-
 }
