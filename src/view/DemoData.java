@@ -163,7 +163,7 @@ public class DemoData {
 		bidSetbidder1auction5.add(new Bid(bidder1, item12, BigDecimal.valueOf(700.00)));
 		
 		HashSet<Bid> bidSetbidder2auction5 = new HashSet<>();
-		bidSetbidder2auction5.add(new Bid(bidder1, item12, BigDecimal.valueOf(700.00)));
+		bidSetbidder2auction5.add(new Bid(bidder2, item12, BigDecimal.valueOf(700.00)));
 		
 		// Auction 6
 		HashSet<Bid> bidSetbidder1auction6 = new HashSet<>();
@@ -199,7 +199,7 @@ public class DemoData {
 		HashMap<Bidder, HashSet<Bid>> bidSet3 = new HashMap<>();
 		bidSet3.put(bidder1, bidSetbidder1auction3);
 		bidSet3.put(bidder2, bidSetbidder2auction3);
-		bidSet3.put(bidder3, bidSetbidder4auction3);
+		bidSet3.put(bidder4, bidSetbidder4auction3);
 		
 		HashMap<Bidder, HashSet<Bid>> bidSet4 = new HashMap<>();
 		bidSet4.put(bidder1, bidSetbidder1auction5);
