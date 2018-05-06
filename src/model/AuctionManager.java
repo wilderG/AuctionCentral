@@ -1,6 +1,7 @@
 package model;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashSet;
 
@@ -151,9 +152,22 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Bid processNewBid(NewBidRequest theNewBidRequest) {
-		// TODO Auto-generated method stub
-		return null;
+	public Bid processNewBid(NewBidRequest theNewBidRequest) 
+			throws IllegalArgumentException {
+		
+		AuctionItem item = theNewBidRequest.getMyItem();
+		BigDecimal bidValue = theNewBidRequest.getMyAmount();
+		Bidder bidder = theNewBidRequest.getMyBidder();
+		Auction auction = theNewBidRequest.getMyAuction();
+		
+		if (!item.isBidAmountValid(bidValue)) {
+			throw new IllegalArgumentException("Bid is less than the minimum "
+					+ "acceptable value.");
+		}
+		
+		Bid newBid = new Bid(bidder, item, bidValue);
+		auction.addBid(bidder, newBid);
+		return newBid;
 	}
 
 }
