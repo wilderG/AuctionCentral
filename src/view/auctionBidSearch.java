@@ -9,7 +9,7 @@ import model.Bidder;
 public class auctionBidSearch extends mainDriver {
 	Bidder bidder = new Bidder("Alex", "Alex");
 
-	Auction test = new Auction(null, 0, 0);
+	Auction test = new Auction(null, 0, 0, "Some non profit");
 
 	public void auctionMenu() {
 		Scanner input = new Scanner(System.in);
