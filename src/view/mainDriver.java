@@ -175,7 +175,7 @@ public class mainDriver {
 					userAuctionChoice = viewAuctions.showBiddersAuctions(scanner, theUser);
 					break;
 				case 2:
-					
+					viewItems.showBiddersItemsForAllAuctions(scanner, theUser);
 					break;
 				default:
 					break;

@@ -51,39 +51,36 @@ public class ViewItems {
 //		return theScanner.nextInt();
 	}
 	
-	public void showBidderAuctions(Scanner theScanner, Bidder theUser) {
+	public void showBiddersItemsForAllAuctions(Scanner theScanner, Bidder theUser) {
 		int count = 0;
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 
-		for (Iterator<Auction> i= auctionCollection .iterator();
-				i.hasNext(); ) {
-
+		for (Iterator<Auction> i= auctionCollection .iterator(); i.hasNext();) {
 			Auction auction =  i.next();
 			Collection<AuctionItem> auctionItems = auction.getAllItemsWithBidder(theUser);
 			HashSet<Bid> myBids = auction.getMyBids(theUser);
 
-			System.out.println("\t" + (count + 1) + ". With " + auction.getName() + ", " 
-					+ auction.getDate() + " (" + auction.getAllItems().size() + ")");
+			System.out.println("   " + auction.getName() + ", " + mainDriver.formatDate(auction.getDate()));
 
-			int count2 = 0;
+			int count2 = 1;
 
-			for (Iterator<AuctionItem> j= auctionItems .iterator();
-					j.hasNext(); ) {
+			for (Iterator<AuctionItem> j= auctionItems .iterator(); j.hasNext(); ) {
 				BigDecimal myBidValue = BigDecimal.ZERO;
 				AuctionItem auctionItem =  j.next();
 				for(Iterator <Bid> p = myBids.iterator(); p.hasNext();) {	
 					Bid bids = p.next();
 					if(bids.getAuctionItem().equals(auctionItem)) {
 						myBidValue = bids.getValue();
-					}
-					System.out.println("\t\t Item" + (count2 + 1) + ": " + auctionItem.getDescription());
-					System.out.println("\t\tMinimum bid:"+ auctionItem.getMinimumAcceptableBidValue() +"\t\tMy bid:" + myBidValue );
+					}		
 				}
+				System.out.println("      Item " + count2++ + ": " + auctionItem.getDescription());
+				System.out.println("          Minimum bid: $"+ auctionItem.getMinimumAcceptableBidValue() +"\t\tMy bid: $" + myBidValue );
 			}
-
+			System.out.println();
 		}
 
-		System.out.println("Enter 0 to go back");	
+		System.out.print("Enter 0 to go back: ");	
+		theScanner.nextInt();
 	}
 	
 	public void showBiddersItems(Scanner theScanner, Bidder theUser, int theAuctionIndex) {
