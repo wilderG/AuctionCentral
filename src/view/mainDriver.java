@@ -165,7 +165,6 @@ public class mainDriver {
 			} 
 			
 			if (option == 2) {
-//				theManager.getAvailableAuctions(theUser);
 				ViewBids viewBids = new ViewBids();
 				int userViewChoice = 0;
 				int userAuctionChoice = 0;
@@ -175,7 +174,7 @@ public class mainDriver {
 					userAuctionChoice = viewAuctions.showBiddersAuctions(scanner, theUser);
 					break;
 				case 2:
-					
+					viewItems.showBiddersItemsForAllAuctions(scanner, theUser);
 					break;
 				default:
 					break;
