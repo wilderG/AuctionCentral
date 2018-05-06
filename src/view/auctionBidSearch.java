@@ -6,7 +6,7 @@ import model.Auction;
 
 import model.Bidder;
 
-public class auctionBidSearch {
+public class auctionBidSearch extends mainDriver {
 	Bidder bidder = new Bidder("Alex", "Alex");
 
 	Auction test = new Auction(null, 0, 0);
