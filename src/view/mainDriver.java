@@ -52,7 +52,7 @@ public class mainDriver {
 			System.out.println("  3. Modify auction inventory");
 			System.out.println("  4. Logout");
 			System.out.print("Choice: ");
-			option = getNextInt();
+			option = getNextInt(4);
 			
 			if (option == 1) {
 				ViewAuction viewAuctions = new ViewAuction();
@@ -156,7 +156,7 @@ public class mainDriver {
 			System.out.println("  2. View current bids");
 			System.out.println("  3. Logout");
 			System.out.print("Choice: ");
-			option = getNextInt();
+			option = getNextInt(3);
 			
 			if (option == 1) {
 				// call auction view passing
@@ -276,7 +276,7 @@ public class mainDriver {
 		return auctions[theResponse - 1];
 	}
 
-	public static int getNextInt() {
+	public static int getNextInt(final int theMax) {
 		int result = -1;
 		
 		do {
@@ -287,7 +287,7 @@ public class mainDriver {
 				System.out.println("Invalid input, please try again.");
 				input.nextLine();
 			}
-		} while (result < 0);
+		} while (result < 0 || result > theMax);
 		return result;
 	}
 	
