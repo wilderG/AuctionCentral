@@ -186,4 +186,15 @@ public final class Auction implements Serializable {
 		return myBids.get(theBidder);
 	}
 	
+	public Bid getBidForItem(final Bidder theBidder, AuctionItem theItem) {
+		Bid bid = null;
+		for (Bid potentialBid: myBids.get(theBidder)) {
+			if (potentialBid.getAuctionItem().equals(theItem)) {
+				bid = potentialBid;
+				break;
+			}
+		}
+		return bid;
+	}
+	
 }
