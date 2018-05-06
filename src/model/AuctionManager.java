@@ -1,16 +1,15 @@
 package model;
 
-import java.io.IOException;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-
-import backend.ObjectCloner;
 import backend.StorageIO;
 
 /**
  * Manages new object requests from the front-end and 
- * @author Jared
+ * @author Jared Malone
+ * @version 5/5/2018
  *
  */
 public class AuctionManager implements Manager {
@@ -29,12 +28,6 @@ public class AuctionManager implements Manager {
 	/** The default number of bids a bidder may place in any one auction. **/
 	private static final int MAXIMUM_BIDDER_BIDS_PER_AUCTION = 4;
 		
-	/** The maximum number of bids a bidder may place. **/
-	private static final int MAXIMUM_BIDDER_BIDS = 10;
-		
-	/** The minimum days between two auctions for the same non-profit. **/
-	private static final int MINIMUM_DAYS_BETWEEN_USER_AUCTIONS = 365;
-	
 	/** The schedule of all past and future auctions. **/
 	private AuctionCalendar myCalendar;
 	
@@ -52,24 +45,7 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public User getUser(String theUsername) throws IllegalArgumentException {
-		// not connected to StorageIO
-		// return new User(theUsername, "Test User");
-		
-		User user = storage.getUser(theUsername);
-//		User copyOfUser;
-		
-//		try {
-//			copyOfUser = (User) ObjectCloner.deepCopy(user);
-//		} catch (Exception e) {
-//			throw new IllegalArgumentException("User not found.");
-//		}
-//
-//		if (copyOfUser == null) {
-//			throw new IllegalArgumentException("User not found.");
-//		} else {
-//			return user;
-//		}
-		return user;
+		return storage.getUser(theUsername);
 	}
 	
 	/**
@@ -106,9 +82,24 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Auction processNewAuctionRequest(NewAuctionRequest theAuctionRequest) {
-		// TODO Auto-generated method stub
-		return null;
+	public Auction processNewAuctionRequest(NewAuctionRequest theAuctionRequest) 
+		throws IllegalArgumentException {
+		NonProfitContact sponsor = theAuctionRequest.getMySponsor();
+		LocalDate auctionDate = theAuctionRequest.getMyDate();
+		
+		Auction newAuction = new Auction(auctionDate, MAXIMUM_AUCTION_ITEMS,
+				MAXIMUM_BIDDER_BIDS_PER_AUCTION, sponsor.getDisplayName());
+		
+		if (!sponsor.isDateForProposedAuctionValid(newAuction)) {
+			throw new IllegalArgumentException("You may not add an auction on this date.");
+		}
+		
+		myCalendar.submitAuction(newAuction, auctionDate.getDayOfMonth(), 
+				auctionDate.getMonthValue(), auctionDate.getYear());
+				
+		sponsor.addAuction(newAuction);
+		storage.writeData();
+		return newAuction;
 	}
 
 	/**
@@ -126,8 +117,19 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public AuctionItem processNewItem(NewItemRequest theNewItemRequest) {
-		// TODO Auto-generated method stub
-		return null;
+		Auction auction = theNewItemRequest.getMyAuction();
+		String description = theNewItemRequest.getMyDescription();
+		BigDecimal minimumAmount = theNewItemRequest.getMyMinimumBid();
+		
+		if (!isNewItemRequestAllowed(auction)) {
+			throw new IllegalArgumentException("New item is not allowed.");
+		}
+		
+		AuctionItem newItem = new AuctionItem(minimumAmount, description);
+		auction.addItem(newItem);
+		storage.writeData();
+		
+		return newItem;
 	}
 
 	/**
@@ -167,6 +169,7 @@ public class AuctionManager implements Manager {
 		
 		Bid newBid = new Bid(bidder, item, bidValue);
 		auction.addBid(bidder, newBid);
+		storage.writeData();
 		return newBid;
 	}
 
