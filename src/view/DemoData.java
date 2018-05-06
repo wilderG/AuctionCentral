@@ -92,19 +92,19 @@ public class DemoData {
 		NonProfitContact nonProfit13 = new NonProfitContact("nonprof13", "UNICEF");
 		NonProfitContact nonProfit14 = new NonProfitContact("nonprof14", "Human Rights Watch");
 		NonProfitContact nonProfit15 = new NonProfitContact("nonprof15", "ACLU");
-		NonProfitContact nonProfit16 = new NonProfitContact("nonprof16", "Doctors Without Borders");
-		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17", "Sierra Club");
-		NonProfitContact nonProfit18 = new NonProfitContact("nonprof18", "NPR");
-		NonProfitContact nonProfit19 = new NonProfitContact("nonprof19", "American Red Cross");
-		NonProfitContact nonProfit20 = new NonProfitContact("nonprof20", "Teach for America");
-		NonProfitContact nonProfit21 = new NonProfitContact("nonprof21", "St. Jude's Children's Research Hospital");
-		NonProfitContact nonProfit22 = new NonProfitContact("nonprof22", "Save the Children");
-		NonProfitContact nonProfit23 = new NonProfitContact("nonprof23", "Make-A-Wish");
-		NonProfitContact nonProfit24 = new NonProfitContact("nonprof24", "Habitat for Humanity");
-		NonProfitContact nonProfit25 = new NonProfitContact("nonprof25", "Mozilla");
-		NonProfitContact nonProfit26 = new NonProfitContact("nonprof26", "EFF");
-		NonProfitContact nonProfit27 = new NonProfitContact("nonprof27", "Green Peace");
-		NonProfitContact nonProfit28 = new NonProfitContact("nonprof28", "World Wildlife Fund");
+//		NonProfitContact nonProfit16 = new NonProfitContact("nonprof16", "Doctors Without Borders");
+//		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17", "Sierra Club");
+//		NonProfitContact nonProfit18 = new NonProfitContact("nonprof18", "NPR");
+//		NonProfitContact nonProfit19 = new NonProfitContact("nonprof19", "American Red Cross");
+//		NonProfitContact nonProfit20 = new NonProfitContact("nonprof20", "Teach for America");
+//		NonProfitContact nonProfit21 = new NonProfitContact("nonprof21", "St. Jude's Children's Research Hospital");
+//		NonProfitContact nonProfit22 = new NonProfitContact("nonprof22", "Save the Children");
+//		NonProfitContact nonProfit23 = new NonProfitContact("nonprof23", "Make-A-Wish");
+//		NonProfitContact nonProfit24 = new NonProfitContact("nonprof24", "Habitat for Humanity");
+//		NonProfitContact nonProfit25 = new NonProfitContact("nonprof25", "Mozilla");
+//		NonProfitContact nonProfit26 = new NonProfitContact("nonprof26", "EFF");
+//		NonProfitContact nonProfit27 = new NonProfitContact("nonprof27", "Green Peace");
+//		NonProfitContact nonProfit28 = new NonProfitContact("nonprof28", "World Wildlife Fund");
 
 		Bidder bidder1 = new Bidder("bidder1", "Peter Piper");
 		Bidder bidder2 = new Bidder("bidder2", "Jane Doe");
@@ -228,19 +228,6 @@ public class DemoData {
 		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6), 10, 10, "N\\A");
 		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7), 10, 10, "N\\A");
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8), 10, 10, "N\\A");
-		Auction auction10 = new Auction(LocalDate.of(2018, 6, 9), 10, 10, "N\\A");
-		Auction auction11 = new Auction(LocalDate.of(2018, 6, 10), 10, 10, "N\\A");
-		Auction auction12 = new Auction(LocalDate.of(2018, 6, 11), 10, 10, "N\\A");
-		Auction auction13 = new Auction(LocalDate.of(2018, 6, 12), 10, 10, "N\\A");
-		Auction auction14 = new Auction(LocalDate.of(2018, 6, 13), 10, 10, "N\\A");
-		Auction auction15 = new Auction(LocalDate.of(2018, 6, 14), 10, 10, "N\\A");
-		Auction auction16 = new Auction(LocalDate.of(2018, 6, 15), 10, 10, "N\\A");
-		Auction auction17 = new Auction(LocalDate.of(2018, 6, 16), 10, 10, "N\\A");
-		Auction auction18 = new Auction(LocalDate.of(2018, 6, 17), 10, 10, "N\\A");
-		Auction auction19 = new Auction(LocalDate.of(2018, 6, 18), 10, 10, "N\\A");
-		Auction auction20 = new Auction(LocalDate.of(2018, 6, 19), 10, 10, "N\\A");
-		Auction auction21 = new Auction(LocalDate.of(2018, 6, 20), 10, 10, "N\\A");
-		Auction auction22 = new Auction(LocalDate.of(2018, 6, 21), 10, 10, "N\\A");
 		
 		
 //		Auction auction1 = new Auction(theDate, theMaxItemCount, theMaxBidCount, theNonProfit, theItems, theBids)
@@ -279,7 +266,9 @@ public class DemoData {
 		nonProfit4.addAuction(auction4);
 		nonProfit5.addAuction(auction5);
 		nonProfit6.addAuction(auction6);
-		
+		nonProfit13.addAuction(auction7);
+        nonProfit14.addAuction(auction8);
+        nonProfit15.addAuction(auction9);
 		
 		
 		
@@ -318,23 +307,24 @@ public class DemoData {
 		storage.storeUser(nonProfit8);
 		storage.storeUser(nonProfit9);
 		storage.storeUser(nonProfit10);
+        storage.storeUser(nonProfit11);
 		storage.storeUser(nonProfit12);
 		storage.storeUser(nonProfit13);
 		storage.storeUser(nonProfit14);
 		storage.storeUser(nonProfit15);
-		storage.storeUser(nonProfit16);
-		storage.storeUser(nonProfit17);
-		storage.storeUser(nonProfit18);
-		storage.storeUser(nonProfit19);
-		storage.storeUser(nonProfit20);
-		storage.storeUser(nonProfit21);
-		storage.storeUser(nonProfit22);
-		storage.storeUser(nonProfit23);
-		storage.storeUser(nonProfit24);
-		storage.storeUser(nonProfit25);
-		storage.storeUser(nonProfit26);
-		storage.storeUser(nonProfit27);
-		storage.storeUser(nonProfit28);
+//		storage.storeUser(nonProfit16);
+//		storage.storeUser(nonProfit17);
+//		storage.storeUser(nonProfit18);
+//		storage.storeUser(nonProfit19);
+//		storage.storeUser(nonProfit20);
+//		storage.storeUser(nonProfit21);
+//		storage.storeUser(nonProfit22);
+//		storage.storeUser(nonProfit23);
+//		storage.storeUser(nonProfit24);
+//		storage.storeUser(nonProfit25);
+//		storage.storeUser(nonProfit26);
+//		storage.storeUser(nonProfit27);
+//		storage.storeUser(nonProfit28);
 		
 		storage.setCalendar(calendar);
 	}
