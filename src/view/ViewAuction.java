@@ -15,14 +15,26 @@ import model.User;
 
 public class ViewAuction {
 
-	public int showAllAuctions(Scanner theScanner, User theUser) {
+	public int showAllAuctions(Scanner theScanner, User theUser, AuctionManager theManager) {
 		if (theUser instanceof NonProfitContact) {
 			nonProfitIntroMessage(theUser);
 		} else {
 			bidderIntroMessage();
 		}
 		
-		Collection<Auction> auctionCollection = theUser.getMyAuctions();
+		Collection<Auction> auctionCollection = null;
+		
+		if (theUser instanceof NonProfitContact) {
+			auctionCollection = theUser.getMyAuctions();
+		} else {
+			auctionCollection = theManager.getAvailableAuctions((Bidder) theUser);
+			if (auctionCollection.isEmpty()) {
+				System.out.println("Sorry you're at the max amount of bids allowable");
+				System.out.println("Please choose a different option");
+				return 0;
+			}
+		}
+		
 		Iterator<Auction> iterator = auctionCollection.iterator();
 		for (int count = 0; count < auctionCollection.size(); count++) {
 			Auction auction = iterator.next();

@@ -57,7 +57,7 @@ public class mainDriver {
 			
 			if (option == 1) {
 				ViewAuction viewAuctions = new ViewAuction();
-				int userResponse = viewAuctions .showAllAuctions(theScanner, theUser);
+				int userResponse = viewAuctions .showAllAuctions(theScanner, theUser, theManager);
 				if (userResponse != 0) {
 					Auction auction = getAuctionFromUserResponse(theUser, userResponse);
 					ViewItems viewItems = new ViewItems();
@@ -102,15 +102,26 @@ public class mainDriver {
 						
 					//NewItemRequest n
 					String itemDescription;
-					Double itemMinimumBid;
+					Double itemMinimumBid = 0.0;
 					
 					//get input
 					input.nextLine();
 					
 					System.out.print("Please enter the new item's name: ");
 					itemDescription = input.nextLine();
-					System.out.print("Please enter the minimum bid: ");
-					itemMinimumBid = input.nextDouble();
+					boolean invalidChoice = true;
+					do {
+						try {
+							System.out.print("Please enter the minimum bid: ");
+							itemMinimumBid = input.nextDouble();
+							invalidChoice = false;
+						} catch (Exception e) {
+							System.out.println("Invalid Input Please Try again");
+						}
+					} while (invalidChoice);
+					
+					
+					
 					
 					AuctionItem newItem = 
 						theManager.processNewItem(new NewItemRequest
@@ -151,16 +162,17 @@ public class mainDriver {
 			if (option == 1) {
 				// call auction view passing
 				theManager.getAvailableAuctions(theUser);
-				int userResponse = 0;
-				userResponse = viewAuctions.showAllAuctions(scanner, theUser);
-				if (userResponse != 0) {
-					Auction theChosenAuction = getAuctionFromUserResponse(theUser, userResponse);
+				int userItemChoice = 0;
+				int auctionUserChoice = viewAuctions.showAllAuctions(scanner, theUser, theManager);
+				if (auctionUserChoice != 0) {
+					Auction theChosenAuction = getAuctionFromUserResponse(theUser, auctionUserChoice);
+					userItemChoice = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
 				}
-				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
-				if (userResponse != 0) {
-					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
-					AuctionItem theChosenItem = items[userResponse + 1];
-				}
+				
+//				if (userResponse != 0) {
+//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+//					AuctionItem theChosenItem = items[userResponse + 1];
+//				}
 				
 			} 
 			

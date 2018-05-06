@@ -77,9 +77,10 @@ public class Bidder extends User {
 		LocalDate today = LocalDate.now();
 		for (Auction auction: this.getMyAuctions()) {
 			if (auction.getDate().isAfter(today)) {
-				currentBidCount++;
+				currentBidCount += auction.getMyBids(this).size();
 			}
 		}
+		System.out.println("Peter Piper has: " + currentBidCount);
 		myBidCount = currentBidCount;
 	}
 	
