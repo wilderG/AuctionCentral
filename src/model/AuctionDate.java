@@ -158,7 +158,7 @@ public class AuctionDate implements Serializable {
      * @return the formatted string of this date's date
      */
     public String format() {
-        String thisDate = myDate.getDayOfYear() + "/" + myDate.getMonthValue() + "/" + myDate.getDayOfMonth();
+        String thisDate = myDate.getYear() + "/" + myDate.getMonthValue() + "/" + myDate.getDayOfMonth();
         return thisDate;
     }
     
