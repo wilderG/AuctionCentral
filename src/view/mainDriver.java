@@ -158,7 +158,7 @@ public class mainDriver {
 				
 			} 
 			
-			if (option ==2) {
+			if (option == 2) {
 				
 				theManager.getAvailableAuctions(theUser);
 				int userResponse = 0;
