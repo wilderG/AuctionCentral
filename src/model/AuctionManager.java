@@ -121,9 +121,9 @@ public class AuctionManager implements Manager {
 		String description = theNewItemRequest.getMyDescription();
 		BigDecimal minimumAmount = theNewItemRequest.getMyMinimumBid();
 		
-		if (!isNewItemRequestAllowed(auction)) {
-			throw new IllegalArgumentException("New item is not allowed.");
-		}
+//		if (!isNewItemRequestAllowed(auction)) {
+//			throw new IllegalArgumentException("New item is not allowed.");
+//		}
 		
 		AuctionItem newItem = new AuctionItem(minimumAmount, description);
 		auction.addItem(newItem);
