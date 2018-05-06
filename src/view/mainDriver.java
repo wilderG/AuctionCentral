@@ -33,7 +33,6 @@ public class mainDriver {
 	public static void main(String[] theArgs) {
 		showWelcomeMessage();
 		userLogon(new AuctionManager());
-		endSession();
 	}
 	
 	/**
@@ -53,7 +52,7 @@ public class mainDriver {
 			System.out.println("  3. Modify auction inventory");
 			System.out.println("  4. Logout");
 			System.out.print("Choice: ");
-			option = input.nextInt();
+			option = getNextInt();
 			
 			if (option == 1) {
 				ViewAuction viewAuctions = new ViewAuction();
@@ -116,7 +115,7 @@ public class mainDriver {
 							itemMinimumBid = input.nextDouble();
 							invalidChoice = false;
 						} catch (Exception e) {
-							System.out.println("Invalid Input Please Try again");
+							System.out.println("Invalid input please try again.");
 						}
 					} while (invalidChoice);
 					
@@ -157,7 +156,7 @@ public class mainDriver {
 			System.out.println("  2. View current bids");
 			System.out.println("  3. Logout");
 			System.out.print("Choice: ");
-			option = input.nextInt();
+			option = getNextInt();
 			
 			if (option == 1) {
 				// call auction view passing
@@ -277,5 +276,19 @@ public class mainDriver {
 		return auctions[theResponse - 1];
 	}
 
+	public static int getNextInt() {
+		int result = -1;
+		
+		do {
+			try {
+				System.out.print("Enter a choice: ");
+				result = input.nextInt();
+			} catch (Exception e) {
+				System.out.println("Invalid input, please try again.");
+				input.nextLine();
+			}
+		} while (result < 0);
+		return result;
+	}
 	
 }
