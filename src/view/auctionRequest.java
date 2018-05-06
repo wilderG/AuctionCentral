@@ -49,44 +49,60 @@ public class auctionRequest {
      * then books the auction if so.
      */
 	public void nonProfitAuctionRequest() {
-	    LocalDate today = LocalDate.now();
-	    LocalDate soonestDayAvailable = getSoonestPossibleDate(today);
-
 	    if (isSchedulingAllowedForNonprof()) {
-	        System.out.println("Please enter the date you would like to schedule "
-                    + "an auction on.");
-	        System.out.println("(Must be between " + soonestDayAvailable.toString() 
-	                + " and " + today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT) + ")");
-	        System.out.println("\"YYYY-MM-DD\":");
-	        
+	        displayPrompt();
             LocalDate chosenDate;
             do {
-                chosenDate = promptForChosenDate();
+                chosenDate = getChosenDateFromUser();
             } while (chosenDate == null);
-            
-            System.out.println();
             try {
-                NewAuctionRequest auctionRequest = new NewAuctionRequest(myNonprof, chosenDate);
-                myManager.processNewAuctionRequest(auctionRequest);
-                
-                System.out.println("Auction for " + myNonprof.getDisplayName() 
-                + " successfully scheduled for " + chosenDate.toString() + "!");
-                System.out.println("\n");
+                attemptToScheduleAuction(chosenDate);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
 	    } else {
 	        displayPrecheckError();
 	    }
-	    
 	}
 
 	/**
+	 * Displays the instructions for the non-profit to enter a date to schedule 
+	 * an auction on.
+	 */
+	private void displayPrompt() {
+	    LocalDate today = LocalDate.now();
+        System.out.println("Please enter the date you would like to schedule "
+                + "an auction on.");
+        System.out.println("(Must be between " + getSoonestPossibleDate().toString() 
+                + " and " + today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT) + ")");
+        System.out.println("\"YYYY-MM-DD\":");
+    }
+
+	/**
+	 * Attempts to schedule an auction based on the chosen date by the user.
+	 * 
+	 * @param theChosenDate the date the user chose the schedule
+	 * @throws IllegalArgumentException if the chosen date is not available
+	 */
+    private void attemptToScheduleAuction(LocalDate theChosenDate) 
+            throws IllegalArgumentException {
+        System.out.println();
+        NewAuctionRequest auctionRequest = new NewAuctionRequest(myNonprof, theChosenDate);
+        myManager.processNewAuctionRequest(auctionRequest);
+        
+        //___________________
+        
+        System.out.println("Auction for " + myNonprof.getDisplayName() 
+        + " successfully scheduled for " + theChosenDate.toString() + "!");
+        System.out.println("\n");
+    }
+
+    /**
 	 * Prompts the user for a date to schedule an auction on.
 	 * 
 	 * @return the input as a date from the user
 	 */
-	private LocalDate promptForChosenDate() {
+	private LocalDate getChosenDateFromUser() {
 	    String input = stdin.nextLine();
 	    LocalDate chosenDate;
         try {
@@ -140,9 +156,10 @@ public class auctionRequest {
 	 * @param theToday the current date
 	 * @return the soonest possible date for the nonprofit to book an auction.
 	 */
-    private LocalDate getSoonestPossibleDate(LocalDate theToday) {
+    private LocalDate getSoonestPossibleDate() {
+        LocalDate today = LocalDate.now();
         LocalDate oneYearFromPrevAuction = myNonprof.getLatestDate().plusYears(1);
-        LocalDate minDaysOutFromToday = theToday.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        LocalDate minDaysOutFromToday = today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
         LocalDate latestDate;
         if (minDaysOutFromToday.isAfter(oneYearFromPrevAuction))
             latestDate = minDaysOutFromToday;

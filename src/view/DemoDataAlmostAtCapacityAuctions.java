@@ -7,6 +7,14 @@ import model.Auction;
 import model.AuctionCalendar;
 import model.NonProfitContact;
 
+
+
+
+/**
+ * 
+ * @author Steven Golob 
+ * @version May 6, 2018
+ */
 public class DemoDataAlmostAtCapacityAuctions {
 
     public static void main(String[] args) {
@@ -26,10 +34,11 @@ public class DemoDataAlmostAtCapacityAuctions {
             calendar.submitAuction(addedAuction, dateOfAdd.getDayOfMonth(), dateOfAdd.getMonthValue(), dateOfAdd.getYear());
         }
 
-
+        // nonprofit to add an auction successfully
         NonProfitContact nonProfit1 = new NonProfitContact("nonprof1", "The Human Fund");
-        storage.storeUser(nonProfit1);
+        // nonprofit to try and add an auction and fails 
         NonProfitContact nonProfit2 = new NonProfitContact("nonprof2", "The Fund for People");
+        storage.storeUser(nonProfit1);
         storage.storeUser(nonProfit2);
         storage.setCalendar(calendar);
     }
