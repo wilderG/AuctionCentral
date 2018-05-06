@@ -5,13 +5,15 @@ import java.util.Scanner;
 import model.AuctionManager;
 import model.Bidder;
 
-public class viewBids {
+public class viewBids extends mainDriver{
 	Bidder bidder = new Bidder("Alex", "Alex");
 	AuctionManager test = new AuctionManager();
 	Scanner input = new Scanner(System.in);
+	
 	int option = 0;
 	public void MenuOption2() {
 		int size = test.getAvailableAuctions(bidder).size();
+		
 		System.out.println("Auctions available to bid on:");
 		System.out.println("");
 		if(test.getAvailableAuctions(bidder).isEmpty()) {

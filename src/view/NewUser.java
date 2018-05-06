@@ -6,7 +6,7 @@ import model.Bidder;
 import model.NonProfitContact;
 import model.User;
 
-public class NewUser {
+public class NewUser extends mainDriver {
 
 	public static void main(String[] args) {
 
