@@ -1,6 +1,6 @@
 package model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 /**
  * Class represents a request for a new auction.
@@ -11,19 +11,19 @@ public class NewAuctionRequest {
 	/**
 	 * The sponsor for the new auction.
 	 */
-	private User mySponsor;
+	private NonProfitContact mySponsor;
 	
 	/**
 	 * The date for the requested auction.
 	 */
-	private Date myDate;
+	private LocalDate myDate;
 	
 	/**
 	 * Constructor for a new auction request.
 	 * @param theSponsor that will be associated with the newly requested auction.
 	 * @param theDate on which the newly requested auction be held.
 	 */
-	public NewAuctionRequest(User theSponsor, Date theDate) {
+	public NewAuctionRequest(NonProfitContact theSponsor, LocalDate theDate) {
 		mySponsor = theSponsor;
 		myDate = theDate;
 	}
@@ -32,7 +32,7 @@ public class NewAuctionRequest {
 	 * Getter for the sponsor for the newly requested auction.
 	 * @return The sponsor for the newly requested auction.
 	 */
-	public User getMySponsor() {
+	public NonProfitContact getMySponsor() {
 		return mySponsor;
 	}
 	
@@ -40,7 +40,7 @@ public class NewAuctionRequest {
 	 * Getter for the date on which the newly requested auction will be held.
 	 * @return The date on which the new auction will be held.
 	 */
-	public Date getMyDate() {
+	public LocalDate getMyDate() {
 		return myDate;
 	}
 }
