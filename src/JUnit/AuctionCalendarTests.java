@@ -12,6 +12,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import model.Auction;
 import model.AuctionCalendar;
 import model.AuctionDate;
 
@@ -19,6 +20,7 @@ import model.AuctionDate;
  * 
  * @author Jared Malone (5/3/2018)
  * @author Jim Rosales (5/5/2018)
+ * @author Steven Golob
  * @version 5/5/2018
  */
 public class AuctionCalendarTests {
@@ -62,6 +64,42 @@ public class AuctionCalendarTests {
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 	
+	/**
+     * Tests the submitAuction method. Specifically, checks that an auction is scheduled 
+     * if the requested date has no auctions on it.
+     */
+    @Test
+    public void submitAuction_noAuctionsOnRequestedDate_newAuctionAdded() {
+        Auction testAuction = new Auction();
+        theCalendar.submitAuction(testAuction, 30, 5, 2018);
+        assertEquals("Should have 1 auction", 1, testCalendar.getFutureNumberOfAuction());
+        assertSame("Should be same auction scheduled", testAuction, testCalendar.getFutureAuctions().get(0));
+    }
+
+    /**
+     * Tests the submitAuction method. Specifically, checks that an auction is scheduled if 
+     * the requested date has less than the maximum number of auctions on it.
+     */
+    @Test
+    public void submitAuction_lessThanMaxAuctionsOnRequestedDate_newAuctionAdded() {
+    		theCalendar.submitAuction(new Auction(), 30, 5, 2018);
+        Auction testAuction = new Auction();
+        theCalendar.submitAuction(testAuction, 30, 5, 2018);
+        assertEquals("Should have 1 auction", 2, testCalendar.getFutureNumberOfAuction());
+        assertSame("Should be same auction scheduled", testAuction, testCalendar.getFutureAuctions().get(1));
+    }
+
+    /**
+     * Tests the submitAuction method. Specifically, checks that an exception is thrown when 
+     * attempting to schedule an auction on a date that already has the maximum number of 
+     * auctions.
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void submitAuction_maxAuctionsOnRequestedDate_ExceptionThrown() {
+    		theCalendar.submitAuction(new Auction(), 30, 5, 2018);
+    		theCalendar.submitAuction(new Auction(), 30, 5, 2018);
+    		theCalendar.submitAuction(new Auction(), 30, 5, 2018);
+    }
 	
 	@Test
 	public void 
