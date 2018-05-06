@@ -1,13 +1,16 @@
 package view;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Collection;
 import java.util.Scanner;
 
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
 import model.Bidder;
+import model.NewItemRequest;
 import model.NonProfitContact;
 import model.User;
 
@@ -28,8 +31,9 @@ public class mainDriver {
 	private mainDriver() {}
 	
 	public static void main(String[] theArgs) {
-
+		showWelcomeMessage();
 		userLogon(new AuctionManager());
+		endSession();
 	}
 	
 	/**
@@ -42,7 +46,7 @@ public class mainDriver {
 		int option;
 		
 		do {
-			System.out.println("MAIN MENU:");
+			System.out.println("\nMAIN MENU:");
 			System.out.println("  1. View all auctions/items for " 
 								+ theUser.getDisplayName());
 			System.out.println("  2. Submit an auction request");
@@ -67,17 +71,53 @@ public class mainDriver {
 			} 
 			
 			if(option ==3) {
-				// get an auction from view screen
+				Collection<Auction> existingAuctions = theUser.getMyAuctions();
+				Auction futureAuction = null;
 				
-				// pre-check if auction can be added to
-				// someAuction.isAllowingNewItem()
+				if (!existingAuctions.isEmpty()) {
+					for (Auction e : existingAuctions) {
+						if (e.getDate().isAfter(LocalDate.now())) {
+							futureAuction = e;
+						}
+					}
+				}
 				
-				// show NewItemRequest screen
-				
+				if (futureAuction == null) {
+					System.out.println("You do not have a current auction.");
+				} else if (!futureAuction.isAllowingNewItem()) {
+					System.out.println("You cannot add more items to the auction.");
+				} else {
+					// show NewItemRequest screen					
+					System.out.println("\nAdding inventory item for auction " +
+							"scheduled on " + formatDate(futureAuction.getDate()));
+					System.out.println("(You may enter up to " + 
+							futureAuction.getAvailableSpace() + " more items)");
+						
+					//NewItemRequest n
+					String itemDescription;
+					Double itemMinimumBid;
+					
+					//get input
+					input.nextLine();
+					
+					System.out.print("Please enter the new item's name: ");
+					itemDescription = input.nextLine();
+					System.out.print("Please enter the minimum bid: ");
+					itemMinimumBid = input.nextDouble();
+					
+					AuctionItem newItem = 
+						theManager.processNewItem(new NewItemRequest
+							(itemDescription, BigDecimal.valueOf(itemMinimumBid), 
+							 futureAuction));
+					
+					System.out.println("Thank You! " + newItem.getDescription() 
+						+ " has been added to your auction.");
+				}
+		
 			}
 			
 			} while(option!=4);
-			System.out.println("Sesion has ended.");
+			endSession();
 	}
 	
 	
@@ -94,7 +134,7 @@ public class mainDriver {
 
 		
 		do {
-			System.out.println("MAIN MENU:");
+			System.out.println("\nMAIN MENU:");
 			System.out.println("  1. Search for auctions to bid on");
 			System.out.println("  2. View items I have bid on");
 			System.out.println("  3. Logout");
@@ -119,9 +159,23 @@ public class mainDriver {
 			} 
 			
 			if (option ==2) {
+				
+				theManager.getAvailableAuctions(theUser);
+				int userResponse = 0;
+				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+				if (userResponse != 0) {
+					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+					AuctionItem theChosenItem = items[userResponse + 1];
+				}
+				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+				if (userResponse != 0) {
+					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+					AuctionItem theChosenItem = items[userResponse + 1];
+				}
+				
 				//submenu?
 				// story 1 all auctions with bids
-				theUser.getMyAuctions();
+				
 				
 				// story 2 all items I have bid on in an auction
 				// select an auction and display items with bids?
@@ -133,7 +187,7 @@ public class mainDriver {
 				
 			} 
 		} while(option!=3);
-		System.out.println("Sesion has ended.");
+		endSession();
  	}
 
 	
@@ -143,15 +197,16 @@ public class mainDriver {
 	 * @param theManager instance of AuctionManager
 	 */
 	private static void userLogon(final AuctionManager theManager) {
-		User user;
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
-		
-		System.out.println("Welcome to Auction Central!");
-		System.out.println("--------------------------------");
-		System.out.println("Today is " + LocalDate.now().format(formatter));
-		
+		User user = null;
 		System.out.print("\rPlease enter username to login: ");
-		user = theManager.getUser(input.nextLine());
+		
+		try {
+			user = theManager.getUser(input.nextLine());
+		} catch (Exception e) {
+			System.out.println("Invalid username. Please try again.");
+			userLogon(theManager);
+		}
+		
 		System.out.println("Welcome " + user.getDisplayName() + ".");
 				
 		if (user instanceof model.Bidder) {
@@ -159,8 +214,27 @@ public class mainDriver {
 		} else if (user instanceof model.NonProfitContact) {
 			nonProfitContactScreen((NonProfitContact) user, theManager);
 		} else {
-			System.exit(1);
+			endSession();
 		}
+	}
+	
+	
+	private static void showWelcomeMessage() {
+		System.out.println("Welcome to Auction Central!");
+		System.out.println("--------------------------------");
+		System.out.println("Today is " + formatDate(LocalDate.now()));
+	}
+	
+	
+	private static void endSession() {
+		System.out.println("Sesion has ended.");
+		System.exit(0);
+	}
+	
+	
+	private static String formatDate(final LocalDate theDate) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
+		return theDate.format(formatter);
 	}
 	
 }

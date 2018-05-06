@@ -178,4 +178,8 @@ public final class Auction implements Serializable {
 		return myDate;
 	}
 
+	public int getAvailableSpace() {
+		return myMaximumItems - myItems.size();
+	}
+	
 }
