@@ -8,7 +8,6 @@ import model.Bidder;
 import model.NonProfitContact;
 import model.User;
 
-
 /**
  * The Auction Central program...
  * @author Jared Malone
