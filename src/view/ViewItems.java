@@ -10,6 +10,7 @@ import model.Auction;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
+import sun.net.www.protocol.http.AuthenticationInfo;
 
 public class ViewItems {
 
@@ -85,4 +86,22 @@ public class ViewItems {
 		System.out.println("Enter 0 to go back");	
 	}
 	
+	public void showBiddersItems(Scanner theScanner, Bidder theUser, int theAuctionIndex) {
+		Collection<Auction> auctionCollection = theUser.getMyAuctions();
+		Auction[] indexedAuctions = auctionCollection.toArray(new Auction[auctionCollection.size()]);
+		Auction auction = indexedAuctions[theAuctionIndex];
+		
+		Collection<AuctionItem> auctionItemCollection = auction.getAllItemsWithBidder(theUser);
+		AuctionItem[] indexedItems = auctionItemCollection.toArray(new AuctionItem[auctionItemCollection.size()]);
+		System.out.println(auction.getName() + " (" + mainDriver.formatDate(auction.getDate()) + "):\n");
+		for (int count = 0; count < indexedItems.length; count++) {
+			AuctionItem item = indexedItems[count];
+			System.out.println("    Item " + (count + 1) + ": " + item.getDescription());
+			System.out.println("        Minimum bid: $" + item.getMinimumAcceptableBidValue() + 
+					"\t My bid: $" + auction.getBidForItem(theUser, item).getValue());
+		}
+
+		System.out.println("Enter 0 to go back: ");	
+		theScanner.nextInt();
+	}
 }
