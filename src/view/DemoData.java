@@ -92,8 +92,8 @@ public class DemoData {
 		NonProfitContact nonProfit13 = new NonProfitContact("nonprof13", "UNICEF");
 		NonProfitContact nonProfit14 = new NonProfitContact("nonprof14", "Human Rights Watch");
 		NonProfitContact nonProfit15 = new NonProfitContact("nonprof15", "ACLU");
-//		NonProfitContact nonProfit16 = new NonProfitContact("nonprof16", "Doctors Without Borders");
-//		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17", "Sierra Club");
+		NonProfitContact nonProfit16 = new NonProfitContact("nonprof16", "Doctors Without Borders");
+		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17", "Sierra Club");
 //		NonProfitContact nonProfit18 = new NonProfitContact("nonprof18", "NPR");
 //		NonProfitContact nonProfit19 = new NonProfitContact("nonprof19", "American Red Cross");
 //		NonProfitContact nonProfit20 = new NonProfitContact("nonprof20", "Teach for America");
@@ -283,6 +283,9 @@ public class DemoData {
 		LocalDate auction4Date = auction4.getDate();
 		LocalDate auction5Date = auction5.getDate();
 		LocalDate auction6Date = auction6.getDate();
+        LocalDate auction7Date = auction7.getDate();
+        LocalDate auction8Date = auction8.getDate();
+        LocalDate auction9Date = auction9.getDate();
 		
 		calendar.forceAddAuctionInThePast(auction0, 2018, 3, 20);
 		calendar.forceAddAuctionInThePast(auction1, 2017, 5, 15);
@@ -291,6 +294,9 @@ public class DemoData {
 		calendar.submitAuction(auction4, auction4Date.getDayOfMonth(), auction4Date.getMonthValue(), auction4Date.getYear());
 		calendar.submitAuction(auction5, auction5Date.getDayOfMonth(), auction5Date.getMonthValue(), auction5Date.getYear());
 		calendar.submitAuction(auction6, auction6Date.getDayOfMonth(), auction6Date.getMonthValue(), auction6Date.getYear());
+        calendar.submitAuction(auction7, auction7Date.getDayOfMonth(), auction7Date.getMonthValue(), auction7Date.getYear());
+        calendar.submitAuction(auction8, auction8Date.getDayOfMonth(), auction8Date.getMonthValue(), auction8Date.getYear());
+        calendar.submitAuction(auction9, auction9Date.getDayOfMonth(), auction9Date.getMonthValue(), auction9Date.getYear());
 				
 		//final store
 		storage.storeUser(bidder1);
@@ -312,8 +318,8 @@ public class DemoData {
 		storage.storeUser(nonProfit13);
 		storage.storeUser(nonProfit14);
 		storage.storeUser(nonProfit15);
-//		storage.storeUser(nonProfit16);
-//		storage.storeUser(nonProfit17);
+		storage.storeUser(nonProfit16);
+		storage.storeUser(nonProfit17);
 //		storage.storeUser(nonProfit18);
 //		storage.storeUser(nonProfit19);
 //		storage.storeUser(nonProfit20);
