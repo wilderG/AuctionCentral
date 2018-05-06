@@ -51,11 +51,6 @@ public class AuctionCalendar implements Serializable {
         myDates = new LinkedList<>();
         myNumberOfFutureAuctions = 0;
         myCurrentDate = LocalDate.now();
-//        Calendar cal = Calendar.getInstance();
-//        myCurrentDate = new A
-//        myCurrentDate = getAuctionDate(cal.get(Calendar.DAY_OF_MONTH), 
-//                                       cal.get(Calendar.MONTH) + 1, 
-//                                       cal.get(Calendar.YEAR));
     }
     
     //_________________________________________________________________________________________
@@ -144,7 +139,7 @@ public class AuctionCalendar implements Serializable {
     }
     
     /**
-     * Gets the number of future auctions scheduled, including today.                   //Does max number of auctions include today??
+     * Gets the number of future auctions scheduled, including today.         
      * 
      * @return the number of future auctions
      */
@@ -187,4 +182,13 @@ public class AuctionCalendar implements Serializable {
         myDates.add(newDate);
         return newDate;
     }   
+    
+    public void forceAddAuctionInThePast(Auction theAuction, int theAmountOfYearsInThePast) {
+    		myCurrentDate.minusYears(theAmountOfYearsInThePast);
+		LocalDate pastDate = theAuction.getDate();
+		submitAuction(theAuction, pastDate.getDayOfMonth(), pastDate.getMonthValue(), pastDate.getYear());
+		myCurrentDate = LocalDate.now();
+    }
+   
+    
 }

@@ -62,7 +62,8 @@ public class DummyData {
 		
 		//add auctions to user and calendar
 		bidder1.addAuction(auction3);
-		
+		LocalDate theDate = auction3.getDate();
+		calendar.submitAuction(auction3, theDate.getDayOfMonth(), theDate.getMonthValue(), theDate.getYear());
 		
 		//final store
 		storage.storeUser(bidder1);
