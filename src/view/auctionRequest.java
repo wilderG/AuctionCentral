@@ -84,7 +84,7 @@ public class auctionRequest extends mainDriver {
 	}
 
     private LocalDate getSoonestPossibleDate(LocalDate theToday) {
-        LocalDate oneYearFromPrevAuction = myNonprof.getPriorDate().plusYears(1);
+        LocalDate oneYearFromPrevAuction = myNonprof.getLatestDate().plusYears(1);
         LocalDate minDaysOutFromToday = theToday.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
         LocalDate latestDate;
         if (minDaysOutFromToday.isAfter(oneYearFromPrevAuction))

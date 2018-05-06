@@ -27,8 +27,8 @@ public class mainDriver {
 
 	private static Scanner input = new Scanner(System.in);
 	
-	/** This class should not be constructed. **/
-	private mainDriver() {}
+//	/** This class should not be constructed. **/
+//	private mainDriver() {}
 	
 	public static void main(String[] theArgs) {
 		showWelcomeMessage();
@@ -63,17 +63,17 @@ public class mainDriver {
 			} 
 			
 			if (option ==2) {
-				// pre-check with manager
-				theManager.isNewAuctionRequestAllowed(); //handle false
-				
-				// call NewAuctionRequest screen
+//				// pre-check with manager
+//				theManager.isNewAuctionRequestAllowed(); //handle false
+//				
+//				// call NewAuctionRequest screen
+			    new auctionRequest(theUser, theManager);
 				
 			} 
 			
 			if(option ==3) {
 				Collection<Auction> existingAuctions = theUser.getMyAuctions();
 				Auction futureAuction = null;
-				
 				if (!existingAuctions.isEmpty()) {
 					for (Auction e : existingAuctions) {
 						if (e.getDate().isAfter(LocalDate.now())) {

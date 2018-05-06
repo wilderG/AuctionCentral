@@ -91,7 +91,8 @@ public class AuctionManager implements Manager {
 				MAXIMUM_BIDDER_BIDS_PER_AUCTION, sponsor.getDisplayName());
 		
 		if (!sponsor.isDateForProposedAuctionValid(newAuction)) {
-			throw new IllegalArgumentException("You may not add an auction on this date.");
+			throw new IllegalArgumentException("You may not add an auction on this date."
+			        + "It is within one year of your latest auction.");
 		}
 		
 		myCalendar.submitAuction(newAuction, auctionDate.getDayOfMonth(), 

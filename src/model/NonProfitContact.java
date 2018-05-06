@@ -41,7 +41,7 @@ public class NonProfitContact extends User {
 	 * @return True if a year has elapsed for the non profits last auction.
 	 */
 	public boolean isDateOneYearAfterPreviousAuction(LocalDate theDate) {
-		LocalDate mostRecentDate = getPriorDate();
+		LocalDate mostRecentDate = getLatestDate();
 		
 		// Found the most recent date that the non profit had an auction. Add a year to this date
 		// Now theDate has to occur on this date of after for it to be a viable date. 
@@ -75,4 +75,18 @@ public class NonProfitContact extends User {
 	}
 	
 
+    /**
+     * Gets the date of the non profits latest auction in the past or future.
+     * @return A LocalDate that represents the date of the non profits most recent auction.
+     */
+    public LocalDate getLatestDate() {
+        LocalDate mostRecentDate = LocalDate.MIN;
+        for (Auction auction: super.getMyAuctions()) {
+            LocalDate auctionsDate = auction.getDate();
+            if (auctionsDate.compareTo(mostRecentDate) > 0) {
+                mostRecentDate = auctionsDate;
+            }
+        }
+        return mostRecentDate;
+    }
 }
