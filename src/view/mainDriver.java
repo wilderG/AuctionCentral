@@ -165,7 +165,6 @@ public class mainDriver {
 			} 
 			
 			if (option == 2) {
-//				theManager.getAvailableAuctions(theUser);
 				ViewBids viewBids = new ViewBids();
 				int userViewChoice = 0;
 				int userAuctionChoice = 0;
