@@ -35,7 +35,7 @@ public class AuctionItemTest {
     
     @Before
     public void setup() {
-        testItem = new AuctionItem(BigDecimal.valueOf(35.0), new LinkedList<Bid>(), "BB-gun");
+        testItem = new AuctionItem(BigDecimal.valueOf(35.0), "BB-gun");
         bidderMakingBidsOnTestItem = new Bidder("bidder1", "StevenTest");
     }
     
@@ -45,7 +45,7 @@ public class AuctionItemTest {
      */
     @Test
     public void isBidValid_equalToMinimumBid_shouldBeTrue() {
-        assertTrue("Equal bid to minimum amount is valid", testItem.isBidValid(bidderMakingBidsOnTestItem, BigDecimal.valueOf(35.0)));
+        assertTrue("Equal bid to minimum amount is valid", testItem.isBidAmountValid(BigDecimal.valueOf(35.0)));
     }
 
     /**
@@ -54,7 +54,7 @@ public class AuctionItemTest {
      */
     @Test
     public void isBidValid_greaterThanMinimumBid_shouldBeTrue() {
-        assertTrue("Equal bid to minimum amount is valid", testItem.isBidValid(bidderMakingBidsOnTestItem, BigDecimal.valueOf(35.01)));
+        assertTrue("Equal bid to minimum amount is valid", testItem.isBidAmountValid(BigDecimal.valueOf(35.01)));
     }
 
     /**
@@ -63,6 +63,6 @@ public class AuctionItemTest {
      */
     @Test
     public void isBidValid_lessThanMinimumBid_shouldBeFalse() {
-        assertFalse("Equal bid to minimum amount is valid", testItem.isBidValid(bidderMakingBidsOnTestItem, BigDecimal.valueOf(34.99)));
+        assertFalse("Equal bid to minimum amount is valid", testItem.isBidAmountValid(BigDecimal.valueOf(34.99)));
     }
 }
