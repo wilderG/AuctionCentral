@@ -1,6 +1,6 @@
 package view;
 
-public class viewNonProfitAuction extends mainDriver {
+public class viewNonProfitAuction {
 	public void showAllAuction() {
 		
 	}

@@ -27,8 +27,8 @@ public class mainDriver {
 
 	private static Scanner input = new Scanner(System.in);
 	
-//	/** This class should not be constructed. **/
-//	private mainDriver() {}
+	/** This class should not be constructed. **/
+	private mainDriver() {}
 	
 	public static void main(String[] theArgs) {
 		showWelcomeMessage();

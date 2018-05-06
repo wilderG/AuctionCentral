@@ -2,7 +2,7 @@ package view;
 
 import java.util.Scanner;
 
-public class viewNonProfit extends mainDriver {
+public class viewNonProfit {
 	static Scanner input = new Scanner(System.in);
 	public void disPlay() {
 		auctionBidSearch test = new auctionBidSearch();

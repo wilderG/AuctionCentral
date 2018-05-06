@@ -18,7 +18,7 @@ import model.NonProfitContact;
  * @author Steven Golob 
  * @version May 6, 2018
  */
-public class auctionRequest extends mainDriver {
+public class auctionRequest {
     
     private final NonProfitContact myNonprof;
     
