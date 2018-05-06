@@ -51,7 +51,7 @@ public class DummyData {
 		HashMap<Bidder, HashSet<Bid>> bidSet3 = new HashMap<>();
 		bidSet3.put(bidder1, bidSetbidder1auction3);
 		
-		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9), 10, 4, 
+		Auction auction3 = new Auction(LocalDate.of(2018, 6, 9), 10, 4, 
 				nonProfit1.getDisplayName(), itemSet3, bidSet3);
 		
 		
