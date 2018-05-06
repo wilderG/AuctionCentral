@@ -55,19 +55,20 @@ public class AuctionManager implements Manager {
 		// return new User(theUsername, "Test User");
 		
 		User user = storage.getUser(theUsername);
-		User copyOfUser;
+//		User copyOfUser;
 		
-		try {
-			copyOfUser = (User) ObjectCloner.deepCopy(user);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("User not found.");
-		}
-
-		if (copyOfUser == null) {
-			throw new IllegalArgumentException("User not found.");
-		} else {
-			return user;
-		}
+//		try {
+//			copyOfUser = (User) ObjectCloner.deepCopy(user);
+//		} catch (Exception e) {
+//			throw new IllegalArgumentException("User not found.");
+//		}
+//
+//		if (copyOfUser == null) {
+//			throw new IllegalArgumentException("User not found.");
+//		} else {
+//			return user;
+//		}
+		return user;
 	}
 	
 	/**

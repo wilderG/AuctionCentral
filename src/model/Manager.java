@@ -64,6 +64,6 @@ public interface Manager extends Serializable {
 	 * Submits a new bid request using the given request.
 	 * @return a new Bid object
 	 */
-	Bid processNewBid(NewBidRequest theNewBidRequest);
+	Bid processNewBid(NewBidRequest theNewBidRequest) throws IllegalArgumentException;
 
 }
