@@ -272,6 +272,22 @@ public class DemoData {
 		bidder4.addAuction(auction3);
 		bidder4.addAuction(auction6);
 		
+		nonProfit1.addAuction(auction0);
+		nonProfit1.addAuction(auction3);
+		nonProfit2.addAuction(auction1);
+		nonProfit3.addAuction(auction2);
+		nonProfit4.addAuction(auction4);
+		nonProfit5.addAuction(auction5);
+		nonProfit6.addAuction(auction6);
+		
+		
+		
+		
+		
+		
+		
+		//
+		
 		LocalDate auction1Date = auction1.getDate();
 		LocalDate auction2Date = auction2.getDate();
 		LocalDate auction3Date = auction3.getDate();
