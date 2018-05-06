@@ -227,7 +227,7 @@ public class mainDriver {
 	
 	
 	private static void endSession() {
-		System.out.println("Sesion has ended.");
+		System.out.println("Session has ended.");
 		System.exit(0);
 	}
 	
