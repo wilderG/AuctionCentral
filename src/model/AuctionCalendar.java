@@ -126,10 +126,6 @@ public class AuctionCalendar implements Serializable {
      * Updates the current date and current number of future auctions.
      */
     public void updateDate() {
-//        Calendar now = Calendar.getInstance();
-//        myCurrentDate = getAuctionDate(now.get(Calendar.DAY_OF_MONTH), 
-//                                       now.get(Calendar.MONTH) + 1, 
-//                                       now.get(Calendar.YEAR));
     		myCurrentDate = LocalDate.now();
         myNumberOfFutureAuctions = 0;
         for (AuctionDate date : myDates) {
@@ -183,8 +179,8 @@ public class AuctionCalendar implements Serializable {
         return newDate;
     }   
     
-    public void forceAddAuctionInThePast(Auction theAuction, int theAmountOfYearsInThePast) {
-    		myCurrentDate.minusYears(theAmountOfYearsInThePast);
+    public void forceAddAuctionInThePast(Auction theAuction, int theYear, int theMonth, int theDay) {
+    		myCurrentDate = LocalDate.of(theYear, theMonth, theDay);
 		LocalDate pastDate = theAuction.getDate();
 		submitAuction(theAuction, pastDate.getDayOfMonth(), pastDate.getMonthValue(), pastDate.getYear());
 		myCurrentDate = LocalDate.now();
