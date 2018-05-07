@@ -40,7 +40,6 @@ public class ViewBidMenu {
 		NewBidRequest theRequest = new NewBidRequest(theUser, theAuction, theItem, bidAmount);
 		Bid userBid = theManager.processNewBid(theRequest);
 		theAuction.addBid(theUser, userBid);
-		theUser.addAuction(theAuction);
 		System.out.println("Bid Successfully placed!");
 		System.out.println("Press any key to continue");
 		theScanner.next();
