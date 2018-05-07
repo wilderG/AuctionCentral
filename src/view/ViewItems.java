@@ -10,7 +10,7 @@ import model.Auction;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
-import sun.net.www.protocol.http.AuthenticationInfo;
+
 /**
  * Displaying view items.
  * 

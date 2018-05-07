@@ -24,6 +24,7 @@ import model.User;
  * @version 5/8/2018
  */
 public class ViewAuction {
+    
 	/**
 	 * Showing all auctions information
 	 * 

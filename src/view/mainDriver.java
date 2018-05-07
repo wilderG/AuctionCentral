@@ -16,6 +16,7 @@ import model.User;
 
 /**
  * The Auction Central program...
+ * 
  * @author Jared Malone
  * @author Jim Rosales
  * @author Steven Kenneth Golob
@@ -72,12 +73,7 @@ public class mainDriver {
 			} 
 			
 			if (option ==2) {
-//				// pre-check with manager
-//				theManager.isNewAuctionRequestAllowed(); //handle false
-//				
-//				// call NewAuctionRequest screen
 			    new auctionRequest(theUser, theManager);
-				
 			} 
 			
 			if(option ==3) {
@@ -213,35 +209,6 @@ public class mainDriver {
 					viewItems.showBiddersItems(scanner, 
 							theUser, userAuctionChoice);
 				}
-				
-//				int userResponse = 0;
-//				userResponse = viewItems.showItems(scanner,
-//						theUser.getMyAuctions().iterator().next());
-//				if (userResponse != 0) {
-//					AuctionItem[] items =
-//							theUser.getMyAuctions().toArray(
-//							new AuctionItem[theUser.getMyAuctions().size()]);
-//					AuctionItem theChosenItem = items[userResponse + 1];
-//				}
-//				userResponse = viewItems.showItems(scanner,
-//						theUser.getMyAuctions().iterator().next());
-//				if (userResponse != 0) {
-//					AuctionItem[] items = theUser.getMyAuctions().toArray(
-//							new AuctionItem[theUser.getMyAuctions().size()]); 
-//					AuctionItem theChosenItem = items[userResponse + 1];
-//				}
-				
-				//submenu?
-				// story 1 all auctions with bids
-				
-				
-				// story 2 all items I have bid on in an auction
-				// select an auction and display items with bids?
-				// someAuction.getAllItemsWithBidder(theUser)
-				
-				
-				// or display all items from all auctions 
-				// merge collection of items and display all with item viewer?
 				
 			} 
 		} while(option!=3);

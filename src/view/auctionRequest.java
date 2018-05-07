@@ -43,6 +43,8 @@ public class auctionRequest {
         nonProfitAuctionRequest();
     }
     
+    //_______________________________________________________________________________
+    
     /**
      * Displays why an auction may not be scheduled for this nonprofit at this time,
      * otherwise, prompts the user for date, checks to see if it is available,

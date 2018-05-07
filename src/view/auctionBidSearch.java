@@ -1,7 +1,5 @@
 package view;
 
-import java.util.Scanner;
-
 import model.Auction;
 
 import model.Bidder;
@@ -12,12 +10,12 @@ public class auctionBidSearch {
 	Auction test = new Auction(null, 0, 0, "Some non profit");
 
 	public void auctionMenu() {
-		Scanner input = new Scanner(System.in);
+	    final int maxChoices = 2;
 		System.out.println("Options:");
 		System.out.println("1.View all auctions in which I have placed bids");
 		System.out.println("2.View all items that I have placed bids on");
 		System.out.print("Choice: ");
-		Integer name = input.nextInt();
+		int name = mainDriver.getNextInt(maxChoices);
 		if (name == 1) {
 			System.out.println(test.getAllItemsWithBidder(bidder));// we need to pass proper variables.
 			

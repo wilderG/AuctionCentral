@@ -4,10 +4,8 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Provides common implementations of some user behaviors.

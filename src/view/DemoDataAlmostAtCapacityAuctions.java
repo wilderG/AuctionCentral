@@ -34,9 +34,9 @@ public class DemoDataAlmostAtCapacityAuctions {
             calendar.submitAuction(addedAuction, dateOfAdd.getDayOfMonth(), dateOfAdd.getMonthValue(), dateOfAdd.getYear());
         }
 
-        // nonprofit to add an auction successfully
+        // non-profit to add an auction successfully
         NonProfitContact nonProfit1 = new NonProfitContact("nonprof1", "The Human Fund");
-        // nonprofit to try and add an auction and fails 
+        // non-profit to try and add an auction and fails 
         NonProfitContact nonProfit2 = new NonProfitContact("nonprof2", "The Fund for People");
         storage.storeUser(nonProfit1);
         storage.storeUser(nonProfit2);

@@ -144,30 +144,6 @@ public class DemoData {
 				"Doctors Without Borders");
 		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17",
 				"Sierra Club");
-		
-		
-//		NonProfitContact nonProfit18 = new NonProfitContact("nonprof18",
-//				"NPR");
-//		NonProfitContact nonProfit19 = new NonProfitContact("nonprof19",
-//				"American Red Cross");
-//		NonProfitContact nonProfit20 = new NonProfitContact("nonprof20",
-//				"Teach for America");
-//		NonProfitContact nonProfit21 = new NonProfitContact("nonprof21",
-//				"St. Jude's Children's Research Hospital");
-//		NonProfitContact nonProfit22 = new NonProfitContact("nonprof22",
-//				"Save the Children");
-//		NonProfitContact nonProfit23 = new NonProfitContact("nonprof23",
-//				"Make-A-Wish");
-//		NonProfitContact nonProfit24 = new NonProfitContact("nonprof24",
-//				"Habitat for Humanity");
-//		NonProfitContact nonProfit25 = new NonProfitContact("nonprof25",
-//				"Mozilla");
-//		NonProfitContact nonProfit26 = new NonProfitContact("nonprof26",
-//				"EFF");
-//		NonProfitContact nonProfit27 = new NonProfitContact("nonprof27",
-//				"Green Peace");
-//		NonProfitContact nonProfit28 = new NonProfitContact("nonprof28",
-//				"World Wildlife Fund");
 
 		Bidder bidder1 = new Bidder("bidder1", "Peter Piper");
 		Bidder bidder2 = new Bidder("bidder2", "Jane Doe");
@@ -276,17 +252,6 @@ public class DemoData {
 				BigDecimal.valueOf(60.00)));
 		bidSetbidder4auction6.add(new Bid(bidder4, item15,
 				BigDecimal.valueOf(4500.00)));
-		
-//	
-//		HashSet<Bid> bidSetbidder1auction3 = new HashSet<>();
-//		bidSetbidder1auction3.add(new Bid(bidder1, 
-//				item5, BigDecimal.valueOf(1300)));
-//		bidSetbidder1auction3.add(new Bid(bidder1, 
-//				item6, BigDecimal.valueOf(70)));
-//		bidSetbidder1auction3.add(new Bid(bidder1, 
-//				item7, BigDecimal.valueOf(6)));
-//		bidSetbidder1auction3.add(new Bid(bidder1, 
-//				item8, BigDecimal.valueOf(1)));
 				
 		// Maps For Auction
 		HashMap<Bidder, HashSet<Bid>> bidSet1 = new HashMap<>();
@@ -315,8 +280,6 @@ public class DemoData {
 		bidSet6.put(bidder2, bidSetbidder2auction6);
 		bidSet6.put(bidder4, bidSetbidder4auction6);
 		
-//		HashMap<Bidder, HashSet<Bid>> bidSet3 = new HashMap<>();
-//		bidSet3.put(bidder1, bidSetbidder1auction3);
 		
 		// Make Auctions
 		Auction auction0 = new Auction(LocalDate.of(2018, 4, 10),
@@ -340,12 +303,6 @@ public class DemoData {
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
 				10, 4, "N\\A");
 		
-		
-//		Auction auction1 = new Auction(theDate, theMaxItemCount, 
-//				theMaxBidCount, theNonProfit, theItems, theBids)
-//		
-//		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9), 10, 4, 
-//				nonProfit1.getDisplayName(), itemSet3, bidSet3);
 		
 		
 		
@@ -386,12 +343,6 @@ public class DemoData {
 		
 		
 		
-		
-		//
-		
-//		LocalDate auction1Date = auction1.getDate();
-//		LocalDate auction2Date = auction2.getDate();
-//		LocalDate auction3Date = auction3.getDate();
 		LocalDate auction4Date = auction4.getDate();
 		LocalDate auction5Date = auction5.getDate();
 		LocalDate auction6Date = auction6.getDate();
@@ -438,17 +389,6 @@ public class DemoData {
 		storage.storeUser(nonProfit15);
 		storage.storeUser(nonProfit16);
 		storage.storeUser(nonProfit17);
-//		storage.storeUser(nonProfit18);
-//		storage.storeUser(nonProfit19);
-//		storage.storeUser(nonProfit20);
-//		storage.storeUser(nonProfit21);
-//		storage.storeUser(nonProfit22);
-//		storage.storeUser(nonProfit23);
-//		storage.storeUser(nonProfit24);
-//		storage.storeUser(nonProfit25);
-//		storage.storeUser(nonProfit26);
-//		storage.storeUser(nonProfit27);
-//		storage.storeUser(nonProfit28);
 		
 		storage.setCalendar(calendar);
 	}
