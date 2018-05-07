@@ -6,7 +6,7 @@ import model.AuctionItem;
 import model.AuctionManager;
 import model.Bidder;
 
-public class viewBidMenu {
+public class ViewBidMenu {
 
 	public void placeBid(Bidder theUser, AuctionItem theItem, Scanner theScanner, AuctionManager theManager) {
 		System.out.println("Bid Menu for Item: " + theItem.getDescription());
