@@ -93,8 +93,8 @@ public class mainDriver {
 				if (futureAuction == null) {
 					System.out.println("You do not have a current auction.");
 				} else if (!futureAuction.isAllowingNewItem()) {
-					System.out.println(
-							"You cannot add more items to the auction.");
+					System.out.println("You cannot add more items to your future auction on " 
+					        + futureAuction.getDate().toString() + ".");
 				} else {
 					// show NewItemRequest screen					
 					System.out.println("\nAdding inventory item for auction " +
@@ -160,7 +160,7 @@ public class mainDriver {
 		do {
 			System.out.println("\nMAIN MENU:");
 			System.out.println("  1. Search for auctions to bid on");
-			System.out.println("  2. View current bids");
+			System.out.println("  2. View all of my bids");
 			System.out.println("  3. Logout");
 			System.out.print("Choice: ");
 			option = getNextInt(3);

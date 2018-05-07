@@ -6,6 +6,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -32,7 +33,7 @@ public class User implements Serializable {
 	/**
 	 * List that will keep track of all the auctions associated with the user.
 	 */
-	private List<Auction> myAuctions;
+	private HashSet<Auction> myAuctions;
 	
 	
 	
@@ -44,7 +45,7 @@ public class User implements Serializable {
 	public User(String theUsername, String theDisplayName) {
 		myUsername = theUsername;
 		myDisplayName = theDisplayName;
-		myAuctions = new ArrayList<>();
+		myAuctions = new HashSet<>();
 	}
 	
 	/**
