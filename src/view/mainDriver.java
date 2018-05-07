@@ -160,7 +160,6 @@ public class mainDriver {
 			
 			if (option == 1) {
 				// call auction view passing
-				theManager.getAvailableAuctions(theUser);
 				int userItemChoice = 0;
 				int auctionUserChoice = viewAuctions.showAllAuctions(scanner, theUser, theManager);
 				Auction theChosenAuction = null;

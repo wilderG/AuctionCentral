@@ -218,16 +218,16 @@ public class DemoData {
 //		bidSet3.put(bidder1, bidSetbidder1auction3);
 		
 		// Make Auctions
-		Auction auction0 = new Auction(LocalDate.of(2018, 4, 10), 0, 0, "The Human Fund");
-		Auction auction1 = new Auction(LocalDate.of(2017, 5, 30), 5, 5, "The People Fund", auction1Items, bidSet1);
-		Auction auction2 = new Auction(LocalDate.of(2018, 5, 8), 10, 10, "The Fund For the People", auction2Items, bidSet2);
-		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9), 10, 10, "The Human Fund", auction3Items, bidSet3);
-		Auction auction4 = new Auction(LocalDate.of(2018, 6, 4), 10, 10, "The Fund for Humans", auction4Items, bidSet4);
-		Auction auction5 = new Auction(LocalDate.of(2018, 6, 4), 10, 10, "The Whale Fund", auction5Items, bidSet5);
-		Auction auction6 = new Auction(LocalDate.of(2018, 6, 5), 10, 10, "The Fund for Whales", auction6Items, bidSet6);
-		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6), 10, 10, "N\\A");
-		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7), 10, 10, "N\\A");
-		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8), 10, 10, "N\\A");
+		Auction auction0 = new Auction(LocalDate.of(2018, 4, 10), 10, 4, "The Human Fund");
+		Auction auction1 = new Auction(LocalDate.of(2017, 5, 30), 10, 4, "The People Fund", auction1Items, bidSet1);
+		Auction auction2 = new Auction(LocalDate.of(2018, 5, 8), 10, 4, "The Fund For the People", auction2Items, bidSet2);
+		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9), 10, 4, "The Human Fund", auction3Items, bidSet3);
+		Auction auction4 = new Auction(LocalDate.of(2018, 6, 4), 10, 4, "The Fund for Humans", auction4Items, bidSet4);
+		Auction auction5 = new Auction(LocalDate.of(2018, 6, 4), 10, 4, "The Whale Fund", auction5Items, bidSet5);
+		Auction auction6 = new Auction(LocalDate.of(2018, 6, 5), 10, 4, "The Fund for Whales", auction6Items, bidSet6);
+		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6), 10, 4, "N\\A");
+		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7), 10, 4, "N\\A");
+		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8), 10, 4, "N\\A");
 		
 		
 //		Auction auction1 = new Auction(theDate, theMaxItemCount, theMaxBidCount, theNonProfit, theItems, theBids)
