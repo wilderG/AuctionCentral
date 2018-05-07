@@ -10,7 +10,6 @@ import java.time.LocalDate;
  * @author Jim Rosales
  */
 public class NonProfitContact extends User {
-	AuctionDate myDate = new AuctionDate(0, 0, 0);
 
 	/**
 	 * Generated Serial Version UID

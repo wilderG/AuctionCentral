@@ -3,10 +3,12 @@ package JUnit;
 import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 import model.Auction;
+import model.AuctionCalendar;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
@@ -30,7 +32,9 @@ public class AuctionTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		auction = new Auction(null, 10, MAX_BID_COUNT, "Human Rights Watch");
+		LocalDate testDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT+1);
+		
+		auction = new Auction(testDate, 10, MAX_BID_COUNT, "Human Rights Watch");
 		bidder = new Bidder("tester", "Test Bidder");
 		
 		//add item test fixtures
