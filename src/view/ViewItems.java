@@ -71,11 +71,8 @@ public class ViewItems {
 			+ item.getBidCount() + " bids)");
 			System.out.println("\tMinimum bid set at: $" +
 			item.getMinimumAcceptableBidValue());
-			System.out.println("\tItem not auctioned off for: ????" );
-			
-			
 		}
-		System.out.println("\nPress enter to return to the main menu: ");
+		System.out.println("\nEnter any key to return to the main menu: ");
 		theScanner.next();
 
 	}
@@ -121,8 +118,8 @@ public class ViewItems {
 			System.out.println();
 		}
 
-		System.out.print("Enter 0 to go back: ");	
-		mainDriver.getNextInt(0);
+		System.out.print("Enter any key to go back: ");	
+		theScanner.next();
 	}
 	/**
 	 * showing bidder items.
@@ -157,7 +154,7 @@ public class ViewItems {
 					auction.getBidForItem(theUser, item).getValue());
 		}
 
-		System.out.println("Enter 0 to go back: ");	
-		mainDriver.getNextInt(0);
+		System.out.println("Enter any key to go back: ");	
+		theScanner.next();
 	}
 }

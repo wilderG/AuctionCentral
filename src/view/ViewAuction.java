@@ -57,7 +57,7 @@ public class ViewAuction {
 		
 		if (auctionCollection.isEmpty()) {
 			System.out.println("The Auction list is empty");
-			System.out.println("Please press enter to go back to the main menu");
+			System.out.println("Please enter 0 to go back to the main menu");
 			return mainDriver.getNextInt(0);
 		}
 		
