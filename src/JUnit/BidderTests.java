@@ -28,25 +28,30 @@ public class BidderTests {
 	}
 
 	/**
-	 * Tests whether a new bid is able to be placed when a bidder already has the max number of bids allowed.
-	 * The expected outcome is that the bidder is not able to place a new bid.
+	 * Tests whether a new bid is able to be placed
+	 *  when a bidder already has the max number of bids allowed.
+	 * The expected outcome is that
+	 *  the bidder is not able to place a new bid.
 	 */
 	@Test
 	public void isNewBidAllowable_bidderWithMaxBids_False() {
 		bidderWithMaxBids.setBidCount(Bidder.MY_MAX_BID_COUNT);
-		assertFalse("A bidder with a max number of bids as expected is not able to place a bid", 
+		assertFalse("A bidder with a max number of bids"
+				+ " as expected is not able to place a bid", 
 				bidderWithMaxBids.isNewBidAllowed());
 	}
 	
 	/**
-	 * Tests whether a new bid is able to be placed when a bidder already one less than the max number of bids
+	 * Tests whether a new bid is able to be placed 
+	 * when a bidder already one less than the max number of bids
 	 * allowed.
 	 * The expected outcome is that the bidder is able to place a new bid.
 	 */
 	@Test
 	public void isNewBidAllowable_bidderWithOneBidBelowTheMax_True() {
 		bidderWithBelowMaxBids.setBidCount(Bidder.MY_MAX_BID_COUNT - 1);
-		assertTrue("A bidder with one less than the number of max bids is able to place a new bid as expected", 
+		assertTrue("A bidder with one less than "
+				+ "the number of max bids is able to place a new bid as expected", 
 				bidderWithBelowMaxBids.isNewBidAllowed());
 	}
 

@@ -56,7 +56,8 @@ public class AuctionDateTest {
                 oneMonthFromToday.getMonthValue(),
                 oneMonthFromToday.getYear());
         for (int i = 0; i < AuctionDate.MAX_AUCTIONS; i++)
-            dateWithCapacityAuctions.addAuction(new Auction(LocalDate.now().plusDays(30), 10, 4, "NPR"));
+            dateWithCapacityAuctions.addAuction(
+            		new Auction(LocalDate.now().plusDays(30), 10, 4, "NPR"));
     }
 
     /**
@@ -67,7 +68,8 @@ public class AuctionDateTest {
     public void addAuction_noAuctionsOnRequestedDate_newAuctionAdded() {
         assertEquals("date should hold no auctions yet", 0, 
                 dateWithNoAuctions.getAuctions().size());
-        dateWithNoAuctions.addAuction(new Auction(LocalDate.now().plusDays(30), 10, 4, "Sierra Club"));
+        dateWithNoAuctions.addAuction(
+        		new Auction(LocalDate.now().plusDays(30), 10, 4, "Sierra Club"));
         assertEquals("date should hold one auction now", 1, 
                 dateWithNoAuctions.getAuctions().size());
     }
@@ -95,7 +97,8 @@ public class AuctionDateTest {
     @Test (expected = IllegalArgumentException.class)
     public void addAuction_maxAuctionsOnRequestedDate_ExceptionThrown() {
         dateWithCapacityAuctions.addAuction(
-        		new Auction(LocalDate.now().plusDays(30), 10, 4, "St. Jude's Children's Research Hospital"));
+        		new Auction(LocalDate.now().plusDays(30),
+        				10, 4, "St. Jude's Children's Research Hospital"));
     }
 
     /**
