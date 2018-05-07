@@ -202,8 +202,8 @@ public class DemoData {
 		bidSet3.put(bidder4, bidSetbidder4auction3);
 		
 		HashMap<Bidder, HashSet<Bid>> bidSet4 = new HashMap<>();
-		bidSet4.put(bidder1, bidSetbidder1auction5);
-		bidSet4.put(bidder2, bidSetbidder2auction5);
+		bidSet4.put(bidder1, bidSetbidder1auction4);
+		bidSet4.put(bidder2, bidSetbidder2auction4);
 
 		HashMap<Bidder, HashSet<Bid>> bidSet5 = new HashMap<>();
 		bidSet5.put(bidder1, bidSetbidder1auction5);
