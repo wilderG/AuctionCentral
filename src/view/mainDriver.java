@@ -154,7 +154,7 @@ public class mainDriver {
 		do {
 			System.out.println("\nMAIN MENU:");
 			System.out.println("  1. Search for auctions to bid on");
-			System.out.println("  2. View current bids");
+			System.out.println("  2. View all of my bids");
 			System.out.println("  3. Logout");
 			System.out.print("Choice: ");
 			option = getNextInt(3);
