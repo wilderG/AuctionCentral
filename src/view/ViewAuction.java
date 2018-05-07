@@ -35,6 +35,12 @@ public class ViewAuction {
 			}
 		}
 		
+		if (auctionCollection.isEmpty()) {
+			System.out.println("The Auction list is empty");
+			System.out.println("Please press enter to go back to the main menu");
+			return mainDriver.getNextInt(0);
+		}
+		
 		Iterator<Auction> iterator = auctionCollection.iterator();
 		for (int count = 0; count < auctionCollection.size(); count++) {
 			Auction auction = iterator.next();
@@ -49,7 +55,7 @@ public class ViewAuction {
 		System.out.println("Select an auction number for which you would like to view items\n"
 				+ "(Enter 0 to return to the main menu)");
 	
-		return theScanner.nextInt();
+		return mainDriver.getNextInt(auctionCollection.size());
 	}
 	
 	private void bidderIntroMessage() {
@@ -74,9 +80,17 @@ public class ViewAuction {
 	}
 	
 	public int showBiddersAuctions(Scanner theScanner, Bidder theUser) {
-		System.out.println("Please select an auction");
-		
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
+		if (auctionCollection.isEmpty()) {
+			System.out.println("It looks like you haven't placed any bids in an auction");
+			System.out.println("Please press any key and enter to return to the previous screen");
+			theScanner.next();
+			return 0;
+		}
+		
+		
+		System.out.println("Please select an auction");
+
 		Iterator<Auction> iterator = auctionCollection.iterator();
 		for (int count = 0; count < auctionCollection.size(); count++) {
 			Auction auction = iterator.next();

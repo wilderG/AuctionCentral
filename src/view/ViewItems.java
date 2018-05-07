@@ -27,8 +27,9 @@ public class ViewItems {
 		System.out.println("Would you like to place a bid? \n"
 				+ "(If so, enter the number corresponding to an item. \n"
 				+ " Otherwise, enter 0)\n");
-		
-		return theScanner.nextInt();
+
+		System.out.print("Choice: ");
+		return mainDriver.getNextInt(items.size());
 		
 	}
 	
@@ -48,7 +49,7 @@ public class ViewItems {
 		}
 		System.out.println("\nPress enter to return to the main menu: ");
 		theScanner.next();
-//		return theScanner.nextInt();
+
 	}
 	
 	public void showBiddersItemsForAllAuctions(Scanner theScanner, Bidder theUser) {
@@ -80,7 +81,7 @@ public class ViewItems {
 		}
 
 		System.out.print("Enter 0 to go back: ");	
-		theScanner.nextInt();
+		mainDriver.getNextInt(0);
 	}
 	
 	public void showBiddersItems(Scanner theScanner, Bidder theUser, int theAuctionIndex) {
@@ -99,6 +100,6 @@ public class ViewItems {
 		}
 
 		System.out.println("Enter 0 to go back: ");	
-		theScanner.nextInt();
+		mainDriver.getNextInt(0);
 	}
 }
