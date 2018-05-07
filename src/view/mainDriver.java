@@ -91,7 +91,8 @@ public class mainDriver {
 				if (futureAuction == null) {
 					System.out.println("You do not have a current auction.");
 				} else if (!futureAuction.isAllowingNewItem()) {
-					System.out.println("You cannot add more items to the auction.");
+					System.out.println("You cannot add more items to your future auction on " 
+					        + futureAuction.getDate().toString() + ".");
 				} else {
 					// show NewItemRequest screen					
 					System.out.println("\nAdding inventory item for auction " +
