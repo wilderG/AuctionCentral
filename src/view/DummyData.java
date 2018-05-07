@@ -13,21 +13,39 @@ import model.Bid;
 import model.Bidder;
 import model.NonProfitContact;
 
-public class DummyData {
+/**
+ * Dummy Data class for checking if the project works.
+ * 
+ * @author 
+ *
+ */
 
+public class DummyData {
+	/**
+	 * The main method for running Dummy Data.
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
-		String fileName = "data/storage.dat"; //auction manager points to data/storage.dat by default
+		 //auction manager points to data/storage.dat by default
+		String fileName = "data/storage.dat";
 		
 		// make items
-		AuctionItem item5 = new AuctionItem(BigDecimal.valueOf(1200.00), "A Subaru Outback");
-		AuctionItem item6 = new AuctionItem(BigDecimal.valueOf(67.00), "PF Flyers");
-		AuctionItem item7 = new AuctionItem(BigDecimal.valueOf(5.00), "Magnifying Glass");
-		AuctionItem item8 = new AuctionItem(BigDecimal.valueOf(0.05), "A Canoli");
-		AuctionItem item9 = new AuctionItem(BigDecimal.valueOf(13.00), "Swiffer Duster");
+		AuctionItem item5 = new AuctionItem(BigDecimal.valueOf(1200.00),
+				"A Subaru Outback");
+		AuctionItem item6 = new AuctionItem(BigDecimal.valueOf(67.00),
+				"PF Flyers");
+		AuctionItem item7 = new AuctionItem(BigDecimal.valueOf(5.00),
+				"Magnifying Glass");
+		AuctionItem item8 = new AuctionItem(BigDecimal.valueOf(0.05),
+				"A Canoli");
+		AuctionItem item9 = new AuctionItem(BigDecimal.valueOf(13.00), 
+				"Swiffer Duster");
 		
 		
 		// make users
-		NonProfitContact nonProfit1 = new NonProfitContact("nonprof1", "The Human Fund");
+		NonProfitContact nonProfit1 =
+				new NonProfitContact("nonprof1", "The Human Fund");
 		Bidder bidder1 = new Bidder("bidder1", "Peter Piper");
 		
 		
@@ -42,10 +60,14 @@ public class DummyData {
 		itemSet3.add(item9);
 		
 		HashSet<Bid> bidSetbidder1auction3 = new HashSet<>();
-		bidSetbidder1auction3.add(new Bid(bidder1, item5, BigDecimal.valueOf(1300)));
-		bidSetbidder1auction3.add(new Bid(bidder1, item6, BigDecimal.valueOf(70)));
-		bidSetbidder1auction3.add(new Bid(bidder1, item7, BigDecimal.valueOf(6)));
-		bidSetbidder1auction3.add(new Bid(bidder1, item8, BigDecimal.valueOf(1)));
+		bidSetbidder1auction3.add(new Bid(bidder1,
+				item5, BigDecimal.valueOf(1300)));
+		bidSetbidder1auction3.add(new Bid(bidder1,
+				item6, BigDecimal.valueOf(70)));
+		bidSetbidder1auction3.add(new Bid(bidder1,
+				item7, BigDecimal.valueOf(6)));
+		bidSetbidder1auction3.add(new Bid(bidder1,
+				item8, BigDecimal.valueOf(1)));
 				
 		HashMap<Bidder, HashSet<Bid>> bidSet3 = new HashMap<>();
 		bidSet3.put(bidder1, bidSetbidder1auction3);
@@ -63,7 +85,8 @@ public class DummyData {
 		bidder1.addAuction(auction3);
 		nonProfit1.addAuction(auction3);
 		LocalDate theDate = auction3.getDate();
-		calendar.submitAuction(auction3, theDate.getDayOfMonth(), theDate.getMonthValue(), theDate.getYear());
+		calendar.submitAuction(auction3, theDate.getDayOfMonth(),
+				theDate.getMonthValue(), theDate.getYear());
 		
 		//final store
 		storage.storeUser(bidder1);

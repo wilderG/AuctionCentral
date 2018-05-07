@@ -56,9 +56,11 @@ public class mainDriver {
 			
 			if (option == 1) {
 				ViewAuction viewAuctions = new ViewAuction();
-				int userResponse = viewAuctions .showAllAuctions(theScanner, theUser, theManager);
+				int userResponse =
+						viewAuctions .showAllAuctions(theScanner, theUser, theManager);
 				if (userResponse != 0) {
-					Auction auction = getAuctionFromUserResponse(theUser, userResponse);
+					Auction auction =
+							getAuctionFromUserResponse(theUser, userResponse);
 					ViewItems viewItems = new ViewItems();
 					viewItems.showItemsForNonProfAuction(theScanner, auction);
 				}
@@ -96,9 +98,10 @@ public class mainDriver {
 				} else {
 					// show NewItemRequest screen					
 					System.out.println("\nAdding inventory item for auction " +
-							"scheduled on " + formatDate(futureAuction.getDate()));
+							"scheduled on " +
+							formatDate(futureAuction.getDate()));
 					System.out.println("(You may enter up to " + 
-							futureAuction.getAvailableSpace() + " more items)");
+					 futureAuction.getAvailableSpace() + " more items)");
 						
 					//NewItemRequest n
 					String itemDescription;
@@ -116,7 +119,8 @@ public class mainDriver {
 							itemMinimumBid = input.nextDouble();
 							invalidChoice = false;
 						} catch (Exception e) {
-							System.out.println("Invalid input please try again.");
+							System.out.println(
+									"Invalid input please try again.");
 						}
 					} while (invalidChoice);
 					
@@ -125,10 +129,12 @@ public class mainDriver {
 					
 					AuctionItem newItem = 
 						theManager.processNewItem(new NewItemRequest
-							(itemDescription, BigDecimal.valueOf(itemMinimumBid), 
+							(itemDescription,
+									BigDecimal.valueOf(itemMinimumBid), 
 							 futureAuction));
 					
-					System.out.println("Thank You! " + newItem.getDescription() 
+					System.out.println("Thank You! " + 
+					   newItem.getDescription() 
 						+ " has been added to your auction.");
 				}
 		
@@ -162,18 +168,25 @@ public class mainDriver {
 			if (option == 1) {
 				// call auction view passing
 				int userItemChoice = 0;
-				int auctionUserChoice = viewAuctions.showAllAuctions(scanner, theUser, theManager);
+				int auctionUserChoice = 
+				 viewAuctions.showAllAuctions(scanner, theUser, theManager);
 				Auction theChosenAuction = null;
 				if (auctionUserChoice != 0) {
-					theChosenAuction = getNewAuctionForUserFromResponse(theUser, auctionUserChoice, theManager);
-					userItemChoice = viewItems.showItems(scanner, theChosenAuction);					
+					theChosenAuction = 
+					   getNewAuctionForUserFromResponse(theUser,
+							   auctionUserChoice, theManager);
+					userItemChoice = 
+							viewItems.showItems(scanner, theChosenAuction);					
 				}
 				
 				if (userItemChoice != 0) {
 					// Show bid menu
 					ViewBidMenu viewBidMenu = new ViewBidMenu();
-					AuctionItem chosenItem = getChosenItemUserWantsToBidOn(theChosenAuction, userItemChoice);
-					viewBidMenu.placeBid(theUser, chosenItem, scanner, theManager, theChosenAuction);
+					AuctionItem chosenItem = 
+							getChosenItemUserWantsToBidOn(theChosenAuction,
+									userItemChoice);
+					viewBidMenu.placeBid(theUser, chosenItem,
+							scanner, theManager, theChosenAuction);
 				}
 		
 				
@@ -196,17 +209,24 @@ public class mainDriver {
 				}
 				
 				if (userAuctionChoice != 0) {
-					viewItems.showBiddersItems(scanner, theUser, userAuctionChoice);
+					viewItems.showBiddersItems(scanner, 
+							theUser, userAuctionChoice);
 				}
+				
 //				int userResponse = 0;
-//				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+//				userResponse = viewItems.showItems(scanner,
+//						theUser.getMyAuctions().iterator().next());
 //				if (userResponse != 0) {
-//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+//					AuctionItem[] items =
+//							theUser.getMyAuctions().toArray(
+//							new AuctionItem[theUser.getMyAuctions().size()]);
 //					AuctionItem theChosenItem = items[userResponse + 1];
 //				}
-//				userResponse = viewItems.showItems(scanner, theUser.getMyAuctions().iterator().next());
+//				userResponse = viewItems.showItems(scanner,
+//						theUser.getMyAuctions().iterator().next());
 //				if (userResponse != 0) {
-//					AuctionItem[] items = theUser.getMyAuctions().toArray(new AuctionItem[theUser.getMyAuctions().size()]); 
+//					AuctionItem[] items = theUser.getMyAuctions().toArray(
+//							new AuctionItem[theUser.getMyAuctions().size()]); 
 //					AuctionItem theChosenItem = items[userResponse + 1];
 //				}
 				
@@ -249,7 +269,8 @@ public class mainDriver {
 		if (user instanceof model.Bidder) {
 			bidderScreen((Bidder) user, theManager);
 		} else if (user instanceof model.NonProfitContact) {
-			nonProfitContactScreen((NonProfitContact) user, theManager, scanner);
+			nonProfitContactScreen((NonProfitContact) user,
+					theManager, scanner);
 		} else {
 			endSession();
 			scanner.close();
@@ -275,19 +296,28 @@ public class mainDriver {
 		return theDate.format(formatter);
 	}
 	
-	private static Auction getAuctionFromUserResponse(User theUser, int theResponse) {
-		Auction[] auctions = theUser.getMyAuctions().toArray(new Auction[theUser.getMyAuctions().size()]);
+	private static Auction getAuctionFromUserResponse(
+			User theUser, int theResponse) {
+		Auction[] auctions =
+				theUser.getMyAuctions().toArray(
+						new Auction[theUser.getMyAuctions().size()]);
 		return auctions[theResponse - 1];
 	}
 	
-	private static Auction getNewAuctionForUserFromResponse(User theUser, int theResponse, AuctionManager theManager) {
-		Auction[] auctions = theManager.getAvailableAuctions((Bidder) theUser).toArray(new Auction[theUser.getMyAuctions().size()]);
+	private static Auction getNewAuctionForUserFromResponse(User theUser,
+			int theResponse, AuctionManager theManager) {
+		Auction[] auctions = 
+				theManager.getAvailableAuctions((Bidder) theUser).toArray(
+						new Auction[theUser.getMyAuctions().size()]);
 		return auctions[theResponse - 1];
 	}
 	
-	private static AuctionItem getChosenItemUserWantsToBidOn(Auction theChosenAuction, int theItemChoice) {
-		Collection<AuctionItem> theItems = theChosenAuction.getAllItems();
-		AuctionItem[] indexedItems = theItems.toArray(new AuctionItem[theItems.size()]);
+	private static AuctionItem getChosenItemUserWantsToBidOn
+	(Auction theChosenAuction, int theItemChoice) {
+		Collection<AuctionItem> theItems =
+				theChosenAuction.getAllItems();
+		AuctionItem[] indexedItems =
+				theItems.toArray(new AuctionItem[theItems.size()]);
 		return indexedItems[theItemChoice - 1];
 	}
 
