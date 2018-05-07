@@ -45,16 +45,19 @@ public class AuctionItemTest {
      */
     @Test
     public void isBidValid_equalToMinimumBid_shouldBeTrue() {
-        assertTrue("Equal bid to minimum amount is valid", testItem.isBidAmountValid(BigDecimal.valueOf(35.0)));
+        assertTrue("Equal bid to minimum amount is valid", 
+        		testItem.isBidAmountValid(BigDecimal.valueOf(35.0)));
     }
 
     /**
-     * Test the isBidValid method. Specifically, checks that a bid is valid for an amount 
+     * Test the isBidValid method. Specifically, 
+     * checks that a bid is valid for an amount 
      * greater than the minimum bid amount.
      */
     @Test
     public void isBidValid_greaterThanMinimumBid_shouldBeTrue() {
-        assertTrue("Equal bid to minimum amount is valid", testItem.isBidAmountValid(BigDecimal.valueOf(35.01)));
+        assertTrue("Equal bid to minimum amount is valid",
+        		testItem.isBidAmountValid(BigDecimal.valueOf(35.01)));
     }
 
     /**
@@ -63,6 +66,7 @@ public class AuctionItemTest {
      */
     @Test
     public void isBidValid_lessThanMinimumBid_shouldBeFalse() {
-        assertFalse("Equal bid to minimum amount is valid", testItem.isBidAmountValid(BigDecimal.valueOf(34.99)));
+        assertFalse("Equal bid to minimum amount is valid", 
+        		testItem.isBidAmountValid(BigDecimal.valueOf(34.99)));
     }
 }

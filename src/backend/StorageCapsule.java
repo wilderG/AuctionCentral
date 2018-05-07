@@ -16,7 +16,8 @@ public class StorageCapsule implements Serializable {
 	
 	public AuctionCalendar calendar;
 	
-	public StorageCapsule(HashMap<String, User> theUser, AuctionCalendar theCalendar) {
+	public StorageCapsule(HashMap<String, User> theUser,
+			AuctionCalendar theCalendar) {
 		users = theUser;
 		calendar = theCalendar;
 	}
