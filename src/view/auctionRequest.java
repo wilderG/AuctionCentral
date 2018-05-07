@@ -73,8 +73,10 @@ public class auctionRequest {
 	    LocalDate today = LocalDate.now();
         System.out.println("Please enter the date you would like to schedule "
                 + "an auction on.");
-        System.out.println("(Must be between " + getSoonestPossibleDate().toString() 
-                + " and " + today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT) + ")");
+        System.out.println("(Must be between " +
+                getSoonestPossibleDate().toString() 
+                + " and " + 
+                today.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT) + ")");
         System.out.println("\"YYYY-MM-DD\":");
     }
 
@@ -87,7 +89,8 @@ public class auctionRequest {
     private void attemptToScheduleAuction(LocalDate theChosenDate) 
             throws IllegalArgumentException {
         System.out.println();
-        NewAuctionRequest auctionRequest = new NewAuctionRequest(myNonprof, theChosenDate);
+        NewAuctionRequest auctionRequest = new NewAuctionRequest(myNonprof,
+        		theChosenDate);
         myManager.processNewAuctionRequest(auctionRequest);
         
         //___________________
@@ -121,16 +124,22 @@ public class auctionRequest {
 	 */
     private void displayPrecheckError() {
 	    if (!myManager.isNewAuctionRequestAllowed()) {
-            System.out.println("We're sorry, but AuctionCentral is currently not \n"
-                    + "accepting new auction requests at this time due to capacity \n"
-                    + "constraints. Please check back later to see if new auctions \n"
+            System.out.println("We're sorry, "
+            		+ "but AuctionCentral is currently not \n"
+                    + "accepting new auction "
+                    + "requests at this time due to capacity \n"
+                    + "constraints. Please check "
+                    + "back later to see if new auctions \n"
                     + "are available. We apologize for the inconvenience.");
         } else if (!myNonprof.isDateOneYearAfterPreviousAuction(
-                        LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))) {
-            System.out.println("We're sorry, but there is already an auction for \n"
-                    + "your organization (on " + myNonprof.getLatestDate().toString()
+             LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))) {
+            System.out.println("We're sorry, "
+            		+ "but there is already an auction for \n"
+                    + "your organization (on " +
+            		myNonprof.getLatestDate().toString()
                     + ") within 1 year from any possible date you \n"
-                    + "may schedule. AuctionCentral, as policy, only accepts one \n"
+                    + "may schedule. AuctionCentral, "
+                    + "as policy, only accepts one \n"
                     + "auction per organization per year.");
         }
     }
@@ -145,7 +154,8 @@ public class auctionRequest {
 	    LocalDate latestAvailableDateInCalendar = 
 	            LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
 	    return myManager.isNewAuctionRequestAllowed() 
-	            && myNonprof.isDateOneYearAfterPreviousAuction(latestAvailableDateInCalendar);
+	            && myNonprof.isDateOneYearAfterPreviousAuction
+	            (latestAvailableDateInCalendar);
     }
 
     /**
@@ -158,8 +168,10 @@ public class auctionRequest {
 	 */
     private LocalDate getSoonestPossibleDate() {
         LocalDate today = LocalDate.now();
-        LocalDate oneYearFromPrevAuction = myNonprof.getLatestDate().plusYears(1);
-        LocalDate minDaysOutFromToday = today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        LocalDate oneYearFromPrevAuction = 
+        		myNonprof.getLatestDate().plusYears(1);
+        LocalDate minDaysOutFromToday =
+        		today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
         LocalDate latestDate;
         if (minDaysOutFromToday.isAfter(oneYearFromPrevAuction))
             latestDate = minDaysOutFromToday;
