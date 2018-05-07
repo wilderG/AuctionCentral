@@ -62,7 +62,7 @@ public class ViewAuction {
 	
 	private void bidderOutputMessage(Auction theAuction) {
 		System.out.println("With " + theAuction.getName() + ", " 
-				+ theAuction.getDate() + " (" + theAuction.getAllItems().size() + ")");
+				+ theAuction.getDate() + " (" + theAuction.getAllItems().size() + " items available)");
 	}
 	
 	private void nonProfitOutputMessage(Auction theAuction) {
