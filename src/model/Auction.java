@@ -132,7 +132,6 @@ public final class Auction implements Serializable {
 		} else if (myBids.containsKey(theBidder)) {
 			int bidCount = myBids.get(theBidder).size(); 
 			result = bidCount < myMaximumBidsFromUniqueBidder;
-			System.err.println("BidCount " + bidCount + "/myMax " + myMaximumBidsFromUniqueBidder);
 		} 
 
 		return result;
