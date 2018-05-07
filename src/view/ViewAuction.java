@@ -133,7 +133,7 @@ public class ViewAuction {
 //		for which you would like to view items\n"
 //				+ "(Enter 0 to return to the main menu)");
 	
-		return theScanner.nextInt();
+		return mainDriver.getNextInt(auctionCollection.size());
 	}
 
 }

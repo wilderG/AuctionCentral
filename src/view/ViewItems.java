@@ -135,7 +135,7 @@ public class ViewItems {
 		Auction[] indexedAuctions =
 				auctionCollection.toArray(
 						new Auction[auctionCollection.size()]);
-		Auction auction = indexedAuctions[theAuctionIndex];
+		Auction auction = indexedAuctions[theAuctionIndex - 1];
 		
 		Collection<AuctionItem> auctionItemCollection =
 				auction.getAllItemsWithBidder(theUser);
