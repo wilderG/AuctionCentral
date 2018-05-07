@@ -3,7 +3,6 @@ package view;
 import backend.StorageIO;
 import model.AuctionManager;
 import model.Bidder;
-import model.NonProfitContact;
 import model.User;
 
 public class ForceNewTestUser {

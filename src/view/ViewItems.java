@@ -10,7 +10,6 @@ import model.Auction;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
-import sun.net.www.protocol.http.AuthenticationInfo;
 
 public class ViewItems {
 
@@ -52,7 +51,6 @@ public class ViewItems {
 	}
 	
 	public void showBiddersItemsForAllAuctions(Scanner theScanner, Bidder theUser) {
-		int count = 0;
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 
 		for (Iterator<Auction> i= auctionCollection .iterator(); i.hasNext();) {

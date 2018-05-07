@@ -80,7 +80,6 @@ public class Bidder extends User {
 				currentBidCount += auction.getMyBids(this).size();
 			}
 		}
-		System.out.println("Peter Piper has: " + currentBidCount);
 		myBidCount = currentBidCount;
 	}
 	

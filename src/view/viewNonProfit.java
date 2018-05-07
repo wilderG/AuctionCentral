@@ -5,8 +5,7 @@ import java.util.Scanner;
 public class viewNonProfit {
 	static Scanner input = new Scanner(System.in);
 	public void disPlay() {
-		auctionBidSearch test = new auctionBidSearch();
-		ViewItems test2 = new ViewItems();
+		
 		int option;
 		System.out.println("MAIN MENU");
 		System.out.println("	1.View all auctions/items for Salvation Army");
