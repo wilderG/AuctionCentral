@@ -10,12 +10,7 @@ import java.time.LocalDate;
  * @author Jim Rosales
  */
 public class NonProfitContact extends User {
-<<<<<<< HEAD
-//	AuctionDate myDate = new AuctionDate();
-=======
 	AuctionDate myDate = new AuctionDate(0, 0, 0);
->>>>>>> refs/remotes/origin/yohei-dev
-
 
 	/**
 	 * Generated Serial Version UID
