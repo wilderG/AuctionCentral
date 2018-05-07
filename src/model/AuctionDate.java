@@ -16,7 +16,8 @@ import java.time.LocalDate;
 
 
 /**
- * Represents a date that can have an auction. Can only hold a certain amount of auctions, 
+ * Represents a date that can have an auction. 
+ * Can only hold a certain amount of auctions, 
  * and is responsible for determining if it can schedule more.
  * 
  * @author Steven Golob 
@@ -48,7 +49,8 @@ public class AuctionDate implements Serializable {
      * @param theYear the year
      * @throws DateTimeException if the given parameters are invalid
      */
-    public AuctionDate(final int theDay, final int theMonth, final int theYear) {        
+    public AuctionDate(final int theDay,
+    		final int theMonth, final int theYear) {        
         try {
 			myDate = LocalDate.of(theYear, theMonth, theDay);
 		} catch (Exception DateTimeExepction) {
@@ -68,7 +70,8 @@ public class AuctionDate implements Serializable {
     }
     
     /**
-     * Determines if this day can take on any more auctions or not based on maximum.
+     * Determines if this day can take on any
+     *  more auctions or not based on maximum.
      * 
      * @return whether or not can schedule more auctions
      */
@@ -77,14 +80,17 @@ public class AuctionDate implements Serializable {
     }
     
     /**
-     * Attempts to add auction to this date. Must not be at capacity in order to succeed.
+     * Attempts to add auction to this date.
+     *  Must not be at capacity in order to succeed.
      * 
      * @param theAuction the auction to be added
-     * @throws IllegalArgumentExpection if an auction is added when the date is already at capacity.
+     * @throws IllegalArgumentExpection if an 
+     * auction is added when the date is already at capacity.
      */
     public void addAuction(final Auction theAuction) {
         if (isAtCapacity())
-            throw new IllegalArgumentException(this.format() + " is already at capacity!");
+            throw new IllegalArgumentException(this.format() +
+            		" is already at capacity!");
         myAuctions.add(theAuction);
     }
     
@@ -98,8 +104,10 @@ public class AuctionDate implements Serializable {
     }
     
     /**
-     * This method indicates the number of days in between today and the given date. If
-     * the given date is in the future, this method will return a positive number.
+     * This method indicates the number of days
+     *  in between today and the given date. If
+     * the given date is in the future,
+     *  this method will return a positive number.
      * 
      * @return the comparison between this date and today's date
      */
@@ -158,7 +166,8 @@ public class AuctionDate implements Serializable {
      * @return the formatted string of this date's date
      */
     public String format() {
-        String thisDate = myDate.getYear() + "/" + myDate.getMonthValue() + "/" + myDate.getDayOfMonth();
+        String thisDate = myDate.getYear() + "/" +
+    myDate.getMonthValue() + "/" + myDate.getDayOfMonth();
         return thisDate;
     }
     

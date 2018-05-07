@@ -13,9 +13,27 @@ import model.Bidder;
 import model.NonProfitContact;
 import model.User;
 
+/**
+ * Displaying some data when users do certain actions.
+ * 
+ * @author Jared Malone
+ * @author Jim Rosales
+ * @author Steven Kenneth Golob
+ * @author Wilder Emanuel Garcia Y Garcia
+ * @author Yohei Sato
+ * @version 5/8/2018
+ */
 public class ViewAuction {
-
-	public int showAllAuctions(Scanner theScanner, User theUser, AuctionManager theManager) {
+	/**
+	 * Showing all auctions information
+	 * 
+	 * @param theScanner
+	 * @param theUser
+	 * @param theManager
+	 * @return  the number users choose.
+	 */
+	public int showAllAuctions(Scanner theScanner, 
+			User theUser, AuctionManager theManager) {
 		if (theUser instanceof NonProfitContact) {
 			nonProfitIntroMessage(theUser);
 		} else {
@@ -27,9 +45,11 @@ public class ViewAuction {
 		if (theUser instanceof NonProfitContact) {
 			auctionCollection = theUser.getMyAuctions();
 		} else {
-			auctionCollection = theManager.getAvailableAuctions((Bidder) theUser);
+			auctionCollection =
+					theManager.getAvailableAuctions((Bidder) theUser);
 			if (auctionCollection.isEmpty()) {
-				System.out.println("Sorry you're at the max amount of bids allowable");
+				System.out.println(
+						"Sorry you're at the max amount of bids allowable");
 				System.out.println("Please choose a different option");
 				return 0;
 			}
@@ -46,7 +66,8 @@ public class ViewAuction {
 			}
 		}
 		
-		System.out.println("Select an auction number for which you would like to view items\n"
+		System.out.println("Select an auction"
+				+ " number for which you would like to view items\n"
 				+ "(Enter 0 to return to the main menu)");
 	
 		return theScanner.nextInt();
@@ -57,20 +78,24 @@ public class ViewAuction {
 	}
 	
 	private void nonProfitIntroMessage(User theUser) {
-		System.out.println("All auctions for " + theUser.getDisplayName() + "\n");
+		System.out.println("All auctions for " +
+	theUser.getDisplayName() + "\n");
 	}
 	
 	private void bidderOutputMessage(Auction theAuction) {
 		System.out.println("With " + theAuction.getName() + ", " 
-				+ theAuction.getDate() + " (" + theAuction.getAllItems().size() + " items available)");
+				+ theAuction.getDate() + " ("
+				+ theAuction.getAllItems().size() + " items available)");
 	}
 	
 	private void nonProfitOutputMessage(Auction theAuction) {
 		Locale local = Locale.US ; // Or Locale.US
-		DateTimeFormatter formatter = DateTimeFormatter.ofLocalizedDate( FormatStyle.LONG )
+		DateTimeFormatter formatter =
+				DateTimeFormatter.ofLocalizedDate( FormatStyle.LONG )
 		                                       .withLocale(local) ;
 		String dateOutput = theAuction.getDate().format( formatter );
-		System.out.println(dateOutput + " (" + theAuction.getAllItems().size() + " Items)");
+		System.out.println(dateOutput + " ("
+		+ theAuction.getAllItems().size() + " Items)");
 	}
 	
 	public int showBiddersAuctions(Scanner theScanner, Bidder theUser) {
@@ -82,13 +107,16 @@ public class ViewAuction {
 			Auction auction = iterator.next();
 			System.out.print("  " + (count + 1) + ". ");
 //			Auction 1 with Non-Prof A: (4 bid on items) April 21, 2018
-			System.out.println("Auction " + (count + 1) + " with "+ auction.getName() + ": " + 
-			"(" + auction.getAllItemsWithBidder(theUser).size() + " bid on items) " 
+			System.out.println("Auction " +
+(count + 1) + " with "+ auction.getName() + ": " + 
+			"(" + auction.getAllItemsWithBidder(theUser).size()
+			+ " bid on items) " 
 					+ mainDriver.formatDate(auction.getDate()));
 		}
 		System.out.println("To return to the main menu enter 0");
 		System.out.print("Choice: ");
-//		System.out.println("Select an auction number for which you would like to view items\n"
+//		System.out.println("Select an auction number
+//		for which you would like to view items\n"
 //				+ "(Enter 0 to return to the main menu)");
 	
 		return theScanner.nextInt();

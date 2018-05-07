@@ -14,7 +14,8 @@ import java.util.List;
 
 
 /**
- * Represents the system that keeps track of auction dates holding Auctions. Is responsible
+ * Represents the system that keeps track
+ *  of auction dates holding Auctions. Is responsible
  * for determining if a new auction may be scheduled.
  * 
  * @author Steven Golob 
@@ -31,7 +32,8 @@ public class AuctionCalendar implements Serializable {
     /** Minimum days out that an auction can be scheduled. */
     public static final int MINIMUM_DAYS_OUT = 14;
     
-    /** Maximum number of auctions in the future that can be scheduled at a time. */
+    /** Maximum number of auctions
+     *  in the future that can be scheduled at a time. */
     public static final int MAXIMUM_FUTURE_AUCTIONS = 25;
     
     /** All of the dates used currently by the calendar. */
@@ -44,8 +46,8 @@ public class AuctionCalendar implements Serializable {
     private LocalDate myCurrentDate;
     
     /**
-     * A management system for storing auctions by their dates. Handles rules for 
-     * submitting new auctions.
+     * A management system for storing auctions by 
+     * their dates. Handles rules for submitting new auctions.
      */
     public AuctionCalendar() {
         myDates = new LinkedList<>();
@@ -56,7 +58,8 @@ public class AuctionCalendar implements Serializable {
     //_________________________________________________________________________________________
     
     /**
-     * Schedules a new auction if all the rules are met for scheduling an auction, and the 
+     * Schedules a new auction if all the rules are met for
+     *  scheduling an auction, and the 
      * date to be scheduled is available for new auctions.
      * 
      * @param theAuction the new auction to be scheduled
@@ -66,11 +69,12 @@ public class AuctionCalendar implements Serializable {
      * @throws IllegalArgumentException if date is already at capacity
      */
     public void submitAuction(final Auction theAuction, 
-                              final int theDay, final int theMonth, final int theYear) 
-                                                          throws IllegalArgumentException {
+                    final int theDay, final int theMonth, final int theYear) 
+                                   throws IllegalArgumentException {
         AuctionDate dateForAuction = getAuctionDate(theDay, theMonth, theYear);
         if (!isAllowingNewAuction())
-            throw new IllegalArgumentException("Already at maximum amount of auctions!");
+            throw new IllegalArgumentException(
+            		"Already at maximum amount of auctions!");
         if (!isDateWithinEligableRange(dateForAuction))
             throw new IllegalArgumentException("Specified date (" 
                                 + dateForAuction.format() 
@@ -80,7 +84,8 @@ public class AuctionCalendar implements Serializable {
     }
     
     /**
-     * Determines if the schedule is allowing new auctions to be scheduled at this time. 
+     * Determines if the schedule is 
+     * allowing new auctions to be scheduled at this time. 
      * Determined based on having less than maximum number of auctions.
      * 
      * @return whether or not the schedule is at capacity yet
@@ -90,7 +95,8 @@ public class AuctionCalendar implements Serializable {
     }
     
     /**
-     * Determines if the given date is within the eligible range for scheduling a new auction.
+     * Determines if the given date is within 
+     * the eligible range for scheduling a new auction.
      * 
      * @param theDay the day of month to add an auction
      * @param theMonth the month to add an auction
@@ -99,23 +105,28 @@ public class AuctionCalendar implements Serializable {
      * @throws IllegalArgumentException if given date is not valid
      */
     public boolean isDateWithinEligableRange(final int theDay, 
-                                             final int theMonth, final int theYear) 
-                                                     throws IllegalArgumentException {
+                        final int theMonth, final int theYear) 
+                       throws IllegalArgumentException {
         AuctionDate date = new AuctionDate(theDay, theMonth, theYear);
         return isDateWithinEligableRange(date);
     }
     /**
-     * Determines if the given date is within the eligible range for scheduling a new auction.
+     * Determines if the given date is within 
+     * the eligible range for scheduling a new auction.
      * 
      * @param theAuctionDate the date to be considered
-     * @return whether or not given date is in eligible range to schedule auction
+     * @return whether or not given date 
+     * is in eligible range to schedule auction
      */
-    public boolean isDateWithinEligableRange(final AuctionDate theAuctionDate) {
+    public boolean isDateWithinEligableRange(
+    		final AuctionDate theAuctionDate) {
         boolean result = true;
         
-        if (theAuctionDate.getDate().isAfter(myCurrentDate.plusDays(MAXIMUM_DAYS_OUT))) {
+        if (theAuctionDate.getDate().isAfter(
+        		myCurrentDate.plusDays(MAXIMUM_DAYS_OUT))) {
         		result = false;
-        } else if (theAuctionDate.getDate().isBefore(myCurrentDate.plusDays(MINIMUM_DAYS_OUT))) {
+        } else if (theAuctionDate.getDate().isBefore(
+        		myCurrentDate.plusDays(MINIMUM_DAYS_OUT))) {
         		result = false;
         }
 
@@ -158,8 +169,10 @@ public class AuctionCalendar implements Serializable {
     }
     
     /**
-     * This method returns an auctionDate that can hold auctions. If the date does not yet 
-     * exist in the calendar, it creates a date and adds it to the calendar first.
+     * This method returns an auctionDate 
+     * that can hold auctions. If the date does not yet 
+     * exist in the calendar, it creates a date 
+     * and adds it to the calendar first.
      * 
      * @param theDay the day of the month
      * @param theMonth the month (1 - 12)
@@ -167,8 +180,9 @@ public class AuctionCalendar implements Serializable {
      * @return the auction date that holds auctions
      * @throws IllegalArgumentException if date is invalid
      */
-    public AuctionDate getAuctionDate(final int theDay, final int theMonth, final int theYear)
-                                                    throws IllegalArgumentException {
+    public AuctionDate getAuctionDate(final int theDay,
+    		final int theMonth, final int theYear)
+                                      throws IllegalArgumentException {
         AuctionDate newDate = new AuctionDate(theDay, theMonth, theYear);
         for (AuctionDate date : myDates) {
             if (newDate.getDate().compareTo(date.getDate()) == 0)
@@ -179,10 +193,12 @@ public class AuctionCalendar implements Serializable {
         return newDate;
     }   
     
-    public void forceAddAuctionInThePast(Auction theAuction, int theYear, int theMonth, int theDay) {
+    public void forceAddAuctionInThePast(Auction theAuction,
+    		int theYear, int theMonth, int theDay) {
     		myCurrentDate = LocalDate.of(theYear, theMonth, theDay);
 		LocalDate pastDate = theAuction.getDate();
-		submitAuction(theAuction, pastDate.getDayOfMonth(), pastDate.getMonthValue(), pastDate.getYear());
+		submitAuction(theAuction, pastDate.getDayOfMonth(), 
+				pastDate.getMonthValue(), pastDate.getYear());
 		myCurrentDate = LocalDate.now();
     }
    

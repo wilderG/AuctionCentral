@@ -81,7 +81,8 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public Auction processNewAuctionRequest(NewAuctionRequest theAuctionRequest) 
+	public Auction processNewAuctionRequest(
+			NewAuctionRequest theAuctionRequest) 
 		throws IllegalArgumentException {
 		NonProfitContact sponsor = theAuctionRequest.getMySponsor();
 		LocalDate auctionDate = theAuctionRequest.getMyDate();
@@ -90,7 +91,8 @@ public class AuctionManager implements Manager {
 				MAXIMUM_BIDDER_BIDS_PER_AUCTION, sponsor.getDisplayName());
 		
 		if (!sponsor.isDateForProposedAuctionValid(newAuction)) {
-			throw new IllegalArgumentException("You may not add an auction on this date."
+			throw new IllegalArgumentException(
+					"You may not add an auction on this date."
 			        + "It is within one year of your latest auction.");
 		}
 		
@@ -138,7 +140,8 @@ public class AuctionManager implements Manager {
 	 * the bidder is allowed to make new bids.
 	 */
 	@Override
-	public boolean isNewBidRequestAllowed(Auction theAuction, Bidder theBidder) {
+	public boolean isNewBidRequestAllowed(
+			Auction theAuction, Bidder theBidder) {
 		boolean result;
 		
 		// check auction status

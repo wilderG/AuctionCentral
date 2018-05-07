@@ -1,7 +1,16 @@
 package view;
 
 import java.util.Scanner;
-
+/**
+ * Displaying non profit menu.
+ * 
+ * @author Jared Malone
+ * @author Jim Rosales
+ * @author Steven Kenneth Golob
+ * @author Wilder Emanuel Garcia Y Garcia
+ * @author Yohei Sato
+ * @version 5/8/2018
+ */
 public class viewNonProfit {
 	static Scanner input = new Scanner(System.in);
 	public void disPlay() {

@@ -24,8 +24,10 @@ public class Bidder extends User {
 	
 	/**
 	 * Constructor for a bidder
-	 * @param theUsername that will be associated with the newly created bidder.
-	 * @param theDisplayName that will be associated with the newly created bidder.
+	 * @param theUsername that will be
+	 *  associated with the newly created bidder.
+	 * @param theDisplayName that will be 
+	 * associated with the newly created bidder.
 	 */
 	public Bidder(String theUsername, String theDisplayName) {
 		super(theUsername, theDisplayName);
@@ -34,7 +36,8 @@ public class Bidder extends User {
 	
 	/**
 	 * Determines whether or not a new bid is allowed for the bidder
-	 * @return True if the current bidCount for the user is less than the max bid count allowed. Else 
+	 * @return True if the current bidCount for the 
+	 * user is less than the max bid count allowed. Else 
 	 * returns false.
 	 */
 	public boolean isNewBidAllowed() {
@@ -43,14 +46,16 @@ public class Bidder extends User {
 	}
 	
 	/**
-	 * Increments the bid count for the bidder if it is allowed. If not the bid count is not modified.
+	 * Increments the bid count for the bidder if it is allowed.
+	 *  If not the bid count is not modified.
 	 */
 	private void incrementBidCount() {
 		myBidCount++;
 	}
 	
 	/**
-	 * Adds the given auction to the bidders list of associated auctions. Increases the bid count as well.
+	 * Adds the given auction to the bidders list of associated
+	 *  auctions. Increases the bid count as well.
 	 * @param theAuction that will be associated with the user.
 	 */
 	@Override
@@ -70,7 +75,8 @@ public class Bidder extends User {
 	}
 	
 	/**
-	 * Updates the current bid count for a bidder to reflect only the auctions that are upcoming.
+	 * Updates the current bid count for a bidder to reflect 
+	 * only the auctions that are upcoming.
 	 */
 	private void updateBidCount() {
 		int currentBidCount = 0;

@@ -11,17 +11,36 @@ import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
 import sun.net.www.protocol.http.AuthenticationInfo;
-
+/**
+ * Displaying view items.
+ * 
+ * @author Jared Malone
+ * @author Jim Rosales
+ * @author Steven Kenneth Golob
+ * @author Wilder Emanuel Garcia Y Garcia
+ * @author Yohei Sato
+ * @version 5/8/2018
+ */
 public class ViewItems {
-
+	/**
+	 * showing items.
+	 * 
+	 * @param theScanner
+	 * @param theAuction
+	 * @return the number users pick.
+	 */
 	public int showItems(Scanner theScanner, Auction theAuction) {
 		
-		System.out.println("Auction with " + theAuction.getName() + ", " + theAuction.getDate() + ":");
-		Collection<AuctionItem> items = theAuction.getAllItems();
-		AuctionItem[] indexedItems = items.toArray(new AuctionItem[items.size()]);
+		System.out.println("Auction with " +
+		theAuction.getName() + ", " + theAuction.getDate() + ":");
+		Collection<AuctionItem> items =
+				theAuction.getAllItems();
+		AuctionItem[] indexedItems = items.toArray(
+				new AuctionItem[items.size()]);
 		for (int count = 0; count < items.size(); count++) {
 			AuctionItem item = indexedItems[count];
-			System.out.println("\t" + (count + 1) + ". " + item.getDescription());
+			System.out.println("\t" + (count + 1) + 
+					". " + item.getDescription());
 		}
 		
 		System.out.println("Would you like to place a bid? \n"
@@ -31,17 +50,26 @@ public class ViewItems {
 		return theScanner.nextInt();
 		
 	}
-	
-	public void showItemsForNonProfAuction(Scanner theScanner, Auction theAuction) {
+	/**
+	 * showing items for non profit.
+	 * 
+	 * @param theScanner
+	 * @param theAuction
+	 */
+	public void showItemsForNonProfAuction
+	(Scanner theScanner, Auction theAuction) {
 		String theDate = mainDriver.formatDate(theAuction.getDate());
 		System.out.println("Items for your auction on " + theDate + ":");
 		AuctionItem[] indexedItems = 
-				theAuction.getAllItems().toArray(new AuctionItem[theAuction.getAllItems().size()]);
+				theAuction.getAllItems().toArray(
+						new AuctionItem[theAuction.getAllItems().size()]);
 		for (int count = 0; count < indexedItems.length; count++) {
 			System.out.print("   " + (count + 1) + ". ");
 			AuctionItem item = indexedItems[count];
-			System.out.println(item.getDescription() + " (" + item.getBidCount() + " bids)");
-			System.out.println("\tMinimum bid set at: $" + item.getMinimumAcceptableBidValue());
+			System.out.println(item.getDescription() + " ("
+			+ item.getBidCount() + " bids)");
+			System.out.println("\tMinimum bid set at: $" +
+			item.getMinimumAcceptableBidValue());
 			System.out.println("\tItem not auctioned off for: ????" );
 			
 			
@@ -50,21 +78,31 @@ public class ViewItems {
 		theScanner.next();
 //		return theScanner.nextInt();
 	}
-	
-	public void showBiddersItemsForAllAuctions(Scanner theScanner, Bidder theUser) {
+	/**
+	 * showing Bidder items for every auctions.
+	 * 
+	 * @param theScanner
+	 * @param theUser
+	 */
+	public void showBiddersItemsForAllAuctions
+	   (Scanner theScanner, Bidder theUser) {
 		int count = 0;
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 
-		for (Iterator<Auction> i= auctionCollection .iterator(); i.hasNext();) {
+		for (Iterator<Auction> i=
+				auctionCollection .iterator(); i.hasNext();) {
 			Auction auction =  i.next();
-			Collection<AuctionItem> auctionItems = auction.getAllItemsWithBidder(theUser);
+			Collection<AuctionItem> auctionItems =
+					auction.getAllItemsWithBidder(theUser);
 			HashSet<Bid> myBids = auction.getMyBids(theUser);
 
-			System.out.println("   " + auction.getName() + ", " + mainDriver.formatDate(auction.getDate()));
+			System.out.println("   " + auction.getName() + ", "
+			+ mainDriver.formatDate(auction.getDate()));
 
 			int count2 = 1;
 
-			for (Iterator<AuctionItem> j= auctionItems .iterator(); j.hasNext(); ) {
+			for (Iterator<AuctionItem> j = 
+					auctionItems .iterator(); j.hasNext(); ) {
 				BigDecimal myBidValue = BigDecimal.ZERO;
 				AuctionItem auctionItem =  j.next();
 				for(Iterator <Bid> p = myBids.iterator(); p.hasNext();) {	
@@ -73,8 +111,11 @@ public class ViewItems {
 						myBidValue = bids.getValue();
 					}		
 				}
-				System.out.println("      Item " + count2++ + ": " + auctionItem.getDescription());
-				System.out.println("          Minimum bid: $"+ auctionItem.getMinimumAcceptableBidValue() +"\t\tMy bid: $" + myBidValue );
+				System.out.println("      Item " + count2++ +
+						": " + auctionItem.getDescription());
+				System.out.println("          Minimum bid: $"+
+						auctionItem.getMinimumAcceptableBidValue()
+				+"\t\tMy bid: $" + myBidValue );
 			}
 			System.out.println();
 		}
@@ -82,20 +123,37 @@ public class ViewItems {
 		System.out.print("Enter 0 to go back: ");	
 		theScanner.nextInt();
 	}
-	
-	public void showBiddersItems(Scanner theScanner, Bidder theUser, int theAuctionIndex) {
-		Collection<Auction> auctionCollection = theUser.getMyAuctions();
-		Auction[] indexedAuctions = auctionCollection.toArray(new Auction[auctionCollection.size()]);
+	/**
+	 * showing bidder items.
+	 * 
+	 * @param theScanner
+	 * @param theUser
+	 * @param theAuctionIndex
+	 */
+	public void showBiddersItems(Scanner theScanner,
+			Bidder theUser, int theAuctionIndex) {
+		Collection<Auction> auctionCollection =
+				theUser.getMyAuctions();
+		Auction[] indexedAuctions =
+				auctionCollection.toArray(
+						new Auction[auctionCollection.size()]);
 		Auction auction = indexedAuctions[theAuctionIndex];
 		
-		Collection<AuctionItem> auctionItemCollection = auction.getAllItemsWithBidder(theUser);
-		AuctionItem[] indexedItems = auctionItemCollection.toArray(new AuctionItem[auctionItemCollection.size()]);
-		System.out.println(auction.getName() + " (" + mainDriver.formatDate(auction.getDate()) + "):\n");
+		Collection<AuctionItem> auctionItemCollection =
+				auction.getAllItemsWithBidder(theUser);
+		AuctionItem[] indexedItems =
+				auctionItemCollection.toArray(
+						new AuctionItem[auctionItemCollection.size()]);
+		System.out.println(auction.getName() + " (" +
+						mainDriver.formatDate(auction.getDate()) + "):\n");
 		for (int count = 0; count < indexedItems.length; count++) {
 			AuctionItem item = indexedItems[count];
-			System.out.println("    Item " + (count + 1) + ": " + item.getDescription());
-			System.out.println("        Minimum bid: $" + item.getMinimumAcceptableBidValue() + 
-					"\t My bid: $" + auction.getBidForItem(theUser, item).getValue());
+			System.out.println("    Item " + (count + 1)
+					+ ": " + item.getDescription());
+			System.out.println("        Minimum bid: $" + 
+					item.getMinimumAcceptableBidValue() + 
+					"\t My bid: $" +
+					auction.getBidForItem(theUser, item).getValue());
 		}
 
 		System.out.println("Enter 0 to go back: ");	

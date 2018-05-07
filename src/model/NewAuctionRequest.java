@@ -20,7 +20,8 @@ public class NewAuctionRequest {
 	
 	/**
 	 * Constructor for a new auction request.
-	 * @param theSponsor that will be associated with the newly requested auction.
+	 * @param theSponsor that will be associated
+	 *  with the newly requested auction.
 	 * @param theDate on which the newly requested auction be held.
 	 */
 	public NewAuctionRequest(NonProfitContact theSponsor, LocalDate theDate) {
