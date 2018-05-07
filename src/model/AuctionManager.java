@@ -53,18 +53,17 @@ public class AuctionManager implements Manager {
 	 */
 	@Override
 	public Collection<Auction> getAvailableAuctions(Bidder theBidder) {
-		Collection<Auction> result;
+		Collection<Auction> allFutureAuctions = new HashSet<>();
+		Collection<Auction> result = new HashSet<>();
 		
 		if (theBidder.isNewBidAllowed()) {
-			result = myCalendar.getFutureAuctions();	
-		} else {
-			result = new HashSet<>();
+			allFutureAuctions = myCalendar.getFutureAuctions();	
 		}
 		
-		// remove auctions such that bidder is not allowed
-		for (Auction e : result) {
-			if (!e.isAllowingNewBid(theBidder))
-				result.remove(e);
+		for (Auction e : allFutureAuctions) {
+			if (e.isAllowingNewBid(theBidder) && !e.getAllItems().isEmpty()) {
+				result.add(e);
+			}
 		}
 				
 		return result;
@@ -170,6 +169,7 @@ public class AuctionManager implements Manager {
 		
 		Bid newBid = new Bid(bidder, item, bidValue);
 		auction.addBid(bidder, newBid);
+		bidder.addAuction(auction);
 		storage.writeData();
 		return newBid;
 	}
