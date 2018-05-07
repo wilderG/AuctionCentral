@@ -28,7 +28,7 @@ public class NonProfitContactTest {
 		myDateToday = LocalDate.now();
 		
 		dateForPreviousAuction = LocalDate.now();
-		dateForPreviousAuction = dateForPreviousAuction.minusYears(1);
+		dateForPreviousAuction = dateForPreviousAuction.minusYears(NonProfitContact.MIN_YEAR_ELAPSED);
 		
 		proposedAuction =  new Auction(myDateToday, 0, 0, "Red Cross");
 		myNonProfitWithAPreviousAuction = new NonProfitContact("auctionAdmin99", "John Smith");
@@ -42,7 +42,7 @@ public class NonProfitContactTest {
 	}
 
 	@Test
-	public void isDateForProposedAuctionValid_hasAuctionExactlyOneYearSinceLast_true() {
+	public void isDateForProposedAuctionValid_hasAuctionExactlyMinYearSinceLast_true() {
 		previousAuction = new Auction(dateForPreviousAuction, 0, 0, "Helping Link");
 		myNonProfitWithAPreviousAuction.addAuction(previousAuction);
 		assertTrue("Unable to add an auction when the required elapsed time for the proposed auction has "
@@ -51,7 +51,7 @@ public class NonProfitContactTest {
 	}
 	
 	@Test
-	public void isDateForProposedAuctionValid_isExactlyOneDayAfterOneYearSinceLast_false() {
+	public void isDateForProposedAuctionValid_isExactlyOneDayAfterMinYearSinceLast_false() {
 		dateForPreviousAuction = dateForPreviousAuction.plusDays(1);
 		previousAuction = new Auction(dateForPreviousAuction, 0, 0, "Tacoma Community House");
 		myNonProfitWithAPreviousAuction.addAuction(previousAuction);

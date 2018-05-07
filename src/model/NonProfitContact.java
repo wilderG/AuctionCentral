@@ -10,11 +10,17 @@ import java.time.LocalDate;
  * @author Jim Rosales
  */
 public class NonProfitContact extends User {
-
+	
+	
 	/**
 	 * Generated Serial Version UID
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * The minumum amount of years needed to have elapsed between two auctions
+	 */
+	public static final int MIN_YEAR_ELAPSED = 1;
 
 	/**
 	 * {@inheritDoc}
