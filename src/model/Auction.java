@@ -112,6 +112,7 @@ public final class Auction implements Serializable {
 		for (Bid e : bids) {
 			if (e.getAuctionItem().equals(theBid.getAuctionItem())) {
 				bids.remove(e);
+				break;
 			}
 		}
 		
