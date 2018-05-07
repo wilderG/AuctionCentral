@@ -3,8 +3,10 @@ package backend;
 import model.User;
 
 /**
- * Test driver for persistent storage. You can create an auction and user the auction belongs to.
- * Then call addUser to store both objects. If you rerun the program and call testload, both
+ * Test driver for persistent storage. You can create 
+ * an auction and user the auction belongs to.
+ * Then call addUser to store both objects. 
+ * If you rerun the program and call testload, both
  * objects and their relationship will be present in memory.
  * @author Jared
  */

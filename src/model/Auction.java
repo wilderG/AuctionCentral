@@ -159,7 +159,8 @@ public final class Auction implements Serializable {
 	 * @param theBidder to reference
 	 * @return a collection of items the bidder has bid on.
 	 */
-	public Collection<AuctionItem> getAllItemsWithBidder(final Bidder theBidder) {
+	public Collection<AuctionItem> getAllItemsWithBidder
+	         (final Bidder theBidder) {
 		Collection<AuctionItem> bidderItems = new HashSet<>();
 		
 		if (myBids.containsKey(theBidder)) {

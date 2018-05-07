@@ -53,7 +53,8 @@ public interface Manager extends Serializable {
 	AuctionItem processNewItem(NewItemRequest theNewItemRequest);
 	
 	/**
-	 * Pre-check if a new bid request is allowed for a given auction and bidder.	
+	 * Pre-check if a new bid request is allowed 
+	 * for a given auction and bidder.
 	 * @param theAuction of the new bid
 	 * @param theBidder making the new bid
 	 * @return true if the bid request is allowed
@@ -64,6 +65,7 @@ public interface Manager extends Serializable {
 	 * Submits a new bid request using the given request.
 	 * @return a new Bid object
 	 */
-	Bid processNewBid(NewBidRequest theNewBidRequest) throws IllegalArgumentException;
+	Bid processNewBid(NewBidRequest theNewBidRequest) 
+			throws IllegalArgumentException;
 
 }

@@ -14,7 +14,8 @@ public class NewItemRequest {
 	private String myDescription;
 	
 	/**
-	 * The minimum value that will be accepted for any bids placed for the new item.
+	 * The minimum value that will be accepted
+	 *  for any bids placed for the new item.
 	 */
 	private BigDecimal myMinimumBid;
 	
@@ -30,7 +31,8 @@ public class NewItemRequest {
 	 * @param theMinimumBid that will be accepted for the new item.
 	 * @param theAuction that will be associated with the new item.
 	 */
-	public NewItemRequest(String theDescription, BigDecimal theMinimumBid, Auction theAuction) {
+	public NewItemRequest(String theDescription, 
+			BigDecimal theMinimumBid, Auction theAuction) {
 		myDescription = theDescription;
 		myMinimumBid = theMinimumBid;
 		myAuction = theAuction;

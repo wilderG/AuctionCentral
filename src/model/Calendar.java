@@ -31,5 +31,6 @@ public interface Calendar extends Serializable {
 	 * @param theAuction the auction to add.
 	 * @param theUser the nonprofit contact associated with the auction.
 	 */
-	void addAuction(Auction theAuction, NonProfitContact theUser) throws IllegalArgumentException;
+	void addAuction(Auction theAuction, NonProfitContact theUser) 
+			throws IllegalArgumentException;
 }

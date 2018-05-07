@@ -36,7 +36,8 @@ public class NewBidRequest {
 	 * @param theItem that will be associated with the new bid request.
 	 * @param theAmount that will be associated with the new bid request.
 	 */
-	public NewBidRequest(Bidder theBidder, Auction theAuction, AuctionItem theItem, BigDecimal theAmount) {
+	public NewBidRequest(Bidder theBidder, Auction theAuction,
+			AuctionItem theItem, BigDecimal theAmount) {
 		myBidder = theBidder;
 		myAuction = theAuction;
 		myItem = theItem;

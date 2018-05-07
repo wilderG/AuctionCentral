@@ -10,7 +10,8 @@ import model.AuctionCalendar;
 import model.User;
 
 /**
- * Stores an AuctionCalendar and a collection of Users. If the provided filename
+ * Stores an AuctionCalendar and a collection of Users. 
+ * If the provided filename
  * does not exist then an empty file will be created. 
  * 
  * @author Jared Malone (5/3/2018)
