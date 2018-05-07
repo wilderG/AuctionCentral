@@ -43,6 +43,7 @@ public class mainDriver {
 	private static void nonProfitContactScreen(final NonProfitContact theUser,
 			final AuctionManager theManager, Scanner theScanner) {
 		int option;
+		final int mainMenuMaxOptions = 4;
 		
 		do {
 			System.out.println("\nMAIN MENU:");
@@ -52,7 +53,7 @@ public class mainDriver {
 			System.out.println("  3. Modify auction inventory");
 			System.out.println("  4. Logout");
 			System.out.print("Choice: ");
-			option = getNextInt(4);
+			option = getNextInt(mainMenuMaxOptions);
 			
 			if (option == 1) {
 				ViewAuction viewAuctions = new ViewAuction();
@@ -156,14 +157,14 @@ public class mainDriver {
 		ViewItems viewItems = new ViewItems();
 		ViewAuction viewAuctions = new ViewAuction();
 
-		
+		final int mainMenuOptions = 3;
 		do {
 			System.out.println("\nMAIN MENU:");
 			System.out.println("  1. Search for auctions to bid on");
 			System.out.println("  2. View all of my bids");
 			System.out.println("  3. Logout");
 			System.out.print("Choice: ");
-			option = getNextInt(3);
+			option = getNextInt(mainMenuOptions);
 			
 			if (option == 1) {
 				// call auction view passing

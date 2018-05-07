@@ -57,8 +57,8 @@ public class ViewAuction {
 		
 		if (auctionCollection.isEmpty()) {
 			System.out.println("The Auction list is empty");
-			System.out.println("Please enter 0 to go back to the main menu");
-			return mainDriver.getNextInt(0);
+			System.out.println("Enter any key to go back to the main menu");
+			theScanner.next();
 		}
 		
 		Iterator<Auction> iterator = auctionCollection.iterator();
@@ -121,8 +121,8 @@ public class ViewAuction {
 			Auction auction = iterator.next();
 			System.out.print("  " + (count + 1) + ". ");
 //			Auction 1 with Non-Prof A: (4 bid on items) April 21, 2018
-			System.out.println("Auction " +
-(count + 1) + " with "+ auction.getName() + ": " + 
+			System.out.println("Auction " + (count + 1) + " with "+ 
+			        auction.getName() + ": " + 
 			"(" + auction.getAllItemsWithBidder(theUser).size()
 			+ " bid on items) " 
 					+ mainDriver.formatDate(auction.getDate()));
