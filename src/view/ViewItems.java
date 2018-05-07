@@ -10,6 +10,7 @@ import model.Auction;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
+import sun.net.www.protocol.http.AuthenticationInfo;
 
 public class ViewItems {
 
@@ -26,7 +27,7 @@ public class ViewItems {
 		System.out.println("Would you like to place a bid? \n"
 				+ "(If so, enter the number corresponding to an item. \n"
 				+ " Otherwise, enter 0)\n");
-		System.out.print("Choice: ");
+		
 		return theScanner.nextInt();
 		
 	}
@@ -51,6 +52,7 @@ public class ViewItems {
 	}
 	
 	public void showBiddersItemsForAllAuctions(Scanner theScanner, Bidder theUser) {
+		int count = 0;
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 
 		for (Iterator<Auction> i= auctionCollection .iterator(); i.hasNext();) {
@@ -84,7 +86,7 @@ public class ViewItems {
 	public void showBiddersItems(Scanner theScanner, Bidder theUser, int theAuctionIndex) {
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 		Auction[] indexedAuctions = auctionCollection.toArray(new Auction[auctionCollection.size()]);
-		Auction auction = indexedAuctions[theAuctionIndex - 1];
+		Auction auction = indexedAuctions[theAuctionIndex];
 		
 		Collection<AuctionItem> auctionItemCollection = auction.getAllItemsWithBidder(theUser);
 		AuctionItem[] indexedItems = auctionItemCollection.toArray(new AuctionItem[auctionItemCollection.size()]);
