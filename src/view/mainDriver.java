@@ -163,15 +163,17 @@ public class mainDriver {
 				theManager.getAvailableAuctions(theUser);
 				int userItemChoice = 0;
 				int auctionUserChoice = viewAuctions.showAllAuctions(scanner, theUser, theManager);
-				int itemChoice = 0;
+				Auction theChosenAuction = null;
 				if (auctionUserChoice != 0) {
-					Auction theChosenAuction = getNewAuctionForUserFromResponse(theUser, auctionUserChoice, theManager);
-					itemChoice = viewItems.showItems(scanner, theChosenAuction);					
+					theChosenAuction = getNewAuctionForUserFromResponse(theUser, auctionUserChoice, theManager);
+					userItemChoice = viewItems.showItems(scanner, theChosenAuction);					
 				}
 				
-				if (itemChoice != 0) {
+				if (userItemChoice != 0) {
 					// Show bid menu
-					
+					ViewBidMenu viewBidMenu = new ViewBidMenu();
+					AuctionItem chosenItem = getChosenItemUserWantsToBidOn(theChosenAuction, userItemChoice);
+					viewBidMenu.placeBid(theUser, chosenItem, scanner, theManager, theChosenAuction);
 				}
 		
 				
@@ -281,6 +283,12 @@ public class mainDriver {
 	private static Auction getNewAuctionForUserFromResponse(User theUser, int theResponse, AuctionManager theManager) {
 		Auction[] auctions = theManager.getAvailableAuctions((Bidder) theUser).toArray(new Auction[theUser.getMyAuctions().size()]);
 		return auctions[theResponse - 1];
+	}
+	
+	private static AuctionItem getChosenItemUserWantsToBidOn(Auction theChosenAuction, int theItemChoice) {
+		Collection<AuctionItem> theItems = theChosenAuction.getAllItems();
+		AuctionItem[] indexedItems = theItems.toArray(new AuctionItem[theItems.size()]);
+		return indexedItems[theItemChoice - 1];
 	}
 
 	public static int getNextInt(final int theMax) {

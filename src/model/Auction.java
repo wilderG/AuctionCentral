@@ -95,7 +95,7 @@ public final class Auction implements Serializable {
 			throw new IllegalArgumentException("Bidder is not allowed to bid on this auction.");
 		}
 		
-		if (theBid.getAmount().compareTo(theBid.getAuctionItem().
+		if (theBid.getValue().compareTo(theBid.getAuctionItem().
 				getMinimumAcceptableBidValue()) < 0) {
 			throw new IllegalArgumentException(
 					"This bid is below the minimum accepted bid for the item.");
