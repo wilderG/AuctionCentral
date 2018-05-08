@@ -18,7 +18,7 @@ import model.NonProfitContact;
  * @author Steven Golob 
  * @version May 6, 2018
  */
-public class auctionRequest {
+public class AuctionRequest {
     
     /** The nonprofit attempting to submit an auction request. */
     private final NonProfitContact myNonprof;
@@ -36,7 +36,7 @@ public class auctionRequest {
      * @param theContact the nonprofit attempting to submit a request
      * @param theManager the object in charge of scheduling auctions
      */
-    public auctionRequest(NonProfitContact theContact, AuctionManager theManager) {
+    public AuctionRequest(NonProfitContact theContact, AuctionManager theManager) {
         myNonprof = theContact;
         myManager = theManager;
         stdin = new Scanner(System.in);

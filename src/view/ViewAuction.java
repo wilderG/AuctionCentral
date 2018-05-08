@@ -73,7 +73,7 @@ public class ViewAuction {
 				+ " number for which you would like to view items\n"
 				+ "(Enter 0 to return to the main menu)");
 	
-		return mainDriver.getNextInt(auctionCollection.size());
+		return MainDriver.getNextInt(auctionCollection.size());
 	}
 	
 	private void bidderIntroMessage() {
@@ -122,14 +122,14 @@ public class ViewAuction {
 			        auction.getName() + ": " + 
 			"(" + auction.getAllItemsWithBidder(theUser).size()
 			+ " bid on items) " 
-					+ mainDriver.formatDate(auction.getDate()));
+					+ MainDriver.formatDate(auction.getDate()));
 		}
 		System.out.println("To return to the main menu enter 0");
 //		System.out.println("Select an auction number
 //		for which you would like to view items\n"
 //				+ "(Enter 0 to return to the main menu)");
 	
-		return mainDriver.getNextInt(auctionCollection.size());
+		return MainDriver.getNextInt(auctionCollection.size());
 	}
 
 }

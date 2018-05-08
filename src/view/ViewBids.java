@@ -28,6 +28,6 @@ public class ViewBids {
 				+ " I have placed bids");
 		System.out.println("  2. View all items that I have placed bids on");
 		System.out.print("Choice: ");
-		return mainDriver.getNextInt(maxChoices);
+		return MainDriver.getNextInt(maxChoices);
 	}
 }

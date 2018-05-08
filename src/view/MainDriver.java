@@ -24,12 +24,12 @@ import model.User;
  * @author Yohei Sato
  * @version 5/8/2018
  */
-public class mainDriver {
+public class MainDriver {
 
 	private static Scanner input = new Scanner(System.in);
 	
 	/** This class should not be constructed. **/
-	private mainDriver() {}
+	private MainDriver() {}
 	
 	public static void main(String[] theArgs) {
 		showWelcomeMessage();
@@ -69,7 +69,7 @@ public class mainDriver {
 			} 
 			
 			if (option ==2) {
-			    new auctionRequest(theUser, theManager);
+			    new AuctionRequest(theUser, theManager);
 			} 
 			
 			if(option ==3) {
@@ -181,27 +181,32 @@ public class mainDriver {
 			} 
 			
 			if (option == 2) {
-				ViewBids viewBids = new ViewBids();
-				int userViewChoice = 0;
-				int userAuctionChoice = 0;
-				userViewChoice = viewBids.viewOptions(scanner);
-				switch (userViewChoice) {
-				case 1:
-					userAuctionChoice = viewAuctions.showBiddersAuctions(scanner, theUser);
-					break;
-				case 2:
-					viewItems.showBiddersItemsForAllAuctions(scanner, theUser);
-					break;
-				default:
-					break;
-				}
 				
-				if (userAuctionChoice != 0) {
-					viewItems.showBiddersItems(scanner, 
-							theUser, userAuctionChoice);
+				if (theUser.getMyAuctions().isEmpty()) {
+					System.out.println("You have no bids to view.");
+				} else {
+					ViewBids viewBids = new ViewBids();
+					int userViewChoice = 0;
+					int userAuctionChoice = 0;
+					userViewChoice = viewBids.viewOptions(scanner);
+					switch (userViewChoice) {
+					case 1:
+						userAuctionChoice = viewAuctions.showBiddersAuctions(scanner, theUser);
+						break;
+					case 2:
+						viewItems.showBiddersItemsForAllAuctions(scanner, theUser);
+						break;
+					default:
+						break;
+					}
+					
+					if (userAuctionChoice != 0) {
+						viewItems.showBiddersItems(scanner, 
+								theUser, userAuctionChoice);
+					}
 				}
-				
-			} 
+			}
+			
 		} while(option!=3);
 		endSession();
  	}

@@ -4,7 +4,7 @@ import model.Auction;
 
 import model.Bidder;
 
-public class auctionBidSearch {
+public class AuctionBidSearch {
 	Bidder bidder = new Bidder("Alex", "Alex");
 
 	Auction test = new Auction(null, 0, 0, "Some non profit");
@@ -15,7 +15,7 @@ public class auctionBidSearch {
 		System.out.println("1.View all auctions in which I have placed bids");
 		System.out.println("2.View all items that I have placed bids on");
 		System.out.print("Choice: ");
-		int name = mainDriver.getNextInt(maxChoices);
+		int name = MainDriver.getNextInt(maxChoices);
 		if (name == 1) {
 			System.out.println(test.getAllItemsWithBidder(bidder));// we need to pass proper variables.
 			

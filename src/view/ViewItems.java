@@ -48,7 +48,7 @@ public class ViewItems {
 				+ " Otherwise, enter 0)\n");
 
 		System.out.print("Choice: ");
-		return mainDriver.getNextInt(items.size());
+		return MainDriver.getNextInt(items.size());
 		
 	}
 	/**
@@ -59,7 +59,7 @@ public class ViewItems {
 	 */
 	public void showItemsForNonProfAuction
 	(Scanner theScanner, Auction theAuction) {
-		String theDate = mainDriver.formatDate(theAuction.getDate());
+		String theDate = MainDriver.formatDate(theAuction.getDate());
 		System.out.println("Items for your auction on " + theDate + ":");
 		AuctionItem[] indexedItems = 
 				theAuction.getAllItems().toArray(
@@ -94,7 +94,7 @@ public class ViewItems {
 			HashSet<Bid> myBids = auction.getMyBids(theUser);
 
 			System.out.println("   " + auction.getName() + ", "
-			+ mainDriver.formatDate(auction.getDate()));
+			+ MainDriver.formatDate(auction.getDate()));
 
 			int count2 = 1;
 
@@ -142,7 +142,7 @@ public class ViewItems {
 				auctionItemCollection.toArray(
 						new AuctionItem[auctionItemCollection.size()]);
 		System.out.println(auction.getName() + " (" +
-						mainDriver.formatDate(auction.getDate()) + "):\n");
+						MainDriver.formatDate(auction.getDate()) + "):\n");
 		for (int count = 0; count < indexedItems.length; count++) {
 			AuctionItem item = indexedItems[count];
 			System.out.println("    Item " + (count + 1)
