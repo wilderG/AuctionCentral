@@ -27,7 +27,6 @@ public class ViewBids {
 		System.out.println("  1. View all auctions in which"
 				+ " I have placed bids");
 		System.out.println("  2. View all items that I have placed bids on");
-		System.out.print("Choice: ");
 		return MainDriver.getNextInt(maxChoices);
 	}
 }
