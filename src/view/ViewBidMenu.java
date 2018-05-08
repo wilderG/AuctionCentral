@@ -6,18 +6,14 @@ import java.util.Scanner;
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
-import model.Bid;
 import model.Bidder;
 import model.NewBidRequest;
 
 /**
  * Displaying the Bid menu
  * 
- * @author Jared Malone
  * @author Jim Rosales
- * @author Steven Kenneth Golob
  * @author Wilder Emanuel Garcia Y Garcia
- * @author Yohei Sato
  * @version 5/8/2018
  */
 
@@ -66,8 +62,8 @@ public class ViewBidMenu {
 				new NewBidRequest(theUser, theAuction, theItem, bidAmount);
 		theManager.processNewBid(theRequest);
 		System.out.println("Bid Successfully placed!");
-		System.out.println("Press any key to continue");
-		theScanner.next();
+		System.out.println("Press enter to continue");
+		theScanner.nextLine();
 	}
 
 }

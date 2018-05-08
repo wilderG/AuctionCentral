@@ -84,7 +84,6 @@ public class ViewItems {
 	 */
 	public void showBiddersItemsForAllAuctions
 	   (Scanner theScanner, Bidder theUser) {
-		int count = 0;
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 
 		for (Iterator<Auction> i=
@@ -118,8 +117,8 @@ public class ViewItems {
 			System.out.println();
 		}
 
-		System.out.print("Enter any key to go back: ");	
-		theScanner.next();
+		System.out.print("Press enter to go back.");	
+		theScanner.nextLine();
 	}
 	/**
 	 * showing bidder items.
@@ -154,7 +153,7 @@ public class ViewItems {
 					auction.getBidForItem(theUser, item).getValue());
 		}
 
-		System.out.println("Enter any key to go back: ");	
-		theScanner.next();
+		System.out.println("Press enter to go back: ");	
+		theScanner.nextLine();
 	}
 }

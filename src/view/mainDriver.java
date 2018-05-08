@@ -15,7 +15,7 @@ import model.NonProfitContact;
 import model.User;
 
 /**
- * The Auction Central program...
+ * Main driver for the AuctionCentral application.
  * 
  * @author Jared Malone
  * @author Jim Rosales
@@ -66,10 +66,6 @@ public class mainDriver {
 					ViewItems viewItems = new ViewItems();
 					viewItems.showItemsForNonProfAuction(theScanner, auction);
 				}
-				// get an auction from view screen
-				
-				// call item view screen
-				
 			} 
 			
 			if (option ==2) {
@@ -100,13 +96,11 @@ public class mainDriver {
 					System.out.println("(You may enter up to " + 
 					 futureAuction.getAvailableSpace() + " more items)");
 						
-					//NewItemRequest n
+					//NewItemRequest
 					String itemDescription;
 					Double itemMinimumBid = 0.0;
 					
-					//get input
 					input.nextLine();
-					
 					System.out.print("Please enter the new item's name: ");
 					itemDescription = input.nextLine();
 					boolean invalidChoice = true;
@@ -120,8 +114,6 @@ public class mainDriver {
 									"Invalid input please try again.");
 						}
 					} while (invalidChoice);
-					
-					
 					
 					
 					AuctionItem newItem = 
@@ -159,7 +151,6 @@ public class mainDriver {
 			System.out.println("  1. Search for auctions to bid on");
 			System.out.println("  2. View all of my bids");
 			System.out.println("  3. Logout");
-			System.out.print("Choice: ");
 			option = getNextInt(mainMenuOptions);
 			
 			if (option == 1) {
@@ -220,6 +211,7 @@ public class mainDriver {
 	 * Prompts the user to login and determines if user is a Bidder or
 	 * a NonProfitContact. 
 	 * @param theManager instance of AuctionManager
+	 * @author Jared Malone
 	 */
 	private static void userLogon(final AuctionManager theManager) {
 		User user = null;
@@ -245,20 +237,30 @@ public class mainDriver {
 		}
 	}
 	
-	
+	/**
+	 * Displays the welcome message when the program is executed.
+	 */
 	private static void showWelcomeMessage() {
 		System.out.println("Welcome to Auction Central!");
 		System.out.println("--------------------------------");
 		System.out.println("Today is " + formatDate(LocalDate.now()));
 	}
 	
-	
+	/**
+	 * Displays an exit message and terminates the program.
+	 */
 	private static void endSession() {
 		System.out.println("Session has ended.");
 		System.exit(0);
 	}
 	
-	
+	/**
+	 * Returns a string value containing the formatted date. The format follows
+	 * the pattern of "January 1, 2018".
+	 * @param theDate LocalDate instance
+	 * @return formatted String
+	 * @author Jared Malone
+	 */
 	public static String formatDate(final LocalDate theDate) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
 		return theDate.format(formatter);
@@ -289,6 +291,13 @@ public class mainDriver {
 		return indexedItems[theItemChoice - 1];
 	}
 
+	/**
+	 * Prompts the user to enter a value. Valid input is an integer between
+	 * 0 and theMax. Any other input prompts the user to try again.
+	 * @param theMax the maximum integer
+	 * @return user selection between 0 and theMax
+	 * @author Jared Malone
+	 */
 	public static int getNextInt(final int theMax) {
 		int result = -1;
 		

@@ -15,12 +15,8 @@ import model.User;
 
 /**
  * Displaying some data when users do certain actions.
- * 
- * @author Jared Malone
  * @author Jim Rosales
- * @author Steven Kenneth Golob
  * @author Wilder Emanuel Garcia Y Garcia
- * @author Yohei Sato
  * @version 5/8/2018
  */
 public class ViewAuction {
@@ -58,8 +54,8 @@ public class ViewAuction {
 		
 		if (auctionCollection.isEmpty()) {
 			System.out.println("The Auction list is empty");
-			System.out.println("Enter any key to go back to the main menu");
-			theScanner.next();
+			System.out.println("Enter enter to go back to the main menu");
+			theScanner.nextLine();
 		}
 		
 		Iterator<Auction> iterator = auctionCollection.iterator();
@@ -109,8 +105,8 @@ public class ViewAuction {
 		Collection<Auction> auctionCollection = theUser.getMyAuctions();
 		if (auctionCollection.isEmpty()) {
 			System.out.println("It looks like you haven't placed any bids in an auction");
-			System.out.println("Please press any key and enter to return to the previous screen");
-			theScanner.next();
+			System.out.println("Please enter to return to the previous screen");
+			theScanner.nextLine();
 			return 0;
 		}
 		
@@ -129,7 +125,6 @@ public class ViewAuction {
 					+ mainDriver.formatDate(auction.getDate()));
 		}
 		System.out.println("To return to the main menu enter 0");
-		System.out.print("Choice: ");
 //		System.out.println("Select an auction number
 //		for which you would like to view items\n"
 //				+ "(Enter 0 to return to the main menu)");
