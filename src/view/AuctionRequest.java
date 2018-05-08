@@ -133,13 +133,14 @@ public class AuctionRequest {
                     + "constraints. Please check "
                     + "back later to see if new auctions \n"
                     + "are available. We apologize for the inconvenience.");
-        } else if (!myNonprof.isDateOneYearAfterPreviousAuction(
+        } else if (!myNonprof.isDateSpecifiedTimeAfterPreviousAuction(
              LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))) {
             System.out.println("We're sorry, "
             		+ "but there is already an auction for \n"
                     + "your organization (on " +
-            		myNonprof.getLatestDate().toString()
-                    + ") within 1 year from any possible date you \n"
+            		myNonprof.getLatestDate().toString() + ") within "
+        		        + AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF
+        		        + "months from any possible date you \n"
                     + "may schedule. AuctionCentral, "
                     + "as policy, only accepts one \n"
                     + "auction per organization per year.");
@@ -156,7 +157,7 @@ public class AuctionRequest {
 	    LocalDate latestAvailableDateInCalendar = 
 	            LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
 	    return myManager.isNewAuctionRequestAllowed() 
-	            && myNonprof.isDateOneYearAfterPreviousAuction
+	            && myNonprof.isDateSpecifiedTimeAfterPreviousAuction
 	            (latestAvailableDateInCalendar);
     }
 
@@ -170,15 +171,16 @@ public class AuctionRequest {
 	 */
     private LocalDate getSoonestPossibleDate() {
         LocalDate today = LocalDate.now();
-        LocalDate oneYearFromPrevAuction = 
-        		myNonprof.getLatestDate().plusYears(1);
+        LocalDate specifiedTimeFromPrevAuction = 
+        		myNonprof.getLatestDate().plusMonths(
+        		        AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF);
         LocalDate minDaysOutFromToday =
         		today.plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
         LocalDate latestDate;
-        if (minDaysOutFromToday.isAfter(oneYearFromPrevAuction))
+        if (minDaysOutFromToday.isAfter(specifiedTimeFromPrevAuction))
             latestDate = minDaysOutFromToday;
         else 
-            latestDate = oneYearFromPrevAuction;
+            latestDate = specifiedTimeFromPrevAuction;
         return latestDate;
     }
 }

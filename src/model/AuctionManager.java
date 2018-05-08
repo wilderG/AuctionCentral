@@ -92,8 +92,9 @@ public class AuctionManager implements Manager {
 		
 		if (!sponsor.isDateForProposedAuctionValid(newAuction)) {
 			throw new IllegalArgumentException(
-					"You may not add an auction on this date."
-			        + "It is within one year of your latest auction.");
+					"You may not add an auction on this date. It is within "
+			        + AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF
+					        + "months of your latest auction.");
 		}
 		
 		myCalendar.submitAuction(newAuction, auctionDate.getDayOfMonth(), 
