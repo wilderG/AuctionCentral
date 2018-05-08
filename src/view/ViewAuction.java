@@ -69,8 +69,8 @@ public class ViewAuction {
 			}
 		}
 		
-		System.out.println("Select an auction"
-				+ " number for which you would like to view items\n"
+		System.out.println("\nSelect an auction"
+				+ " number for which you would like to view items.\n"
 				+ "(Enter 0 to return to the main menu)");
 	
 		return MainDriver.getNextInt(auctionCollection.size());
