@@ -196,13 +196,29 @@ public class AuctionCalendar implements Serializable {
         return newDate;
     }   
     
-    public void forceAddAuctionInThePast(Auction theAuction,
-    		int theYear, int theMonth, int theDay) {
-    		myCurrentDate = LocalDate.of(theYear, theMonth, theDay);
-		LocalDate pastDate = theAuction.getDate();
-		submitAuction(theAuction, pastDate.getDayOfMonth(), 
-				pastDate.getMonthValue(), pastDate.getYear());
-		myCurrentDate = LocalDate.now();
+//    public void submitAuction2(final Auction theAuction, 
+//            final int theDay, final int theMonth, final int theYear) 
+//                           throws IllegalArgumentException {
+//        AuctionDate dateForAuction = getAuctionDate(theDay, theMonth, theYear);
+//        if (!isAllowingNewAuction())
+//            throw new IllegalArgumentException(
+//                    "Already at maximum amount of auctions!");
+//        if (!isDateWithinEligableRange(dateForAuction))
+//            throw new IllegalArgumentException("Specified date (" 
+//                                + dateForAuction.format() 
+//                                + ") out of eligable range");
+//        dateForAuction.addAuction(theAuction);
+//        myNumberOfFutureAuctions++;
+//    }
+    
+    public void forceAddAuctionInThePast(Auction theAuction) {
+        LocalDate pastDate = theAuction.getDate();
+        AuctionDate dateForAuction = getAuctionDate(pastDate.getDayOfMonth(),
+                                pastDate.getMonthValue(), pastDate.getYear());
+        dateForAuction.addAuction(theAuction);
+        //myNumberOfFutureAuctions++;
+
+        myCurrentDate = LocalDate.now();
     }
    
     

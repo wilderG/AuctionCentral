@@ -157,7 +157,7 @@ public class ViewItems {
 					MainDriver.formatCurrency(bidValue));
 		}
 
-		System.out.println("\nPress enter to go back.");	
+		System.out.println("\nEnter any key to go back.");	
 		theScanner.nextLine();
 	}
 }

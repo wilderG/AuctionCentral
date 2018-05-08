@@ -141,9 +141,9 @@ public class DemoData {
 		NonProfitContact nonProfit15 = new NonProfitContact("nonprof15",
 				"ACLU");
 		NonProfitContact nonProfit16 = new NonProfitContact("nonprof16",
-				"Doctors Without Borders");
+				"The Old Fund");
 		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17",
-				"Sierra Club");
+				"The Newer Old Fund");
 
 		Bidder bidder1 = new Bidder("bidder1", "Peter Piper");
 		Bidder bidder2 = new Bidder("bidder2", "Jane Doe");
@@ -302,7 +302,10 @@ public class DemoData {
 				10, 4, "N\\A");
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
 				10, 4, "N\\A");
-		
+        Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
+                10, 4, "The Old Fund", new HashSet<AuctionItem>(), new HashMap<Bidder, HashSet<Bid>>());
+        Auction auction3333 = new Auction(LocalDate.of(2017, 5, 9),
+                10, 4, "The Newer Old Fund", new HashSet<AuctionItem>(), new HashMap<Bidder, HashSet<Bid>>());
 		
 		
 		
@@ -338,6 +341,8 @@ public class DemoData {
 		nonProfit13.addAuction(auction7);
         nonProfit14.addAuction(auction8);
         nonProfit15.addAuction(auction9);
+        nonProfit16.addAuction(auction2222);
+        nonProfit17.addAuction(auction3333);
 		
 		
 		
@@ -350,10 +355,12 @@ public class DemoData {
         LocalDate auction8Date = auction8.getDate();
         LocalDate auction9Date = auction9.getDate();
 		
-		calendar.forceAddAuctionInThePast(auction0, 2018, 3, 20);
-		calendar.forceAddAuctionInThePast(auction1, 2017, 5, 15);
-		calendar.forceAddAuctionInThePast(auction2, 2018, 4, 20);
-		calendar.forceAddAuctionInThePast(auction3, 2018, 4, 20);
+		calendar.forceAddAuctionInThePast(auction0);
+		calendar.forceAddAuctionInThePast(auction1);
+		calendar.forceAddAuctionInThePast(auction2);
+		calendar.forceAddAuctionInThePast(auction3);
+        calendar.forceAddAuctionInThePast(auction2222);
+        calendar.forceAddAuctionInThePast(auction3333);
 		calendar.submitAuction(auction4, auction4Date.getDayOfMonth(),
 				auction4Date.getMonthValue(), auction4Date.getYear());
 		calendar.submitAuction(auction5, auction5Date.getDayOfMonth(),
