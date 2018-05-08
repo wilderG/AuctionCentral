@@ -16,7 +16,7 @@ import model.NonProfitContact;
 /**
  * DemoData class
  * 
- * @author 
+ * @author Jim Rosales
  *
  */
 
