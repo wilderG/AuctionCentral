@@ -40,14 +40,14 @@ public class DemoData {
 		
 		AuctionItem item1 = new AuctionItem(BigDecimal.valueOf(20.00), 
 				"Bowling Ball");
-		AuctionItem item2 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item2 = new AuctionItem(BigDecimal.valueOf(300.00),
 				"Canoe");
 		auction1Items.add(item1);
 		auction1Items.add(item2);
 		
-		AuctionItem item3 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item3 = new AuctionItem(BigDecimal.valueOf(35.00),
 				"Pencil");
-		AuctionItem item4 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item4 = new AuctionItem(BigDecimal.valueOf(83.00),
 				"Coffee cup with Ed sullivan on it");
 		auction2Items.add(item3);
 		auction2Items.add(item4);
@@ -68,34 +68,34 @@ public class DemoData {
 		auction3Items.add(item8);
 		auction3Items.add(item9);
 		
-		AuctionItem item10 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item10 = new AuctionItem(BigDecimal.valueOf(8.00),
 				"A Golf ball");
-		AuctionItem item11 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item11 = new AuctionItem(BigDecimal.valueOf(0.01),
 				"An IHeartNewYork T-shirt");
 		auction4Items.add(item10);
 		auction4Items.add(item11);
 		
-		AuctionItem item12 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item12 = new AuctionItem(BigDecimal.valueOf(500.00),
 				"A European Carry-all");
 		auction5Items.add(item12);
 		
-		AuctionItem item13 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item13 = new AuctionItem(BigDecimal.valueOf(1.00),
 				"A Big Salad");
-		AuctionItem item14 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item14 = new AuctionItem(BigDecimal.valueOf(18.00),
 				"Gum");
-		AuctionItem item15 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item15 = new AuctionItem(BigDecimal.valueOf(4000.00),
 				"A Bow-staff");
-		AuctionItem item16 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item16 = new AuctionItem(BigDecimal.valueOf(10.00),
 				"A picture of a picture");
-		AuctionItem item17 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item17 = new AuctionItem(BigDecimal.valueOf(75.00),
 				"Fish oil");
-		AuctionItem item18 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item18 = new AuctionItem(BigDecimal.valueOf(10.00),
 				"Thingamajig");
-		AuctionItem item19 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item19 = new AuctionItem(BigDecimal.valueOf(10000.00),
 				"Whosywhatsie");
-		AuctionItem item20 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item20 = new AuctionItem(BigDecimal.valueOf(875000.00),
 				"Time Machine");
-		AuctionItem item21 = new AuctionItem(BigDecimal.valueOf(20.00),
+		AuctionItem item21 = new AuctionItem(BigDecimal.valueOf(12.00),
 				"A glow stick");
 		auction6Items.add(item13);
 		auction6Items.add(item14);

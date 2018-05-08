@@ -39,8 +39,10 @@ public class ViewItems {
 				new AuctionItem[items.size()]);
 		for (int count = 0; count < items.size(); count++) {
 			AuctionItem item = indexedItems[count];
+			BigDecimal minValue = item.getMinimumAcceptableBidValue();
 			System.out.println("\t" + (count + 1) + 
-					". " + item.getDescription());
+					". " + item.getDescription() + "\n\t     Minimum Bid: " +
+					MainDriver.formatCurrency(minValue));
 		}
 		
 		System.out.println("Would you like to place a bid? \n"
