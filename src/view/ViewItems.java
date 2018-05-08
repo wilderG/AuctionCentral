@@ -47,7 +47,6 @@ public class ViewItems {
 				+ "(If so, enter the number corresponding to an item. \n"
 				+ " Otherwise, enter 0)\n");
 
-		System.out.print("Choice: ");
 		return MainDriver.getNextInt(items.size());
 		
 	}
@@ -69,11 +68,11 @@ public class ViewItems {
 			AuctionItem item = indexedItems[count];
 			System.out.println(item.getDescription() + " ("
 			+ item.getBidCount() + " bids)");
-			System.out.println("\tMinimum bid set at: $" +
-			item.getMinimumAcceptableBidValue());
+			System.out.println("\tMinimum bid set at: " +
+			MainDriver.formatCurrency(item.getMinimumAcceptableBidValue()));
 		}
-		System.out.println("\nEnter any key to return to the main menu: ");
-		theScanner.next();
+		System.out.println("\nPress enter to return to the main menu: ");
+		theScanner.nextLine();
 
 	}
 	/**
@@ -100,19 +99,20 @@ public class ViewItems {
 
 			for (Iterator<AuctionItem> j = 
 					auctionItems .iterator(); j.hasNext(); ) {
-				BigDecimal myBidValue = BigDecimal.ZERO;
 				AuctionItem auctionItem =  j.next();
+				BigDecimal bidValue = BigDecimal.ZERO;
+				BigDecimal minValue = auctionItem.getMinimumAcceptableBidValue();
 				for(Iterator <Bid> p = myBids.iterator(); p.hasNext();) {	
 					Bid bids = p.next();
 					if(bids.getAuctionItem().equals(auctionItem)) {
-						myBidValue = bids.getValue();
+						bidValue = bids.getValue();
 					}		
 				}
 				System.out.println("      Item " + count2++ +
 						": " + auctionItem.getDescription());
-				System.out.println("          Minimum bid: $"+
-						auctionItem.getMinimumAcceptableBidValue()
-				+"\t\tMy bid: $" + myBidValue );
+				System.out.println("          Minimum bid: "+
+						MainDriver.formatCurrency(minValue)
+				+"\t\tMy bid: " + MainDriver.formatCurrency(bidValue));
 			}
 			System.out.println();
 		}
@@ -145,15 +145,17 @@ public class ViewItems {
 						MainDriver.formatDate(auction.getDate()) + "):\n");
 		for (int count = 0; count < indexedItems.length; count++) {
 			AuctionItem item = indexedItems[count];
+			BigDecimal bidValue = auction.getBidForItem(theUser, item).getValue();
+			BigDecimal minValue = item.getMinimumAcceptableBidValue(); 
 			System.out.println("    Item " + (count + 1)
 					+ ": " + item.getDescription());
-			System.out.println("        Minimum bid: $" + 
-					item.getMinimumAcceptableBidValue() + 
-					"\t My bid: $" +
-					auction.getBidForItem(theUser, item).getValue());
+			System.out.println("        Minimum bid: " + 
+					MainDriver.formatCurrency(minValue) + 
+					"\t My bid: " +
+					MainDriver.formatCurrency(bidValue));
 		}
 
-		System.out.println("Press enter to go back: ");	
+		System.out.println("Press enter to go back.");	
 		theScanner.nextLine();
 	}
 }

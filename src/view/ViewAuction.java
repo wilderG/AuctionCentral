@@ -117,7 +117,6 @@ public class ViewAuction {
 		for (int count = 0; count < auctionCollection.size(); count++) {
 			Auction auction = iterator.next();
 			System.out.print("  " + (count + 1) + ". ");
-//			Auction 1 with Non-Prof A: (4 bid on items) April 21, 2018
 			System.out.println("Auction " + (count + 1) + " with "+ 
 			        auction.getName() + ": " + 
 			"(" + auction.getAllItemsWithBidder(theUser).size()
@@ -125,10 +124,6 @@ public class ViewAuction {
 					+ MainDriver.formatDate(auction.getDate()));
 		}
 		System.out.println("To return to the main menu enter 0");
-//		System.out.println("Select an auction number
-//		for which you would like to view items\n"
-//				+ "(Enter 0 to return to the main menu)");
-	
 		return MainDriver.getNextInt(auctionCollection.size());
 	}
 

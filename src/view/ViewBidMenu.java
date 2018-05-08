@@ -30,8 +30,8 @@ public class ViewBidMenu {
 	public void placeBid(Bidder theUser, AuctionItem theItem,
 		Scanner theScanner, AuctionManager theManager, Auction theAuction) {
 		System.out.println("Bid Menu for Item: " + theItem.getDescription());
-		System.out.println("     Minimum bid: $" +
-		theItem.getMinimumAcceptableBidValue());
+		System.out.println("     Minimum bid: " +
+			MainDriver.formatCurrency(theItem.getMinimumAcceptableBidValue()));
 		System.out.println();
 		System.out.println("What is the bid amount "
 				+ "you would like to place for the Item?");

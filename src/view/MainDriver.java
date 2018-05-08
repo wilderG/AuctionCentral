@@ -1,9 +1,11 @@
 package view;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Collection;
+import java.util.Locale;
 import java.util.Scanner;
 
 import model.Auction;
@@ -270,6 +272,19 @@ public class MainDriver {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM d, u");
 		return theDate.format(formatter);
 	}
+	
+	/**
+	 * Returns a string value containing the formatted currency. The format
+	 * uses the local default format of the user's computer.
+	 * @param theAmount to format
+	 * @return the formatted string
+	 * @author Jared Malone
+	 */
+	public static String formatCurrency(final BigDecimal theAmount) {
+		return NumberFormat.getCurrencyInstance(Locale.getDefault()).
+				format(theAmount);
+	}
+	
 	
 	private static Auction getAuctionFromUserResponse(
 			User theUser, int theResponse) {
