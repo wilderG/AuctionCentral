@@ -45,7 +45,7 @@ public class ViewItems {
 					MainDriver.formatCurrency(minValue));
 		}
 		
-		System.out.println("Would you like to place a bid? \n"
+		System.out.println("\nWould you like to place a bid?\n"
 				+ "(If so, enter the number corresponding to an item. \n"
 				+ " Otherwise, enter 0)\n");
 
@@ -157,7 +157,7 @@ public class ViewItems {
 					MainDriver.formatCurrency(bidValue));
 		}
 
-		System.out.println("Press enter to go back.");	
+		System.out.println("\nPress enter to go back.");	
 		theScanner.nextLine();
 	}
 }
