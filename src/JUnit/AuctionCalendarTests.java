@@ -117,7 +117,7 @@ public class AuctionCalendarTests {
 	
 	@Test
 	public void 
-	isDateWithinEligableRange_DayOfMaximumFromCurrentDate_ReturnsTrue() {
+	isDateWithinEligableRange_dayOfMaximumFromCurrentDate_ReturnsTrue() {
 		LocalDate testDate = theCurrentDay.plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
 		
 		AuctionDate auctionDateDayOfMax = 

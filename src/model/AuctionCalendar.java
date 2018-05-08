@@ -32,6 +32,9 @@ public class AuctionCalendar implements Serializable {
     /** Minimum days out that an auction can be scheduled. */
     public static final int MINIMUM_DAYS_OUT = 14;
     
+    /** The number of months between auctions for a nonprofit. */
+    public static final int MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF = 12;
+    
     /** Maximum number of auctions
      *  in the future that can be scheduled at a time. */
     public static final int MAXIMUM_FUTURE_AUCTIONS = 25;

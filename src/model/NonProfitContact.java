@@ -40,7 +40,7 @@ public class NonProfitContact extends User {
 	 * the nonprofits last auction has elapsed. False otherwise.
 	 */
 	public boolean isDateForProposedAuctionValid(Auction theRequestedAuction) {
-		return isDateOneYearAfterPreviousAuction(theRequestedAuction.getDate());
+		return isDateSpecifiedTimeAfterPreviousAuction(theRequestedAuction.getDate());
 	}
 	
 	/**
@@ -48,16 +48,16 @@ public class NonProfitContact extends User {
 	 * one year after the non profits most recent auction.
 	 * @return True if a year has elapsed for the non profits last auction.
 	 */
-	public boolean isDateOneYearAfterPreviousAuction(LocalDate theDate) {
-		LocalDate mostRecentDate = getLatestDate();
+	public boolean isDateSpecifiedTimeAfterPreviousAuction(LocalDate theDate) {
 		
 //		// Found the most recent date that
 //		the non profit had an auction. Add a year to this date
 		// Now theDate has to occur on this 
 //		date of after for it to be a viable date. 
-		mostRecentDate = mostRecentDate.plusYears(1); 
-		return mostRecentDate.isEqual(theDate) ||
-				theDate.isAfter(mostRecentDate);
+		LocalDate latestAuctionDate = getLatestDate().plusMonths(
+		        AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF); 
+		return latestAuctionDate.isEqual(theDate) ||
+				theDate.isAfter(latestAuctionDate);
 	}
 	
 	/**
