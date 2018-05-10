@@ -12,7 +12,7 @@ import java.math.BigDecimal;
  * Class represents a bid that can be placed on an item.
  * @author Yohei Sato
  */
-public class Bid implements Serializable {
+public class Bid implements Serializable, Comparable<Bid> {
 
 	/**
 	 * Generated Serial Version UID
@@ -58,6 +58,15 @@ public class Bid implements Serializable {
 
 	public BigDecimal getAmount() {
 		return null;
+	}
+
+	@Override
+	public int compareTo(Bid theOther) {
+		if (myItem.equals(theOther.myItem)) {
+			return myValue.compareTo(theOther.myValue);
+		} else {
+			return myItem.compareTo(theOther.myItem);
+		}
 	}
 	
 }

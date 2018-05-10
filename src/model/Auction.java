@@ -3,8 +3,8 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * Represents an Auction event. The object contains a collection of Items and
@@ -13,7 +13,7 @@ import java.util.HashSet;
  * @version 5/5/2018
  *
  */
-public final class Auction implements Serializable {
+public final class Auction implements Serializable, Comparable<Auction> {
 
 	/** Generated Serial ID **/
 	private static final long serialVersionUID = -5386584822819727993L;
@@ -28,10 +28,10 @@ public final class Auction implements Serializable {
 	private final LocalDate myDate;
 	
 	/** The collection of items for this auction. **/
-	private HashSet<AuctionItem> myItems;
+	private TreeSet<AuctionItem> myItems;
 	
 	/** The collection of bids for this auction. **/
-	private HashMap<Bidder, HashSet<Bid>> myBids;
+	private TreeMap<Bidder, TreeSet<Bid>> myBids;
 	
 	/**
 	 * 
@@ -50,13 +50,13 @@ public final class Auction implements Serializable {
 		myMaximumItems = theMaxItemCount;
 		myNonProfitName = theNonProfit;
 		myMaximumBidsFromUniqueBidder = theMaxBidCount;
-		myItems = new HashSet<>();
-		myBids = new HashMap<>();
+		myItems = new TreeSet<>();
+		myBids = new TreeMap<>();
 	}
 	
 	
 	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount, String theNonProfit,
-			final HashSet<AuctionItem> theItems, final HashMap<Bidder, HashSet<Bid>> theBids) {
+			final TreeSet<AuctionItem> theItems, final TreeMap<Bidder, TreeSet<Bid>> theBids) {
 		this(theDate, theMaxItemCount, theMaxBidCount, theNonProfit);
 		myItems = theItems;
 		myBids = theBids;
@@ -103,7 +103,7 @@ public final class Auction implements Serializable {
 		
 		// new bidder instantiate empty set of bids
 		if (!myBids.containsKey(theBidder)) {
-			myBids.put(theBidder, new HashSet<>());
+			myBids.put(theBidder, new TreeSet<>());
 		}
 		
 		// check for existing bid and remove
@@ -161,13 +161,12 @@ public final class Auction implements Serializable {
 	 */
 	public Collection<AuctionItem> getAllItemsWithBidder
 	         (final Bidder theBidder) {
-		Collection<AuctionItem> bidderItems = new HashSet<>();
+		Collection<AuctionItem> bidderItems = new TreeSet<>();
 		
 		if (myBids.containsKey(theBidder)) {
-		for (Bid e : myBids.get(theBidder)) {
-			bidderItems.add(e.getAuctionItem());
-
-		}
+			for (Bid e : myBids.get(theBidder)) {
+				bidderItems.add(e.getAuctionItem());
+			}
 		}
 		return bidderItems;
 	}
@@ -184,7 +183,7 @@ public final class Auction implements Serializable {
 		return myMaximumItems - myItems.size();
 	}
 	
-	public HashSet<Bid> getMyBids(final Bidder theBidder) {		
+	public TreeSet<Bid> getMyBids(final Bidder theBidder) {		
 		return myBids.get(theBidder);
 	}
 	
@@ -197,6 +196,16 @@ public final class Auction implements Serializable {
 			}
 		}
 		return bid;
+	}
+
+
+	@Override
+	public int compareTo(Auction theOther) {
+		if (myDate.equals(theOther.myDate)) {
+			return myNonProfitName.compareTo(theOther.myNonProfitName);
+		} else {
+			return myDate.compareTo(theOther.myDate);
+		}
 	}
 	
 }

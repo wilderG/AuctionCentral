@@ -2,8 +2,8 @@ package view;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import backend.StorageIO;
 import model.Auction;
@@ -34,12 +34,12 @@ public class DemoData {
 		AuctionCalendar calendar = storage.getCalendar();
 		
 		// make items
-		HashSet<AuctionItem> auction1Items = new HashSet<>();
-		HashSet<AuctionItem> auction2Items = new HashSet<>();
-		HashSet<AuctionItem> auction3Items = new HashSet<>();
-		HashSet<AuctionItem> auction4Items = new HashSet<>();
-		HashSet<AuctionItem> auction5Items = new HashSet<>();
-		HashSet<AuctionItem> auction6Items = new HashSet<>();
+		TreeSet<AuctionItem> auction1Items = new TreeSet<>();
+		TreeSet<AuctionItem> auction2Items = new TreeSet<>();
+		TreeSet<AuctionItem> auction3Items = new TreeSet<>();
+		TreeSet<AuctionItem> auction4Items = new TreeSet<>();
+		TreeSet<AuctionItem> auction5Items = new TreeSet<>();
+		TreeSet<AuctionItem> auction6Items = new TreeSet<>();
 		
 		AuctionItem item1 = new AuctionItem(BigDecimal.valueOf(20.00), 
 				"Bowling Ball");
@@ -155,33 +155,33 @@ public class DemoData {
 		
 		
 		// Auction 1
-		HashSet<Bid> bidSetbidder1auction1 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder1auction1 = new TreeSet<>();
 		bidSetbidder1auction1.add(new Bid(bidder1, item1,
 				BigDecimal.valueOf(13.00)));
 		bidSetbidder1auction1.add(new Bid(bidder1, item2,
 				BigDecimal.valueOf(5000.00)));
 		
-		HashSet<Bid> bidSetbidder2auction1 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder2auction1 = new TreeSet<>();
 		bidSetbidder2auction1.add(new Bid(bidder2, item1,
 				BigDecimal.valueOf(13.00)));
 		bidSetbidder2auction1.add(new Bid(bidder2, item2,
 				BigDecimal.valueOf(5000.00)));
 		
 		// Auction 2
-		HashSet<Bid> bidSetbidder1auction2 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder1auction2 = new TreeSet<>();
 		bidSetbidder1auction2.add(new Bid(bidder1, item3,
 				BigDecimal.valueOf(35.00)));
 		bidSetbidder1auction2.add(new Bid(bidder1, item4, 
 				BigDecimal.valueOf(100.00)));
 		
-		HashSet<Bid> bidSetbidder2auction2 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder2auction2 = new TreeSet<>();
 		bidSetbidder2auction2.add(new Bid(bidder2, item3,
 				BigDecimal.valueOf(35.00)));
 		bidSetbidder2auction2.add(new Bid(bidder2, item4,
 				BigDecimal.valueOf(100.00)));
 		
 		// Auction 3
-		HashSet<Bid> bidSetbidder1auction3 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder1auction3 = new TreeSet<>();
 		bidSetbidder1auction3.add(new Bid(bidder1, item5,
 				BigDecimal.valueOf(1300.00)));
 		bidSetbidder1auction3.add(new Bid(bidder1, item6,
@@ -191,7 +191,7 @@ public class DemoData {
 		bidSetbidder1auction3.add(new Bid(bidder1, item8,
 				BigDecimal.valueOf(1.00)));
 		
-		HashSet<Bid> bidSetbidder2auction3 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder2auction3 = new TreeSet<>();
 		bidSetbidder2auction3.add(new Bid(bidder2, item5,
 				BigDecimal.valueOf(1300.00)));
 		bidSetbidder2auction3.add(new Bid(bidder2, item6,
@@ -201,7 +201,7 @@ public class DemoData {
 		bidSetbidder2auction3.add(new Bid(bidder2, item8,
 				BigDecimal.valueOf(1.00)));
 	
-		HashSet<Bid> bidSetbidder4auction3 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder4auction3 = new TreeSet<>();
 		bidSetbidder4auction3.add(new Bid(bidder4, item5,
 				BigDecimal.valueOf(1300.00)));
 		bidSetbidder4auction3.add(new Bid(bidder4, item6,
@@ -212,35 +212,35 @@ public class DemoData {
 				BigDecimal.valueOf(1.00)));
 		
 		// Auction 4
-		HashSet<Bid> bidSetbidder1auction4 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder1auction4 = new TreeSet<>();
 		bidSetbidder1auction4.add(new Bid(bidder1, item10,
 				BigDecimal.valueOf(9.00)));
 		bidSetbidder1auction4.add(new Bid(bidder1, item11,
 				BigDecimal.valueOf(1.00)));
 		
-		HashSet<Bid> bidSetbidder2auction4 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder2auction4 = new TreeSet<>();
 		bidSetbidder2auction4.add(new Bid(bidder2, item10,
 				BigDecimal.valueOf(9.00)));
 		bidSetbidder2auction4.add(new Bid(bidder2, item11,
 				BigDecimal.valueOf(1.00)));
 		
 		// Auction 5
-		HashSet<Bid> bidSetbidder1auction5 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder1auction5 = new TreeSet<>();
 		bidSetbidder1auction5.add(new Bid(bidder1, item12,
 				BigDecimal.valueOf(700.00)));
 		
-		HashSet<Bid> bidSetbidder2auction5 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder2auction5 = new TreeSet<>();
 		bidSetbidder2auction5.add(new Bid(bidder2, item12,
 				BigDecimal.valueOf(700.00)));
 		
 		// Auction 6
-		HashSet<Bid> bidSetbidder1auction6 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder1auction6 = new TreeSet<>();
 		bidSetbidder1auction6.add(new Bid(bidder1, item13,
 				BigDecimal.valueOf(10.00)));
 		bidSetbidder1auction6.add(new Bid(bidder1, item14,
 				BigDecimal.valueOf(60.00)));
 		
-		HashSet<Bid> bidSetbidder2auction6 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder2auction6 = new TreeSet<>();
 		bidSetbidder2auction6.add(new Bid(bidder2, item13,
 				BigDecimal.valueOf(10.00)));
 		bidSetbidder2auction6.add(new Bid(bidder2, item14,
@@ -248,7 +248,7 @@ public class DemoData {
 		bidSetbidder2auction6.add(new Bid(bidder2, item15,
 				BigDecimal.valueOf(4500.00)));
 		
-		HashSet<Bid> bidSetbidder4auction6 = new HashSet<>();
+		TreeSet<Bid> bidSetbidder4auction6 = new TreeSet<>();
 		bidSetbidder4auction6.add(new Bid(bidder4, item13,
 				BigDecimal.valueOf(10.00)));
 		bidSetbidder4auction6.add(new Bid(bidder4, item14,
@@ -257,28 +257,28 @@ public class DemoData {
 				BigDecimal.valueOf(4500.00)));
 				
 		// Maps For Auction
-		HashMap<Bidder, HashSet<Bid>> bidSet1 = new HashMap<>();
+		TreeMap<Bidder, TreeSet<Bid>> bidSet1 = new TreeMap<>();
 		bidSet1.put(bidder1, bidSetbidder1auction1);
 		bidSet1.put(bidder2, bidSetbidder2auction1);
 		
-		HashMap<Bidder, HashSet<Bid>> bidSet2 = new HashMap<>();
+		TreeMap<Bidder, TreeSet<Bid>> bidSet2 = new TreeMap<>();
 		bidSet2.put(bidder1, bidSetbidder1auction2);
 		bidSet2.put(bidder2, bidSetbidder2auction2);
 		
-		HashMap<Bidder, HashSet<Bid>> bidSet3 = new HashMap<>();
+		TreeMap<Bidder, TreeSet<Bid>> bidSet3 = new TreeMap<>();
 		bidSet3.put(bidder1, bidSetbidder1auction3);
 		bidSet3.put(bidder2, bidSetbidder2auction3);
 		bidSet3.put(bidder4, bidSetbidder4auction3);
 		
-		HashMap<Bidder, HashSet<Bid>> bidSet4 = new HashMap<>();
+		TreeMap<Bidder, TreeSet<Bid>> bidSet4 = new TreeMap<>();
 		bidSet4.put(bidder1, bidSetbidder1auction4);
 		bidSet4.put(bidder2, bidSetbidder2auction4);
 
-		HashMap<Bidder, HashSet<Bid>> bidSet5 = new HashMap<>();
+		TreeMap<Bidder, TreeSet<Bid>> bidSet5 = new TreeMap<>();
 		bidSet5.put(bidder1, bidSetbidder1auction5);
 		bidSet5.put(bidder2, bidSetbidder2auction5);
 		
-		HashMap<Bidder, HashSet<Bid>> bidSet6 = new HashMap<>();
+		TreeMap<Bidder, TreeSet<Bid>> bidSet6 = new TreeMap<>();
 		bidSet6.put(bidder1, bidSetbidder1auction6);
 		bidSet6.put(bidder2, bidSetbidder2auction6);
 		bidSet6.put(bidder4, bidSetbidder4auction6);
@@ -306,9 +306,9 @@ public class DemoData {
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
 				10, 4, "N\\A");
         Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
-                10, 4, "The Old Fund", new HashSet<AuctionItem>(), new HashMap<Bidder, HashSet<Bid>>());
+                10, 4, "The Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
         Auction auction3333 = new Auction(LocalDate.of(2017, 5, 9),
-                10, 4, "The Newer Old Fund", new HashSet<AuctionItem>(), new HashMap<Bidder, HashSet<Bid>>());
+                10, 4, "The Newer Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
 		
 		
 		

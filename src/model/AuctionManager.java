@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.TreeSet;
+
 import backend.StorageIO;
 
 /**
@@ -54,7 +56,7 @@ public class AuctionManager implements Manager {
 	@Override
 	public Collection<Auction> getAvailableAuctions(Bidder theBidder) {
 		Collection<Auction> allFutureAuctions = new HashSet<>();
-		Collection<Auction> result = new HashSet<>();
+		Collection<Auction> result = new TreeSet<>();
 		
 		if (theBidder.isNewBidAllowed()) {
 			allFutureAuctions = myCalendar.getFutureAuctions();	

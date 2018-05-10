@@ -14,7 +14,7 @@ import java.math.BigDecimal;
  * @author Yohei Sato
  *
  */
-public class AuctionItem implements Serializable {
+public class AuctionItem implements Serializable, Comparable<AuctionItem> {
 
 	/**
 	 * Generate Serial Version UID.
@@ -50,11 +50,13 @@ public class AuctionItem implements Serializable {
 	
 	}
 	
-	public void incrementBidCount() {
-		myBidCount++;
-	}
-	
 	public int getBidCount() {
 		return myBidCount;
 	}
+
+	@Override
+	public int compareTo(AuctionItem theOther) {
+		return myDescription.compareTo(theOther.myDescription);
+	}
+	
 }

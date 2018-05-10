@@ -18,11 +18,6 @@ public class Bidder extends User {
 	public static final int MY_MAX_BID_COUNT = 10;
 	
 	/**
-	 * The current bid count for the bidder for all future auctions.
-	 */
-	private int myBidCount;
-	
-	/**
 	 * Constructor for a bidder
 	 * @param theUsername that will be
 	 *  associated with the newly created bidder.
@@ -31,7 +26,6 @@ public class Bidder extends User {
 	 */
 	public Bidder(String theUsername, String theDisplayName) {
 		super(theUsername, theDisplayName);
-		myBidCount = 0;
 	}
 	
 	/**
@@ -41,16 +35,7 @@ public class Bidder extends User {
 	 * returns false.
 	 */
 	public boolean isNewBidAllowed() {
-		updateBidCount();
-		return myBidCount < MY_MAX_BID_COUNT;
-	}
-	
-	/**
-	 * Increments the bid count for the bidder if it is allowed.
-	 *  If not the bid count is not modified.
-	 */
-	private void incrementBidCount() {
-		myBidCount++;
+		return getBidCount() < MY_MAX_BID_COUNT;
 	}
 	
 	/**
@@ -61,24 +46,14 @@ public class Bidder extends User {
 	@Override
 	public void addAuction(Auction theAuction) {
 		if (isNewBidAllowed()) {
-			incrementBidCount();
 			super.addAuction(theAuction);
 		}
 	}
 	
 	/**
-	 * Sets the bidders bid count to the given value
-	 * @param theBidCount that will be used to set the bidders bid count.
+	 * Returns the current future bid count for a bidder. 
 	 */
-	public void setBidCount(int theBidCount) {
-		myBidCount = theBidCount;
-	}
-	
-	/**
-	 * Updates the current bid count for a bidder to reflect 
-	 * only the auctions that are upcoming.
-	 */
-	private void updateBidCount() {
+	private int getBidCount() {
 		int currentBidCount = 0;
 		LocalDate today = LocalDate.now();
 		for (Auction auction: this.getMyAuctions()) {
@@ -86,7 +61,7 @@ public class Bidder extends User {
 				currentBidCount += auction.getMyBids(this).size();
 			}
 		}
-		myBidCount = currentBidCount;
+		return currentBidCount;
 	}
 	
 }
