@@ -172,6 +172,21 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	}
 	
 	/**
+	 * Returns a collection of bids for a bidder.
+	 * @param theBidder to reference
+	 * @return a collection of bids from the bidder.
+	 */
+	public Collection<Bid> getAllBidsWithBidder
+	         (final Bidder theBidder) {
+		Collection<Bid> bidderBids = new TreeSet<>();
+		
+		if (myBids.containsKey(theBidder)) {
+			bidderBids.addAll(myBids.get(theBidder));
+		}
+		return bidderBids;
+	}
+	
+	/**
 	 * Returns the date of this auction.
 	 * @return the date of this auction.
 	 */
