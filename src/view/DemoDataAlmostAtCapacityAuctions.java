@@ -23,7 +23,7 @@ public class DemoDataAlmostAtCapacityAuctions {
         String fileName = "data/storage.dat";
 
         //STORE
-        StorageIO storage = new StorageIO(fileName);
+        StorageIO storage = new StorageIO(fileName, true);
         AuctionCalendar calendar = storage.getCalendar();
 
         Auction addedAuction;

@@ -30,6 +30,9 @@ public class DemoData {
 		//auction manager points to data/storage.dat by default
 		String fileName = "data/storage.dat"; 
 		
+		StorageIO storage = new StorageIO(fileName, true);
+		AuctionCalendar calendar = storage.getCalendar();
+		
 		// make items
 		HashSet<AuctionItem> auction1Items = new HashSet<>();
 		HashSet<AuctionItem> auction2Items = new HashSet<>();
@@ -309,9 +312,7 @@ public class DemoData {
 		
 		
 		
-		//STORE
-		StorageIO storage = new StorageIO(fileName);
-		AuctionCalendar calendar = storage.getCalendar();
+		
 		
 		// Add Auctions to user and calendar
 		bidder1.addAuction(auction1);
