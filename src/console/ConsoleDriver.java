@@ -1,4 +1,4 @@
-package view;
+package console;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
@@ -26,12 +26,12 @@ import model.User;
  * @author Yohei Sato
  * @version 5/8/2018
  */
-public class MainDriver {
+public class ConsoleDriver {
 
 	private static Scanner input = new Scanner(System.in);
 	
 	/** This class should not be constructed. **/
-	private MainDriver() {}
+	private ConsoleDriver() {}
 	
 	public static void main(String[] theArgs) {
 		showWelcomeMessage();

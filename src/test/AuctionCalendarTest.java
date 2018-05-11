@@ -1,7 +1,7 @@
 /**
  * 
  */
-package JUnit;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -23,7 +23,7 @@ import model.AuctionDate;
  * @author Steven Golob
  * @version 5/5/2018
  */
-public class AuctionCalendarTests {
+public class AuctionCalendarTest {
 	
 	/** Test fixtures. **/
 	private LocalDate theCurrentDay;

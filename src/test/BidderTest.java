@@ -1,7 +1,7 @@
 /**
  * 
  */
-package JUnit;
+package test;
 
 import static org.junit.Assert.*;
 
@@ -22,7 +22,7 @@ import model.Bidder;
  * @author Jim Rosales
  * JUnit Tests
  */
-public class BidderTests {
+public class BidderTest {
 	private Bidder bidderWithMaxBids;
 	private Bidder bidderWithBelowMaxBids;
 

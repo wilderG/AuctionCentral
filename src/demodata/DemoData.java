@@ -1,4 +1,4 @@
-package view;
+package demodata;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

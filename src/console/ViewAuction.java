@@ -1,4 +1,4 @@
-package view;
+package console;
 
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
@@ -73,7 +73,7 @@ public class ViewAuction {
 				+ " number for which you would like to view items.\n"
 				+ "(Enter 0 to return to the main menu)");
 	
-		return MainDriver.getNextInt(auctionCollection.size());
+		return ConsoleDriver.getNextInt(auctionCollection.size());
 	}
 	
 	private void bidderIntroMessage() {
@@ -121,10 +121,10 @@ public class ViewAuction {
 			        auction.getName() + ": " + 
 			"(" + auction.getAllItemsWithBidder(theUser).size()
 			+ " bid on items) " 
-					+ MainDriver.formatDate(auction.getDate()));
+					+ ConsoleDriver.formatDate(auction.getDate()));
 		}
 		System.out.println("To return to the main menu enter 0");
-		return MainDriver.getNextInt(auctionCollection.size());
+		return ConsoleDriver.getNextInt(auctionCollection.size());
 	}
 
 }

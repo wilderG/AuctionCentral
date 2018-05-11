@@ -1,4 +1,4 @@
-package view;
+package console;
 
 import java.math.BigDecimal;
 import java.util.Collection;
@@ -42,14 +42,14 @@ public class ViewItems {
 			BigDecimal minValue = item.getMinimumAcceptableBidValue();
 			System.out.println("\t" + (count + 1) + 
 					". " + item.getDescription() + "\n\t     Minimum Bid: " +
-					MainDriver.formatCurrency(minValue));
+					ConsoleDriver.formatCurrency(minValue));
 		}
 		
 		System.out.println("\nWould you like to place a bid?\n"
 				+ "(If so, enter the number corresponding to an item. \n"
 				+ " Otherwise, enter 0)\n");
 
-		return MainDriver.getNextInt(items.size());
+		return ConsoleDriver.getNextInt(items.size());
 		
 	}
 	/**
@@ -60,7 +60,7 @@ public class ViewItems {
 	 */
 	public void showItemsForNonProfAuction
 	(Scanner theScanner, Auction theAuction) {
-		String theDate = MainDriver.formatDate(theAuction.getDate());
+		String theDate = ConsoleDriver.formatDate(theAuction.getDate());
 		System.out.println("Items for your auction on " + theDate + ":");
 		AuctionItem[] indexedItems = 
 				theAuction.getAllItems().toArray(
@@ -71,7 +71,7 @@ public class ViewItems {
 			System.out.println(item.getDescription() + " ("
 			+ item.getBidCount() + " bids)");
 			System.out.println("\tMinimum bid set at: " +
-			MainDriver.formatCurrency(item.getMinimumAcceptableBidValue()));
+			ConsoleDriver.formatCurrency(item.getMinimumAcceptableBidValue()));
 		}
 		System.out.println("\nPress enter to return to the main menu: ");
 		theScanner.nextLine();
@@ -95,7 +95,7 @@ public class ViewItems {
 			TreeSet<Bid> myBids = auction.getMyBids(theUser);
 
 			System.out.println("   " + auction.getName() + ", "
-			+ MainDriver.formatDate(auction.getDate()));
+			+ ConsoleDriver.formatDate(auction.getDate()));
 
 			int count2 = 1;
 
@@ -113,8 +113,8 @@ public class ViewItems {
 				System.out.println("      Item " + count2++ +
 						": " + auctionItem.getDescription());
 				System.out.println("          Minimum bid: "+
-						MainDriver.formatCurrency(minValue)
-				+"\t\tMy bid: " + MainDriver.formatCurrency(bidValue));
+						ConsoleDriver.formatCurrency(minValue)
+				+"\t\tMy bid: " + ConsoleDriver.formatCurrency(bidValue));
 			}
 			System.out.println();
 		}
@@ -144,7 +144,7 @@ public class ViewItems {
 				auctionItemCollection.toArray(
 						new AuctionItem[auctionItemCollection.size()]);
 		System.out.println(auction.getName() + " (" +
-						MainDriver.formatDate(auction.getDate()) + "):\n");
+						ConsoleDriver.formatDate(auction.getDate()) + "):\n");
 		for (int count = 0; count < indexedItems.length; count++) {
 			AuctionItem item = indexedItems[count];
 			BigDecimal bidValue = auction.getBidForItem(theUser, item).getValue();
@@ -152,9 +152,9 @@ public class ViewItems {
 			System.out.println("    Item " + (count + 1)
 					+ ": " + item.getDescription());
 			System.out.println("        Minimum bid: " + 
-					MainDriver.formatCurrency(minValue) + 
+					ConsoleDriver.formatCurrency(minValue) + 
 					"\t My bid: " +
-					MainDriver.formatCurrency(bidValue));
+					ConsoleDriver.formatCurrency(bidValue));
 		}
 
 		System.out.println("\nEnter any key to go back.");	

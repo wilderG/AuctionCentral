@@ -1,4 +1,4 @@
-package view;
+package console;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

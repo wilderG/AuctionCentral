@@ -1,4 +1,4 @@
-package view;
+package demodata;
 
 import java.time.LocalDate;
 

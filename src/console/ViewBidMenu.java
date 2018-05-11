@@ -1,4 +1,4 @@
-package view;
+package console;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -31,7 +31,7 @@ public class ViewBidMenu {
 		Scanner theScanner, AuctionManager theManager, Auction theAuction) {
 		System.out.println("Bid Menu for Item: " + theItem.getDescription());
 		System.out.println("     Minimum bid: " +
-			MainDriver.formatCurrency(theItem.getMinimumAcceptableBidValue()));
+			ConsoleDriver.formatCurrency(theItem.getMinimumAcceptableBidValue()));
 		System.out.println();
 		System.out.println("What is the bid amount "
 				+ "you would like to place for the Item?");

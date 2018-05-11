@@ -3,7 +3,7 @@
  * Group 1
  * AuctionCentral
  */
-package JUnit;
+package test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
