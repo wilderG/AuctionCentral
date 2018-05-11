@@ -2,9 +2,9 @@ package view;
 
 import java.math.BigDecimal;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
+import java.util.TreeSet;
 
 import model.Auction;
 import model.AuctionItem;
@@ -92,7 +92,7 @@ public class ViewItems {
 			Auction auction =  i.next();
 			Collection<AuctionItem> auctionItems =
 					auction.getAllItemsWithBidder(theUser);
-			HashSet<Bid> myBids = auction.getMyBids(theUser);
+			TreeSet<Bid> myBids = auction.getMyBids(theUser);
 
 			System.out.println("   " + auction.getName() + ", "
 			+ MainDriver.formatDate(auction.getDate()));

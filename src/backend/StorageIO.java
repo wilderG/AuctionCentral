@@ -42,6 +42,22 @@ public class StorageIO implements Handler {
 		loadData();
 	}
 	
+	/**
+	 * Creates a persistent storage handler for saving and loading the calendar
+	 * and system users. If the specified file does not exist then it will be
+	 * created. If boolean flag is true then existing data will be overwritten.  
+	 * @param theFileName is a file to load/save the data
+	 * @param theNewFileFlag existing data will be written over.
+	 */
+	public StorageIO(final String theFileName, final boolean theNewFileFlag) {
+		myFileName = theFileName;
+		
+		if (theNewFileFlag) {
+			initializeNewData();
+		} else {
+			loadData();	
+		}
+	}
 	
 	/**
 	 * Returns the AuctionCalendar from storage.

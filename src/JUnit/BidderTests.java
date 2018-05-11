@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,7 +55,7 @@ public class BidderTests {
         AuctionItem item10 = new AuctionItem(BigDecimal.valueOf(20.00),
                 "A Golf ball");
         
-        HashSet<AuctionItem> auction1Items = new HashSet<>();
+        TreeSet<AuctionItem> auction1Items = new TreeSet<>();
         auction1Items.add(item1);
         auction1Items.add(item2);
         auction1Items.add(item3);
@@ -67,7 +67,7 @@ public class BidderTests {
         auction1Items.add(item9);
         auction1Items.add(item10);
         
-        HashSet<Bid> bidSetbidder1auction1 = new HashSet<>();
+        TreeSet<Bid> bidSetbidder1auction1 = new TreeSet<>();
         bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item1,
                 BigDecimal.valueOf(21.00)));
         bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item2,
@@ -89,7 +89,7 @@ public class BidderTests {
         bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item10,
                 BigDecimal.valueOf(21.00)));
 
-        HashSet<Bid> bidSetbidder2auction1 = new HashSet<>();
+        TreeSet<Bid> bidSetbidder2auction1 = new TreeSet<>();
         bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item1,
                 BigDecimal.valueOf(21.00)));
         bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item2,
@@ -109,7 +109,7 @@ public class BidderTests {
         bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item9,
                 BigDecimal.valueOf(21.00)));
         
-        HashMap<Bidder, HashSet<Bid>> bidSet1 = new HashMap<>();
+        TreeMap<Bidder, TreeSet<Bid>> bidSet1 = new TreeMap<>();
         bidSet1.put(bidderWithMaxBids, bidSetbidder1auction1);
         bidSet1.put(bidderWithBelowMaxBids, bidSetbidder2auction1);
         
@@ -118,7 +118,7 @@ public class BidderTests {
         
         bidderWithBelowMaxBids.addAuction(auction1);
         bidderWithMaxBids.addAuction(auction1);
-		//bidderWithMaxBids.
+       
 	}
 
 	/**

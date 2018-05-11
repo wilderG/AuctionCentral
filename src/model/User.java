@@ -5,13 +5,13 @@ package model;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.TreeSet;
 
 /**
  * Provides common implementations of some user behaviors.
  * @author Jim Rosales
  */
-public class User implements Serializable {
+public class User implements Serializable, Comparable<User> {
 	
 	/**
 	 * Generated Serial Version UID
@@ -31,7 +31,7 @@ public class User implements Serializable {
 	/**
 	 * List that will keep track of all the auctions associated with the user.
 	 */
-	private HashSet<Auction> myAuctions;
+	private TreeSet<Auction> myAuctions;
 	
 	
 	
@@ -43,7 +43,7 @@ public class User implements Serializable {
 	public User(String theUsername, String theDisplayName) {
 		myUsername = theUsername;
 		myDisplayName = theDisplayName;
-		myAuctions = new HashSet<>();
+		myAuctions = new TreeSet<>();
 	}
 	
 	/**
@@ -76,6 +76,15 @@ public class User implements Serializable {
 	 */
 	public Collection<Auction> getMyAuctions() {
 		return myAuctions;
+	}
+
+	@Override
+	public int compareTo(User theOther) {
+		if (myDisplayName.equals(theOther.myDisplayName)) {
+			return myUsername.compareTo(theOther.myUsername);
+		} else {
+			return myDisplayName.compareTo(theOther.myDisplayName);
+		}
 	}
 	
 }
