@@ -34,7 +34,7 @@
             </Label>
             <Label text="User Name:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="usernameField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="loginButton" mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+            <Button fx:id="loginButton" mnemonicParsing="false" text="Login" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
             <Text fx:id="actionTarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
          </children>
       </GridPane>
