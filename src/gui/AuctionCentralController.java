@@ -51,21 +51,30 @@ public class AuctionCentralController implements Initializable {
 		usernameField.setOnKeyReleased(new EventHandler<KeyEvent>() {
 			@Override
 			public void handle(KeyEvent theEvent) {
+				clearUserDisplay();
+				
 				if (theEvent.getCode().equals(KeyCode.ENTER)) {
 					updateUserDisplay(usernameField.getText());
 				}
 			}
 		});
-				
-		
 		
 	}
 	
+	private void clearUserDisplay() {
+		actionTarget.setText("");
+	}
 	
 	/*
 	 * Displays the user name in the text field.
 	 */
 	private void updateUserDisplay(final String theUsername) {
+		clearUserDisplay();
+		
+		if (theUsername.isEmpty()) {
+			return;
+		}
+		
 		User user = getUser(theUsername);
 		
 		if (user == null) {
@@ -99,8 +108,7 @@ public class AuctionCentralController implements Initializable {
 //			endSession();
 //			scanner.close();
 //		}
+	
 	}
-	
-	
 	
 }
