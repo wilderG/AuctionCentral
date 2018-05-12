@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="anchor" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserLoginController">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.BidderViewController">
    <children>
       <GridPane alignment="TOP_CENTER" layoutX="-62.0" layoutY="-134.0" prefHeight="400.0" prefWidth="400.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -18,23 +18,19 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="70.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="231.0" minHeight="10.0" prefHeight="86.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="61.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="219.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="253.0" minHeight="10.0" prefHeight="241.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="219.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <opaqueInsets>
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </opaqueInsets>
          <children>
-            <Label alignment="BOTTOM_LEFT" prefHeight="85.0" prefWidth="81.0" text="Welcome" GridPane.columnIndex="1">
+            <Label fx:id="userDisplayName" alignment="BOTTOM_LEFT" prefHeight="61.0" prefWidth="302.0" GridPane.columnIndex="1" GridPane.columnSpan="2">
                <font>
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Label>
-            <Label text="User Name:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="usernameField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="loginButton" mnemonicParsing="false" text="Login" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-            <Text fx:id="actionTarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Button fx:id="logoutButton" mnemonicParsing="false" text="Logout" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>

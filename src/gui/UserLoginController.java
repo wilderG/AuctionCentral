@@ -2,31 +2,39 @@ package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.AuctionManager;
 import model.User;
 
-public class AuctionCentralController implements Initializable {
+public class UserLoginController implements Initializable {
 
 	private AuctionManager myManager;
 	
 	@FXML
-	TextField usernameField;
+	private AnchorPane anchor;
 	
 	@FXML
-	Button loginButton;
+	private TextField usernameField;
 	
 	@FXML
-	Text actionTarget;
+	private Button loginButton;
+	
+	@FXML
+	private Text actionTarget;
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -35,7 +43,6 @@ public class AuctionCentralController implements Initializable {
 		configureEventListeners();
 	}
 
-	
 	/*
 	 * Setup listeners for login field and button press.
 	 */
@@ -97,18 +104,23 @@ public class AuctionCentralController implements Initializable {
 			return null;
 		}
 		
-		return user;
-		
-//		if (user instanceof model.Bidder) {
-//			bidderScreen((Bidder) user, theManager);
-//		} else if (user instanceof model.NonProfitContact) {
-//			nonProfitContactScreen((NonProfitContact) user,
-//					theManager, scanner);
-//		} else {
-//			endSession();
-//			scanner.close();
-//		}
+		if (user instanceof model.Bidder) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderView.fxml"));
+			
+			try {
+				Parent root = (Parent) loader.load();
+				anchor.getScene().setRoot(root);
+				
+				BidderViewController controller = loader.<BidderViewController>getController();
+				controller.setBidder((model.Bidder) user);
+				controller.setManager(myManager);
+			} catch (Exception ex) {
+	            Logger.getLogger(AuctionCentralMain.class.getName())
+	            		.log(Level.SEVERE, null, ex);
+	        }
+		} 
 	
+		return user;
 	}
 	
 }

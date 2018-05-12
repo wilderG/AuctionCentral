@@ -4,8 +4,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class AuctionCentralMain extends Application {
@@ -17,9 +17,10 @@ public class AuctionCentralMain extends Application {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		try {
-            AnchorPane page = (AnchorPane) FXMLLoader.load
-            		(AuctionCentralMain.class.getResource("UserLogin.fxml"));
-            Scene scene = new Scene(page);
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("UserLogin.fxml"));
+			Parent root = (Parent) loader.load();
+			
+			Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("AuctionCentral");
             primaryStage.show();
