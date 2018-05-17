@@ -8,6 +8,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
+import model.Auction;
+import model.AuctionItem;
 import model.AuctionManager;
 import model.User;
 
@@ -21,7 +26,10 @@ public class MainViewController implements Initializable {
 	Label userDisplayName;
 	
 	@FXML
-	Button logoutButton;
+	Label logoutButton;
+	
+	@FXML
+	FlowPane tileDisplay;
 	
 	public MainViewController(final User theUser, final AuctionManager theManager) {
 		myUser = theUser;
@@ -35,6 +43,7 @@ public class MainViewController implements Initializable {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		configureEventListeners();
 		updateDisplayName();
+		showAuctions();
 	}
 
 	/*
@@ -42,9 +51,9 @@ public class MainViewController implements Initializable {
 	 */
 	private void configureEventListeners() {
 				
-		logoutButton.setOnAction(new EventHandler<ActionEvent>() {
+		logoutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
-			public void handle(ActionEvent theEvent) {
+			public void handle(MouseEvent theEvent) {
 				ViewController.loadLoginScreen();
 			}
 		});
@@ -54,7 +63,27 @@ public class MainViewController implements Initializable {
 	}
 	
 	private void updateDisplayName() {
-		userDisplayName.setText("Welcome " + myUser.getDisplayName());
+		userDisplayName.setText(myUser.getDisplayName());
+	}
+
+	private void showAuctions() {
+		for (Auction e : myUser.getMyAuctions()) {
+			Label label = new Label(e.toString());
+			label.setOnMouseClicked(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent theEvent) {
+					showItems(e);
+				}
+			});
+			tileDisplay.getChildren().add(label);
+		}
+	}
+	
+	private void showItems(final Auction theAuction) {
+		tileDisplay.getChildren().clear();
+		for (AuctionItem e : theAuction.getAllItems()) {
+			tileDisplay.getChildren().add(new Label(e.toString()));
+		}
 	}
 	
 }
