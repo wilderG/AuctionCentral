@@ -223,4 +223,10 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		}
 	}
 	
+	@Override
+	public String toString() {
+		return myDate + ": " + myNonProfitName;
+	}
+	
+	
 }
