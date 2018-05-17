@@ -3,24 +3,20 @@ package gui;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
 import model.User;
 
-public class MainViewController implements Initializable {
+public class UserViewController implements Initializable {
 
 	private User myUser;
 	
@@ -35,17 +31,19 @@ public class MainViewController implements Initializable {
 	@FXML
 	FlowPane tileDisplay;
 	
-	public MainViewController(final User theUser, final AuctionManager theManager) {
-		myUser = theUser;
-		myManager = theManager;
-		
-	}
-	
+//	public MainViewController(final User theUser, final AuctionManager theManager) {
+//		myUser = theUser;
+//		myManager = theManager;
+//		
+//	}
+//	
 	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
+		myUser = SessionController.getUser();
+		myManager = SessionController.getManager();
 		configureEventListeners();
 		updateDisplayName();
 		showTiles();
@@ -59,7 +57,7 @@ public class MainViewController implements Initializable {
 		logoutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent theEvent) {
-				ViewController.loadLoginScreen();
+				SessionController.userLogout();
 			}
 		});
 		
@@ -76,7 +74,7 @@ public class MainViewController implements Initializable {
 		for (int count = 0; count < 5; count++) {
 			
 			try {
-				SplitPane tile = (SplitPane) FXMLLoader.load(MainViewController.class.getResource("auctionTile.fxml"));
+				SplitPane tile = (SplitPane) FXMLLoader.load(UserViewController.class.getResource("auctionTile.fxml"));
 				tileDisplay.getChildren().add(tile);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

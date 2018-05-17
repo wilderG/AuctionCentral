@@ -1,14 +1,11 @@
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -18,7 +15,7 @@ import javafx.scene.text.Text;
 import model.AuctionManager;
 import model.User;
 
-public class UserLoginController implements Initializable {
+public class LoginViewController implements Initializable {
 
 	private AuctionManager myManager;
 	
@@ -34,13 +31,14 @@ public class UserLoginController implements Initializable {
 	@FXML
 	private Text actionTarget;
 	
-	public UserLoginController(final AuctionManager theManager) {
-		myManager = theManager;
-	}
-	
+//	public UserLoginController(final AuctionManager theManager) {
+//		myManager = theManager;
+//	}
+//	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
+		myManager = SessionController.getManager();
 		configureEventListeners();
 	}
 
@@ -75,9 +73,6 @@ public class UserLoginController implements Initializable {
 	
 	private void loginUser(final String theUsername) {
 		User user;
-		FXMLLoader loader;
-		MainViewController controller;
-		Parent root;
 		
 		try {
 			user = myManager.getUser(theUsername);
@@ -86,8 +81,7 @@ public class UserLoginController implements Initializable {
 			return;
 		}
 		
-		ViewController.loadUserScreen(user);
-			
+		SessionController.userLogin(user);
 	}
 
 	

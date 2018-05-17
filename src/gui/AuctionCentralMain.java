@@ -11,8 +11,7 @@ public class AuctionCentralMain extends Application {
 
 	@Override
 	public void start(final Stage thePrimaryStage) throws Exception {
-		ViewController.setStage(thePrimaryStage);
-		ViewController.loadLoginScreen();
+		SessionController.initialize(thePrimaryStage);
 		thePrimaryStage.setTitle("AuctionCentral");
 		thePrimaryStage.show();
 	}
