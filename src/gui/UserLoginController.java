@@ -1,10 +1,8 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -51,7 +49,7 @@ public class UserLoginController implements Initializable {
 		loginButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent theEvent) {
-				updateUserDisplay(usernameField.getText());
+				loginUser(usernameField.getText());
 			}
 		});
 		
@@ -61,7 +59,7 @@ public class UserLoginController implements Initializable {
 				clearUserDisplay();
 				
 				if (theEvent.getCode().equals(KeyCode.ENTER)) {
-					updateUserDisplay(usernameField.getText());
+					loginUser(usernameField.getText());
 				}
 			}
 		});
@@ -72,55 +70,33 @@ public class UserLoginController implements Initializable {
 		actionTarget.setText("");
 	}
 	
-	/*
-	 * Displays the user name in the text field.
-	 */
-	private void updateUserDisplay(final String theUsername) {
-		clearUserDisplay();
-		
-		if (theUsername.isEmpty()) {
-			return;
-		}
-		
-		User user = getUser(theUsername);
-		
-		if (user == null) {
-			actionTarget.setText("User not found.");
-		} else {
-			actionTarget.setText("Hello " + user.getDisplayName());
-		}
-	}
-	
-	
-	/*
-	 * Returns a user from the manager. Returns null if user not found.
-	 */
-	private User getUser(final String theUsername) {
+	private void loginUser(final String theUsername) {
 		User user;
+		FXMLLoader loader;
+		MainViewController controller;
+		Parent root;
 		
 		try {
 			user = myManager.getUser(theUsername);
 		} catch (Exception e) {
-			return null;
+			actionTarget.setText("User not found.");
+			return;
 		}
 		
-		if (user instanceof model.Bidder) {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("BidderView.fxml"));
+		controller = new MainViewController(user, myManager);
+		loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
+		loader.setController(controller);
+		
+		try {
+			root = (Parent) loader.load();
+			anchor.getScene().setRoot(root);
+		} catch (IOException e) {
+			System.err.println("Unable to load MainView.fxml");
+			e.printStackTrace();
+		}
 			
-			try {
-				Parent root = (Parent) loader.load();
-				anchor.getScene().setRoot(root);
-				
-				BidderViewController controller = loader.<BidderViewController>getController();
-				controller.setBidder((model.Bidder) user);
-				controller.setManager(myManager);
-			} catch (Exception ex) {
-	            Logger.getLogger(AuctionCentralMain.class.getName())
-	            		.log(Level.SEVERE, null, ex);
-	        }
-		} 
-	
-		return user;
 	}
+
+	
 	
 }

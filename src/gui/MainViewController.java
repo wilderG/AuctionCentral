@@ -2,8 +2,6 @@ package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,11 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import model.AuctionManager;
-import model.Bidder;
+import model.User;
 
-public class BidderViewController implements Initializable {
+public class MainViewController implements Initializable {
 
-	private Bidder myBidder;
+	private User myUser;
 	
 	private AuctionManager myManager;
 	
@@ -25,11 +23,18 @@ public class BidderViewController implements Initializable {
 	@FXML
 	Button logoutButton;
 	
+	public MainViewController(final User theUser, final AuctionManager theManager) {
+		myUser = theUser;
+		myManager = theManager;
+	}
+	
+	
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
-		myBidder = null;
 		configureEventListeners();
+		updateDisplayName();
 	}
 
 	/*
@@ -40,7 +45,7 @@ public class BidderViewController implements Initializable {
 		logoutButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent theEvent) {
-				Platform.exit();
+				
 			}
 		});
 		
@@ -48,21 +53,8 @@ public class BidderViewController implements Initializable {
 		
 	}
 	
-	
-	/*
-	 * Returns a user from the manager. Returns null if user not found.
-	 */
-	public void setBidder(final Bidder theBidder) {
-		myBidder = theBidder;
-		updateDisplayName();
-	}
-
-	public void setManager(final AuctionManager theManager) {
-		myManager = theManager;
-	}
-	
 	private void updateDisplayName() {
-		userDisplayName.setText("Welcome " + myBidder.getDisplayName());
+		userDisplayName.setText("Welcome " + myUser.getDisplayName());
 	}
 	
 }
