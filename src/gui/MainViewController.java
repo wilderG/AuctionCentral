@@ -1,13 +1,17 @@
 package gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
@@ -34,6 +38,7 @@ public class MainViewController implements Initializable {
 	public MainViewController(final User theUser, final AuctionManager theManager) {
 		myUser = theUser;
 		myManager = theManager;
+		
 	}
 	
 	
@@ -43,7 +48,7 @@ public class MainViewController implements Initializable {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		configureEventListeners();
 		updateDisplayName();
-		showAuctions();
+		showTiles();
 	}
 
 	/*
@@ -66,6 +71,21 @@ public class MainViewController implements Initializable {
 		userDisplayName.setText(myUser.getDisplayName());
 	}
 
+	
+	private void showTiles() {
+		for (int count = 0; count < 5; count++) {
+			
+			try {
+				SplitPane tile = (SplitPane) FXMLLoader.load(MainViewController.class.getResource("auctionTile.fxml"));
+				tileDisplay.getChildren().add(tile);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	private void showAuctions() {
 		for (Auction e : myUser.getMyAuctions()) {
 			Label label = new Label(e.toString());

@@ -2,7 +2,6 @@ package gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.AuctionManager;
 
 public class AuctionCentralMain extends Application {
 
@@ -11,12 +10,11 @@ public class AuctionCentralMain extends Application {
 	}
 
 	@Override
-	public void start(Stage primaryStage) throws Exception {
-		primaryStage.setTitle("AuctionCentral");
-		ViewController.setStage(primaryStage);
-		ViewController.setAuctionManager(new AuctionManager());
+	public void start(final Stage thePrimaryStage) throws Exception {
+		ViewController.setStage(thePrimaryStage);
 		ViewController.loadLoginScreen();
-		primaryStage.show();
+		thePrimaryStage.setTitle("AuctionCentral");
+		thePrimaryStage.show();
 	}
 
 }

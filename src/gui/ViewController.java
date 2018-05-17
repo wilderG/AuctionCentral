@@ -1,6 +1,5 @@
 package gui;
 
-import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -10,7 +9,7 @@ import model.User;
 
 public class ViewController {
 
-	private static AuctionManager myManager;
+	private static AuctionManager myManager = new AuctionManager();
 	
 	private static Stage myStage;
 	
@@ -18,9 +17,7 @@ public class ViewController {
 	
 	private static final String USER_VIEW = "MainView.fxml";
 	
-	public static void setAuctionManager(final AuctionManager theManager) {
-		myManager = theManager;
-	}
+	private static final String TILE_VIEW = "InformationContainer.fxml";
 	
 	public static void setStage(final Stage theStage) {
 		myStage = theStage;
@@ -41,9 +38,11 @@ public class ViewController {
 			FXMLLoader loader = new FXMLLoader(ViewController.class.getResource(theScene));
 			loader.setController(theController);
 			myStage.setScene(new Scene((Pane) loader.load()));
-		} catch (IOException e) {
+		} catch (Exception e) {
+			if (myStage == null) {
+				System.err.println("ViewController stage is null");
+			} 
 			System.err.println("Unable to load scene: " + theScene);
-			e.printStackTrace();
 		}
 	}
 	
