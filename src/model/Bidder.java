@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDate;
 
+
 /**
  * Class that represents a bidder
  * @author Jared Malone

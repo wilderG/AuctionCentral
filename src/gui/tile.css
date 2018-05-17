@@ -1,0 +1,41 @@
+/* Remove the pane dividers */
+.split-pane:horizontal > .split-pane-divider {
+   -fx-background-color: #FCFEFC;
+}
+.split-pane:vertical > .split-pane-divider {
+   -fx-background-color: transparent;
+}
+
+#main {
+	-fx-background-color: transparent;
+	-fx-font-family: 'Helvetica', Arial, sans-serif;
+}
+
+#leftInfo {
+	-fx-background-color: #53B799;
+}
+
+ #rightInfo {
+	-fx-background-color: #FCFEFC;
+}
+
+#leftInfo .label {
+	-fx-text-fill: white;
+}
+
+#rigthInfo .label {
+	-fx-text-fill: black;
+}
+
+#leftTopInfo {
+	-fx-font-weight: bold;
+	-fx-font-size: 24px;
+}
+
+#leftBottomInfo {
+	-fx-font-size: 16px;
+}
+
+#rightTopInfo {
+	-fx-font-size: 24px;
+}
