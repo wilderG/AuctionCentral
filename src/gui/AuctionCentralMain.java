@@ -1,12 +1,8 @@
 package gui;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import model.AuctionManager;
 
 public class AuctionCentralMain extends Application {
 
@@ -16,18 +12,11 @@ public class AuctionCentralMain extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		try {
-			FXMLLoader loader = new FXMLLoader(getClass().getResource("UserLogin.fxml"));
-			Parent root = (Parent) loader.load();
-			
-			Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("AuctionCentral");
-            primaryStage.show();
-        } catch (Exception ex) {
-            Logger.getLogger(AuctionCentralMain.class.getName())
-            		.log(Level.SEVERE, null, ex);
-        }
+		primaryStage.setTitle("AuctionCentral");
+		ViewController.setStage(primaryStage);
+		ViewController.setAuctionManager(new AuctionManager());
+		ViewController.loadLoginScreen();
+		primaryStage.show();
 	}
 
 }

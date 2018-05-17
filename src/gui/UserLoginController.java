@@ -34,10 +34,13 @@ public class UserLoginController implements Initializable {
 	@FXML
 	private Text actionTarget;
 	
+	public UserLoginController(final AuctionManager theManager) {
+		myManager = theManager;
+	}
+	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
-		myManager = new AuctionManager();
 		configureEventListeners();
 	}
 
@@ -83,17 +86,7 @@ public class UserLoginController implements Initializable {
 			return;
 		}
 		
-		controller = new MainViewController(user, myManager);
-		loader = new FXMLLoader(getClass().getResource("MainView.fxml"));
-		loader.setController(controller);
-		
-		try {
-			root = (Parent) loader.load();
-			anchor.getScene().setRoot(root);
-		} catch (IOException e) {
-			System.err.println("Unable to load MainView.fxml");
-			e.printStackTrace();
-		}
+		ViewController.loadUserScreen(user);
 			
 	}
 

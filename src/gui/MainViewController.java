@@ -45,7 +45,7 @@ public class MainViewController implements Initializable {
 		logoutButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent theEvent) {
-				
+				ViewController.loadLoginScreen();
 			}
 		});
 		
