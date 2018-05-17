@@ -70,8 +70,13 @@ public class UserViewController implements Initializable {
 	}
 
 	
+	
+	
 	private void showTiles() {
-		for (int count = 0; count < 5; count++) {
+		for (int count = 0; count < 9; count++) {
+			
+			// maybe we could make a TileFactory static class that returns a SplitPane
+			// or a Collection<SplitPane> and has methods for each of our needs (Auction, Item, Bid)?
 			
 			try {
 				SplitPane tile = (SplitPane) FXMLLoader.load(UserViewController.class.getResource("auctionTile.fxml"));
@@ -80,27 +85,6 @@ public class UserViewController implements Initializable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-	}
-	
-	
-	private void showAuctions() {
-		for (Auction e : myUser.getMyAuctions()) {
-			Label label = new Label(e.toString());
-			label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showItems(e);
-				}
-			});
-			tileDisplay.getChildren().add(label);
-		}
-	}
-	
-	private void showItems(final Auction theAuction) {
-		tileDisplay.getChildren().clear();
-		for (AuctionItem e : theAuction.getAllItems()) {
-			tileDisplay.getChildren().add(new Label(e.toString()));
 		}
 	}
 	
