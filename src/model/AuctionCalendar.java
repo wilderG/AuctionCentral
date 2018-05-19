@@ -7,8 +7,11 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 
 
@@ -37,7 +40,7 @@ public class AuctionCalendar implements Serializable {
     
     /** Maximum number of auctions
      *  in the future that can be scheduled at a time. */
-    public static final int MAXIMUM_FUTURE_AUCTIONS = 25;
+    public static final int DEFAULT_MAXIMUM_FUTURE_AUCTIONS = 25;
     
     /** All of the dates used currently by the calendar. */
     private final List<AuctionDate> myDates;
@@ -48,6 +51,9 @@ public class AuctionCalendar implements Serializable {
     /** The current date. */
     private LocalDate myCurrentDate;
     
+    /** The current maximum number of upcoming auctions accepted. */
+    private int myMaximumUpcomingAuctions;
+    
     /**
      * A management system for storing auctions by 
      * their dates. Handles rules for submitting new auctions.
@@ -56,9 +62,10 @@ public class AuctionCalendar implements Serializable {
         myDates = new LinkedList<>();
         myNumberOfFutureAuctions = 0;
         myCurrentDate = LocalDate.now();
+        myMaximumUpcomingAuctions = DEFAULT_MAXIMUM_FUTURE_AUCTIONS;
     }
     
-    //_________________________________________________________________________________________
+    //______________________________________________________________________________
     
     /**
      * Schedules a new auction if all the rules are met for
@@ -94,7 +101,7 @@ public class AuctionCalendar implements Serializable {
      * @return whether or not the schedule is at capacity yet
      */
     public boolean isAllowingNewAuction() {
-        return myNumberOfFutureAuctions < MAXIMUM_FUTURE_AUCTIONS;
+        return myNumberOfFutureAuctions < myMaximumUpcomingAuctions;
     }
     
     /**
@@ -196,20 +203,11 @@ public class AuctionCalendar implements Serializable {
         return newDate;
     }   
     
-//    public void submitAuction2(final Auction theAuction, 
-//            final int theDay, final int theMonth, final int theYear) 
-//                           throws IllegalArgumentException {
-//        AuctionDate dateForAuction = getAuctionDate(theDay, theMonth, theYear);
-//        if (!isAllowingNewAuction())
-//            throw new IllegalArgumentException(
-//                    "Already at maximum amount of auctions!");
-//        if (!isDateWithinEligableRange(dateForAuction))
-//            throw new IllegalArgumentException("Specified date (" 
-//                                + dateForAuction.format() 
-//                                + ") out of eligable range");
-//        dateForAuction.addAuction(theAuction);
-//        myNumberOfFutureAuctions++;
-//    }
+    public AuctionDate getAuctionDate(final LocalDate theDate) {
+        return getAuctionDate(theDate.getDayOfMonth(), 
+                theDate.getMonthValue(), theDate.getYear());
+    }
+    
     
     public void forceAddAuctionInThePast(Auction theAuction) {
         LocalDate pastDate = theAuction.getDate();
@@ -221,5 +219,69 @@ public class AuctionCalendar implements Serializable {
         myCurrentDate = LocalDate.now();
     }
    
+    /**
+     * Changes the current maximum number of auctions being accepted for the future.
+     * 
+     * pre-condition: the new maximum must be a positive integer
+     * post-condition: the calendar will now accept future auctions up until 
+     * reaching the new maximum.
+     * 
+     * @param theNewMax the new number of future auctions accepted
+     * @throws IllegelArgumentException if the number is not positive
+     */
+    public void setMaximumUpcomingAuctions(final int theNewMax) {
+        if (theNewMax <= 0) 
+            throw new IllegalArgumentException("Maximum must be a positive number!");
+        myMaximumUpcomingAuctions = theNewMax;
+    }
     
+    /**
+     * Gets the current number of future auctions being accepted.
+     * 
+     * @return the current capacity of future auctions.
+     */
+    public int getMaximumUpcomingAuctions() {
+        return myMaximumUpcomingAuctions;
+    }
+    
+    /**
+     * Gets all auctions within a specified range of dates, inclusive.
+     * 
+     * pre-condition: Start date is before or equal to end date.
+     * post_condition: returns all auctions in-between the given dates.
+     * 
+     * @param theStart the initial date of range
+     * @param theEnd the closing date of range
+     * @return all auctions between the two dates inclusive
+     */
+    public List<Auction> getAuctionsWithinRange(final LocalDate theStart, final LocalDate theEnd) {
+        if (theStart.isAfter(theEnd))
+            throw new IllegalArgumentException("Start Date is after end date!");
+        
+        List<Auction> auctionsWithinRange = new LinkedList<>();
+        for (AuctionDate date : myDates) {
+            if ((date.getDate().plusDays(1)).isAfter(theStart) 
+                    && (date.getDate().minusDays(1)).isBefore(theEnd)) {
+                auctionsWithinRange.addAll(date.getAuctions());
+            }
+        }
+        return auctionsWithinRange;
+    }
+
+    /**
+     * Gets all auctions in the calendar, past, present, and future.
+     * The auctions will be returned in sorted order.
+     * 
+     * pre-condition: 
+     * post-Condition: all auctions in the calendar returned in sorted order
+     * 
+     * @return all auctions in the calendar
+     */
+    public Collection<Auction> geAllAuctionsSorted() {
+        Set<Auction> allAuctions = new TreeSet<>();
+        for (AuctionDate date : myDates) {
+            allAuctions.addAll(date.getAuctions());
+        }
+        return allAuctions;
+    }
 }

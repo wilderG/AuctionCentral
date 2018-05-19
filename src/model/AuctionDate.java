@@ -59,6 +59,11 @@ public class AuctionDate implements Serializable {
         myAuctions = new LinkedList<>();
     }
     
+    public AuctionDate(final LocalDate theDate) {
+        this(theDate.getDayOfMonth(), theDate.getMonthValue(), theDate.getYear());
+    }
+    
+    //________________________________________________________________________________
     
     /**
      * Gets the number of auctions scheduled for this date.

@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.TreeSet;
 
 import backend.StorageIO;
@@ -180,4 +181,46 @@ public class AuctionManager implements Manager {
 		return newBid;
 	}
 
-}
+
+    /**
+     * Changes the current maximum number of auctions being accepted for the 
+     * calendar in the futureBTW.
+     * 
+     * pre-condition: the new maximum must be a positive integer
+     * post-condition: the calendar will now accept future auctions up until 
+     * reaching the new maximum.
+     * 
+     * @param theNewMax the new number of future auctions accepted
+     * @throws IllegelArgumentException if the number is not positive
+     */
+	public void setFutureAuctionCapacity(final int theNewCap) {
+	    myCalendar.setMaximumUpcomingAuctions(theNewCap);
+	}
+	
+    /**
+     * Gets all auctions within a specified range of dates, inclusive.
+     * 
+     * pre-condition: Start date is before or equal to end date.
+     * post_condition: returns all auctions in-between the given dates.
+     * 
+     * @param theStart the initial date of range
+     * @param theEnd the closing date of range
+     * @return all auctions between the two dates inclusive
+     */
+	public Collection<Auction> getAuctionsWithinRange(final LocalDate theStart, final LocalDate theEnd) {
+	    return myCalendar.getAuctionsWithinRange(theStart, theEnd);
+	}
+	
+    /**
+     * Gets all auctions in the calendar, past, present, and future.
+     * The auctions will be returned in sorted order.
+     * 
+     * pre-condition: 
+     * post-Condition: all auctions in the calendar returned in sorted order
+     * 
+     * @return all auctions in the calendar
+     */
+	public Collection<Auction> getAllAuctionsSorted() {
+	    return myCalendar.geAllAuctionsSorted();
+	}
+ }

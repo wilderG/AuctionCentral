@@ -28,7 +28,7 @@ public class DemoDataAlmostAtCapacityAuctions {
 
         Auction addedAuction;
         LocalDate dateOfAdd;
-        for (int i = 1; i < AuctionCalendar.MAXIMUM_FUTURE_AUCTIONS; i++) {
+        for (int i = 1; i < AuctionCalendar.DEFAULT_MAXIMUM_FUTURE_AUCTIONS; i++) {
             addedAuction = new Auction(LocalDate.now().plusDays(30 + i), 0, 0, "");
             dateOfAdd = addedAuction.getDate();
             calendar.submitAuction(addedAuction, dateOfAdd.getDayOfMonth(), dateOfAdd.getMonthValue(), dateOfAdd.getYear());
