@@ -70,8 +70,8 @@ public class AuctionCalendarTest {
      */
     @Test
     public void submitAuction_noAuctionsOnRequestedDate_newAuctionAdded() {
-        Auction testAuction = new Auction(null, 0, 0, "");
-        theCalendar.submitAuction(testAuction, 30, 5, 2018);
+        Auction testAuction = new Auction(null, "");
+        theCalendar.submitAuction(testAuction, 30, 6, 2018);
         assertEquals("Should have 1 auction", 1, theCalendar.getFutureNumberOfAuction());
         assertSame("Should be same auction scheduled", testAuction, theCalendar.getFutureAuctions().get(0));
     }
@@ -82,9 +82,9 @@ public class AuctionCalendarTest {
      */
     @Test
     public void submitAuction_lessThanMaxAuctionsOnRequestedDate_newAuctionAdded() {
-    		theCalendar.submitAuction(new Auction(null, 0, 0, ""), 30, 5, 2018);
-        Auction testAuction = new Auction(null, 0, 0, "");
-        theCalendar.submitAuction(testAuction, 30, 5, 2018);
+    		theCalendar.submitAuction(new Auction(null, ""), 30, 6, 2018);
+        Auction testAuction = new Auction(null, "");
+        theCalendar.submitAuction(testAuction, 30, 6, 2018);
         assertEquals("Should have 1 auction", 2, theCalendar.getFutureNumberOfAuction());
         assertSame("Should be same auction scheduled", testAuction, theCalendar.getFutureAuctions().get(1));
     }
@@ -96,9 +96,9 @@ public class AuctionCalendarTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void submitAuction_maxAuctionsOnRequestedDate_ExceptionThrown() {
-    		theCalendar.submitAuction(new Auction(null, 0, 0, ""), 30, 5, 2018);
-    		theCalendar.submitAuction(new Auction(null, 0, 0, ""), 30, 5, 2018);
-    		theCalendar.submitAuction(new Auction(null, 0, 0, ""), 30, 5, 2018);
+    		theCalendar.submitAuction(new Auction(null, ""), 30, 6, 2018);
+    		theCalendar.submitAuction(new Auction(null, ""), 30, 6, 2018);
+    		theCalendar.submitAuction(new Auction(null, ""), 30, 6, 2018);
     }
 	
 	@Test

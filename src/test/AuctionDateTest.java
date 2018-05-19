@@ -49,7 +49,7 @@ public class AuctionDateTest {
                 oneMonthFromToday.getYear());
         for (int i = 0; i < AuctionDate.MAX_AUCTIONS - 1; i++)
             dateWithOneLessThanCapacityAuctions.addAuction(
-            		new Auction(LocalDate.now().plusDays(30), 10, 4, "ACLU"));
+            		new Auction(LocalDate.now().plusDays(30), "ACLU"));
         
         dateWithCapacityAuctions = new AuctionDate(
                 oneMonthFromToday.getDayOfMonth(),
@@ -57,7 +57,7 @@ public class AuctionDateTest {
                 oneMonthFromToday.getYear());
         for (int i = 0; i < AuctionDate.MAX_AUCTIONS; i++)
             dateWithCapacityAuctions.addAuction(
-            		new Auction(LocalDate.now().plusDays(30), 10, 4, "NPR"));
+            		new Auction(LocalDate.now().plusDays(30), "NPR"));
     }
 
     /**
@@ -69,7 +69,7 @@ public class AuctionDateTest {
         assertEquals("date should hold no auctions yet", 0, 
                 dateWithNoAuctions.getAuctions().size());
         dateWithNoAuctions.addAuction(
-        		new Auction(LocalDate.now().plusDays(30), 10, 4, "Sierra Club"));
+        		new Auction(LocalDate.now().plusDays(30), "Sierra Club"));
         assertEquals("date should hold one auction now", 1, 
                 dateWithNoAuctions.getAuctions().size());
     }
@@ -81,7 +81,7 @@ public class AuctionDateTest {
     @Test
     public void addAuction_lessThanMaxAuctionsOnRequestedDate_newAuctionAdded() {
         dateWithOneLessThanCapacityAuctions.addAuction(
-        		new Auction(LocalDate.now().plusDays(30), 10, 4, "Green Peace"));
+        		new Auction(LocalDate.now().plusDays(30), "Green Peace"));
         
         assertEquals("date should hold capacity auctions now", 
                 AuctionDate.MAX_AUCTIONS, 
@@ -98,7 +98,7 @@ public class AuctionDateTest {
     public void addAuction_maxAuctionsOnRequestedDate_ExceptionThrown() {
         dateWithCapacityAuctions.addAuction(
         		new Auction(LocalDate.now().plusDays(30),
-        				10, 4, "St. Jude's Children's Research Hospital"));
+        				"St. Jude's Children's Research Hospital"));
     }
 
     /**

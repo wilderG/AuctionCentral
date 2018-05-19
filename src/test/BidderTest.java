@@ -54,6 +54,12 @@ public class BidderTest {
                 "Swiffer Duster");
         AuctionItem item10 = new AuctionItem(BigDecimal.valueOf(20.00),
                 "A Golf ball");
+        AuctionItem item11 = new AuctionItem(BigDecimal.valueOf(20.00),
+                "Regular Duster");
+        AuctionItem item12 = new AuctionItem(BigDecimal.valueOf(20.00),
+                "A Tennis ball");
+        
+        
         
         TreeSet<AuctionItem> auction1Items = new TreeSet<>();
         auction1Items.add(item1);
@@ -66,6 +72,9 @@ public class BidderTest {
         auction1Items.add(item8);
         auction1Items.add(item9);
         auction1Items.add(item10);
+        auction1Items.add(item11);
+        auction1Items.add(item12);
+        
         
         TreeSet<Bid> bidSetbidder1auction1 = new TreeSet<>();
         bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item1,
@@ -88,7 +97,13 @@ public class BidderTest {
                 BigDecimal.valueOf(21.00)));
         bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item10,
                 BigDecimal.valueOf(21.00)));
+        bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item11,
+                BigDecimal.valueOf(21.00)));
+        bidSetbidder1auction1.add(new Bid(bidderWithMaxBids, item12,
+                BigDecimal.valueOf(21.00)));
 
+        
+        
         TreeSet<Bid> bidSetbidder2auction1 = new TreeSet<>();
         bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item1,
                 BigDecimal.valueOf(21.00)));
@@ -108,13 +123,19 @@ public class BidderTest {
                 BigDecimal.valueOf(21.00)));
         bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item9,
                 BigDecimal.valueOf(21.00)));
+        bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item10,
+                BigDecimal.valueOf(21.00)));
+        bidSetbidder2auction1.add(new Bid(bidderWithBelowMaxBids, item11,
+                BigDecimal.valueOf(21.00)));
+        
+        
         
         TreeMap<Bidder, TreeSet<Bid>> bidSet1 = new TreeMap<>();
         bidSet1.put(bidderWithMaxBids, bidSetbidder1auction1);
         bidSet1.put(bidderWithBelowMaxBids, bidSetbidder2auction1);
         
         Auction auction1 = new Auction(LocalDate.now().plusDays(1),
-                10, 4, "The People Fund", auction1Items, bidSet1);
+                "The People Fund", auction1Items, bidSet1);
         
         bidderWithBelowMaxBids.addAuction(auction1);
         bidderWithMaxBids.addAuction(auction1);

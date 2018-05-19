@@ -286,29 +286,29 @@ public class DemoData {
 		
 		// Make Auctions
 		Auction auction0 = new Auction(LocalDate.of(2018, 4, 10),
-				10, 4, "The Human Fund");
+				"The Human Fund");
 		Auction auction1 = new Auction(LocalDate.of(2017, 5, 30),
-				10, 4, "The People Fund", auction1Items, bidSet1);
+				"The People Fund", auction1Items, bidSet1);
 		Auction auction2 = new Auction(LocalDate.of(2018, 5, 8),
-				10, 4, "The Fund For the People", auction2Items, bidSet2);
+				"The Fund For the People", auction2Items, bidSet2);
 		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9),
-				10, 4, "The Human Fund", auction3Items, bidSet3);
+				"The Human Fund", auction3Items, bidSet3);
 		Auction auction4 = new Auction(LocalDate.of(2018, 6, 4),
-				10, 4, "The Fund for Humans", auction4Items, bidSet4);
+				"The Fund for Humans", auction4Items, bidSet4);
 		Auction auction5 = new Auction(LocalDate.of(2018, 6, 4),
-				10, 4, "The Whale Fund", auction5Items, bidSet5);
+				"The Whale Fund", auction5Items, bidSet5);
 		Auction auction6 = new Auction(LocalDate.of(2018, 6, 5),
-				10, 4, "The Fund for Whales", auction6Items, bidSet6);
+				"The Fund for Whales", auction6Items, bidSet6);
 		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6),
-				10, 4, "N\\A");
+				"N\\A");
 		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7),
-				10, 4, "N\\A");
+				"N\\A");
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
-				10, 4, "N\\A");
+				"N\\A");
         Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
-                10, 4, "The Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
+                "The Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
         Auction auction3333 = new Auction(LocalDate.of(2017, 5, 9),
-                10, 4, "The Newer Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
+                "The Newer Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
 		
 		
 		

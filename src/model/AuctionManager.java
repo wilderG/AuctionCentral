@@ -24,12 +24,6 @@ public class AuctionManager implements Manager {
 	/** The storage object to save and load persistent data. **/
 	private StorageIO storage;
 		
-	/** The default maximum auction items for an auction. **/
-	private static final int MAXIMUM_AUCTION_ITEMS = 10;
-	
-	/** The default number of bids a bidder may place in any one auction. **/
-	private static final int MAXIMUM_BIDDER_BIDS_PER_AUCTION = 4;
-		
 	/** The schedule of all past and future auctions. **/
 	private AuctionCalendar myCalendar;
 	
@@ -89,8 +83,7 @@ public class AuctionManager implements Manager {
 		NonProfitContact sponsor = theAuctionRequest.getMySponsor();
 		LocalDate auctionDate = theAuctionRequest.getMyDate();
 		
-		Auction newAuction = new Auction(auctionDate, MAXIMUM_AUCTION_ITEMS,
-				MAXIMUM_BIDDER_BIDS_PER_AUCTION, sponsor.getDisplayName());
+		Auction newAuction = new Auction(auctionDate, sponsor.getDisplayName());
 		
 		if (!sponsor.isDateForProposedAuctionValid(newAuction)) {
 			throw new IllegalArgumentException(

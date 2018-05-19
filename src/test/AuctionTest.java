@@ -28,17 +28,17 @@ public class AuctionTest {
 	private static Bidder bidder;
 	
 	/** The maximum allowed bids for the bidder. **/
-	private final static int MAX_BID_COUNT = 4;
+	private final static int maxBidCount = Auction.MAXIMUM_BID_COUNT_EACH_BIDDER;
 	
 	@Before
 	public void setUp() throws Exception {
 		LocalDate testDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT+1);
 		
-		auction = new Auction(testDate, 10, MAX_BID_COUNT, "Human Rights Watch");
+		auction = new Auction(testDate, "Human Rights Watch");
 		bidder = new Bidder("tester", "Test Bidder");
 		
 		//add item test fixtures
-		for (int i = 0; i < MAX_BID_COUNT - 1; i++) {
+		for (int i = 0; i < maxBidCount - 1; i++) {
 			AuctionItem testItem;
 			testItem = new AuctionItem(BigDecimal.valueOf((i+1)), 
 					"Test Item " + (i + 1));
@@ -64,12 +64,12 @@ public class AuctionTest {
 	public void IsAllowToBidAuctionHasMaximumAllowedBids_ShouldReturnFalse() {
 		// add one more bid to reach maximum
 		AuctionItem testItem;
-		testItem = new AuctionItem(BigDecimal.valueOf((MAX_BID_COUNT)), 
-				"Test Item " + MAX_BID_COUNT);
+		testItem = new AuctionItem(BigDecimal.valueOf((maxBidCount)), 
+				"Test Item " + maxBidCount);
 		auction.addItem(testItem);
 		
 		Bid testBid = new Bid(bidder, testItem, 
-				BigDecimal.valueOf(MAX_BID_COUNT+1));
+				BigDecimal.valueOf(maxBidCount+1));
 		auction.addBid(bidder, testBid);
 		
 		assertFalse(auction.isAllowingNewBid(bidder));
