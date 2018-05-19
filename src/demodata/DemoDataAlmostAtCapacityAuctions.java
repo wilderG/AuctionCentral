@@ -26,18 +26,21 @@ public class DemoDataAlmostAtCapacityAuctions {
         StorageIO storage = new StorageIO(fileName, true);
         AuctionCalendar calendar = storage.getCalendar();
 
-        Auction addedAuction;
-        LocalDate dateOfAdd;
-        for (int i = 1; i < AuctionCalendar.MAXIMUM_FUTURE_AUCTIONS; i++) {
-            addedAuction = new Auction(LocalDate.now().plusDays(30 + i), "");
-            dateOfAdd = addedAuction.getDate();
-            calendar.submitAuction(addedAuction, dateOfAdd.getDayOfMonth(), dateOfAdd.getMonthValue(), dateOfAdd.getYear());
-        }
-
         // non-profit to add an auction successfully
         NonProfitContact nonProfit1 = new NonProfitContact("nonprof1", "The Human Fund");
         // non-profit to try and add an auction and fails 
         NonProfitContact nonProfit2 = new NonProfitContact("nonprof2", "The Fund for People");
+        
+        Auction addedAuction;
+        LocalDate dateOfAdd;
+        for (int i = 1; i < AuctionCalendar.MAXIMUM_FUTURE_AUCTIONS; i++) {
+            addedAuction = new Auction(LocalDate.now().plusDays(30 + i), nonProfit1);
+            dateOfAdd = addedAuction.getDate();
+            nonProfit1.addAuction(addedAuction);
+            calendar.submitAuction(addedAuction, dateOfAdd.getDayOfMonth(), dateOfAdd.getMonthValue(), 
+            		dateOfAdd.getYear());
+        }
+
         storage.storeUser(nonProfit1);
         storage.storeUser(nonProfit2);
         storage.setCalendar(calendar);

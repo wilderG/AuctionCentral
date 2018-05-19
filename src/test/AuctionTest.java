@@ -12,6 +12,7 @@ import model.AuctionCalendar;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
+import model.NonProfitContact;
 
 /**
  * Tests that an auction will not allow bids from a bidder
@@ -27,6 +28,10 @@ public class AuctionTest {
 	/** Bidder test fixture. **/
 	private static Bidder bidder;
 	
+	/** NonProfit test fixture. **/
+	private final NonProfitContact auctionOwner = new NonProfitContact("test", "Test User");
+	
+	
 	/** The maximum allowed bids for the bidder. **/
 	private final static int maxBidCount = Auction.MAXIMUM_BID_COUNT_EACH_BIDDER;
 	
@@ -34,7 +39,7 @@ public class AuctionTest {
 	public void setUp() throws Exception {
 		LocalDate testDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT+1);
 		
-		auction = new Auction(testDate, "Human Rights Watch");
+		auction = new Auction(testDate, auctionOwner);
 		bidder = new Bidder("tester", "Test Bidder");
 		
 		//add item test fixtures

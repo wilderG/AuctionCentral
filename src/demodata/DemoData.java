@@ -286,29 +286,29 @@ public class DemoData {
 		
 		// Make Auctions
 		Auction auction0 = new Auction(LocalDate.of(2018, 4, 10),
-				"The Human Fund");
+				nonProfit1);
 		Auction auction1 = new Auction(LocalDate.of(2017, 5, 30),
-				"The People Fund", auction1Items, bidSet1);
+				nonProfit2, auction1Items, bidSet1);
 		Auction auction2 = new Auction(LocalDate.of(2018, 5, 8),
-				"The Fund For the People", auction2Items, bidSet2);
+				nonProfit3, auction2Items, bidSet2);
 		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9),
-				"The Human Fund", auction3Items, bidSet3);
+				nonProfit1, auction3Items, bidSet3);
 		Auction auction4 = new Auction(LocalDate.of(2018, 6, 4),
-				"The Fund for Humans", auction4Items, bidSet4);
+				nonProfit4, auction4Items, bidSet4);
 		Auction auction5 = new Auction(LocalDate.of(2018, 6, 4),
-				"The Whale Fund", auction5Items, bidSet5);
+				nonProfit5, auction5Items, bidSet5);
 		Auction auction6 = new Auction(LocalDate.of(2018, 6, 5),
-				"The Fund for Whales", auction6Items, bidSet6);
+				nonProfit6, auction6Items, bidSet6);
 		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6),
-				"N\\A");
+				nonProfit13);
 		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7),
-				"N\\A");
+				nonProfit14);
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
-				"N\\A");
+				nonProfit15);
         Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
-                "The Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
+                nonProfit16, new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
         Auction auction3333 = new Auction(LocalDate.of(2017, 5, 9),
-                "The Newer Old Fund", new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
+                nonProfit17, new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
 		
 		
 		

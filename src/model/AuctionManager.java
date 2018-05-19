@@ -83,7 +83,7 @@ public class AuctionManager implements Manager {
 		NonProfitContact sponsor = theAuctionRequest.getMySponsor();
 		LocalDate auctionDate = theAuctionRequest.getMyDate();
 		
-		Auction newAuction = new Auction(auctionDate, sponsor.getDisplayName());
+		Auction newAuction = new Auction(auctionDate, sponsor);
 		
 		if (!sponsor.isDateForProposedAuctionValid(newAuction)) {
 			throw new IllegalArgumentException(
@@ -173,4 +173,14 @@ public class AuctionManager implements Manager {
 		return newBid;
 	}
 
+	public void removeAuction(final Auction theAuction) {
+		if (theAuction.isEmptyBids()) {
+			// remove auction from sponsor
+			theAuction.getOwner().removeAuction(theAuction);
+			
+			// remove auction from calendar
+			
+		}
+	}
+	
 }

@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import model.Auction;
 import model.AuctionDate;
+import model.NonProfitContact;
 
 
 
@@ -35,6 +36,8 @@ public class AuctionDateTest {
     
     private AuctionDate dateWithCapacityAuctions;
     
+    private final NonProfitContact auctionOwner = new NonProfitContact("test", "Test User");
+	    
     @Before
     public void setup() {
         oneMonthFromToday = LocalDate.now().plusMonths(1);
@@ -49,7 +52,7 @@ public class AuctionDateTest {
                 oneMonthFromToday.getYear());
         for (int i = 0; i < AuctionDate.MAX_AUCTIONS - 1; i++)
             dateWithOneLessThanCapacityAuctions.addAuction(
-            		new Auction(LocalDate.now().plusDays(30), "ACLU"));
+            		new Auction(LocalDate.now().plusDays(30), auctionOwner));
         
         dateWithCapacityAuctions = new AuctionDate(
                 oneMonthFromToday.getDayOfMonth(),
@@ -57,7 +60,7 @@ public class AuctionDateTest {
                 oneMonthFromToday.getYear());
         for (int i = 0; i < AuctionDate.MAX_AUCTIONS; i++)
             dateWithCapacityAuctions.addAuction(
-            		new Auction(LocalDate.now().plusDays(30), "NPR"));
+            		new Auction(LocalDate.now().plusDays(30), auctionOwner));
     }
 
     /**
@@ -69,7 +72,7 @@ public class AuctionDateTest {
         assertEquals("date should hold no auctions yet", 0, 
                 dateWithNoAuctions.getAuctions().size());
         dateWithNoAuctions.addAuction(
-        		new Auction(LocalDate.now().plusDays(30), "Sierra Club"));
+        		new Auction(LocalDate.now().plusDays(30), auctionOwner));
         assertEquals("date should hold one auction now", 1, 
                 dateWithNoAuctions.getAuctions().size());
     }
@@ -81,7 +84,7 @@ public class AuctionDateTest {
     @Test
     public void addAuction_lessThanMaxAuctionsOnRequestedDate_newAuctionAdded() {
         dateWithOneLessThanCapacityAuctions.addAuction(
-        		new Auction(LocalDate.now().plusDays(30), "Green Peace"));
+        		new Auction(LocalDate.now().plusDays(30), auctionOwner));
         
         assertEquals("date should hold capacity auctions now", 
                 AuctionDate.MAX_AUCTIONS, 
@@ -98,7 +101,7 @@ public class AuctionDateTest {
     public void addAuction_maxAuctionsOnRequestedDate_ExceptionThrown() {
         dateWithCapacityAuctions.addAuction(
         		new Auction(LocalDate.now().plusDays(30),
-        				"St. Jude's Children's Research Hospital"));
+        				auctionOwner));
     }
 
     /**

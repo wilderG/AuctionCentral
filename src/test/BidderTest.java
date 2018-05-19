@@ -17,6 +17,7 @@ import model.Auction;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
+import model.NonProfitContact;
 
 /**
  * @author Jim Rosales
@@ -26,6 +27,9 @@ public class BidderTest {
 	private Bidder bidderWithMaxBids;
 	private Bidder bidderWithBelowMaxBids;
 
+	/** NonProfit test fixture. **/
+	private final NonProfitContact auctionOwner = new NonProfitContact("test", "Test User");
+	
 	/**
 	 * Constructs the necessary objects for the executed tests.
 	 */
@@ -135,7 +139,7 @@ public class BidderTest {
         bidSet1.put(bidderWithBelowMaxBids, bidSetbidder2auction1);
         
         Auction auction1 = new Auction(LocalDate.now().plusDays(1),
-                "The People Fund", auction1Items, bidSet1);
+                auctionOwner, auction1Items, bidSet1);
         
         bidderWithBelowMaxBids.addAuction(auction1);
         bidderWithMaxBids.addAuction(auction1);

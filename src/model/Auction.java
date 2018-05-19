@@ -33,10 +33,8 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	/** The collection of bids for this auction. **/
 	private TreeMap<Bidder, TreeSet<Bid>> myBids;
 	
-	/**
-	 * 
-	 */
-	private String myNonProfitName;
+	/** The non-profit associated with this auction. **/
+	private NonProfitContact myOwner;
 	
 	/**
 	 * Creates a new auction.
@@ -45,15 +43,15 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
 
 	 */
-	public Auction(final LocalDate theDate, String theNonProfit) {
+	public Auction(final LocalDate theDate, NonProfitContact theNonProfit) {
 		myDate = theDate;
-		myNonProfitName = theNonProfit;
+		myOwner = theNonProfit;
 		myItems = new TreeSet<>();
 		myBids = new TreeMap<>();
 	}
 	
 	
-	public Auction(final LocalDate theDate, String theNonProfit,
+	public Auction(final LocalDate theDate, NonProfitContact theNonProfit,
 			final TreeSet<AuctionItem> theItems, final TreeMap<Bidder, TreeSet<Bid>> theBids) {
 		this(theDate, theNonProfit);
 		myItems = theItems;
@@ -77,7 +75,11 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	 * @return The name of the non profit associated with the non-profit.
 	 */
 	public String getName() {
-		return myNonProfitName;
+		return myOwner.getDisplayName();
+	}
+	
+	public NonProfitContact getOwner() {
+		return myOwner;
 	}
 	
 	/**
@@ -211,11 +213,14 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		return bid;
 	}
 
+	public boolean isEmptyBids() {
+		return myBids.isEmpty();
+	}
 
 	@Override
 	public int compareTo(Auction theOther) {
 		if (myDate.equals(theOther.myDate)) {
-			return myNonProfitName.compareTo(theOther.myNonProfitName);
+			return myOwner.compareTo(theOther.myOwner);
 		} else {
 			return myDate.compareTo(theOther.myDate);
 		}
