@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
+import model.Bidder;
 import model.User;
 
 public class UserViewController implements Initializable {
@@ -55,7 +56,7 @@ public class UserViewController implements Initializable {
 		myManager = SessionController.getManager();
 		configureEventListeners();
 		updateDisplayName();
-		showTiles();
+		showBidderAuctionInformation();
 	}
 
 	/*
@@ -79,17 +80,33 @@ public class UserViewController implements Initializable {
 	}
 
 	
-	private void showTiles() {
+	private void showBidderAuctionInformation() {
+		
+        // Load person overview.
+//        FXMLLoader loader = new FXMLLoader();
+//        loader.setLocation(MainApp.class.getResource("ScreenDemo.fxml"));
+//        AnchorPane screenDemo = (AnchorPane) loader.load();
+//
+//        // Set person overview into the center of root layout.
+//        rootLayout.setCenter(screenDemo);
+        
 			
-			try {
-				FlowPane tile = (FlowPane) FXMLLoader.load(UserViewController.class.getResource("InformationContainer.fxml"));
-				myGridPane.add(tile, 0, 2);
-				tile.prefWidthProperty().bind(myGridPane.widthProperty().subtract(20));
-				tile.prefHeightProperty().bind(myGridPane.heightProperty().subtract(20));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-//		}
+		try {
+
+			FXMLLoader loader = new FXMLLoader();
+			// Give the controller access to the main app.
+	        InformationContainerController controller = (InformationContainerController) loader.getController();
+	        controller.setMainApp(this);
+//	        controller.loadAuctionInformation(myManager.getAvailableAuctions((Bidder) myUser));
+
+			FlowPane tile = (FlowPane) loader.load(UserViewController.class.getResource("InformationContainer.fxml"));
+			myGridPane.add(tile, 0, 2);
+			tile.prefWidthProperty().bind(myGridPane.widthProperty().subtract(20));
+			tile.prefHeightProperty().bind(myGridPane.heightProperty().subtract(20));
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
