@@ -19,10 +19,10 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	private static final long serialVersionUID = -5386584822819727993L;
 	
 	/** The maximum number of items allowed for this auction. **/
-	private int myMaximumItems;
+	public static final int MAXIMUM_ITEM_COUNT = 10;
 	
 	/** The maximum number of bids allowed from a single bidder. **/
-	private int myMaximumBidsFromUniqueBidder;
+	public static final int MAXIMUM_BID_COUNT_EACH_BIDDER = 8;
 	
 	/** The date of this auction. **/
 	private final LocalDate myDate;
@@ -33,10 +33,8 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	/** The collection of bids for this auction. **/
 	private TreeMap<Bidder, TreeSet<Bid>> myBids;
 	
-	/**
-	 * 
-	 */
-	private String myNonProfitName;
+	/** The non-profit associated with this auction. **/
+	private NonProfitContact myOwner;
 	
 	/**
 	 * Creates a new auction.
@@ -45,19 +43,17 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
 
 	 */
-	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount, String theNonProfit) {
+	public Auction(final LocalDate theDate, NonProfitContact theNonProfit) {
 		myDate = theDate;
-		myMaximumItems = theMaxItemCount;
-		myNonProfitName = theNonProfit;
-		myMaximumBidsFromUniqueBidder = theMaxBidCount;
+		myOwner = theNonProfit;
 		myItems = new TreeSet<>();
 		myBids = new TreeMap<>();
 	}
 	
 	
-	public Auction(final LocalDate theDate, final int theMaxItemCount, final int theMaxBidCount, String theNonProfit,
+	public Auction(final LocalDate theDate, NonProfitContact theNonProfit,
 			final TreeSet<AuctionItem> theItems, final TreeMap<Bidder, TreeSet<Bid>> theBids) {
-		this(theDate, theMaxItemCount, theMaxBidCount, theNonProfit);
+		this(theDate, theNonProfit);
 		myItems = theItems;
 		myBids = theBids;
 	}
@@ -79,7 +75,11 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	 * @return The name of the non profit associated with the non-profit.
 	 */
 	public String getName() {
-		return myNonProfitName;
+		return myOwner.getDisplayName();
+	}
+	
+	public NonProfitContact getOwner() {
+		return myOwner;
 	}
 	
 	/**
@@ -132,7 +132,7 @@ public final class Auction implements Serializable, Comparable<Auction> {
 			result = false;
 		} else if (myBids.containsKey(theBidder)) {
 			int bidCount = myBids.get(theBidder).size(); 
-			result = bidCount < myMaximumBidsFromUniqueBidder;
+			result = bidCount < MAXIMUM_BID_COUNT_EACH_BIDDER;
 		} 
 
 		return result;
@@ -143,7 +143,7 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	 * @return true if a new item may be added.
 	 */
 	public boolean isAllowingNewItem() {
-		return (myItems.size() < myMaximumItems);
+		return (myItems.size() < MAXIMUM_ITEM_COUNT);
 	}
 	
 	/**
@@ -195,7 +195,7 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	}
 
 	public int getAvailableSpace() {
-		return myMaximumItems - myItems.size();
+		return MAXIMUM_ITEM_COUNT - myItems.size();
 	}
 	
 	public TreeSet<Bid> getMyBids(final Bidder theBidder) {		
@@ -213,11 +213,14 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		return bid;
 	}
 
+	public boolean isEmptyBids() {
+		return myBids.isEmpty();
+	}
 
 	@Override
 	public int compareTo(Auction theOther) {
 		if (myDate.equals(theOther.myDate)) {
-			return myNonProfitName.compareTo(theOther.myNonProfitName);
+			return myOwner.compareTo(theOther.myOwner);
 		} else {
 			return myDate.compareTo(theOther.myDate);
 		}

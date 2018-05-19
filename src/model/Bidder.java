@@ -15,7 +15,7 @@ public class Bidder extends User {
 	/**
 	 * The default max number of bids that a bidder can have.
 	 */
-	public static final int MY_MAX_BID_COUNT = 10;
+	public static final int MY_MAX_BID_COUNT = 12;
 	
 	/**
 	 * Constructor for a bidder

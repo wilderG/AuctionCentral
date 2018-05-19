@@ -87,4 +87,7 @@ public class User implements Serializable, Comparable<User> {
 		}
 	}
 	
+	public void removeAuction(final Auction theAuction) {
+		myAuctions.remove(theAuction);
+    }
 }
