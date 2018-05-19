@@ -35,10 +35,7 @@ public class AuctionCalendarTest {
 	private AuctionDate theNonAcceptableDateBeforeMinimumDaysOutAndWithinMaximumDaysOut;
 
 	private final NonProfitContact auctionOwner = new NonProfitContact("test", "Test User");
-	
-	/**
-	 * 
-	 */
+
 	@Before
 	public void setUp() {
 		theCurrentDay = LocalDate.now();
@@ -74,7 +71,9 @@ public class AuctionCalendarTest {
     @Test
     public void submitAuction_noAuctionsOnRequestedDate_newAuctionAdded() {
         Auction testAuction = new Auction(null, auctionOwner);
-        theCalendar.submitAuction(testAuction, 30, 6, 2018);
+        LocalDate acceptableDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        theCalendar.submitAuction(testAuction, acceptableDate.getDayOfMonth(),
+                acceptableDate.getMonthValue(), acceptableDate.getYear());
         assertEquals("Should have 1 auction", 1, theCalendar.getFutureNumberOfAuction());
         assertSame("Should be same auction scheduled", testAuction, theCalendar.getFutureAuctions().get(0));
     }
@@ -85,9 +84,12 @@ public class AuctionCalendarTest {
      */
     @Test
     public void submitAuction_lessThanMaxAuctionsOnRequestedDate_newAuctionAdded() {
-    		theCalendar.submitAuction(new Auction(null, auctionOwner), 30, 6, 2018);
+        LocalDate acceptableDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        theCalendar.submitAuction(new Auction(null, auctionOwner), acceptableDate.getDayOfMonth(),
+                acceptableDate.getMonthValue(), acceptableDate.getYear());
         Auction testAuction = new Auction(null, auctionOwner);
-        theCalendar.submitAuction(testAuction, 30, 6, 2018);
+        theCalendar.submitAuction(testAuction, acceptableDate.getDayOfMonth(),
+                acceptableDate.getMonthValue(), acceptableDate.getYear());
         assertEquals("Should have 1 auction", 2, theCalendar.getFutureNumberOfAuction());
         assertSame("Should be same auction scheduled", testAuction, theCalendar.getFutureAuctions().get(1));
     }
@@ -99,9 +101,11 @@ public class AuctionCalendarTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void submitAuction_maxAuctionsOnRequestedDate_ExceptionThrown() {
-    		theCalendar.submitAuction(new Auction(null, auctionOwner), 30, 6, 2018);
-    		theCalendar.submitAuction(new Auction(null, auctionOwner), 30, 6, 2018);
-    		theCalendar.submitAuction(new Auction(null, auctionOwner), 30, 6, 2018);
+        LocalDate acceptableDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        for (int i = 0; i <= AuctionDate.MAX_AUCTIONS; i++) {
+            theCalendar.submitAuction(new Auction(null, auctionOwner), acceptableDate.getDayOfMonth(),
+                    acceptableDate.getMonthValue(), acceptableDate.getYear());
+        }
     }
 	
 	@Test

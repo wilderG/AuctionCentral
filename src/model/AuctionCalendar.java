@@ -253,6 +253,7 @@ public class AuctionCalendar implements Serializable {
      * @param theStart the initial date of range
      * @param theEnd the closing date of range
      * @return all auctions between the two dates inclusive
+     * @throws IllegalArgumentException if start date is after end date
      */
     public List<Auction> getAuctionsWithinRange(final LocalDate theStart, final LocalDate theEnd) {
         if (theStart.isAfter(theEnd))
