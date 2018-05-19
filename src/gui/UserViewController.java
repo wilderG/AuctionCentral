@@ -7,10 +7,13 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
@@ -30,6 +33,12 @@ public class UserViewController implements Initializable {
 	
 	@FXML
 	FlowPane tileDisplay;
+	
+	@FXML
+	FlowPane informationDisplay;
+	
+	@FXML
+	GridPane myGridPane;
 	
 //	public MainViewController(final User theUser, final AuctionManager theManager) {
 //		myUser = theUser;
@@ -71,16 +80,16 @@ public class UserViewController implements Initializable {
 
 	
 	private void showTiles() {
-		for (int count = 0; count < 5; count++) {
 			
 			try {
-				SplitPane tile = (SplitPane) FXMLLoader.load(UserViewController.class.getResource("auctionTile.fxml"));
-				tileDisplay.getChildren().add(tile);
+				FlowPane tile = (FlowPane) FXMLLoader.load(UserViewController.class.getResource("InformationContainer.fxml"));
+				myGridPane.add(tile, 0, 2);
+				tile.prefWidthProperty().bind(myGridPane.widthProperty().subtract(20));
+				tile.prefHeightProperty().bind(myGridPane.heightProperty().subtract(20));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
+//		}
 	}
 	
 	
