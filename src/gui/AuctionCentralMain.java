@@ -19,8 +19,8 @@ public class AuctionCentralMain extends Application {
 	@Override
 	public void start(final Stage thePrimaryStage) throws Exception {
         SessionController.initialize(thePrimaryStage);
-        myPrimaryStage = thePrimaryStage;
-        myPrimaryStage.setTitle("Auction Central");
+        this.myPrimaryStage = thePrimaryStage;
+        this.myPrimaryStage.setTitle("Auction Central");
         
         myPrimaryStage.show();
         
