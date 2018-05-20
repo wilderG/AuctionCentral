@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.geometry.*?>
@@ -26,12 +27,12 @@
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </opaqueInsets>
          <children>
-            <Label alignment="BOTTOM_LEFT" prefHeight="85.0" prefWidth="81.0" text="Welcome" GridPane.columnIndex="1">
+            <Label alignment="BOTTOM_LEFT" prefHeight="85.0" prefWidth="81.0" text="Welcome" textFill="#20e1e1" GridPane.columnIndex="1">
                <font>
                   <Font name="Tahoma" size="20.0" />
                </font>
             </Label>
-            <Label text="User Name:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="User Name:" textFill="#e48b0e" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="usernameField" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Button fx:id="loginButton" mnemonicParsing="false" text="Login" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2" GridPane.valignment="TOP" />
             <Text fx:id="actionTarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
