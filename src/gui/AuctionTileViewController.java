@@ -24,12 +24,12 @@ public class AuctionTileViewController {
 	/**
 	 * The hex value for the default color of myleftInfoPane.
 	 */
-	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#0FD171";
+	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#53B799";
 	
 	/**
 	 * The hex value for the default on hover color of myLeftInfoPane.
 	 */
-	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#17BA97";
+	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#59C4A4";
 
 	/**
 	 * The string dialog used to present the item count to the user.
@@ -138,7 +138,7 @@ public class AuctionTileViewController {
 	 *
 	 * Pre-Condition: theCount != null
 	 * Post-Condition: The label will be set to BID_COUNT_DIALOG + theCount
-	 * @param theCount The number of bids that the auction has.
+	 * @param theCount The number of bids that the auction has/
 	 */
 	public void setBidCountField(int theCount) {
 		myBidCountField.setText(BID_COUNT_DIALOG + theCount);
@@ -183,14 +183,14 @@ public class AuctionTileViewController {
 	@FXML
 	private void onMouseEntered() {
 		myLeftInfoPane.setBackground(
-				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
+				new Background(new BackgroundFill(Color.web(ON_HOVER_DEFAULT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
 	@FXML
 	private void onMouseExited() {
 		myLeftInfoPane.setBackground(
-				new Background(new BackgroundFill(Color.web(ON_HOVER_DEFAULT_INFO_PANE_COLOR),
+				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 
 	}
