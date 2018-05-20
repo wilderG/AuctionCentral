@@ -96,9 +96,10 @@ public class SessionController {
 	 */
 	public static void userLogin(User theUser) {
 		myUser = theUser;
-		InformationContainerViewController informationContainerController = loadAuctionInfo(USER_VIEW);
+		UserViewController userViewController = loadUserView();
+		InformationContainerViewController informationContainerController = loadInformationContainerView(userViewController);
 		if (theUser instanceof Bidder) {
-			loadBidderInformation(informationContainerController);	
+			loadBidderAuctionInformation(informationContainerController);	
 		} else if (theUser instanceof NonProfitContact) {
 			//			loadNonProfitAuctionInformation(USER_VIEW);
 		} else if (theUser instanceof Manager) {
@@ -109,7 +110,7 @@ public class SessionController {
 
 	/**
 	 * Logs the user out of the current session.
-	 * Post-Condition: 
+	 * Post-Condition: The load screen which will allow a user to login in will be loaded.
 	 */
 	public static void userLogout() {
 		myUser = null;
@@ -117,10 +118,10 @@ public class SessionController {
 	}
 
 	/**
-	 * 
-	 * Pre-Condition:
-	 * Post-Condition:
-	 * @param theScene
+	 * Loads the given scene onto the stage.
+	 * Pre-Condition: myStage != null
+	 * Post-Condition: The given scene will be loaded and set as the current scene.
+	 * @param theScene that will be loaded.
 	 */
 	private static void loadScene(final String theScene) {
 		try {
@@ -128,7 +129,7 @@ public class SessionController {
 			myStage.setScene(new Scene((Pane) loader.load()));
 		} catch (Exception e) {
 			if (myStage == null) {
-				System.err.println("ViewController stage is null");
+				System.err.println("Stage is null");
 			} 
 			System.err.println("Unable to load scene: " + theScene);
 			e.printStackTrace();
@@ -136,12 +137,14 @@ public class SessionController {
 	}
 
 	/**
-	 * 
-	 * Pre-Condition:
-	 * Post-Condition:
-	 * @param thecController
+	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
+	 * Pre-Condition: theController != null
+	 * Post-Condition: An autionTile will be created for each auction associated with the user and added to
+	 * the flowPane of the InformationContainerView
+	 * @param theController associated with the InformationContainerView where all the bidders information will
+	 * be appended. 
 	 */
-	private static void loadBidderInformation(InformationContainerViewController theController) {
+	private static void loadBidderAuctionInformation(InformationContainerViewController theController) {
 		for (Auction auction: myUser.getMyAuctions()) {
 			FXMLLoader auctionTileLoader = new FXMLLoader();
 
@@ -163,40 +166,56 @@ public class SessionController {
 	}
 
 	/**
-	 * 
-	 * Pre-Condition:
-	 * Post-Condition:
-	 * @param theScene
-	 * @return
+	 * Loads a userView onto myStage.
+	 * Pre-Condition: myStage != null
+	 * Post-Condition: A userView will be set as a scene in myStage
+	 * @return A UserViewController associated with the newly created UserView.
 	 */
-	private static InformationContainerViewController loadAuctionInfo(final String theScene) {
-		InformationContainerViewController informationContainerViewController = null;
+	private static UserViewController loadUserView() {
+		UserViewController userViewController = null;
 		try {
-			FXMLLoader userViewLoader = new FXMLLoader(SessionController.class.getResource(theScene));
+			FXMLLoader userViewLoader = new FXMLLoader(SessionController.class.getResource(USER_VIEW));
 			myStage.setScene(new Scene((Pane) userViewLoader.load()));
 
-			UserViewController userViewController = (UserViewController) userViewLoader.getController();
-
-
-			// Load the information container
-			FXMLLoader informationContainerLoader = new FXMLLoader();
-			informationContainerLoader.setLocation(UserViewController.class.getResource(INFORMATION_CONTAINER_VIEW));
-
-
-			FlowPane informationContainerView = (FlowPane) informationContainerLoader.load();
-			userViewController.addToGrid(informationContainerView, 0, 2);
-			GridPane gridPane = userViewController.getMyGrid();
-			informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));
-			informationContainerView.prefHeightProperty().bind(gridPane.heightProperty().subtract(20));
-			informationContainerViewController = (InformationContainerViewController) informationContainerLoader.getController();
+			userViewController = (UserViewController) userViewLoader.getController();
 
 		} catch (Exception e) {
 			if (myStage == null) {
 				System.err.println("The stage is null");
 			} 
-			System.err.println("Unable to load scene: " + theScene);
+			System.err.println("Unable to load scene: " + USER_VIEW);
 			e.printStackTrace();
 		}
+		return userViewController;
+	}
+	
+
+	/**
+	 * Loads an InformationContainerView into theUserView associated with the given userViewController.
+	 * Pre-Condition: theUserViewController != null
+	 * Post-Condition: An informationViewContainerView will be added onto the userView's grid that is associated with the given
+	 * userViewController
+	 * @param theUserViewController that will be used to add the newly created InformationContainerView.
+	 * @return An InformationContainerViewController associated with the newly created InformationContainerView.
+	 */
+	private static InformationContainerViewController loadInformationContainerView(UserViewController theUserViewController) {
+		InformationContainerViewController informationContainerViewController = null;
+		FXMLLoader informationContainerLoader = new FXMLLoader();
+		informationContainerLoader.setLocation(UserViewController.class.getResource(INFORMATION_CONTAINER_VIEW));
+
+
+		FlowPane informationContainerView = null;
+		try {
+			informationContainerView = (FlowPane) informationContainerLoader.load();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		theUserViewController.addToGrid(informationContainerView, 0, 2);
+		GridPane gridPane = theUserViewController.getMyGrid();
+		informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));
+		informationContainerView.prefHeightProperty().bind(gridPane.heightProperty().subtract(20));
+		informationContainerViewController = (InformationContainerViewController) informationContainerLoader.getController();
+		
 		return informationContainerViewController;
 	}
 

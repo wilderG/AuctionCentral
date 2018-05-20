@@ -65,7 +65,7 @@ public class UserViewController implements Initializable {
 	
 	/**
 	 * Configures all the necessary logout buttons event listeners.
-	 * Pre-Condition: The logout button is not null
+	 * Pre-Condition: theLogOutButton != null
 	 * Post-Condition: Event handler for house clicks will be added to the logout button
 	 */
 	private void configureEventListeners() {
@@ -81,7 +81,7 @@ public class UserViewController implements Initializable {
 	
 	/**
 	 * Updates theUserDisplay label to show the current users name.s
-	 * Pre-Condition: theUserDisplay label is not null
+	 * Pre-Condition: theUserDisplayName != null
 	 * Post-Condition: theUserDisplay label will be initialized with the current users name.
 	 */
 	private void updateDisplayName() {
