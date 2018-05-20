@@ -1,127 +1,112 @@
 package gui;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import model.Auction;
-import model.AuctionItem;
-import model.AuctionManager;
-import model.Bidder;
 import model.User;
 
+/**
+ * View constructs a user view interface where the various users of the system can accomplish all necessary tasks
+ * @author Jared Malone
+ * @author Jim Rosales
+ *
+ */
 public class UserViewController implements Initializable {
 
+	/**
+	 * The user who logged into the system.
+	 */
 	private User myUser;
 	
-	private AuctionManager myManager;
-	
+	/**
+	 * The label that is used to display the users name.
+	 */
 	@FXML
-	Label userDisplayName;
+	private Label theUserDisplayName;
 	
+
+	/**
+	 * The button used by the user to logout.
+	 */
 	@FXML
-	Label logoutButton;
-	
+	private Label theLogoutButton;
+
+	/**
+	 * The container that will hold the information presented to the user.
+	 */
 	@FXML
-	FlowPane tileDisplay;
+	private FlowPane informationContainerView;
 	
+	/**
+	 * The grid pane that will hold the views various components.
+	 */
 	@FXML
-	FlowPane informationDisplay;
-	
-	@FXML
-	GridPane myGridPane;
-	
-	//@FXML
-	//private AuctionCentralMain myAuctionCentralMain;
+	private GridPane myGridPane;
 	
 	
 	
+	/**
+	 * Initializes the view by constructing all appropriate view components. 
+	 */
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		myUser = SessionController.getUser();
-		myManager = SessionController.getManager();
 		configureEventListeners();
 		updateDisplayName();
-		showBidderAuctionInformation();
 	}
-
-	/*
-	 * Setup listeners for login field and button press.
+	
+	/**
+	 * Configures all the necessary logout buttons event listeners.
+	 * Pre-Condition: The logout button is not null
+	 * Post-Condition: Event handler for house clicks will be added to the logout button
 	 */
 	private void configureEventListeners() {
 				
-		logoutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+		theLogoutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent theEvent) {
 				SessionController.userLogout();
 			}
 		});
-		
-	
-		
+
 	}
 	
+	/**
+	 * Updates theUserDisplay label to show the current users name.s
+	 * Pre-Condition: theUserDisplay label is not null
+	 * Post-Condition: theUserDisplay label will be initialized with the current users name.
+	 */
 	private void updateDisplayName() {
-		userDisplayName.setText(myUser.getDisplayName());
+		theUserDisplayName.setText(myUser.getDisplayName());
 	}
 
-	
-	private void showBidderAuctionInformation() {
-			
-//		try {
-//			FXMLLoader loader = new FXMLLoader();
-//
-//			
-//			FlowPane tile = (FlowPane) loader.load(UserViewController.class.getResource("InformationContainer.fxml"));
-//		
-//			myGridPane.add(tile, 0, 2);
-//			tile.prefWidthProperty().bind(myGridPane.widthProperty().subtract(20));
-//			tile.prefHeightProperty().bind(myGridPane.heightProperty().subtract(20));
-//			
-//			// Give the controller access to the main app.
-//	        InformationContainerController controller = (InformationContainerController) loader.getController();
-//	        controller.loadAuctionInformation(myUser.getMyAuctions());
-////	        controller.setMainApp(this);
-//		
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+	/**
+	 * Adds a given node to the views grid pane at the designated column and row.
+	 * Pre-Condition: theNode and theGridPane are not null.
+	 * Post-Condition: The views grid will load the given node to its designated location.
+	 * @param theNode that will be added to the views grid pane.
+	 * @param theColumn where the node will be added.
+	 * @param theRow where the node will be added.
+	 */
+	public void addToGrid(Node theNode, int theColumn, int theRow) {
+		myGridPane.add(theNode, theColumn, theRow);
 	}
 	
-	
-	private void showAuctions() {
-		for (Auction e : myUser.getMyAuctions()) {
-			Label label = new Label(e.toString());
-			label.setOnMouseClicked(new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showItems(e);
-				}
-			});
-			tileDisplay.getChildren().add(label);
-		}
+	/**
+	 * Getter for the views grid pane.
+	 * Post-Condition: The object returned will the the one used by the view.
+	 * @return The views grid pane.
+	 */
+	public GridPane getMyGrid() {
+		return myGridPane;
 	}
-	
-	private void showItems(final Auction theAuction) {
-		tileDisplay.getChildren().clear();
-		for (AuctionItem e : theAuction.getAllItems()) {
-			tileDisplay.getChildren().add(new Label(e.toString()));
-		}
-	}
-	
-//	public void setMainApp(AuctionCentralMain theAuctionCentralMain) {
-//		myAuctionCentralMain = theAuctionCentralMain;
-//	}
 	
 }

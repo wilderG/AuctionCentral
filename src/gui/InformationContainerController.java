@@ -1,31 +1,10 @@
 package gui;
 
-import java.io.IOException;
-import java.time.LocalDate;
-import java.util.Collection;
-import java.util.Set;
 
-import org.omg.CosNaming.NamingContextExtPackage.AddressHelper;
-import org.omg.CosNaming.NamingContextExtPackage.StringNameHelper;
 
-import console.ConsoleDriver;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
-import javafx.scene.text.Text;
-import model.Auction;
-import model.AuctionManager;
-import model.User;
 
 public class InformationContainerController {
 

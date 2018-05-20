@@ -1,20 +1,14 @@
 package gui;
 
-import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Collection;
 
-import javax.sound.sampled.LineUnavailableException;
 
 import console.ConsoleDriver;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.text.TextAlignment;
-import model.Auction;
 
 public class AuctionTileController {
 	  @FXML
