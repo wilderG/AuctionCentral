@@ -226,6 +226,7 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		}
 	}
 	
+
 	public boolean isContaingBids() {
 	    int bidCount = 0;
 	    for (Bidder bidder : myBids.keySet()) {
