@@ -11,7 +11,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -36,6 +35,11 @@ public class AuctionTileViewController {
 	 * The string dialog used to present the item count to the user.
 	 */
 	private static final String ITEM_COUNT_DIALOG = "Number of Items: ";
+	
+	/**
+	 * The string dialog used to present the bid count in an auction
+	 */
+	private static final String BID_COUNT_DIALOG = "Number of Bids: ";
 
 	/**
 	 * The label used for the auctions title.
@@ -69,6 +73,9 @@ public class AuctionTileViewController {
 	 */
 	@FXML
 	private Label myItemCountField;
+	
+	@FXML
+	private Label myBidCountField;
 
 
 	/**
@@ -79,9 +86,13 @@ public class AuctionTileViewController {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	/**
 	 * Initializes the controller class. This method is automatically called
 	 * after the fxml file has been loaded.
+	 *
+	 * Pre-Condition:
+	 * Post-Condition:
 	 */
 	@FXML
 	private void initialize() {
@@ -89,10 +100,14 @@ public class AuctionTileViewController {
 		myDateInfoDay.setText("");
 		myDateInfoMonthYear.setText("");
 		myItemCountField.setText("");
+		myBidCountField.setText("");
+		// Only needed for a employee
+		myBidCountField.setVisible(false);
 	}
 
 	/**
 	 * Sets the auctionTiles titleField to the given string. 
+	 * 
 	 * Pre-Condition: String != null
 	 * Post-Condition: The labels title will be set to the given string.
 	 * @param theTitle
@@ -108,6 +123,7 @@ public class AuctionTileViewController {
 
 	/**
 	 * Sets the auctionsTiles ItemInfoCount label using the given count number.
+	 * 
 	 * Pre-Condition: theCount != null
 	 * Post-Condition: The label will be set to ITEM_COUNT_DIALOG + theCount
 	 * @param theCount The number of items that the auction has.
@@ -118,7 +134,19 @@ public class AuctionTileViewController {
 	}
 
 	/**
+	 * Sets the auctionsTiles bidCountField label using the given count number.
+	 *
+	 * Pre-Condition: theCount != null
+	 * Post-Condition: The label will be set to BID_COUNT_DIALOG + theCount
+	 * @param theCount The number of bids that the auction has.
+	 */
+	public void setBidCountField(int theCount) {
+		myBidCountField.setText(BID_COUNT_DIALOG + theCount);
+	}
+	
+	/**
 	 * Sets the auctionTiles date labels using the given date.
+	 * 
 	 * Pre-Condition: theDate != null
 	 * Post-Condition: The auctionTile will display the fill date for the auction
 	 * @param theDate when the auction was held or will be held.
@@ -130,6 +158,7 @@ public class AuctionTileViewController {
 
 	/**
 	 * Sets auctionTiles day information
+	 * 
 	 * Pre-Condition: theDate != null
 	 * Post-Condition: The auctionTiles dateInfo label's text will be set to 
 	 * the day that the auction was/will be held.
@@ -141,6 +170,7 @@ public class AuctionTileViewController {
 
 	/**
 	 * Sets the auctionTIles month and year information.
+	 * 
 	 * Pre-Condition: theDate != null
 	 * Post-Condition: The aucitonTiles dateInfoMonthYear label's text will be set to
 	 * the month and year that the auction was/will be held.

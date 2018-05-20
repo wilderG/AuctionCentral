@@ -39,6 +39,11 @@
                         <Insets left="15.0" />
                      </padding>
                   </Label>
+                  <Label id="rightBottomInfo" fx:id="myBidCountField" layoutY="34.0" text="Number of Bids: " textAlignment="CENTER">
+                     <padding>
+                        <Insets left="15.0" />
+                     </padding>
+                  </Label>
                </children>
             </AnchorPane>
          </items>

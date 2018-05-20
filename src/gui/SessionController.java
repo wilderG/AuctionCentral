@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import model.Auction;
 import model.AuctionManager;
 import model.Bidder;
-import model.Manager;
+import model.Employee;
 import model.NonProfitContact;
 import model.User;
 
@@ -102,8 +102,8 @@ public class SessionController {
 			loadBidderAuctionInformation(informationContainerController);	
 		} else if (theUser instanceof NonProfitContact) {
 			loadNonProfitAuctionInformation(informationContainerController);
-		} else if (theUser instanceof Manager) {
-			//			loadNonProfitAuctionInformation(USER_VIEW);
+		} else if (theUser instanceof Employee) {
+			loadEmployee(informationContainerController);
 		}
 
 	}
@@ -193,10 +193,10 @@ public class SessionController {
 		
 	}
 	
-	private static void loadAdmin(
+	private static void loadEmployee(
 			InformationContainerViewController informationContainerController) {
 		int count = 0;
-		for (Auction auction: myUser.getMyAuctions()) {
+		for (Auction auction: myManager.getAllAuctionsSorted()) {
 			count++;
 			FXMLLoader auctionTileLoader = new FXMLLoader();
 
@@ -213,6 +213,7 @@ public class SessionController {
 			LocalDate date = auction.getDate();
 			auctionTileController.setDate(date);
 			auctionTileController.setItemInfoCount(auction.getAllItems().size());
+			auctionTileController.setBidCountField(0);
 			informationContainerController.addNode(auctionTileView);
 		}
 		

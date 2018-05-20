@@ -8,8 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 import model.AuctionManager;
@@ -17,8 +15,7 @@ import model.User;
 
 public class LoginViewController implements Initializable {
 	
-	private AuctionCentralMain myAuctionCentralMain;
-
+	
 	private AuctionManager myManager;
 	
 	@FXML
@@ -83,10 +80,6 @@ public class LoginViewController implements Initializable {
 		SessionController.userLogin(user);
 	}
 
-	public void setMainApp(AuctionCentralMain theAuctionCentralMain) {
-		// TODO Auto-generated method stub
-		myAuctionCentralMain = theAuctionCentralMain;
-	}
 
 	
 	
