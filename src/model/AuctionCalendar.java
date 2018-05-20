@@ -286,6 +286,17 @@ public class AuctionCalendar implements Serializable {
         return allAuctions;
     }
     
+    /**
+     * Deletes an auction from the calendar if it has no bids currently.
+     * 
+     * pre-condition: auction given must exist in the calendar, and
+     * must not contain any bids.
+     * post-condition: auction will no longer exist in calendar
+     * 
+     * @param theAuction the auction to be removed
+     * @throws Exception if auction is not in calendar
+     * @throws Exception if the Auction has bids
+     */
     public void deleteAuction(final Auction theAuction) {
         LocalDate dateOfAuctionToBeRemoved = theAuction.getDate();
         AuctionDate dateContainingAuction = getAuctionDate(dateOfAuctionToBeRemoved.getDayOfMonth(), 

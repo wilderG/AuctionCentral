@@ -5,6 +5,7 @@ package test;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Iterator;
@@ -18,6 +19,9 @@ import org.junit.rules.ExpectedException;
 import model.Auction;
 import model.AuctionCalendar;
 import model.AuctionDate;
+import model.AuctionItem;
+import model.Bid;
+import model.Bidder;
 import model.NonProfitContact;
 
 /**
@@ -342,4 +346,34 @@ public class AuctionCalendarTest {
         assertTrue("7", theCalendar.geAllAuctionsSorted().contains(testAuction2));
         assertTrue("8", theCalendar.geAllAuctionsSorted().contains(testAuction4));
     }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void deleteAuction_auctionHasOneBid_exceptionThrown() {
+        LocalDate testDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        Auction testAuction = new Auction(testDate, auctionOwner);
+        Bidder testBidder = new Bidder("", "");
+        testAuction.addBid(testBidder, 
+                new Bid(testBidder, new AuctionItem(BigDecimal.valueOf(20), ""), BigDecimal.valueOf(20)));
+        theCalendar.submitAuction(testAuction, testDate.getDayOfMonth(), testDate.getMonthValue(), testDate.getYear());
+        assertTrue(theCalendar.geAllAuctionsSorted().contains(testAuction));
+        
+        theCalendar.deleteAuction(testAuction);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void deleteAuction_auctionHasMultipleBids_exceptionThrown() {
+        LocalDate testDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        Auction testAuction = new Auction(testDate, auctionOwner);
+        Bidder testBidder1 = new Bidder("", "");
+        Bidder testBidder2 = new Bidder("", "");
+        AuctionItem testItem = new AuctionItem(BigDecimal.valueOf(20), "");
+        testAuction.addBid(testBidder1, 
+                new Bid(testBidder1, testItem, BigDecimal.valueOf(20)));
+        testAuction.addBid(testBidder2, 
+                new Bid(testBidder2, testItem, BigDecimal.valueOf(20)));
+        theCalendar.submitAuction(testAuction, testDate.getDayOfMonth(), testDate.getMonthValue(), testDate.getYear());
+        assertTrue(theCalendar.geAllAuctionsSorted().contains(testAuction));
+        
+        theCalendar.deleteAuction(testAuction);
+    }   
 }

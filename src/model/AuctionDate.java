@@ -176,12 +176,23 @@ public class AuctionDate implements Serializable {
         return thisDate;
     }
     
+    /**
+     * Deletes an auction from the Date if it has no bids currently.
+     * 
+     * pre-condition: auction given must exist in the Date, and
+     * must not contain any bids.
+     * post-condition: auction will no longer exist in calendar
+     * 
+     * @param theAuction the auction to be removed
+     * @throws Exception if auction is not on this date
+     * @throws Exception if the Auction has bids
+     */
     public void removeAuction(final Auction theAuction) {
         if (!myAuctions.contains(theAuction))
             throw new IllegalArgumentException("Date does not contain auction to be deleted!");
+        if (theAuction.isContaingBids())
+            throw new IllegalArgumentException("Auction cannot be removed because it has bids!");
         
-        boolean successfulRemoval = myAuctions.remove(theAuction);
-        if (!successfulRemoval)
-            System.out.println("did not remove");
+        myAuctions.remove(theAuction);
     }
 }
