@@ -16,13 +16,11 @@ public class AuctionCentralMain extends Application {
 	public static void main(String[] args) {
 		Application.launch(AuctionCentralMain.class, (java.lang.String[]) null);		
 	}
-
 	@Override
 	public void start(final Stage thePrimaryStage) throws Exception {
-		SessionController.initialize(thePrimaryStage, this);
-        this.myPrimaryStage = thePrimaryStage;
-        this.myPrimaryStage.setTitle("Auction Central");
-        
+        SessionController.initialize(thePrimaryStage);
+        myPrimaryStage = thePrimaryStage;
+        myPrimaryStage.setTitle("Auction Central");
         
         myPrimaryStage.show();
         
