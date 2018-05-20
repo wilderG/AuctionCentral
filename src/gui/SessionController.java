@@ -19,7 +19,7 @@ import model.NonProfitContact;
 import model.User;
 
 /**
- * Controller manages the various views that will eb presented depending on user interactions.
+ * Controller manages the various views that will be presented depending on user interactions.
  * @author Jared Malone
  * @author Jim Rosales
  * @version May 19, 2018
@@ -101,12 +101,14 @@ public class SessionController {
 		if (theUser instanceof Bidder) {
 			loadBidderAuctionInformation(informationContainerController);	
 		} else if (theUser instanceof NonProfitContact) {
-			//			loadNonProfitAuctionInformation(USER_VIEW);
+			loadNonProfitAuctionInformation(informationContainerController);
 		} else if (theUser instanceof Manager) {
 			//			loadNonProfitAuctionInformation(USER_VIEW);
 		}
 
 	}
+
+	
 
 	/**
 	 * Logs the user out of the current session.
@@ -164,6 +166,57 @@ public class SessionController {
 			theController.addNode(auctionTileView);
 		}
 	}
+	
+	
+	private static void loadNonProfitAuctionInformation(
+			InformationContainerViewController informationContainerController) {
+		int count = 0;
+		for (Auction auction: myUser.getMyAuctions()) {
+			count++;
+			FXMLLoader auctionTileLoader = new FXMLLoader();
+
+			auctionTileLoader.setLocation(InformationContainerViewController.class.getResource(AUCTION_TILE_VIEW));
+			SplitPane auctionTileView = null;
+			try {
+				auctionTileView = (SplitPane) auctionTileLoader.load();
+			} catch (IOException e) {
+				System.err.println("Error in Method: loadBidderInformation, Class: SessionController");
+				e.printStackTrace();
+			}
+			AuctionTileViewController auctionTileController = (AuctionTileViewController) auctionTileLoader.getController();
+			auctionTileController.setTitle("Auction # " + count);
+			LocalDate date = auction.getDate();
+			auctionTileController.setDate(date);
+			auctionTileController.setItemInfoCount(auction.getAllItems().size());
+			informationContainerController.addNode(auctionTileView);
+		}
+		
+	}
+	
+	private static void loadAdmin(
+			InformationContainerViewController informationContainerController) {
+		int count = 0;
+		for (Auction auction: myUser.getMyAuctions()) {
+			count++;
+			FXMLLoader auctionTileLoader = new FXMLLoader();
+
+			auctionTileLoader.setLocation(InformationContainerViewController.class.getResource(AUCTION_TILE_VIEW));
+			SplitPane auctionTileView = null;
+			try {
+				auctionTileView = (SplitPane) auctionTileLoader.load();
+			} catch (IOException e) {
+				System.err.println("Error in Method: loadBidderInformation, Class: SessionController");
+				e.printStackTrace();
+			}
+			AuctionTileViewController auctionTileController = (AuctionTileViewController) auctionTileLoader.getController();
+			auctionTileController.setTitle("Auction # " + count);
+			LocalDate date = auction.getDate();
+			auctionTileController.setDate(date);
+			auctionTileController.setItemInfoCount(auction.getAllItems().size());
+			informationContainerController.addNode(auctionTileView);
+		}
+		
+	}
 
 	/**
 	 * Loads a userView onto myStage.
@@ -193,12 +246,14 @@ public class SessionController {
 	/**
 	 * Loads an InformationContainerView into theUserView associated with the given userViewController.
 	 * Pre-Condition: theUserViewController != null
-	 * Post-Condition: An informationViewContainerView will be added onto the userView's grid that is associated with the given
+	 * Post-Condition: An informationViewContainerView will be added onto the userView's grid that is 
+	 * associated with the given
 	 * userViewController
 	 * @param theUserViewController that will be used to add the newly created InformationContainerView.
 	 * @return An InformationContainerViewController associated with the newly created InformationContainerView.
 	 */
-	private static InformationContainerViewController loadInformationContainerView(UserViewController theUserViewController) {
+	private static InformationContainerViewController loadInformationContainerView(
+			UserViewController theUserViewController) {
 		InformationContainerViewController informationContainerViewController = null;
 		FXMLLoader informationContainerLoader = new FXMLLoader();
 		informationContainerLoader.setLocation(UserViewController.class.getResource(INFORMATION_CONTAINER_VIEW));
@@ -214,9 +269,12 @@ public class SessionController {
 		GridPane gridPane = theUserViewController.getMyGrid();
 		informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));
 		informationContainerView.prefHeightProperty().bind(gridPane.heightProperty().subtract(20));
-		informationContainerViewController = (InformationContainerViewController) informationContainerLoader.getController();
+		informationContainerViewController = 
+				(InformationContainerViewController) informationContainerLoader.getController();
 		
 		return informationContainerViewController;
 	}
+	
+	
 
 }

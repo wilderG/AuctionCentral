@@ -32,11 +32,7 @@ public class LoginViewController implements Initializable {
 	
 	@FXML
 	private Text actionTarget;
-	
-//	public UserLoginController(final AuctionManager theManager) {
-//		myManager = theManager;
-//	}
-//	
+		
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
@@ -55,17 +51,6 @@ public class LoginViewController implements Initializable {
 				loginUser(usernameField.getText());
 			}
 		});
-		
-//		usernameField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-//			@Override
-//			public void handle(KeyEvent theEvent) {
-//				clearUserDisplay();
-//				
-//				if (theEvent.getCode().equals(KeyCode.ENTER)) {
-//					loginUser(usernameField.getText());
-//				}
-//			}
-//		});
 		
 	}
 	

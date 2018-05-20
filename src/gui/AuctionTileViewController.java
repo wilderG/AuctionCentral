@@ -5,9 +5,14 @@ import java.time.LocalDate;
 
 import console.ConsoleDriver;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -16,6 +21,16 @@ import javafx.scene.text.TextAlignment;
  * @version May 19, 2018
  */
 public class AuctionTileViewController {
+	
+	/**
+	 * The hex value for the default color of myleftInfoPane.
+	 */
+	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#0FD171";
+	
+	/**
+	 * The hex value for the default on hover color of myLeftInfoPane.
+	 */
+	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#17BA97";
 
 	/**
 	 * The string dialog used to present the item count to the user.
@@ -26,19 +41,28 @@ public class AuctionTileViewController {
 	 * The label used for the auctions title.
 	 */
 	@FXML
-	private Label titleField;
+	private Label myTitleField;
 
 	/**
 	 * Used to display the day that the auction was/will be held.
 	 */
 	@FXML
-	private Label dateInfoDay;
+	private Label myDateInfoDay;
+	
+	/**
+	 * The pane that is used to display the date information for an auction
+	 */
+	@FXML
+	private SplitPane myLeftInfoPane;
+	
+	@FXML
+	private SplitPane myRightInfoPane;
 
 	/**
 	 * Used to display the Month and Year on which the auction was/will be held.
 	 */
 	@FXML
-	private Label dateInfoMonthYear;
+	private Label myDateInfoMonthYear;
 
 	/**
 	 * Used to display the Item count of the auction.
@@ -61,7 +85,10 @@ public class AuctionTileViewController {
 	 */
 	@FXML
 	private void initialize() {
-
+		myTitleField.setText("");
+		myDateInfoDay.setText("");
+		myDateInfoMonthYear.setText("");
+		myItemCountField.setText("");
 	}
 
 	/**
@@ -71,11 +98,11 @@ public class AuctionTileViewController {
 	 * @param theTitle
 	 */
 	public void setTitle(String theTitle) {
-		titleField.setWrapText(true);
+		myTitleField.setWrapText(true);
 		
-		titleField.setText(theTitle);
+		myTitleField.setText(theTitle);
 
-		titleField.setTextAlignment(TextAlignment.LEFT);
+		myTitleField.setTextAlignment(TextAlignment.LEFT);
 
 	}
 
@@ -109,7 +136,7 @@ public class AuctionTileViewController {
 	 * @param theDate that the auction was held/will be held.
 	 */
 	private void setDayInfo(LocalDate theDate) {
-		dateInfoDay.setText(theDate.getDayOfMonth() + "");
+		myDateInfoDay.setText(theDate.getDayOfMonth() + "");
 	}
 
 	/**
@@ -120,7 +147,22 @@ public class AuctionTileViewController {
 	 * @param theDate that the auction was held/will be held. 
 	 */
 	private void setMonthYearInfo(LocalDate theDate) {
-		dateInfoMonthYear.setText(ConsoleDriver.formatDateMonthYear(theDate));
+		myDateInfoMonthYear.setText(ConsoleDriver.formatDateMonthYear(theDate));
+	}
+	
+	@FXML
+	private void onMouseEntered() {
+		myLeftInfoPane.setBackground(
+				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
+						CornerRadii.EMPTY, Insets.EMPTY)));
+	}
+	
+	@FXML
+	private void onMouseExited() {
+		myLeftInfoPane.setBackground(
+				new Background(new BackgroundFill(Color.web(ON_HOVER_DEFAULT_INFO_PANE_COLOR),
+						CornerRadii.EMPTY, Insets.EMPTY)));
+
 	}
 
 
