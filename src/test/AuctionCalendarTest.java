@@ -307,4 +307,39 @@ public class AuctionCalendarTest {
             prev = next;
         }
     }
+    
+    @Test (expected = IllegalArgumentException.class)
+    public void deleteAuction_auctionWasNotInCalendar_exceptionThrown() {
+        theCalendar.deleteAuction(new Auction(LocalDate.now().plusDays(15), auctionOwner));
+    }
+    
+    @Test
+    public void deleteAuction_auctionAndOthersInCalendar_auctionDeleted() {
+        LocalDate testDate1 = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        LocalDate testDate2 = LocalDate.now().minusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        Auction testAuction1 = new Auction(testDate1, auctionOwner);
+        Auction testAuction2 = new Auction(testDate1, new NonProfitContact("", ""));
+        Auction testAuction3 = new Auction(testDate2, auctionOwner);
+        Auction testAuction4 = new Auction(testDate2, new NonProfitContact("", ""));
+        theCalendar.submitAuction(testAuction1, 
+                testDate1.getDayOfMonth(), testDate1.getMonthValue(), testDate1.getYear());
+        theCalendar.submitAuction(testAuction2, 
+                testDate1.getDayOfMonth(), testDate1.getMonthValue(), testDate1.getYear());
+        theCalendar.forceAddAuctionInThePast(testAuction3);
+        theCalendar.forceAddAuctionInThePast(testAuction4);
+        
+        assertTrue("1", theCalendar.geAllAuctionsSorted().contains(testAuction1));
+        assertTrue("2", theCalendar.geAllAuctionsSorted().contains(testAuction2));
+        assertTrue("3", theCalendar.geAllAuctionsSorted().contains(testAuction3));
+        assertTrue("4", theCalendar.geAllAuctionsSorted().contains(testAuction4));
+        
+        theCalendar.deleteAuction(testAuction1);
+        assertFalse("5", theCalendar.geAllAuctionsSorted().contains(testAuction1));
+        theCalendar.deleteAuction(testAuction3);
+        assertFalse("6", theCalendar.geAllAuctionsSorted().contains(testAuction3));
+        
+        // verify that other auctions on the same day were not deleted
+        assertTrue("7", theCalendar.geAllAuctionsSorted().contains(testAuction2));
+        assertTrue("8", theCalendar.geAllAuctionsSorted().contains(testAuction4));
+    }
 }

@@ -285,4 +285,16 @@ public class AuctionCalendar implements Serializable {
         }
         return allAuctions;
     }
+    
+    public void deleteAuction(final Auction theAuction) {
+        LocalDate dateOfAuctionToBeRemoved = theAuction.getDate();
+        AuctionDate dateContainingAuction = getAuctionDate(dateOfAuctionToBeRemoved.getDayOfMonth(), 
+                dateOfAuctionToBeRemoved.getMonthValue(), dateOfAuctionToBeRemoved.getYear());
+        
+        if (!dateContainingAuction.getAuctions().contains(theAuction)) 
+            throw new IllegalArgumentException("Auction was not in Calendar!");
+        
+        dateContainingAuction.removeAuction(theAuction);
+        updateDate(); // updates number of upcoming auctions
+    }
 }

@@ -175,4 +175,13 @@ public class AuctionDate implements Serializable {
                 myDate.getMonthValue() + "/" + myDate.getDayOfMonth();
         return thisDate;
     }
+    
+    public void removeAuction(final Auction theAuction) {
+        if (!myAuctions.contains(theAuction))
+            throw new IllegalArgumentException("Date does not contain auction to be deleted!");
+        
+        boolean successfulRemoval = myAuctions.remove(theAuction);
+        if (!successfulRemoval)
+            System.out.println("did not remove");
+    }
 }

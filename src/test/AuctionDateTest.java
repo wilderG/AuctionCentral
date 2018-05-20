@@ -6,6 +6,7 @@
 package test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.time.LocalDate;
@@ -112,5 +113,21 @@ public class AuctionDateTest {
     public void isAtCapacity_maxAuctionsOnRequestedDate_shouldBeTrue() {
         assertTrue("Date should be at capacity", 
                 dateWithCapacityAuctions.isAtCapacity());
+    }
+    
+    @Test
+    public void removeAuction_auctionExistsOnDate_removalSuccessful() {
+        Auction testAuction1 = new Auction(null, null);
+        Auction testAuction2 = new Auction(null, null);
+        dateWithNoAuctions.addAuction(testAuction1);
+        dateWithNoAuctions.addAuction(testAuction2);
+        assertTrue(dateWithNoAuctions.getAuctions().contains(testAuction1));
+        assertTrue(dateWithNoAuctions.getAuctions().contains(testAuction2));
+        dateWithNoAuctions.removeAuction(testAuction1);
+        
+        assertFalse(dateWithNoAuctions.getAuctions().contains(testAuction1));
+
+        // make sure other auction not deleted
+        assertTrue(dateWithNoAuctions.getAuctions().contains(testAuction2));
     }
 }
