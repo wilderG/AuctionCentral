@@ -16,6 +16,8 @@ import model.AuctionManager;
 import model.User;
 
 public class LoginViewController implements Initializable {
+	
+	private AuctionCentralMain myAuctionCentralMain;
 
 	private AuctionManager myManager;
 	
@@ -54,18 +56,30 @@ public class LoginViewController implements Initializable {
 			}
 		});
 		
-		usernameField.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent theEvent) {
-				clearUserDisplay();
-				
-				if (theEvent.getCode().equals(KeyCode.ENTER)) {
-					loginUser(usernameField.getText());
-				}
-			}
-		});
+//		usernameField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+//			@Override
+//			public void handle(KeyEvent theEvent) {
+//				clearUserDisplay();
+//				
+//				if (theEvent.getCode().equals(KeyCode.ENTER)) {
+//					loginUser(usernameField.getText());
+//				}
+//			}
+//		});
 		
 	}
+	
+	/**
+	 * On an enter event the username is processed
+	 * @param theActionEvent that is being fired by the textfield
+	 */
+	@FXML
+    public void onEnter(ActionEvent theActionEvent){
+		clearUserDisplay();
+
+		loginUser(usernameField.getText());
+    }
+	
 	
 	private void clearUserDisplay() {
 		actionTarget.setText("");
@@ -82,6 +96,11 @@ public class LoginViewController implements Initializable {
 		}
 		
 		SessionController.userLogin(user);
+	}
+
+	public void setMainApp(AuctionCentralMain theAuctionCentralMain) {
+		// TODO Auto-generated method stub
+		myAuctionCentralMain = theAuctionCentralMain;
 	}
 
 	
