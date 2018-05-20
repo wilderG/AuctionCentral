@@ -5,7 +5,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane id="main" dividerPositions="0.35" minHeight="80.0" minWidth="128.0" prefHeight="160.0" prefWidth="288.0" stylesheets="@tile.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AuctionTileController">
+<SplitPane id="main" dividerPositions="0.35" minHeight="80.0" minWidth="128.0" prefHeight="160.0" prefWidth="288.0" stylesheets="@tile.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AuctionTileViewController">
    <items>
       <SplitPane id="leftInfo" dividerPositions="0.35" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
         <items>

@@ -46,7 +46,7 @@ public class SessionController {
 	
 	public static void userLogin(User theUser) {
 		myUser = theUser;
-		InformationContainerController informationContainerController = loadAuctionInfo(USER_VIEW);
+		InformationContainerViewController informationContainerController = loadAuctionInfo(USER_VIEW);
 		if (theUser instanceof Bidder) {
 			loadBidderInformation(informationContainerController);	
 		} else if (theUser instanceof NonProfitContact) {
@@ -76,11 +76,11 @@ public class SessionController {
 	}
 	
 	
-	private static void loadBidderInformation(InformationContainerController thecController) {
+	private static void loadBidderInformation(InformationContainerViewController thecController) {
 		for (Auction auction: myUser.getMyAuctions()) {
 			FXMLLoader auctionTileLoader = new FXMLLoader();
   
-			auctionTileLoader.setLocation(InformationContainerController.class.getResource("AuctionTile.fxml"));
+			auctionTileLoader.setLocation(InformationContainerViewController.class.getResource("AuctionTile.fxml"));
 			SplitPane auctionTileView = null;
 			try {
 				auctionTileView = (SplitPane) auctionTileLoader.load();
@@ -88,7 +88,7 @@ public class SessionController {
 				System.err.println("Error in Method: loadBidderInformation, Class: SessionController");
 				e.printStackTrace();
 			}
-			AuctionTileController auctionTileController = (AuctionTileController) auctionTileLoader.getController();
+			AuctionTileViewController auctionTileController = (AuctionTileViewController) auctionTileLoader.getController();
 			auctionTileController.setTitle(auction.getName());
 			LocalDate date = auction.getDate();
 			auctionTileController.setDate(date);
@@ -97,8 +97,8 @@ public class SessionController {
 		  }
 	}
 	
-	private static InformationContainerController loadAuctionInfo(final String theScene) {
-		InformationContainerController informationContainerController = null;
+	private static InformationContainerViewController loadAuctionInfo(final String theScene) {
+		InformationContainerViewController informationContainerController = null;
 		try {
 			FXMLLoader userViewLoader = new FXMLLoader(SessionController.class.getResource(theScene));
 			myStage.setScene(new Scene((Pane) userViewLoader.load()));
@@ -116,7 +116,7 @@ public class SessionController {
 			GridPane gridPane = userViewController.getMyGrid();
 			informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));
 			informationContainerView.prefHeightProperty().bind(gridPane.heightProperty().subtract(20));
-			informationContainerController = (InformationContainerController) informationContainerLoader.getController();
+			informationContainerController = (InformationContainerViewController) informationContainerLoader.getController();
 			
 		} catch (Exception e) {
 			if (myStage == null) {
