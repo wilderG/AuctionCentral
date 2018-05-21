@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.SplitPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -150,13 +151,11 @@ public class SessionController {
 	 */
 	private static void loadBidderAuctionInformation() {
 		for (Auction auction: myUser.getMyAuctions()) {
-			SplitPane tile = TileFactory.auctionTile(auction);
-			System.out.println("tile");
+			AnchorPane tile = TileFactory.auctionTile(auction);
 			
-			tile.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent theEvent) {
-					System.out.println("AuctionClick!");
 					showItems(auction);
 				}
 			});
@@ -169,7 +168,16 @@ public class SessionController {
 	private static void loadNonProfitAuctionInformation(
 			InformationContainerViewController theController) {
 		for (Auction auction: myUser.getMyAuctions()) {
-			theController.addNode(TileFactory.auctionTile(auction));
+			AnchorPane tile = TileFactory.auctionTile(auction);
+			
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent theEvent) {
+					showItems(auction);
+				}
+			});
+			
+			infoViewController.addNode(tile);
 		}
 		
 	}
@@ -236,6 +244,7 @@ public class SessionController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		theUserViewController.addToGrid(informationContainerView, 0, 2);
 		GridPane gridPane = theUserViewController.getMyGrid();
 		informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));

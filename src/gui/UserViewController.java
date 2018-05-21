@@ -38,6 +38,7 @@ public class UserViewController implements Initializable {
 	@FXML
 	private Label theLogoutButton;
 
+	
 	/**
 	 * The container that will hold the information presented to the user.
 	 */
