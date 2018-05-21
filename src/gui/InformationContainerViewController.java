@@ -81,7 +81,9 @@ public class InformationContainerViewController {
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				@Override
 				public void handle(MouseEvent theEvent) {
-					showItems(e.getAllItems());
+					if (e.getAllItems().size() > 0) {
+						showItems(e.getAllItems());
+					}
 				}
 			});
 			
