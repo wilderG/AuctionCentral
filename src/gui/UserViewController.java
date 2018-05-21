@@ -2,12 +2,10 @@ package gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import model.User;
@@ -38,6 +36,7 @@ public class UserViewController implements Initializable {
 	@FXML
 	private Label theLogoutButton;
 
+	
 	/**
 	 * The container that will hold the information presented to the user.
 	 */
@@ -50,7 +49,8 @@ public class UserViewController implements Initializable {
 	@FXML
 	private GridPane myGridPane;
 	
-	
+	@FXML
+	private FlowPane menuButtonBar;
 	
 	/**
 	 * Initializes the view by constructing all appropriate view components. 
@@ -59,24 +59,8 @@ public class UserViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		myUser = SessionController.getUser();
-		configureEventListeners();
+	//	configureEventListeners();
 		updateDisplayName();
-	}
-	
-	/**
-	 * Configures all the necessary logout buttons event listeners.
-	 * Pre-Condition: theLogOutButton != null
-	 * Post-Condition: Event handler for house clicks will be added to the logout button
-	 */
-	private void configureEventListeners() {
-				
-		theLogoutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				SessionController.userLogout();
-			}
-		});
-
 	}
 	
 	/**
@@ -109,4 +93,9 @@ public class UserViewController implements Initializable {
 		return myGridPane;
 	}
 	
+	public void addMenuButton(final Node theButton) {
+		menuButtonBar.getChildren().add(theButton);
+	}
+	
 }
+

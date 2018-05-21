@@ -1,20 +1,18 @@
 package gui;
 
 import java.io.IOException;
-import java.time.LocalDate;
-
-
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.SplitPane;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Auction;
 import model.AuctionManager;
 import model.Bidder;
-import model.Employee;
+import model.Manager;
 import model.NonProfitContact;
 import model.User;
 
@@ -41,6 +39,9 @@ public class SessionController {
 	 */
 	private static User myUser;
 
+	
+	private static InformationContainerViewController infoViewController;
+	
 	/**
 	 * The file name for the LoginView
 	 */
@@ -51,8 +52,6 @@ public class SessionController {
 	 */
 	private static final String USER_VIEW = "UserView.fxml";
 
-	private static final String AUCTION_TILE_VIEW = "AuctionTileView.fxml";
-	
 	private static final String INFORMATION_CONTAINER_VIEW = "InformationContainerView.fxml";
 	
 	/**
@@ -97,15 +96,56 @@ public class SessionController {
 	public static void userLogin(User theUser) {
 		myUser = theUser;
 		UserViewController userViewController = loadUserView();
-		InformationContainerViewController informationContainerController = loadInformationContainerView(userViewController);
+		infoViewController = loadInformationContainerView(userViewController);
 		if (theUser instanceof Bidder) {
-			loadBidderAuctionInformation(informationContainerController);	
+			loadBidderMenu(userViewController);
+			//loadBidderAuctionInformation();	
 		} else if (theUser instanceof NonProfitContact) {
-			loadNonProfitAuctionInformation(informationContainerController);
-		} else if (theUser instanceof Employee) {
-			loadEmployee(informationContainerController);
+			loadNonProfitMenu(userViewController);
+		} else if (theUser instanceof Manager) {
+			//loadNonProfitAuctionInformation(infoViewController);
 		}
 
+	}
+
+	private static void loadBidderMenu(final UserViewController theController) {
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+		});
+		theController.addMenuButton(viewAuctionsButton);
+		
+		
+		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
+		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			infoViewController.showAuctionBids(myUser.getMyAuctions());
+		});
+		theController.addMenuButton(viewBidsButton);
+		
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		logOutButton.setOnMouseClicked(event -> {
+			SessionController.userLogout();
+		});
+
+		theController.addMenuButton(logOutButton);
+	}
+	
+	private static void loadNonProfitMenu(final UserViewController theController) {
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent theEvent) {
+				infoViewController.showAuctions(myUser.getMyAuctions());
+			}
+		});
+		theController.addMenuButton(viewAuctionsButton);
+		
+		
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		logOutButton.setOnMouseClicked(event -> {
+			SessionController.userLogout();
+		});
+		theController.addMenuButton(logOutButton);
 	}
 
 	
@@ -137,88 +177,8 @@ public class SessionController {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
-	 * Pre-Condition: theController != null
-	 * Post-Condition: An autionTile will be created for each auction associated with the user and added to
-	 * the flowPane of the InformationContainerView
-	 * @param theController associated with the InformationContainerView where all the bidders information will
-	 * be appended. 
-	 */
-	private static void loadBidderAuctionInformation(InformationContainerViewController theController) {
-		for (Auction auction: myUser.getMyAuctions()) {
-			FXMLLoader auctionTileLoader = new FXMLLoader();
-
-			auctionTileLoader.setLocation(InformationContainerViewController.class.getResource(AUCTION_TILE_VIEW));
-			SplitPane auctionTileView = null;
-			try {
-				auctionTileView = (SplitPane) auctionTileLoader.load();
-			} catch (IOException e) {
-				System.err.println("Error in Method: loadBidderInformation, Class: SessionController");
-				e.printStackTrace();
-			}
-			AuctionTileViewController auctionTileController = (AuctionTileViewController) auctionTileLoader.getController();
-			auctionTileController.setTitle(auction.getName());
-			LocalDate date = auction.getDate();
-			auctionTileController.setDate(date);
-			auctionTileController.setItemInfoCount(auction.getAllItems().size());
-			theController.addNode(auctionTileView);
-		}
-	}
 	
-	
-	private static void loadNonProfitAuctionInformation(
-			InformationContainerViewController informationContainerController) {
-		int count = 0;
-		for (Auction auction: myUser.getMyAuctions()) {
-			count++;
-			FXMLLoader auctionTileLoader = new FXMLLoader();
-
-			auctionTileLoader.setLocation(InformationContainerViewController.class.getResource(AUCTION_TILE_VIEW));
-			SplitPane auctionTileView = null;
-			try {
-				auctionTileView = (SplitPane) auctionTileLoader.load();
-			} catch (IOException e) {
-				System.err.println("Error in Method: loadBidderInformation, Class: SessionController");
-				e.printStackTrace();
-			}
-			AuctionTileViewController auctionTileController = (AuctionTileViewController) auctionTileLoader.getController();
-			auctionTileController.setTitle("Auction # " + count);
-			LocalDate date = auction.getDate();
-			auctionTileController.setDate(date);
-			auctionTileController.setItemInfoCount(auction.getAllItems().size());
-			informationContainerController.addNode(auctionTileView);
-		}
 		
-	}
-	
-	private static void loadEmployee(
-			InformationContainerViewController informationContainerController) {
-		int count = 0;
-		for (Auction auction: myManager.getAllAuctionsSorted()) {
-			count++;
-			FXMLLoader auctionTileLoader = new FXMLLoader();
-
-			auctionTileLoader.setLocation(InformationContainerViewController.class.getResource(AUCTION_TILE_VIEW));
-			SplitPane auctionTileView = null;
-			try {
-				auctionTileView = (SplitPane) auctionTileLoader.load();
-			} catch (IOException e) {
-				System.err.println("Error in Method: loadBidderInformation, Class: SessionController");
-				e.printStackTrace();
-			}
-			AuctionTileViewController auctionTileController = (AuctionTileViewController) auctionTileLoader.getController();
-			auctionTileController.setTitle("Auction # " + count);
-			LocalDate date = auction.getDate();
-			auctionTileController.setDate(date);
-			auctionTileController.setItemInfoCount(auction.getAllItems().size());
-			auctionTileController.setBidCountField(0);
-			informationContainerController.addNode(auctionTileView);
-		}
-		
-	}
-
 	/**
 	 * Loads a userView onto myStage.
 	 * Pre-Condition: myStage != null
@@ -266,6 +226,7 @@ public class SessionController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 		theUserViewController.addToGrid(informationContainerView, 0, 2);
 		GridPane gridPane = theUserViewController.getMyGrid();
 		informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));
@@ -276,6 +237,23 @@ public class SessionController {
 		return informationContainerViewController;
 	}
 	
-	
+	private static class MenuButton {
+		
+		private static AnchorPane newMenuButton(String theTitle) {
+			FXMLLoader buttonLoader = new FXMLLoader(SessionController.class.getResource("ViewMenuButton.fxml"));
+			AnchorPane button = null;
+			try {
+				button = (AnchorPane) buttonLoader.load();
+			} catch (IOException e) {
+				System.err.println("Button Error");
+				//e.printStackTrace();
+			}	
+			
+			ViewMenuButtonController buttonCtrl = (ViewMenuButtonController) buttonLoader.getController();
+			buttonCtrl.setText(theTitle);
+			return button;
+		}
+		
+	}
 
 }

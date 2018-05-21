@@ -1,0 +1,22 @@
+#menuButtonBar {
+	-fx-background-color: #53B799;
+}
+
+#theUserDisplayName {
+	-fx-background-color: #53B799;
+}
+
+#main {
+	-fx-background-color: #53B799;
+	-fx-font-family: 'Helvetica', Arial, sans-serif;
+	-fx-font-size: 18px;
+}
+
+#selected {
+	-fx-font-fill: white;
+}
+
+#notSelected {
+	-fx-font-fill: yellow;
+}
+

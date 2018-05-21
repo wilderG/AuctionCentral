@@ -2,9 +2,18 @@ package gui;
 
 
 
+import java.util.Collection;
+
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import model.Auction;
+import model.AuctionItem;
+import model.Bid;
+import model.Bidder;
 
 /**
  * A controller for the informationContainer which is used to hold various auctionTiles.
@@ -40,27 +49,71 @@ public class InformationContainerViewController {
 	 * Post-Condition: The given node will be added to the nodes flow pane.
 	 * @param theNode that will be added to the InformationContainerControllers flow pane.
 	 */
-	public void addNode(Node theNode) {
+	private void addNode(Node theNode) {
 		myFlowPane.getChildren().add(theNode);
 	}
 
-
-	//  public void loadAuctionInformation(Collection<Auction> theAuctions, final String theScene) {
-	//	  for (Auction auction: theAuctions) {
-	//		  FXMLLoader loader = new FXMLLoader(SessionController.class.getResource(theScene));
-	//	      loader.setLocation(InformationContainerController.class.getResource("auctionTile.fxml"));
-	//		  try {
-	//			  auctionTile = (SplitPane) loader.load();
-	//			  titleField.setText(auction.getName());
-	//			  LocalDate date = auction.getDate();
-	//			  dateInfoDay.setText(date.getDayOfMonth() + "");
-	//			  dateInfoMonthYear.setText(ConsoleDriver.formatDateMonthYear(date));
-	//			  myFlowPane.getChildren().add(auctionTile);
-	//		  } catch (IOException e) {
-	//			  e.printStackTrace();
-	//		  }
-	//	  }
-	//  }
+	private void clear() {
+		myFlowPane.getChildren().clear();
+	}
+	
+	
+	public void showItems(final Collection<AuctionItem> theItems) {
+		this.clear();
+		for (AuctionItem item : theItems) {
+			this.addNode(TileFactory.itemTile(item));
+		}
+	}
+	
+	/**
+	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
+	 * Pre-Condition: theController != null
+	 * Post-Condition: An autionTile will be created for each auction associated with the user and added to
+	 * the flowPane of the InformationContainerView
+	 * @param theController associated with the InformationContainerView where all the bidders information will
+	 * be appended. 
+	 */
+	public void showAuctions(final Collection<Auction> theAuctions) {
+		this.clear();
+		for (Auction e : theAuctions) {
+			AnchorPane tile = TileFactory.auctionTile(e);
+			
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent theEvent) {
+					if (e.getAllItems().size() > 0) {
+						showItems(e.getAllItems());
+					}
+				}
+			});
+			
+			this.addNode(tile);
+		}
+	}
+	
+	public void showAuctionBids(final Collection<Auction> theAuctions) {
+		this.clear();
+		for (Auction e : theAuctions) {
+			AnchorPane tile = TileFactory.auctionTile(e);
+			
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent theEvent) {
+					showBids(e.getAllBidsWithBidder((Bidder) SessionController.getUser()));
+				}
+			});
+			
+			this.addNode(tile);
+		}
+	}
+	
+	public void showBids(final Collection<Bid> theBids) {
+		this.clear();
+		for (Bid e : theBids) {
+			AnchorPane tile = TileFactory.bidTile(e);
+			this.addNode(tile);
+		}
+	}
 
 
 }
