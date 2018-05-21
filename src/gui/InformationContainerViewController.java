@@ -44,6 +44,11 @@ public class InformationContainerViewController {
 		myFlowPane.getChildren().add(theNode);
 	}
 
+	public void clear() {
+		myFlowPane.getChildren().clear();
+	}
+	
+	
 
 	//  public void loadAuctionInformation(Collection<Auction> theAuctions, final String theScene) {
 	//	  for (Auction auction: theAuctions) {
