@@ -24,12 +24,12 @@ public class AuctionTileViewController {
 	/**
 	 * The hex value for the default color of myleftInfoPane.
 	 */
-	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#53B799";
+	public static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#53B799";
 	
 	/**
 	 * The hex value for the default on hover color of myLeftInfoPane.
 	 */
-	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#59C4A4";
+	public static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#59C4A4";
 
 	/**
 	 * The string dialog used to present the item count to the user.
