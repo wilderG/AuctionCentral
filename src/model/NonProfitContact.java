@@ -103,4 +103,5 @@ public class NonProfitContact extends User {
         }
         return mostRecentDate;
     }
+    
 }

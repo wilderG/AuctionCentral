@@ -59,6 +59,11 @@ public class AuctionDate implements Serializable {
         myAuctions = new LinkedList<>();
     }
     
+    public AuctionDate(final LocalDate theDate) {
+        this(theDate.getDayOfMonth(), theDate.getMonthValue(), theDate.getYear());
+    }
+    
+    //________________________________________________________________________________
     
     /**
      * Gets the number of auctions scheduled for this date.
@@ -169,5 +174,25 @@ public class AuctionDate implements Serializable {
         String thisDate = myDate.getYear() + "/" +
                 myDate.getMonthValue() + "/" + myDate.getDayOfMonth();
         return thisDate;
+    }
+    
+    /**
+     * Deletes an auction from the Date if it has no bids currently.
+     * 
+     * pre-condition: auction given must exist in the Date, and
+     * must not contain any bids.
+     * post-condition: auction will no longer exist in calendar
+     * 
+     * @param theAuction the auction to be removed
+     * @throws Exception if auction is not on this date
+     * @throws Exception if the Auction has bids
+     */
+    public void removeAuction(final Auction theAuction) {
+        if (!myAuctions.contains(theAuction))
+            throw new IllegalArgumentException("Date does not contain auction to be deleted!");
+        if (theAuction.isContaingBids())
+            throw new IllegalArgumentException("Auction cannot be removed because it has bids!");
+        
+        myAuctions.remove(theAuction);
     }
 }
