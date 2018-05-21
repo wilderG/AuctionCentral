@@ -110,31 +110,23 @@ public class SessionController {
 
 	private static void loadBidderMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
-			}
+		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
 		
 		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
-		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				infoViewController.showAuctionBids(myUser.getMyAuctions());
-			}
+		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			infoViewController.showAuctionBids(myUser.getMyAuctions());
 		});
 		theController.addMenuButton(viewBidsButton);
 		
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
-		logOutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				SessionController.userLogout();
-			}
+		logOutButton.setOnMouseClicked(event -> {
+			SessionController.userLogout();
 		});
+
 		theController.addMenuButton(logOutButton);
 	}
 	
@@ -150,11 +142,8 @@ public class SessionController {
 		
 		
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
-		logOutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				SessionController.userLogout();
-			}
+		logOutButton.setOnMouseClicked(event -> {
+			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
 	}

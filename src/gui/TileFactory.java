@@ -2,6 +2,8 @@ package gui;
 
 import java.io.IOException;
 import java.time.LocalDate;
+
+import console.ConsoleDriver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
 import model.Auction;
@@ -20,10 +22,10 @@ public class TileFactory {
 		String itemField = "Number of Items: " + theAuction.getAllItems().size();
 		LocalDate date = theAuction.getDate();
 		
-		controller.setTopRight(theAuction.getName());
-		controller.setBottomRight(itemField);
-		controller.setTopLeft(Integer.toString(date.getDayOfMonth()));
-		controller.setBottomLeft(date.getMonth() + " " + Integer.toString(date.getYear()));
+		controller.setTopRightLabel(theAuction.getName());
+		controller.setFirstBottomRightLabel(itemField);
+		controller.setTopLeftLabel("" + date.getDayOfMonth());
+		controller.setBottomLeft(ConsoleDriver.formatDateMonthYear(date));
 
 		return tile;
 	}
@@ -33,8 +35,8 @@ public class TileFactory {
 		AnchorPane tile = getNewTile(loader);
 		TileViewController controller = getTileController(loader);
 		
-		controller.setTopRight(theItem.getDescription());
-		controller.setTopLeft(theItem.getMinimumAcceptableBidValue().toString());
+		controller.setTopRightLabel(theItem.getDescription());
+		controller.setTopLeftLabel(theItem.getMinimumAcceptableBidValue().toString());
 		controller.setBottomLeft("Minimum\nBid");
 		
 		return tile;
@@ -47,9 +49,9 @@ public class TileFactory {
 		
 		String minBid = theBid.getAuctionItem().getMinimumAcceptableBidValue().toString();
 		
-		controller.setTopRight(theBid.getAuctionItem().getDescription());
-		controller.setBottomRight(minBid);
-		controller.setTopLeft(theBid.getValue().toString());
+		controller.setTopRightLabel(theBid.getAuctionItem().getDescription());
+		controller.setFirstBottomRightLabel(minBid);
+		controller.setTopLeftLabel(theBid.getValue().toString());
 		controller.setBottomLeft("Bid\nAmount");
 		
 		return tile;

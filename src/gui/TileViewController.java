@@ -20,24 +20,24 @@ public class TileViewController {
 	/**
 	 * The hex value for the default color of myleftInfoPane.
 	 */
-	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#0FD171";
+	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#53B799";
 	
 	/**
 	 * The hex value for the default on hover color of myLeftInfoPane.
 	 */
-	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#17BA97";
+	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#59C4A4";
 
 	/**
 	 * The label used for the auctions title.
 	 */
 	@FXML
-	private Label topRightField;
+	private Label myTopRightField;
 
 	/**
 	 * Used to display the day that the auction was/will be held.
 	 */
 	@FXML
-	private Label topLeftField;
+	private Label myTopLeftField;
 	
 	/**
 	 * The pane that is used to display the date information for an auction
@@ -52,13 +52,19 @@ public class TileViewController {
 	 * Used to display the Month and Year on which the auction was/will be held.
 	 */
 	@FXML
-	private Label bottomLeftField;
+	private Label myBottomLeftField;
 
 	/**
 	 * Used to display the Item count of the auction.
 	 */
 	@FXML
-	private Label bottomRightField;
+	private Label myFirstBottomRightField;
+	
+	/**
+	 * Used to display the number of bids in an auction.
+	 */
+	@FXML
+	private Label mySecondBottomRightField;
 
 
 	/**
@@ -75,10 +81,12 @@ public class TileViewController {
 	 */
 	@FXML
 	private void initialize() {
-		topRightField.setText("");
-		topLeftField.setText("");
-		bottomLeftField.setText("");
-		bottomRightField.setText("");
+		myTopRightField.setText("");
+		myTopLeftField.setText("");
+		myBottomLeftField.setText("");
+		myFirstBottomRightField.setText("");
+		mySecondBottomRightField.setText("");
+		mySecondBottomRightField.setVisible(false);
 	}
 
 	/**
@@ -87,12 +95,12 @@ public class TileViewController {
 	 * Post-Condition: The labels title will be set to the given string.
 	 * @param theTitle
 	 */
-	public void setTopRight(String theFieldValue) {
-		topRightField.setWrapText(true);
+	public void setTopRightLabel(String theFieldValue) {
+		myTopRightField.setWrapText(true);
 		
-		topRightField.setText(theFieldValue);
+		myTopRightField.setText(theFieldValue);
 
-		topRightField.setTextAlignment(TextAlignment.LEFT);
+		myTopRightField.setTextAlignment(TextAlignment.LEFT);
 
 	}
 
@@ -102,9 +110,9 @@ public class TileViewController {
 	 * Post-Condition: The label will be set to ITEM_COUNT_DIALOG + theCount
 	 * @param theCount The number of items that the auction has.
 	 */
-	public void setBottomRight(String theFieldValue) {
-		bottomRightField.setWrapText(true);
-		bottomRightField.setText(theFieldValue);
+	public void setFirstBottomRightLabel(String theFieldValue) {
+		myFirstBottomRightField.setWrapText(true);
+		myFirstBottomRightField.setText(theFieldValue);
 	}
 
 	/**
@@ -113,8 +121,8 @@ public class TileViewController {
 	 * Post-Condition: The auctionTile will display the fill date for the auction
 	 * @param theDate when the auction was held or will be held.
 	 */
-	public void setTopLeft(String theFieldValue) {
-		topLeftField.setText(theFieldValue);
+	public void setTopLeftLabel(String theFieldValue) {
+		myTopLeftField.setText(theFieldValue);
 	}
 
 	/**
@@ -125,20 +133,20 @@ public class TileViewController {
 	 * @param theDate that the auction was held/will be held.
 	 */
 	public void setBottomLeft(String theFieldValue) {
-		bottomLeftField.setText(theFieldValue);
+		myBottomLeftField.setText(theFieldValue);
 	}
 
 	@FXML
 	private void onMouseEntered() {
 		myLeftInfoPane.setBackground(
-				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
+				new Background(new BackgroundFill(Color.web(ON_HOVER_DEFAULT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
 	@FXML
 	private void onMouseExited() {
 		myLeftInfoPane.setBackground(
-				new Background(new BackgroundFill(Color.web(ON_HOVER_DEFAULT_INFO_PANE_COLOR),
+				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
