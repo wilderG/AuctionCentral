@@ -61,7 +61,7 @@ public class InformationContainerViewController {
 	public void showItems(final Collection<AuctionItem> theItems) {
 		this.clear();
 		for (AuctionItem item : theItems) {
-			this.addNode(TileFactory.itemTile(item));
+			this.addNode(TileFactory.createItemTile(item));
 		}
 	}
 	
@@ -76,7 +76,7 @@ public class InformationContainerViewController {
 	public void showAuctions(final Collection<Auction> theAuctions) {
 		this.clear();
 		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.auctionTile(e);
+			AnchorPane tile = TileFactory.createAuctionTile(e);
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 				@Override
@@ -93,14 +93,10 @@ public class InformationContainerViewController {
 	
 	public void showAuctionBids(final Collection<Auction> theAuctions) {
 		this.clear();
-		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.auctionTile(e);
-			
-			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showBids(e.getAllBidsWithBidder((Bidder) SessionController.getUser()));
-				}
+		for (Auction auction : theAuctions) {
+			AnchorPane tile = TileFactory.createAuctionTile(auction);
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+				showBids(auction.getAllBidsWithBidder((Bidder) SessionController.getUser()));
 			});
 			
 			this.addNode(tile);
@@ -110,7 +106,7 @@ public class InformationContainerViewController {
 	public void showBids(final Collection<Bid> theBids) {
 		this.clear();
 		for (Bid e : theBids) {
-			AnchorPane tile = TileFactory.bidTile(e);
+			AnchorPane tile = TileFactory.createBidTile(e);
 			this.addNode(tile);
 		}
 	}

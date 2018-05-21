@@ -14,7 +14,7 @@ public class TileFactory {
 
 	private static final String TILE_VIEW = "TileView.fxml";
 		
-	public static AnchorPane auctionTile(final Auction theAuction) {
+	public static AnchorPane createAuctionTile(final Auction theAuction) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
 		TileViewController controller = getTileController(loader);
@@ -30,7 +30,7 @@ public class TileFactory {
 		return tile;
 	}
 	
-	public static AnchorPane itemTile(final AuctionItem theItem) {
+	public static AnchorPane createItemTile(final AuctionItem theItem) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
 		TileViewController controller = getTileController(loader);
@@ -42,7 +42,7 @@ public class TileFactory {
 		return tile;
 	}
 	
-	public static AnchorPane bidTile(final Bid theBid) {
+	public static AnchorPane createBidTile(final Bid theBid) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
 		TileViewController controller = getTileController(loader);
