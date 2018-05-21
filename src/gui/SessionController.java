@@ -16,6 +16,7 @@ import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
 import model.Bidder;
+import model.Employee;
 import model.Manager;
 import model.NonProfitContact;
 import model.User;
