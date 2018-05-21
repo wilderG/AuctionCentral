@@ -35,7 +35,7 @@ public class TileFactory {
 		
 		controller.setTopRight(theItem.getDescription());
 		controller.setTopLeft(theItem.getMinimumAcceptableBidValue().toString());
-		controller.setBottomLeft("Minimum Bid");
+		controller.setBottomLeft("Minimum\nBid");
 		
 		return tile;
 	}
@@ -50,7 +50,7 @@ public class TileFactory {
 		controller.setTopRight(theBid.getAuctionItem().getDescription());
 		controller.setBottomRight(minBid);
 		controller.setTopLeft(theBid.getValue().toString());
-		controller.setBottomLeft("Bid Amount");
+		controller.setBottomLeft("Bid\nAmount");
 		
 		return tile;
 	}

@@ -1,8 +1,6 @@
 package gui;
 
 import java.io.IOException;
-import java.util.Collection;
-
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,10 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import model.Auction;
-import model.AuctionItem;
 import model.AuctionManager;
-import model.Bid;
 import model.Bidder;
 import model.Manager;
 import model.NonProfitContact;
@@ -106,9 +101,9 @@ public class SessionController {
 			loadBidderMenu(userViewController);
 			//loadBidderAuctionInformation();	
 		} else if (theUser instanceof NonProfitContact) {
-			loadNonProfitAuctionInformation(infoViewController);
+			loadNonProfitMenu(userViewController);
 		} else if (theUser instanceof Manager) {
-			loadNonProfitAuctionInformation(infoViewController);
+			//loadNonProfitAuctionInformation(infoViewController);
 		}
 
 	}
@@ -118,7 +113,7 @@ public class SessionController {
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent theEvent) {
-				showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+				infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -128,7 +123,7 @@ public class SessionController {
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent theEvent) {
-				showAuctionBids(myUser.getMyAuctions());
+				infoViewController.showAuctionBids(myUser.getMyAuctions());
 			}
 		});
 		theController.addMenuButton(viewBidsButton);
@@ -141,9 +136,29 @@ public class SessionController {
 			}
 		});
 		theController.addMenuButton(logOutButton);
-		
-		
 	}
+	
+	private static void loadNonProfitMenu(final UserViewController theController) {
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent theEvent) {
+				infoViewController.showAuctions(myUser.getMyAuctions());
+			}
+		});
+		theController.addMenuButton(viewAuctionsButton);
+		
+		
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		logOutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent theEvent) {
+				SessionController.userLogout();
+			}
+		});
+		theController.addMenuButton(logOutButton);
+	}
+
 	
 
 	/**
@@ -173,106 +188,8 @@ public class SessionController {
 			e.printStackTrace();
 		}
 	}
-
-	/**
-	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
-	 * Pre-Condition: theController != null
-	 * Post-Condition: An autionTile will be created for each auction associated with the user and added to
-	 * the flowPane of the InformationContainerView
-	 * @param theController associated with the InformationContainerView where all the bidders information will
-	 * be appended. 
-	 */
-	private static void loadBidderAuctionInformation() {
+	
 		
-		for (Auction auction: myUser.getMyAuctions()) {
-			AnchorPane tile = TileFactory.auctionTile(auction);
-			
-			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showItems(auction.getAllItems());
-				}
-			});
-			
-			infoViewController.addNode(tile);
-		}
-	}
-	
-	
-	private static void loadNonProfitAuctionInformation(
-			InformationContainerViewController theController) {
-		for (Auction auction: myUser.getMyAuctions()) {
-			AnchorPane tile = TileFactory.auctionTile(auction);
-			
-			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showItems(auction.getAllItems());
-				}
-			});
-			
-			infoViewController.addNode(tile);
-		}
-		
-	}
-	
-	private static void loadAdmin(
-			InformationContainerViewController theController) {
-		for (Auction auction: myUser.getMyAuctions()) {
-			theController.addNode(TileFactory.auctionTile(auction));
-		}
-		
-	}
-
-	public static void showItems(final Collection<AuctionItem> theItems) {
-		infoViewController.clear();
-		for (AuctionItem item : theItems) {
-			infoViewController.addNode(TileFactory.itemTile(item));
-		}
-	}
-	
-	public static void showAuctions(final Collection<Auction> theAuctions) {
-		infoViewController.clear();
-		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.auctionTile(e);
-			
-			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showItems(e.getAllItems());
-				}
-			});
-			
-			infoViewController.addNode(tile);
-		}
-	}
-	
-	public static void showAuctionBids(final Collection<Auction> theAuctions) {
-		infoViewController.clear();
-		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.auctionTile(e);
-			
-			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
-					showBids(e.getAllBidsWithBidder((Bidder) myUser));
-				}
-			});
-			
-			infoViewController.addNode(tile);
-		}
-	}
-	
-	public static void showBids(final Collection<Bid> theBids) {
-		infoViewController.clear();
-		for (Bid e : theBids) {
-			AnchorPane tile = TileFactory.bidTile(e);
-			infoViewController.addNode(tile);
-		}
-	}
-	
-	
-	
 	/**
 	 * Loads a userView onto myStage.
 	 * Pre-Condition: myStage != null

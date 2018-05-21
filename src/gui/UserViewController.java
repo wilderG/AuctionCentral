@@ -63,22 +63,6 @@ public class UserViewController implements Initializable {
 		updateDisplayName();
 	}
 	
-//	/**
-//	 * Configures all the necessary logout buttons event listeners.
-//	 * Pre-Condition: theLogOutButton != null
-//	 * Post-Condition: Event handler for house clicks will be added to the logout button
-//	 */
-//	private void configureEventListeners() {
-//				
-//		theLogoutButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent theEvent) {
-//				SessionController.userLogout();
-//			}
-//		});
-//
-//	}
-	
 	/**
 	 * Updates theUserDisplay label to show the current users name.s
 	 * Pre-Condition: theUserDisplayName != null
