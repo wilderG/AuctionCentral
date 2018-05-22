@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.Auction;
 import model.AuctionItem;
+import model.AuctionManager;
 import model.Bid;
 import model.Bidder;
 
@@ -106,6 +107,23 @@ public class InformationContainerViewController {
 			AnchorPane tile = TileFactory.createBidTile(e);
 			this.addNode(tile);
 		}
+	}
+
+	public void showAdminAuctions(Collection<Auction> theAuctions, AuctionManager theManager) {
+		this.clear();
+		for (Auction e : theAuctions) {
+			AnchorPane tile = TileFactory.createAdminAuctionTile(e);
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+				if (!e.isContaingBids()) {
+					theManager.removeAuction(e);
+					this.clear();
+					showAdminAuctions(theAuctions, theManager);
+					//System.out.println("Yohei");
+				}
+			});
+			this.addNode(tile);
+		}
+		
 	}
 
 

@@ -33,6 +33,27 @@ public class TileFactory {
 		return tile;
 	}
 	
+	public static AnchorPane createAdminAuctionTile(final Auction theAuction) {
+		FXMLLoader loader = getLoader();
+		AnchorPane tile = getNewTile(loader);
+		TileViewController controller = getTileController(loader);
+		
+		String itemField = "Number of Items: " + theAuction.getAllItems().size();
+		LocalDate date = theAuction.getDate();
+		
+		controller.setTopRightLabel(theAuction.getName());
+		controller.setFirstBottomRightLabel(itemField);
+		controller.setTopLeftLabel("" + date.getDayOfMonth());
+		controller.setBottomLeft(ConsoleDriver.formatDateMonthYear(date)); 
+		String doesHaveBids = theAuction.isContaingBids() ? "Yes":"No";
+		String bidField = "Has bids: " + doesHaveBids;
+		
+		
+		controller.setSecondBottomRightLabel(bidField);
+
+		return tile;
+	}
+	
 	public static AnchorPane createItemTile(final AuctionItem theItem) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);

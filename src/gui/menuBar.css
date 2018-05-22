@@ -2,11 +2,12 @@
 #theUserDisplayName,
 #main,
 #menuContainer {
-	-fx-background-color: #53B799;
+	-fx-background-color: #FF5F14;
 }
 
 #main {
 	-fx-font-family: 'Helvetica', Arial, sans-serif;
+	-fx-text-fill: white;
 	-fx-font-size: 18px;
 }
 
