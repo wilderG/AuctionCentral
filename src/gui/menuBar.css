@@ -10,11 +10,13 @@
 	-fx-font-size: 18px;
 }
 
-#selected {
-	-fx-font-fill: white;
+.myPane:hover {
+	-fx-font-fill: #53B799;
+	-fx-background-color: white;
 }
 
-#notSelected {
-	-fx-font-fill: yellow;
+.myPane {
+	-fx-font-fill: white;
+	-fx-background-color: #53B799;
 }
 

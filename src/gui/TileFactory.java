@@ -1,7 +1,10 @@
 package gui;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.LocalDate;
+import java.util.Locale;
 
 import console.ConsoleDriver;
 import javafx.fxml.FXMLLoader;
@@ -36,7 +39,7 @@ public class TileFactory {
 		TileViewController controller = getTileController(loader);
 		
 		controller.setTopRightLabel(theItem.getDescription());
-		controller.setTopLeftLabel(theItem.getMinimumAcceptableBidValue().toString());
+		controller.setTopLeftLabel(getMoneyFormat(theItem.getMinimumAcceptableBidValue()));
 		controller.setBottomLeft("Minimum\nBid");
 		
 		return tile;
@@ -47,15 +50,38 @@ public class TileFactory {
 		AnchorPane tile = getNewTile(loader);
 		TileViewController controller = getTileController(loader);
 		
-		String minBid = theBid.getAuctionItem().getMinimumAcceptableBidValue().toString();
+		BigDecimal minBid = theBid.getAuctionItem().getMinimumAcceptableBidValue();
 		
 		controller.setTopRightLabel(theBid.getAuctionItem().getDescription());
-		controller.setFirstBottomRightLabel(minBid);
-		controller.setTopLeftLabel(theBid.getValue().toString());
+		controller.setFirstBottomRightLabel("Minimum Bid: " + getMoneyFormat(minBid));
+		controller.setTopLeftLabel(getMoneyFormat(theBid.getValue()));
 		controller.setBottomLeft("Bid\nAmount");
 		
 		return tile;
 	}
+	
+	
+	/**
+	 * Returns a string formatted currency value. If the amount is less than
+	 * $1.00 then cents are displayed.
+	 * @param theAmount
+	 * @return
+	 */
+	private static String getMoneyFormat(final BigDecimal theAmount) {
+		String result;
+		NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
+		
+		if (theAmount.stripTrailingZeros().scale() <= 0) {
+			formatter.setMaximumFractionDigits(0);
+			result = formatter.format(theAmount);
+		} else {
+			result = NumberFormat.getCurrencyInstance(Locale.getDefault()).
+					format(theAmount);
+		}
+		return result; 
+	}
+	
+	
 	
 	private static AnchorPane getNewTile(final FXMLLoader theLoader) {
 		AnchorPane tile = null;

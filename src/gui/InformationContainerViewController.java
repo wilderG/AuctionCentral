@@ -78,13 +78,10 @@ public class InformationContainerViewController {
 		for (Auction e : theAuctions) {
 			AnchorPane tile = TileFactory.createAuctionTile(e);
 			
-			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-				@Override
-				public void handle(MouseEvent theEvent) {
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 					if (e.getAllItems().size() > 0) {
 						showItems(e.getAllItems());
 					}
-				}
 			});
 			
 			this.addNode(tile);
