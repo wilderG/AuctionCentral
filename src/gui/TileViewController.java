@@ -114,6 +114,12 @@ public class TileViewController {
 		myFirstBottomRightField.setWrapText(true);
 		myFirstBottomRightField.setText(theFieldValue);
 	}
+	
+	public void setSecondBottomRightLabel(String theFieldValue) {
+		mySecondBottomRightField.setWrapText(true);
+		mySecondBottomRightField.setText(theFieldValue);
+		mySecondBottomRightField.setVisible(true);
+	}
 
 	/**
 	 * Sets the auctionTiles date labels using the given date.

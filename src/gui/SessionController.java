@@ -157,7 +157,7 @@ public class SessionController {
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent theEvent) {
-				infoViewController.showAuctions(myManager.getAllAuctionsSorted());
+				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
