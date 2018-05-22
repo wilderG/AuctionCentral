@@ -13,11 +13,21 @@
 
 .myPane:hover {
 	-fx-font-fill: #53B799;
+	-fx-font-size: 18px;
 	-fx-background-color: white;
 }
 
 .myPane {
+	-fx-font-family: 'Helvetica', Arial, sans-serif;
+	-fx-font-size: 16px;
 	-fx-font-fill: white;
 	-fx-background-color: #53B799;
 }
 
+.rootPane {
+	-fx-background-color: #8C8E8C;
+}
+
+.subMenuBar {
+	-fx-background-color: white;
+}
