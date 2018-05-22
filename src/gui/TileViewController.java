@@ -1,5 +1,9 @@
 package gui;
 
+import java.awt.Image;
+
+import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -72,7 +76,7 @@ public class TileViewController {
 	 * The delete icon used for the adminAuctionTile
 	 */
 	@FXML
-	private ImageView myDelteIcon;
+	private ImageView myDeleteIcon;
 
 
 	/**
@@ -95,6 +99,7 @@ public class TileViewController {
 		myFirstBottomRightField.setText("");
 		mySecondBottomRightField.setText("");
 		mySecondBottomRightField.setVisible(false);
+		myDeleteIcon.setVisible(false);
 	}
 
 	/**
@@ -127,6 +132,18 @@ public class TileViewController {
 		mySecondBottomRightField.setWrapText(true);
 		mySecondBottomRightField.setText(theFieldValue);
 		mySecondBottomRightField.setVisible(true);
+	}
+	
+	public void setDeleteIcon() {
+		myDeleteIcon.setVisible(true);
+	}
+	
+	public ImageView getDeleteIcon() {
+		return myDeleteIcon;
+	}
+	
+	public void setDeleteIcon(ImageView theImageView) {
+		myDeleteIcon = theImageView;
 	}
 
 	/**
@@ -163,5 +180,7 @@ public class TileViewController {
 				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
+	
+	
 	
 }

@@ -8,9 +8,13 @@ import java.util.Locale;
 
 import console.ConsoleDriver;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Auction;
 import model.AuctionItem;
+import model.AuctionManager;
 import model.Bid;
 
 public class TileFactory {
@@ -33,7 +37,8 @@ public class TileFactory {
 		return tile;
 	}
 	
-	public static AnchorPane createAdminAuctionTile(final Auction theAuction) {
+	public static AnchorPane createAdminAuctionTile(final Auction theAuction, AuctionManager theManager,
+			InformationContainerViewController theInformationContainerViewController) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
 		TileViewController controller = getTileController(loader);
@@ -50,6 +55,24 @@ public class TileFactory {
 		
 		
 		controller.setSecondBottomRightLabel(bidField);
+		controller.setDeleteIcon();
+		
+		ImageView icon = controller.getDeleteIcon();
+		if (!theAuction.isContaingBids()) {
+			icon.setOnMouseClicked(event -> {
+				theManager.removeAuction(theAuction);	
+				theInformationContainerViewController.removeNode(tile);
+			});
+			icon.setOnMouseEntered(event -> {
+				icon.setImage(new Image("/icons/delete-hover.png"));
+			});
+			icon.setOnMouseExited(event -> {
+				icon.setImage(new Image("/icons/delete.png"));
+			});
+		} else {
+			icon.setImage(new Image("/icons/delete-disabled.png"));
+		}
+
 
 		return tile;
 	}
