@@ -93,8 +93,8 @@ public class SessionController {
 	 * Logs the given user into the system and initializes the appropraite informationContainer depending on the
 	 * users type.
 	 * Pre-Condition: theUser != null
-	 * Post-Condition: An informationContainer will be initialies to present the appropraite user interface.
-	 * @param theUser that will be logged into the sytem.
+	 * Post-Condition: An informationContainer will be initializes to present the appropraite user interface.
+	 * @param theUser that will be logged into the system.
 	 */
 	public static void userLogin(User theUser) {
 		myUser = theUser;

@@ -222,7 +222,7 @@ public class AuctionManager implements Manager {
 			theAuction.getOwner().removeAuction(theAuction);
 			
 			// remove auction from calendar
-			
+			myCalendar.deleteAuction(theAuction);
 		}
 	}
 	

@@ -53,6 +53,16 @@ public class InformationContainerViewController {
 	private void addNode(Node theNode) {
 		myFlowPane.getChildren().add(theNode);
 	}
+	
+	/**
+	 * Removes the given node to the containers flow pane.
+	 * Pre-Condition: theNode != null
+	 * Post-Condition: The given node will be removed from the flow pane.
+	 * @param theNode that will be removed from the InformationContainerControllers flow pane.
+	 */
+	private void removeNode(Node theNode) {
+		myFlowPane.getChildren().remove(theNode);
+	}
 
 	private void clear() {
 		myFlowPane.getChildren().clear();
@@ -76,12 +86,12 @@ public class InformationContainerViewController {
 	 */
 	public void showAuctions(final Collection<Auction> theAuctions) {
 		this.clear();
-		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.createAuctionTile(e);
+		for (Auction auction: theAuctions) {
+			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-					if (e.getAllItems().size() > 0) {
-						showItems(e.getAllItems());
+					if (auction.getAllItems().size() > 0) {
+						showItems(auction.getAllItems());
 					}
 			});
 			
@@ -91,7 +101,7 @@ public class InformationContainerViewController {
 	
 	public void showAuctionBids(final Collection<Auction> theAuctions) {
 		this.clear();
-		for (Auction auction : theAuctions) {
+		for (Auction auction: theAuctions) {
 			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 				showBids(auction.getAllBidsWithBidder((Bidder) SessionController.getUser()));
@@ -103,22 +113,20 @@ public class InformationContainerViewController {
 	
 	public void showBids(final Collection<Bid> theBids) {
 		this.clear();
-		for (Bid e : theBids) {
-			AnchorPane tile = TileFactory.createBidTile(e);
+		for (Bid bid: theBids) {
+			AnchorPane tile = TileFactory.createBidTile(bid);
 			this.addNode(tile);
 		}
 	}
 
 	public void showAdminAuctions(Collection<Auction> theAuctions, AuctionManager theManager) {
 		this.clear();
-		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.createAdminAuctionTile(e);
+		for (Auction auction : theAuctions) {
+			AnchorPane tile = TileFactory.createAdminAuctionTile(auction);
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-				if (!e.isContaingBids()) {
-					theManager.removeAuction(e);
-					this.clear();
-					showAdminAuctions(theAuctions, theManager);
-					//System.out.println("Yohei");
+				if (!auction.isContaingBids()) {
+					theManager.removeAuction(auction);	
+					this.removeNode(tile);
 				}
 			});
 			this.addNode(tile);

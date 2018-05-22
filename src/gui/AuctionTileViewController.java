@@ -11,6 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -76,6 +77,9 @@ public class AuctionTileViewController {
 	
 	@FXML
 	private Label myBidCountField;
+	
+	@FXML
+	private Media myDelteIcon;
 
 
 	/**

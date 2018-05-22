@@ -4,9 +4,11 @@ import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.SplitPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -65,6 +67,12 @@ public class TileViewController {
 	 */
 	@FXML
 	private Label mySecondBottomRightField;
+	
+	/**
+	 * The delete icon used for the adminAuctionTile
+	 */
+	@FXML
+	private ImageView myDelteIcon;
 
 
 	/**
