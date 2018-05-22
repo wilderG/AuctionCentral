@@ -294,17 +294,17 @@ public class Deliverable3DemoData {
 				nonProfit3, auction2Items, bidSet2);
 		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9),
 				nonProfit1, auction3Items, bidSet3);
-		Auction auction4 = new Auction(LocalDate.of(2018, 6, 4),
+		Auction auction4 = new Auction(LocalDate.of(2018, 6, 11),
 				nonProfit4, auction4Items, bidSet4);
-		Auction auction5 = new Auction(LocalDate.of(2018, 6, 4),
+		Auction auction5 = new Auction(LocalDate.of(2018, 6, 11),
 				nonProfit5, auction5Items, bidSet5);
-		Auction auction6 = new Auction(LocalDate.of(2018, 6, 5),
+		Auction auction6 = new Auction(LocalDate.of(2018, 6, 12),
 				nonProfit6, auction6Items, bidSet6);
-		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6),
+		Auction auction7 = new Auction(LocalDate.of(2018, 6, 13),
 				nonProfit13);
-		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7),
+		Auction auction8 = new Auction(LocalDate.of(2018, 6, 14),
 				nonProfit14);
-		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
+		Auction auction9 = new Auction(LocalDate.of(2018, 6, 15),
 				nonProfit15);
         Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
                 nonProfit16, new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
