@@ -1,9 +1,11 @@
 package gui;
 
+
 import java.io.IOException;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -12,6 +14,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.AuctionManager;
 import model.Bidder;
+import model.Employee;
 import model.Manager;
 import model.NonProfitContact;
 import model.User;
@@ -102,7 +105,8 @@ public class SessionController {
 			//loadBidderAuctionInformation();	
 		} else if (theUser instanceof NonProfitContact) {
 			loadNonProfitMenu(userViewController);
-		} else if (theUser instanceof Manager) {
+		} else if (theUser instanceof Employee) {
+			loadEmployeeMenu(userViewController);
 			//loadNonProfitAuctionInformation(infoViewController);
 		}
 
@@ -136,6 +140,24 @@ public class SessionController {
 			@Override
 			public void handle(MouseEvent theEvent) {
 				infoViewController.showAuctions(myUser.getMyAuctions());
+			}
+		});
+		theController.addMenuButton(viewAuctionsButton);
+		
+		
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		logOutButton.setOnMouseClicked(event -> {
+			SessionController.userLogout();
+		});
+		theController.addMenuButton(logOutButton);
+	}
+	
+	private static void loadEmployeeMenu(final UserViewController theController) {
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent theEvent) {
+				infoViewController.showAuctions(myManager.getAllAuctionsSorted());
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -227,10 +249,9 @@ public class SessionController {
 			e.printStackTrace();
 		}
 		
-		theUserViewController.addToGrid(informationContainerView, 0, 2);
-		GridPane gridPane = theUserViewController.getMyGrid();
-		informationContainerView.prefWidthProperty().bind(gridPane.widthProperty().subtract(20));
-		informationContainerView.prefHeightProperty().bind(gridPane.heightProperty().subtract(20));
+		ScrollPane scrollPane = theUserViewController.getMyScrollPane();
+		scrollPane.setContent(informationContainerView);
+		informationContainerView.prefWidthProperty().bind(scrollPane.widthProperty().subtract(20));
 		informationContainerViewController = 
 				(InformationContainerViewController) informationContainerLoader.getController();
 		

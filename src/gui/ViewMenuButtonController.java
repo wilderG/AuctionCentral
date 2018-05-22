@@ -2,6 +2,7 @@ package gui;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
@@ -11,16 +12,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class ViewMenuButtonController {
-
-	/**
-	 * The hex value for the default color of myleftInfoPane.
-	 */
-	private static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#0FD171";
-	
-	/**
-	 * The hex value for the default on hover color of myLeftInfoPane.
-	 */
-	private static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#17BA97";
 	
 	@FXML
 	private Label myTitle;
@@ -37,19 +28,20 @@ public class ViewMenuButtonController {
 	@FXML
 	private void onMouseEntered() {
 		myPane.setBackground(
-				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
+				new Background(new BackgroundFill(Color.web(AuctionTileViewController.ON_HOVER_DEFAULT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
 	@FXML
 	private void onMouseExited() {
 		myPane.setBackground(
-				new Background(new BackgroundFill(Color.web(ON_HOVER_DEFAULT_INFO_PANE_COLOR),
+				new Background(new BackgroundFill(Color.web(AuctionTileViewController.DEFAULT_LEFT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
 	
 	public void setText(String theText) {
 		myTitle.setText(theText);
+		myTitle.setAlignment(Pos.CENTER);
 	}
 	
 }

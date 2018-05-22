@@ -1,11 +1,13 @@
 package gui;
 
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import model.User;
@@ -35,6 +37,9 @@ public class UserViewController implements Initializable {
 	 */
 	@FXML
 	private Label theLogoutButton;
+	
+	@FXML
+	private ScrollPane myScrollPane;
 
 	
 	/**
@@ -95,6 +100,15 @@ public class UserViewController implements Initializable {
 	
 	public void addMenuButton(final Node theButton) {
 		menuButtonBar.getChildren().add(theButton);
+	}
+	
+	/**
+	 * Getter for the views scroll pane.
+	 * Post-Condition: The object returned will the the one used by the view.
+	 * @return The views scroll pane.
+	 */
+	public ScrollPane getMyScrollPane() {
+		return myScrollPane;
 	}
 	
 }

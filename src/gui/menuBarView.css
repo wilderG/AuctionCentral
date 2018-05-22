@@ -1,0 +1,31 @@
+.root,
+#mainMenu .button,
+#buttonContainer,
+.titled-pane>*.title,
+#userNameLabel {
+	-fx-background-color: gray;
+}
+
+
+
+#mainMenu .button {
+
+}
+
+#buttonContainer {
+	
+}
+
+#mainMenu, #userNameLabel {
+	
+}
+
+.titled-pane>*.title {
+	
+}
+
+#userNameLabel {
+	
+	-fx-text-fill: white;
+	
+}
