@@ -8,6 +8,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import model.User;
@@ -31,6 +33,8 @@ public class UserViewController implements Initializable {
 	@FXML
 	private Label theUserDisplayName;
 	
+	@FXML
+	private AnchorPane rootPane;
 
 	/**
 	 * The button used by the user to logout.
@@ -41,6 +45,8 @@ public class UserViewController implements Initializable {
 	@FXML
 	private ScrollPane myScrollPane;
 
+	@FXML
+	private FlowPane subMenuBar;
 	
 	/**
 	 * The container that will hold the information presented to the user.
@@ -66,6 +72,12 @@ public class UserViewController implements Initializable {
 		myUser = SessionController.getUser();
 	//	configureEventListeners();
 		updateDisplayName();
+		rootPane.getStyleClass().add("rootPane");
+		myScrollPane.getStyleClass().add("rootPane");
+		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
+		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
+		subMenuBar.getStyleClass().add("subMenuBar");
+		
 	}
 	
 	/**

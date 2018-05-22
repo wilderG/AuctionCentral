@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane minWidth="300.0" prefHeight="600.0" prefWidth="920.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserViewController">
+<AnchorPane fx:id="rootPane" minWidth="650.0" prefHeight="680.0" prefWidth="1024.0" stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserViewController">
    <children>
       <GridPane fx:id="myGridPane" layoutX="100.0" layoutY="155.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -22,7 +22,7 @@
         <rowConstraints>
           <RowConstraints maxHeight="45.0" minHeight="45.0" percentHeight="0.0" prefHeight="45.0" vgrow="SOMETIMES" />
           <RowConstraints maxHeight="35.0" minHeight="35.0" percentHeight="0.0" prefHeight="35.0" vgrow="SOMETIMES" />
-          <RowConstraints maxHeight="524.0" minHeight="10.0" prefHeight="512.0" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="0.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <GridPane id="menuContainer" stylesheets="@menuBar.css">
@@ -49,11 +49,9 @@
                   </FlowPane>
                </children>
             </GridPane>
-            <ScrollPane fx:id="myScrollPane" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0" />
-              </content>
+            <ScrollPane fx:id="myScrollPane" fitToHeight="true" prefHeight="600.0" prefWidth="1024.0" stylesheets="@menuBar.css" GridPane.rowIndex="2">
             </ScrollPane>
+            <FlowPane fx:id="subMenuBar" minHeight="35.0" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </children>

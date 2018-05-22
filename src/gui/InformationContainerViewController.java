@@ -7,6 +7,8 @@ import java.util.Collection;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -40,7 +42,6 @@ public class InformationContainerViewController {
 	 */
 	@FXML
 	private void initialize() {
-
 	}
 
 	/**
