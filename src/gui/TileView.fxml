@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="165.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TileViewController">
+<AnchorPane onMouseEntered="#onMouseEntered" onMouseExited="#onMouseExited" prefHeight="165.0" prefWidth="325.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TileViewController">
    <children>
       <SplitPane id="main" dividerPositions="0.34983498349834985" minHeight="165.0" minWidth="305.0" mouseTransparent="true" prefHeight="185.0" prefWidth="325.0" stylesheets="@tile.css">
          <items>
@@ -29,9 +27,9 @@
             </SplitPane>
             <SplitPane id="rightInfo" fx:id="myRightInfoPane" dividerPositions="0.4972677595628415" mouseTransparent="true" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
-                  <AnchorPane>
+                  <AnchorPane prefHeight="46.0" prefWidth="206.0">
                      <children>
-                        <Label id="rightTopInfo" fx:id="myTopRightField" alignment="BOTTOM_LEFT" contentDisplay="CENTER" prefHeight="88.0" prefWidth="194.0" stylesheets="@tile.css" text="Red Cross" textAlignment="CENTER">
+                        <Label id="rightTopInfo" fx:id="myTopRightField" alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutY="39.0" prefHeight="49.0" prefWidth="206.0" stylesheets="@tile.css" text="Red Cross" textAlignment="CENTER">
                            <padding>
                               <Insets left="15.0" />
                            </padding>
@@ -45,7 +43,7 @@
                               <Insets left="15.0" />
                            </padding>
                         </Label>
-                        <Label id="rightBottomInfo" fx:id="mySecondBottomRightField" layoutY="36.0" prefHeight="27.0" prefWidth="194.0" text="Number of Bids: " textAlignment="CENTER" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
+                        <Label id="rightBottomInfo" fx:id="mySecondBottomRightField" layoutY="36.0" prefHeight="34.0" prefWidth="206.0" text="Number of Bids: " textAlignment="CENTER" AnchorPane.bottomAnchor="17.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="36.0">
                            <padding>
                               <Insets left="15.0" />
                            </padding>
@@ -56,5 +54,10 @@
             </SplitPane>
          </items>
       </SplitPane>
+      <ImageView id="deleteIcon" fx:id="myDeleteIcon" fitHeight="24.0" fitWidth="20.0" layoutX="300.0" layoutY="10.0" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="4.0">
+         <image>
+            <Image url="@../icons/delete.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

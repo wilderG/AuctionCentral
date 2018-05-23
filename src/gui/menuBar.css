@@ -7,6 +7,7 @@
 
 #main {
 	-fx-font-family: 'Helvetica', Arial, sans-serif;
+	-fx-text-fill: white;
 	-fx-font-size: 18px;
 }
 
@@ -22,6 +23,9 @@
 	-fx-font-fill: white;
 	-fx-background-color: #53B799;
 }
+
+
+
 
 .rootPane {
 	-fx-background-color: #8C8E8C;

@@ -2,9 +2,14 @@ package gui;
 
 
 
+import java.awt.color.ICC_Profile;
+import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.Iterator;
 
+import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.ScrollPane;
@@ -14,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import model.Auction;
 import model.AuctionItem;
+import model.AuctionManager;
 import model.Bid;
 import model.Bidder;
 
@@ -53,6 +59,16 @@ public class InformationContainerViewController {
 	private void addNode(Node theNode) {
 		myFlowPane.getChildren().add(theNode);
 	}
+	
+	/**
+	 * Removes the given node to the containers flow pane.
+	 * Pre-Condition: theNode != null
+	 * Post-Condition: The given node will be removed from the flow pane.
+	 * @param theNode that will be removed from the InformationContainerControllers flow pane.
+	 */
+	public void removeNode(Node theNode) {
+		myFlowPane.getChildren().remove(theNode);
+	}
 
 	private void clear() {
 		myFlowPane.getChildren().clear();
@@ -76,12 +92,12 @@ public class InformationContainerViewController {
 	 */
 	public void showAuctions(final Collection<Auction> theAuctions) {
 		this.clear();
-		for (Auction e : theAuctions) {
-			AnchorPane tile = TileFactory.createAuctionTile(e);
+		for (Auction auction: theAuctions) {
+			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-					if (e.getAllItems().size() > 0) {
-						showItems(e.getAllItems());
+					if (auction.getAllItems().size() > 0) {
+						showItems(auction.getAllItems());
 					}
 			});
 			
@@ -91,7 +107,7 @@ public class InformationContainerViewController {
 	
 	public void showAuctionBids(final Collection<Auction> theAuctions) {
 		this.clear();
-		for (Auction auction : theAuctions) {
+		for (Auction auction: theAuctions) {
 			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 				showBids(auction.getAllBidsWithBidder((Bidder) SessionController.getUser()));
@@ -103,10 +119,51 @@ public class InformationContainerViewController {
 	
 	public void showBids(final Collection<Bid> theBids) {
 		this.clear();
-		for (Bid e : theBids) {
-			AnchorPane tile = TileFactory.createBidTile(e);
+		for (Bid bid: theBids) {
+			AnchorPane tile = TileFactory.createBidTile(bid);
 			this.addNode(tile);
 		}
+	}
+
+	public void showAdminAuctions(Collection<Auction> theAuctions, AuctionManager theManager) {
+		this.clear();
+		for (Auction auction : theAuctions) {
+			
+			AnchorPane tile = TileFactory.createAdminAuctionTile(auction, theManager, this);
+//			for (Node node: tile.getChildren()) {
+//				String id = node.getId();
+//				if (id.equals("deleteIcon")) {
+//					if (auction.isContaingBids()) {
+//						node.setOnMouseClicked(event -> {
+//							theManager.removeAuction(auction);	
+//							this.removeNode(tile);
+//						});
+//
+//						node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
+//							node.
+//						});
+//					} else {
+//						
+//					}
+//					node.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+//							System.out.println("Clicked");
+//							if (!auction.isContaingBids()) {
+//							theManager.removeAuction(auction);	
+//							this.removeNode(tile);
+//						}
+//					});
+//				}
+//			}
+//			tile.get
+//			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+//				if (!auction.isContaingBids()) {
+//					theManager.removeAuction(auction);	
+//					this.removeNode(tile);
+//				}
+//			});
+			this.addNode(tile);
+		}
+		
 	}
 
 

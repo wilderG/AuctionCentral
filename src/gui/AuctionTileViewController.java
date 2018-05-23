@@ -11,6 +11,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 
@@ -24,12 +25,12 @@ public class AuctionTileViewController {
 	/**
 	 * The hex value for the default color of myleftInfoPane.
 	 */
-	public static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#53B799";
+	public static final String DEFAULT_LEFT_INFO_PANE_COLOR = "#FF5F14";
 	
 	/**
 	 * The hex value for the default on hover color of myLeftInfoPane.
 	 */
-	public static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#59C4A4";
+	public static final String ON_HOVER_DEFAULT_INFO_PANE_COLOR = "#FF8D57";
 
 	/**
 	 * The string dialog used to present the item count to the user.
@@ -76,6 +77,9 @@ public class AuctionTileViewController {
 	
 	@FXML
 	private Label myBidCountField;
+	
+	@FXML
+	private Media myDelteIcon;
 
 
 	/**

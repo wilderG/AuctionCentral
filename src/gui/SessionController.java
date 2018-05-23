@@ -2,6 +2,9 @@ package gui;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+
+import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,6 +47,7 @@ public class SessionController {
 
 	
 	private static InformationContainerViewController infoViewController;
+	
 	
 	/**
 	 * The file name for the LoginView
@@ -93,8 +97,8 @@ public class SessionController {
 	 * Logs the given user into the system and initializes the appropraite informationContainer depending on the
 	 * users type.
 	 * Pre-Condition: theUser != null
-	 * Post-Condition: An informationContainer will be initialies to present the appropraite user interface.
-	 * @param theUser that will be logged into the sytem.
+	 * Post-Condition: An informationContainer will be initializes to present the appropraite user interface.
+	 * @param theUser that will be logged into the system.
 	 */
 	public static void userLogin(User theUser) {
 		myUser = theUser;
@@ -140,6 +144,7 @@ public class SessionController {
 			@Override
 			public void handle(MouseEvent theEvent) {
 				infoViewController.showAuctions(myUser.getMyAuctions());
+				
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -157,7 +162,8 @@ public class SessionController {
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
 			@Override
 			public void handle(MouseEvent theEvent) {
-				infoViewController.showAuctions(myManager.getAllAuctionsSorted());
+				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+				theController.showDatePicker(infoViewController, myManager);
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -169,6 +175,25 @@ public class SessionController {
 		});
 		theController.addMenuButton(logOutButton);
 	}
+	
+	
+//	private static void addRangeButton(final UserViewController theController) {
+//		AnchorPane viewAuctionsByRangeButton = MenuButton.newMenuButton("View Auctions by Date Range");
+//		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent theEvent) {
+//				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+//			}
+//		});
+//		theController.addMenuButton(viewAuctionsButton);
+//		
+//		
+//		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+//		logOutButton.setOnMouseClicked(event -> {
+//			SessionController.userLogout();
+//		});
+//		theController.addMenuButton(logOutButton);
+//	}
 
 	
 
