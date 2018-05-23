@@ -2,16 +2,29 @@ package gui;
 
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ResourceBundle;
+
+import javafx.util.Callback;
+import javafx.scene.control.DateCell;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import model.AuctionManager;
 import model.User;
 
 /**
@@ -63,6 +76,19 @@ public class UserViewController implements Initializable {
 	@FXML
 	private FlowPane menuButtonBar;
 	
+	@FXML
+	private DatePicker myStartRangeDatePicker;
+	
+	@FXML
+	private DatePicker myEndRangeDatePicker;
+	
+	@FXML
+	private Label myDatePickerTitle;
+	
+	private SimpleObjectProperty<LocalDate> myStartRangeDate;
+	
+	private SimpleObjectProperty<LocalDate> myEndRangeDate;
+	
 	/**
 	 * Initializes the view by constructing all appropriate view components. 
 	 */
@@ -77,9 +103,18 @@ public class UserViewController implements Initializable {
 		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		subMenuBar.getStyleClass().add("subMenuBar");
+
+		myStartRangeDatePicker.setVisible(false);
+		initializeDatePickers();
+		myEndRangeDatePicker.setVisible(false);
+		myDatePickerTitle.setVisible(false);
+		myStartRangeDate = null;
+		myEndRangeDate = null;
 		
 	}
 	
+	
+
 	/**
 	 * Updates theUserDisplay label to show the current users name.s
 	 * Pre-Condition: theUserDisplayName != null
@@ -122,6 +157,95 @@ public class UserViewController implements Initializable {
 	public ScrollPane getMyScrollPane() {
 		return myScrollPane;
 	}
+	
+	public void showDatePicker(InformationContainerViewController infoViewController, AuctionManager myManager) {
+		myDatePickerTitle.setVisible(true);
+		myStartRangeDatePicker.setVisible(true);
+		myEndRangeDatePicker.setVisible(true);
+		
+//		myStartRangeDate.addListener(new ChangeListener<Boolean>() {
+//            public void changed(ObservableValue ov,Boolean old_val, Boolean new_val) {
+//                    System.out.println(new_val);
+//            }
+//        });
+	}
+	
+	private void removeFocusFromStarDatePicker() {
+		final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
+		myStartRangeDatePicker.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
+            if(newValue && firstTime.get()){
+                myGridPane.requestFocus(); // Delegate the focus to container
+                firstTime.setValue(false); // Variable value changed for future references
+            }
+        });
+	}
+	
+	private void addActionsToDatePickers() {
+		myStartRangeDatePicker.setOnAction(event -> {
+//			myStartRangeDate = myStartRangeDatePicker.getValue();
+			myStartRangeDate.set(myStartRangeDatePicker.getValue());
+			disableDaysOnMyEndRangeDatePicker();
+			System.out.println("The start date chosen is " + myStartRangeDate);
+		});
+		
+		myEndRangeDatePicker.setOnAction(event -> {
+//			myEndRangeDate = myEndRangeDatePicker.getValue();
+			myEndRangeDate.set(myEndRangeDatePicker.getValue());
+			disableDaysOnMyStartRangeDatePicker();
+		});
+				
+	}
+	
+	private void initializeDatePickers() {
+		removeFocusFromStarDatePicker();
+		addActionsToDatePickers();
+	}
+	
+	private void disableDaysOnMyEndRangeDatePicker() {
+		final Callback<DatePicker, DateCell> endDatePickerCellFactory = 
+	            new Callback<DatePicker, DateCell>() {
+	                @Override
+	                public DateCell call(final DatePicker datePicker) {
+	                    return new DateCell() {
+	                        @Override
+	                        public void updateItem(LocalDate item, boolean empty) {
+	                            super.updateItem(item, empty);
+	                            if (item.isBefore(
+	                                    myStartRangeDatePicker.getValue().plusDays(1))
+	                                ) {
+	                                    setDisable(true);
+	                                    setStyle("-fx-background-color: #ffc0cb;");
+	                            }
+	                    }
+	                };
+	            }
+	        };
+	        myEndRangeDatePicker.setDayCellFactory(endDatePickerCellFactory);
+	        
+	}
+	
+	private void disableDaysOnMyStartRangeDatePicker () {
+		final Callback<DatePicker, DateCell> startDatePickerCellFactory = 
+                new Callback<DatePicker, DateCell>() {
+                    @Override
+                    public DateCell call(final DatePicker datePicker) {
+                        return new DateCell() {
+                            @Override
+                            public void updateItem(LocalDate item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (item.isAfter(
+                                        myEndRangeDatePicker.getValue())
+                                    ) {
+                                        setDisable(true);
+                                        setStyle("-fx-background-color: #ffc0cb;");
+                                }
+                        }
+                    };
+                }
+            };
+            myStartRangeDatePicker.setDayCellFactory(startDatePickerCellFactory);
+	}
+
 	
 }
 
