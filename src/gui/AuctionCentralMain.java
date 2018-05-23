@@ -2,6 +2,9 @@ package gui;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 
 public class AuctionCentralMain extends Application {
 

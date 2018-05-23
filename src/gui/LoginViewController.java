@@ -71,6 +71,7 @@ public class LoginViewController implements Initializable {
 		actionTarget.setText("");
 	}
 	
+	
 	private void loginUser(final String theUsername) {
 		User user;
 		
@@ -82,6 +83,11 @@ public class LoginViewController implements Initializable {
 		}
 		
 		SessionController.userLogin(user);
+	}
+	public void loginEnhance() {
+//		File f = new File("filecss.css");
+//		scene.getStylesheets().clear();
+//		scene.getStylesheets().add("file:///" + f.getAbsolutePath().replace("\\", "/"));
 	}
 
 	
