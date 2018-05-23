@@ -59,7 +59,7 @@ public class UserViewController implements Initializable {
 	private ScrollPane myScrollPane;
 
 	@FXML
-	private FlowPane subMenuBar;
+	private FlowPane mySubMenuBar;
 	
 	/**
 	 * The container that will hold the information presented to the user.
@@ -76,17 +76,17 @@ public class UserViewController implements Initializable {
 	@FXML
 	private FlowPane menuButtonBar;
 	
-	@FXML
+//	@FXML
 	private DatePicker myStartRangeDatePicker;
-	
-	@FXML
+//	
+//	@FXML
 	private DatePicker myEndRangeDatePicker;
-	
-	@FXML
+//	
+//	@FXML
 	private Label myDatePickerTitle;
-	
+
 	private SimpleObjectProperty<LocalDate> myStartRangeDate;
-	
+//	
 	private SimpleObjectProperty<LocalDate> myEndRangeDate;
 	
 	/**
@@ -102,14 +102,17 @@ public class UserViewController implements Initializable {
 		myScrollPane.getStyleClass().add("rootPane");
 		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-		subMenuBar.getStyleClass().add("subMenuBar");
+		mySubMenuBar.getStyleClass().add("subMenuBar");
 
-		myStartRangeDatePicker.setVisible(false);
-		initializeDatePickers();
-		myEndRangeDatePicker.setVisible(false);
-		myDatePickerTitle.setVisible(false);
-		myStartRangeDate = null;
-		myEndRangeDate = null;
+
+		//myStartRangeDatePicker.setVisible(false);
+		initializeDateObjects();
+		//myEndRangeDatePicker.setVisible(false);
+		//myDatePickerTitle.setVisible(false);
+
+//		myStartRangeDate = null;
+//		myEndRangeDate = null;
+		
 		
 	}
 	
@@ -159,7 +162,7 @@ public class UserViewController implements Initializable {
 	}
 	
 	public void showDatePicker(InformationContainerViewController infoViewController, AuctionManager myManager) {
-		myDatePickerTitle.setVisible(true);
+		//myDatePickerTitle.setVisible(true);
 		myStartRangeDatePicker.setVisible(true);
 		myEndRangeDatePicker.setVisible(true);
 		
@@ -196,7 +199,23 @@ public class UserViewController implements Initializable {
 				
 	}
 	
-	private void initializeDatePickers() {
+	private void initializeDateObjects() {
+		myStartRangeDatePicker = new DatePicker();
+		myStartRangeDatePicker.setPromptText("Start Date");
+		
+		myEndRangeDatePicker = new DatePicker();
+		myEndRangeDatePicker.setPromptText("End Date");
+		
+		myDatePickerTitle = new Label("Filter Auctions by Date Range:");
+		
+		myStartRangeDate = new SimpleObjectProperty<LocalDate>();
+		myEndRangeDate = new SimpleObjectProperty<LocalDate>();
+		
+		mySubMenuBar.getChildren().add(myDatePickerTitle);
+		mySubMenuBar.getChildren().add(myStartRangeDatePicker);
+		mySubMenuBar.getChildren().add(myEndRangeDatePicker);
+		
+		
 		removeFocusFromStarDatePicker();
 		addActionsToDatePickers();
 	}

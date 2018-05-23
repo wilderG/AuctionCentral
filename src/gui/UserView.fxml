@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -46,29 +45,15 @@
                   </FlowPane>
                </children>
             </GridPane>
-            <ScrollPane fx:id="myScrollPane" fitToHeight="true" prefHeight="600.0" prefWidth="1024.0" stylesheets="@menuBar.css" GridPane.rowIndex="2">
+            <ScrollPane fx:id="myScrollPane" fitToHeight="true" prefHeight="600.0" prefWidth="1024.0" stylesheets="@menuBar.css" GridPane.halignment="CENTER" GridPane.rowIndex="2">
             </ScrollPane>
-            <FlowPane fx:id="subMenuBar" minHeight="35.0" GridPane.rowIndex="1">
-               <children>
-                  <Label fx:id="myDatePickerTitle" text="Limit Auctions by a Range of Date:">
-                     <FlowPane.margin>
-                        <Insets left="15.0" />
-                     </FlowPane.margin>
-                     <padding>
-                        <Insets top="4.0" />
-                     </padding>
-                  </Label>
-                  <DatePicker fx:id="myStartRangeDatePicker" promptText="Start Date">
-                     <FlowPane.margin>
-                        <Insets left="15.0" top="5.0" />
-                     </FlowPane.margin>
-                  </DatePicker>
-                  <DatePicker fx:id="myEndRangeDatePicker" promptText="End Date">
-                     <FlowPane.margin>
-                        <Insets left="15.0" top="5.0" />
-                     </FlowPane.margin>
-                  </DatePicker>
-               </children></FlowPane>
+            <FlowPane fx:id="mySubMenuBar" alignment="CENTER_LEFT" hgap="20.0" minHeight="35.0" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <padding>
+                  <Insets left="10.0" />
+               </padding></FlowPane>
          </children>
       </GridPane>
    </children>
