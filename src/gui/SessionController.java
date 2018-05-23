@@ -2,6 +2,9 @@ package gui;
 
 
 import java.io.IOException;
+import java.time.LocalDate;
+
+import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -44,6 +47,7 @@ public class SessionController {
 
 	
 	private static InformationContainerViewController infoViewController;
+	
 	
 	/**
 	 * The file name for the LoginView
@@ -140,6 +144,7 @@ public class SessionController {
 			@Override
 			public void handle(MouseEvent theEvent) {
 				infoViewController.showAuctions(myUser.getMyAuctions());
+				
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -158,6 +163,7 @@ public class SessionController {
 			@Override
 			public void handle(MouseEvent theEvent) {
 				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+				theController.showDatePicker(infoViewController, myManager);
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -169,6 +175,25 @@ public class SessionController {
 		});
 		theController.addMenuButton(logOutButton);
 	}
+	
+	
+//	private static void addRangeButton(final UserViewController theController) {
+//		AnchorPane viewAuctionsByRangeButton = MenuButton.newMenuButton("View Auctions by Date Range");
+//		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+//			@Override
+//			public void handle(MouseEvent theEvent) {
+//				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+//			}
+//		});
+//		theController.addMenuButton(viewAuctionsButton);
+//		
+//		
+//		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+//		logOutButton.setOnMouseClicked(event -> {
+//			SessionController.userLogout();
+//		});
+//		theController.addMenuButton(logOutButton);
+//	}
 
 	
 

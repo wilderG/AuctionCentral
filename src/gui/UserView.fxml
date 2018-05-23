@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -13,7 +10,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" minWidth="650.0" prefHeight="680.0" prefWidth="1024.0" stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserViewController">
+<AnchorPane fx:id="rootPane" minWidth="650.0" prefHeight="680.0" prefWidth="1024.0" stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserViewController">
    <children>
       <GridPane fx:id="myGridPane" layoutX="100.0" layoutY="155.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -51,7 +48,27 @@
             </GridPane>
             <ScrollPane fx:id="myScrollPane" fitToHeight="true" prefHeight="600.0" prefWidth="1024.0" stylesheets="@menuBar.css" GridPane.rowIndex="2">
             </ScrollPane>
-            <FlowPane fx:id="subMenuBar" minHeight="35.0" GridPane.rowIndex="1" />
+            <FlowPane fx:id="subMenuBar" minHeight="35.0" GridPane.rowIndex="1">
+               <children>
+                  <Label fx:id="myDatePickerTitle" text="Limit Auctions by a Range of Date:">
+                     <FlowPane.margin>
+                        <Insets left="15.0" />
+                     </FlowPane.margin>
+                     <padding>
+                        <Insets top="4.0" />
+                     </padding>
+                  </Label>
+                  <DatePicker fx:id="myStartRangeDatePicker" promptText="Start Date">
+                     <FlowPane.margin>
+                        <Insets left="15.0" top="5.0" />
+                     </FlowPane.margin>
+                  </DatePicker>
+                  <DatePicker fx:id="myEndRangeDatePicker" promptText="End Date">
+                     <FlowPane.margin>
+                        <Insets left="15.0" top="5.0" />
+                     </FlowPane.margin>
+                  </DatePicker>
+               </children></FlowPane>
          </children>
       </GridPane>
    </children>
