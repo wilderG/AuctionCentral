@@ -140,7 +140,6 @@ public class SessionController {
 		
 		// go to default screen
 		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
-		//viewAuctionsButton.getStyleClass().add("activeMenuButton");
 	}
 	
 	private static void loadNonProfitMenu(final UserViewController theController) {
@@ -160,6 +159,9 @@ public class SessionController {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
+		
+		// go to default screen
+		infoViewController.showAuctions(myUser.getMyAuctions());
 	}
 	
 	private static void loadEmployeeMenu(final UserViewController theController) {
@@ -173,12 +175,15 @@ public class SessionController {
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
-		
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
+		
+		// go to default screen
+		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+		theController.showDatePicker(infoViewController, myManager);
 	}
 	
 	
