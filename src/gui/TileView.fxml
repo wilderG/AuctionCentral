@@ -54,7 +54,7 @@
             </SplitPane>
          </items>
       </SplitPane>
-      <ImageView id="deleteIcon" fx:id="myDeleteIcon" fitHeight="24.0" fitWidth="20.0" layoutX="300.0" layoutY="10.0" preserveRatio="true" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="4.0">
+      <ImageView id="deleteIcon" fx:id="myDeleteIcon" fitHeight="16.0" fitWidth="15.0" layoutX="305.0" layoutY="10.0" preserveRatio="true" AnchorPane.leftAnchor="305.0" AnchorPane.topAnchor="4.0">
          <image>
             <Image url="@../icons/delete.png" />
          </image>

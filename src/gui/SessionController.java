@@ -45,20 +45,25 @@ public class SessionController {
 	 */
 	private static User myUser;
 
-	
+	/**
+	 * The informationViewController used in conjunction with the infoViewContainer being displayed.
+	 */
 	private static InformationContainerViewController infoViewController;
 	
 	
 	/**
-	 * The file name for the LoginView
+	 * The file name for the LoginView.
 	 */
 	private static final String LOGIN_VIEW = "LoginView.fxml";
 
 	/**
-	 * The file name for the UserView
+	 * The file name for the UserView.
 	 */
 	private static final String USER_VIEW = "UserView.fxml";
 
+	/**
+	 * The file name for the InformationContainerView.
+	 */
 	private static final String INFORMATION_CONTAINER_VIEW = "InformationContainerView.fxml";
 	
 	/**
@@ -106,16 +111,20 @@ public class SessionController {
 		infoViewController = loadInformationContainerView(userViewController);
 		if (theUser instanceof Bidder) {
 			loadBidderMenu(userViewController);
-			//loadBidderAuctionInformation();	
 		} else if (theUser instanceof NonProfitContact) {
 			loadNonProfitMenu(userViewController);
 		} else if (theUser instanceof Employee) {
 			loadEmployeeMenu(userViewController);
-			//loadNonProfitAuctionInformation(infoViewController);
 		}
 
 	}
 
+	/**
+	 * Loads a menu that contains all the main controls that can be used by a bidder
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A menu that is appropriate for a bidder user will be present in theUserView
+	 * @param theController associated with the UserView where the bidder menu will be added.
+	 */
 	private static void loadBidderMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -138,6 +147,12 @@ public class SessionController {
 		theController.addMenuButton(logOutButton);
 	}
 	
+	/**
+	 * Loads a menu that contains all the main controls that can be used by a non profit contact
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A menu that is appropriate for a non profit contact user will be present in theUserView
+	 * @param theController associated with the UserView where the non profit contact menu will be added.
+	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -157,6 +172,12 @@ public class SessionController {
 		theController.addMenuButton(logOutButton);
 	}
 	
+	/**
+	 * Loads a menu and a sub-menu that contains all the main controls that can be used by an employee
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A menu and sub-menu that is appropriate for an employee user will be present in theUserView
+	 * @param theController associated with the UserView where the employee menus will be added.
+	 */
 	private static void loadEmployeeMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -176,24 +197,6 @@ public class SessionController {
 		theController.addMenuButton(logOutButton);
 	}
 	
-	
-//	private static void addRangeButton(final UserViewController theController) {
-//		AnchorPane viewAuctionsByRangeButton = MenuButton.newMenuButton("View Auctions by Date Range");
-//		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent theEvent) {
-//				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-//			}
-//		});
-//		theController.addMenuButton(viewAuctionsButton);
-//		
-//		
-//		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
-//		logOutButton.setOnMouseClicked(event -> {
-//			SessionController.userLogout();
-//		});
-//		theController.addMenuButton(logOutButton);
-//	}
 
 	
 
@@ -281,25 +284,6 @@ public class SessionController {
 				(InformationContainerViewController) informationContainerLoader.getController();
 		
 		return informationContainerViewController;
-	}
-	
-	private static class MenuButton {
-		
-		private static AnchorPane newMenuButton(String theTitle) {
-			FXMLLoader buttonLoader = new FXMLLoader(SessionController.class.getResource("ViewMenuButton.fxml"));
-			AnchorPane button = null;
-			try {
-				button = (AnchorPane) buttonLoader.load();
-			} catch (IOException e) {
-				System.err.println("Button Error");
-				//e.printStackTrace();
-			}	
-			
-			ViewMenuButtonController buttonCtrl = (ViewMenuButtonController) buttonLoader.getController();
-			buttonCtrl.setText(theTitle);
-			return button;
-		}
-		
 	}
 
 }
