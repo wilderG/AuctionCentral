@@ -4,6 +4,7 @@ package gui;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.ResourceBundle;
 
 import javafx.util.Callback;
@@ -25,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import model.AuctionManager;
+import model.Auction;
 import model.User;
 
 /**
@@ -85,9 +87,9 @@ public class UserViewController implements Initializable {
 //	@FXML
 	private Label myDatePickerTitle;
 
-	private SimpleObjectProperty<LocalDate> myStartRangeDate;
+	private LocalDate myStartRangeDate;
 //	
-	private SimpleObjectProperty<LocalDate> myEndRangeDate;
+	private LocalDate myEndRangeDate;
 	
 	/**
 	 * Initializes the view by constructing all appropriate view components. 
@@ -163,6 +165,11 @@ public class UserViewController implements Initializable {
 	
 	public void showDatePicker(InformationContainerViewController infoViewController, AuctionManager myManager) {
 		//myDatePickerTitle.setVisible(true);
+        addActionsToDatePickers(infoViewController, myManager);
+        
+        mySubMenuBar.getChildren().add(myDatePickerTitle);
+        mySubMenuBar.getChildren().add(myStartRangeDatePicker);
+        mySubMenuBar.getChildren().add(myEndRangeDatePicker);
 		myStartRangeDatePicker.setVisible(true);
 		myEndRangeDatePicker.setVisible(true);
 		
@@ -183,20 +190,30 @@ public class UserViewController implements Initializable {
         });
 	}
 	
-	private void addActionsToDatePickers() {
+	private void addActionsToDatePickers(InformationContainerViewController theInfoViewController, AuctionManager theManager) {
 		myStartRangeDatePicker.setOnAction(event -> {
 //			myStartRangeDate = myStartRangeDatePicker.getValue();
-			myStartRangeDate.set(myStartRangeDatePicker.getValue());
+			myStartRangeDate = myStartRangeDatePicker.getValue();
 			disableDaysOnMyEndRangeDatePicker();
 			System.out.println("The start date chosen is " + myStartRangeDate);
+			attemptToGrabAuctionsWithinRange(theInfoViewController, theManager);
 		});
 		
 		myEndRangeDatePicker.setOnAction(event -> {
 //			myEndRangeDate = myEndRangeDatePicker.getValue();
-			myEndRangeDate.set(myEndRangeDatePicker.getValue());
+			myEndRangeDate = myEndRangeDatePicker.getValue();
 			disableDaysOnMyStartRangeDatePicker();
+			attemptToGrabAuctionsWithinRange(theInfoViewController, theManager);
 		});
 				
+	}
+	
+	private void attemptToGrabAuctionsWithinRange(InformationContainerViewController theInfoViewController, AuctionManager theManager) {
+	    Collection<Auction> auctionsWithinRange;
+	    if (myStartRangeDate != null && myEndRangeDate != null) {
+	        auctionsWithinRange = theManager.getAuctionsWithinRange(myStartRangeDate, myEndRangeDate);
+	        theInfoViewController.showAdminAuctions(auctionsWithinRange, theManager);
+	    }
 	}
 	
 	private void initializeDateObjects() {
@@ -208,16 +225,12 @@ public class UserViewController implements Initializable {
 		
 		myDatePickerTitle = new Label("Filter Auctions by Date Range:");
 		
-		myStartRangeDate = new SimpleObjectProperty<LocalDate>();
-		myEndRangeDate = new SimpleObjectProperty<LocalDate>();
+		myStartRangeDate = null;
+		myEndRangeDate = null;
 		
-		mySubMenuBar.getChildren().add(myDatePickerTitle);
-		mySubMenuBar.getChildren().add(myStartRangeDatePicker);
-		mySubMenuBar.getChildren().add(myEndRangeDatePicker);
 		
 		
 		removeFocusFromStarDatePicker();
-		addActionsToDatePickers();
 	}
 	
 	private void disableDaysOnMyEndRangeDatePicker() {
@@ -230,7 +243,7 @@ public class UserViewController implements Initializable {
 	                        public void updateItem(LocalDate item, boolean empty) {
 	                            super.updateItem(item, empty);
 	                            if (item.isBefore(
-	                                    myStartRangeDatePicker.getValue().plusDays(1))
+	                                    myStartRangeDatePicker.getValue())
 	                                ) {
 	                                    setDisable(true);
 	                                    setStyle("-fx-background-color: #ffc0cb;");
