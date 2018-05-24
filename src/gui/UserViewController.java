@@ -278,6 +278,7 @@ public class UserViewController implements Initializable {
             myStartRangeDatePicker.setDayCellFactory(startDatePickerCellFactory);
 	}
 
+		
 	
 }
 

@@ -1,5 +1,8 @@
 package gui;
 
+import java.util.Observable;
+import java.util.Observer;
+
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -11,7 +14,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-public class ViewMenuButtonController {
+public class ViewMenuButtonController implements Observer {
 	
 	@FXML
 	private Label myTitle;
@@ -22,9 +25,10 @@ public class ViewMenuButtonController {
 	@FXML
 	private void initialize() {
 		myTitle.setText("");
-		myPane.getStyleClass().add("myPane");
+		myPane.getStyleClass().add("menuButton");
+		myTitle.getStyleClass().add("menuButton");
 	}
-		
+	
 //	
 //	@FXML
 //	private void onMouseEntered() {
@@ -43,6 +47,13 @@ public class ViewMenuButtonController {
 	public void setText(String theText) {
 		myTitle.setText(theText);
 		myTitle.setAlignment(Pos.CENTER);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		System.out.println("received");
+		myPane.setStyle("-fx-background: #FFFFFF;");
+		myTitle.setStyle("-fx-background: #FFFFFF;");
 	}
 	
 }

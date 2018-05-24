@@ -22,6 +22,8 @@ public class NewBidFormController {
 		myItem = theItem;
 	}
 	
-	
+	// we need code here to create a NewBidRequest and send it to manager.
+	// if it throws an exception then display an error so the user can try
+	// again.
 	
 }

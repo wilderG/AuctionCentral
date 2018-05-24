@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Observable;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,7 +22,7 @@ import model.Bidder;
  * @author Jim Rosales
  * @version May 19, 2018
  */
-public class InformationContainerViewController {
+public class InformationContainerViewController extends Observable {
 
 	/**
 	 * The flowpane used by the informationContainer to hold auctionTiles.
@@ -117,6 +118,10 @@ public class InformationContainerViewController {
 			
 			this.addNode(tile);
 		}
+		System.out.println("notify " + countObservers());
+		setChanged();
+		notifyObservers("showAuctions");
+		
 	}
 	
 	public void showAuctionBids(final Collection<Auction> theAuctions) {

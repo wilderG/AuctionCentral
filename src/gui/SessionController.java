@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 import javafx.beans.value.ChangeListener;
+import javafx.css.PseudoClass;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -117,12 +119,12 @@ public class SessionController {
 	}
 
 	private static void loadBidderMenu(final UserViewController theController) {
-		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions",
+				infoViewController);
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 		});
 		theController.addMenuButton(viewAuctionsButton);
-		
 		
 		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
@@ -134,8 +136,11 @@ public class SessionController {
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
-
 		theController.addMenuButton(logOutButton);
+		
+		// go to default screen
+		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+		//viewAuctionsButton.getStyleClass().add("activeMenuButton");
 	}
 	
 	private static void loadNonProfitMenu(final UserViewController theController) {
@@ -283,23 +288,28 @@ public class SessionController {
 		return informationContainerViewController;
 	}
 	
-	private static class MenuButton {
-		
-		private static AnchorPane newMenuButton(String theTitle) {
-			FXMLLoader buttonLoader = new FXMLLoader(SessionController.class.getResource("ViewMenuButton.fxml"));
-			AnchorPane button = null;
-			try {
-				button = (AnchorPane) buttonLoader.load();
-			} catch (IOException e) {
-				System.err.println("Button Error");
-				//e.printStackTrace();
-			}	
-			
-			ViewMenuButtonController buttonCtrl = (ViewMenuButtonController) buttonLoader.getController();
-			buttonCtrl.setText(theTitle);
-			return button;
-		}
-		
-	}
+//	private static class MenuButton {
+//		
+//		private static AnchorPane newMenuButton(String theTitle) {
+//			FXMLLoader buttonLoader = new FXMLLoader(SessionController.class.getResource("ViewMenuButton.fxml"));
+//			AnchorPane button = null;
+//			try {
+//				button = (AnchorPane) buttonLoader.load();
+//			} catch (IOException e) {
+//				System.err.println("Button Error");
+//				//e.printStackTrace();
+//			}	
+//			
+//			ViewMenuButtonController buttonCtrl = (ViewMenuButtonController) buttonLoader.getController();
+//			buttonCtrl.setText(theTitle);
+//			return button;
+//		}
+//
+//		public static AnchorPane newMenuButton(String string, InformationContainerViewController infoViewController) {
+//			// TODO Auto-generated method stub
+//			return null;
+//		}
+//		
+//	}
 
 }

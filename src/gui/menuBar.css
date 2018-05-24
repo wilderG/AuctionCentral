@@ -11,20 +11,25 @@
 	-fx-font-size: 18px;
 }
 
-.myPane:hover {
-	-fx-font-fill: #53B799;
-	-fx-font-size: 18px;
-	-fx-background-color: white;
-}
-
-.myPane {
+.menuButton {
 	-fx-font-family: 'Helvetica', Arial, sans-serif;
 	-fx-font-size: 16px;
-	-fx-font-fill: white;
+	-fx-text-fill: white;
 	-fx-background-color: #53B799;
 }
 
+.menuButton:hover {
+	-fx-font-size: 18px;
+	-fx-background-color: gray;
+	
+}
 
+.menuButton:active {
+	-fx-font-fill: #53B799;
+	-fx-font-size: 18px;
+	-fx-background-color: white;
+	-fx-font-family: 'Helvetica', Arial, sans-serif;
+}
 
 
 .rootPane {
