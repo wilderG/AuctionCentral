@@ -196,7 +196,7 @@ public class SessionController {
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
-		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Submit Auction Request");
+		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction");
 		requestNewAuctionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			infoViewController.showNewAuctionRequest();
 		});
