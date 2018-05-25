@@ -45,7 +45,7 @@
                   </FlowPane>
                </children>
             </GridPane>
-            <ScrollPane fx:id="myScrollPane" fitToHeight="true" prefHeight="600.0" prefWidth="1024.0" stylesheets="@menuBar.css" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+            <ScrollPane fx:id="myScrollPane" prefHeight="600.0" prefWidth="1024.0" stylesheets="@menuBar.css" GridPane.halignment="CENTER" GridPane.rowIndex="2">
             </ScrollPane>
             <FlowPane fx:id="mySubMenuBar" alignment="CENTER_LEFT" hgap="20.0" minHeight="35.0" GridPane.rowIndex="1">
                <GridPane.margin>
