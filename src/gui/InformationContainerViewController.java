@@ -172,13 +172,13 @@ public class InformationContainerViewController extends Observable {
 		controller.setItem(theItem);
 	}
 
-	public void showNewItemRequest() {
+	public void showNewItemRequest(Auction theAuction) {
 		FXMLLoader loader = 
 				new FXMLLoader(InformationContainerViewController
 						.class.getResource(NEW_ITEM_REQUEST));
 		
 		this.clear();
-		this.addNode(TileFactory.createAuctionTile(myActiveAuction));
+		this.addNode(TileFactory.createAuctionTile(theAuction));
 		this.addNode(loadForm(loader));
 		
 		NewItemFormController controller = (NewItemFormController) loader.getController();

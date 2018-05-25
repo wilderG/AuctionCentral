@@ -17,7 +17,7 @@
             </Label>
             <TextField fx:id="myItemDescription" layoutX="154.0" layoutY="91.0" promptText="Item Name" />
             <TextField fx:id="myMinimumBid" layoutX="154.0" layoutY="184.0" promptText="Minimum bid" />
-            <Button fx:id="mySubmitButton" layoutX="232.0" layoutY="300.0" mnemonicParsing="false" onMousePressed="#pressButton" text="Submit" />
+            <Button fx:id="mySubmitButton" layoutX="232.0" layoutY="300.0" mnemonicParsing="false" text="Submit" />
             <Label fx:id="myErrorLabel" layoutX="244.0" layoutY="248.0" text="Label" textFill="#eb1010" />
          </children>
       </Pane>

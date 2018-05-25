@@ -27,6 +27,9 @@ public class NewItemFormController {
 	@FXML
 	private void initialize() {
         myErrorLabel.setVisible(false);
+        mySubmitButton.setOnMouseClicked(event -> {
+        	pressButton();
+        });
 	}
 	
 	public void setAuction(final Auction theAuction) {
@@ -34,7 +37,7 @@ public class NewItemFormController {
 	}
 	
 	@FXML
-	private void pressButton() {
+	public void pressButton() {
 	    System.out.println(" hi ");
 	    try {
 	        validateInput(myItemDescription, myMinimumBid);

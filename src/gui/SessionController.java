@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Auction;
 import model.AuctionManager;
 import model.Bidder;
 import model.Employee;
@@ -203,8 +204,9 @@ public class SessionController {
 		
 		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Submit Item Request");
 		requestNewItemButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-			if (((NonProfitContact) myUser).getFutureAuction() != null) {
-				infoViewController.showNewItemRequest();
+			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
+			if (auction != null) {
+				infoViewController.showNewItemRequest(auction);
 			}
 		});
 		theController.addMenuButton(requestNewItemButton);
