@@ -1,6 +1,10 @@
 package gui;
 
+import java.math.BigDecimal;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import model.Auction;
 import model.AuctionItem;
 
@@ -11,7 +15,32 @@ public class NewItemFormController {
 	private AuctionItem myItem;
 	
 	@FXML
+	private Label myWarningLabel;
+	
+	@FXML
+	private Label myBidLabel;
+	
+	@FXML
+	private Button mySubmitButton;
+	
+	@FXML
 	private void initialize() {
+		myWarningLabel.setVisible(false);
+		mySubmitButton.setOnMouseClicked(event -> {
+			makeBid();
+		});
+	}
+	
+	
+	@FXML
+	public void makeBid() {
+		String userInput = myBidLabel.getText();
+		int bidValue = Integer.valueOf(userInput);	
+		BigDecimal bV = new BigDecimal(bidValue);
+		if(bV.compareTo(myItem.getMinimumAcceptableBidValue()) >=1) {	
+		} else {
+			myWarningLabel.setVisible(true);
+		}
 	}
 	
 	public void setAuction(final Auction theAuction) {
