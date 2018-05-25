@@ -1,4 +1,3 @@
-
 package gui;
 
 
@@ -31,4 +30,3 @@ public class AuctionCentralMain extends Application {
 	
 
 }
-
