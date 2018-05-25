@@ -195,6 +195,20 @@ public class SessionController {
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
+		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Submit Auction Request");
+		requestNewAuctionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			infoViewController.showNewAuctionRequest();
+		});
+		theController.addMenuButton(requestNewAuctionButton);
+		
+		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Submit Item Request");
+		requestNewItemButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			if (((NonProfitContact) myUser).getFutureAuction() != null) {
+				infoViewController.showNewItemRequest();
+			}
+		});
+		theController.addMenuButton(requestNewItemButton);
+		
 		
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {

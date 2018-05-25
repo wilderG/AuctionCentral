@@ -4,6 +4,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
 /**
  * Class represents a contact person for a non profit organization.
@@ -104,4 +105,17 @@ public class NonProfitContact extends User {
         return mostRecentDate;
     }
     
+    public Auction getFutureAuction() {
+    	Collection<Auction> existingAuctions = super.getMyAuctions();
+    	Auction futureAuction = null;
+    	if (!existingAuctions.isEmpty()) {
+    		for (Auction e : existingAuctions) {
+    			if (e.getDate().isAfter(LocalDate.now())) {
+    				futureAuction = e;
+    			}
+    		}
+    	}
+    	return futureAuction;
+    }
+
 }
