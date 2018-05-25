@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import model.Auction;
 import model.NewItemRequest;
 
@@ -21,11 +22,11 @@ public class NewItemFormController {
 
     /** The description of the item to be added. */
     @FXML
-	private Label myItemDescription;
+	private TextField myItemDescription;
 
     /** The minimum bid of the item to be added. */
     @FXML
-	private Label myMinimumBid;
+	private TextField myMinimumBid;
 
     /** The button to submit the new item. */
     @FXML
@@ -80,13 +81,13 @@ public class NewItemFormController {
 	 * @param theItemDescription the item description
 	 * @param theMinimumBid the Minimum bid value of the item
 	 */
-    private void validateInput(Label theItemDescription, Label theMinimumBid) {
+    private void validateInput(TextField theItemDescription, TextField theMinimumBid) {
         // exception 1
-        if (theItemDescription == null) {
+        if (theItemDescription.getText() == null) {
             throw new IllegalArgumentException("Item Description is missing!");
         }
         // exception 2
-        if (theMinimumBid == null) {
+        if (theMinimumBid.getText() == null) {
             throw new IllegalArgumentException("Minimum bid is missing!");
         }
         // exception 3
