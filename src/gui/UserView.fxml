@@ -30,7 +30,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="myUserDisplayName" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="240.0" stylesheets="@menuBar.css" text="Peter Piper" GridPane.columnIndex="1">
+                  <Label fx:id="myUserDisplayName" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="240.0" styleClass="userName" stylesheets="@menuBar.css" text="Peter Piper" GridPane.columnIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

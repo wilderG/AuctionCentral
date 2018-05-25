@@ -1,14 +1,16 @@
 package gui;
 
-
-
+import java.io.IOException;
 import java.util.Collection;
+import java.util.Observable;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.Pane;
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
@@ -20,7 +22,7 @@ import model.Bidder;
  * @author Jim Rosales
  * @version May 19, 2018
  */
-public class InformationContainerViewController {
+public class InformationContainerViewController extends Observable {
 
 	/**
 	 * The flowpane used by the informationContainer to hold auctionTiles.
@@ -29,9 +31,19 @@ public class InformationContainerViewController {
 	private FlowPane myFlowPane;
 	
 	/**
+	 * The auction that is currently being accessed by the info display. Used for creating
+	 * new forms for user input.
+	 */
+	private Auction myActiveAuction;
+	
+	
+	private static String NEW_BID_REQUEST = "NewBidForm.fxml";
+	
+	/**
 	 * Constructor for the controller. It is called before the initialize() method.
 	 */
 	public InformationContainerViewController() {
+		myActiveAuction = null;
 	}
 
 	/**
@@ -70,7 +82,17 @@ public class InformationContainerViewController {
 	public void showItems(final Collection<AuctionItem> theItems) {
 		this.clear();
 		for (AuctionItem item : theItems) {
-			this.addNode(TileFactory.createItemTile(item));
+			
+			AnchorPane tile = TileFactory.createItemTile(item);
+			
+			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+				if (SessionController.getUser() instanceof model.Bidder && 
+						myActiveAuction.isAllowingNewBid((Bidder) SessionController.getUser())) {
+					showNewBidRequest(item);
+				}
+			});
+			
+			this.addNode(tile);
 		}
 	}
 	
@@ -89,12 +111,17 @@ public class InformationContainerViewController {
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 					if (auction.getAllItems().size() > 0) {
+						myActiveAuction = auction;
 						showItems(auction.getAllItems());
 					}
 			});
 			
 			this.addNode(tile);
 		}
+		System.out.println("notify " + countObservers());
+		setChanged();
+		notifyObservers("showAuctions");
+		
 	}
 	
 	public void showAuctionBids(final Collection<Auction> theAuctions) {
@@ -127,5 +154,36 @@ public class InformationContainerViewController {
 		
 	}
 
+	public void showNewBidRequest(AuctionItem theItem) {
+		FXMLLoader loader = 
+				new FXMLLoader(InformationContainerViewController
+						.class.getResource(NEW_BID_REQUEST));
+		
+		this.clear();
+		this.addNode(TileFactory.createItemTile(theItem));
+		this.addNode(loadForm(loader));
+		
+		NewBidFormController controller = (NewBidFormController) loader.getController();
+		controller.setAuction(myActiveAuction);
+		controller.setItem(theItem);
+	}
 
+	public void showNewItemRequest() {
+		
+	}
+	
+	
+	private Pane loadForm(final FXMLLoader theLoader) {
+		Pane form = null;
+		try {
+			form = (Pane) theLoader.load();
+		} catch (IOException e) {
+			System.err.println("Error in Method: loadForm, " + 
+					"Class: InformationContainerViewController");
+			e.printStackTrace();
+		}
+
+		return form;
+	}
+	
 }

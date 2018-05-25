@@ -1,31 +1,36 @@
 #menuButtonBar,
 #theUserDisplayName,
 #main,
-#menuContainer {
+#menuContainer,
+.menuButton {
 	-fx-background-color: #53B799;
 }
 
-#main {
+#main,
+.menuButton,
+.userName {
 	-fx-font-family: 'Helvetica', Arial, sans-serif;
+}
+
+
+#main {
 	-fx-text-fill: white;
 	-fx-font-size: 18px;
 }
 
-.myPane:hover {
-	-fx-font-fill: #53B799;
-	-fx-font-size: 18px;
-	-fx-background-color: white;
-}
-
-.myPane {
-	-fx-font-family: 'Helvetica', Arial, sans-serif;
+.menuButton,
+.userName {
 	-fx-font-size: 16px;
-	-fx-font-fill: white;
-	-fx-background-color: #53B799;
+	-fx-text-fill: white;
 }
 
 
-
+.menuButton:hover,
+.active {
+	-fx-font-size: 18px;
+	-fx-text-fill: #53B799;
+	-fx-background-color: white;	
+}
 
 .rootPane {
 	-fx-background-color: #8C8E8C;
@@ -34,3 +39,4 @@
 .subMenuBar {
 	-fx-background-color: white;
 }
+

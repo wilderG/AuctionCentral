@@ -5,8 +5,13 @@ import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+import javafx.beans.value.ChangeListener;
+import javafx.css.PseudoClass;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -133,35 +138,44 @@ public class SessionController {
 		buttons.add(viewBidsButton);
 		buttons.add(logOutButton);
 		
-
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
-			
+			addActiveCssClass(viewAuctionsButton);
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
-		
+
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctionBids(myUser.getMyAuctions());
+			addActiveCssClass(viewBidsButton);
 		});
 		theController.addMenuButton(viewBidsButton);
 		
 		logOutButton.setOnMouseClicked(event -> {
-			removeActiveClassFromButtons(buttons);
 			SessionController.userLogout();
 		});
-
 		theController.addMenuButton(logOutButton);
+		
+		// go to default screen
+		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+		addActiveCssClass(viewAuctionsButton);
 	}
 	
-	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> theButtons) {
-		for (AnchorPane button: theButtons) {
+	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> thePanes) {
+		
+		for (AnchorPane pane: thePanes) {
+			Node button = pane.getChildren().get(0);
 			button.getStyleClass().clear(); // Removes all class styles from the button
 			// Add the default
-			button.getStyleClass().add("myPane");
+			button.getStyleClass().add("menuButton");
 		}
+	}
+	
+	private static void addActiveCssClass(AnchorPane thePane) {
+		Node button = thePane.getChildren().get(0);
+		button.getStyleClass().add("active");
 	}
 	
 	/**
@@ -187,6 +201,9 @@ public class SessionController {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
+		
+		// go to default screen
+		infoViewController.showAuctions(myUser.getMyAuctions());
 	}
 	
 	/**
@@ -206,12 +223,15 @@ public class SessionController {
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
-		
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
+		
+		// go to default screen
+		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+		theController.showDatePicker(infoViewController, myManager);
 	}
 	
 
