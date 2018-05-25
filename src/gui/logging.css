@@ -1,0 +1,82 @@
+
+
+.root { 
+-fx-font-family: Arial; 
+-fx-font-weight: Silver;
+-fx-font-size: 20pt;
+}
+
+#anchor {
+-fx-background-color: #4B2E83;
+
+/*-fx-background-color: #B7A57A;
+-fx-background-color: #85754D;
+-fx-background-color: #4B2E83;*/
+
+
+}
+
+.button:hover {
+    -fx-background-color:#B7A57A;
+    -fx-background-radius:0;
+    -fx-border-color:black;
+    -fx-border-width: 0 3 3 0;
+    -fx-background-insets: 0;
+}
+.hyperlink:hover {
+    -fx-underline: true;
+}
+.button {
+    -fx-font: bold italic 20pt "Arial";
+    -fx-effect: dropshadow( one-pass-box , Purple , 16 , 0.0 , 2 , 0 );
+}
+.border {
+  border: 1px #B7A57A;
+  outline: 1px #85754D;
+}
+.label {
+ -fx-text-fill: #000000;
+ -fx-font-size: 18px;
+ 
+}
+.text-field {
+    -fx-background-color: -fx-text-box-border, -fx-background ;
+    -fx-background-insets: 0, 0 0 1 0 ;
+    -fx-background-radius: 0 ;
+}
+.text-field:focused {
+    -fx-background-color: -fx-focus-color, -fx-background ;
+}
+.text {
+    -fx-text-fill: #000000;
+    -fx-font-size: 20px;
+    -fx-background-color: transparent;
+}
+.title-text {
+    -fx-text-fill: #C0C0C0C;
+    -fx-font-size: 18px;
+    
+}
+label.titel{
+	color: white;
+	
+}
+.pane {
+    -fx-border-color: black;
+}
+
+input[type=text], select, textarea {
+    width: 50%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #C0C0C0C;
+    color: blue;
+    resize: vertical;
+}
+#welcome-text {
+   -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #818181;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
