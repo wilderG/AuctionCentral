@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import model.Auction;
 import model.AuctionManager;
 import model.Bidder;
 import model.Employee;
@@ -186,17 +187,47 @@ public class SessionController {
 	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				infoViewController.showAuctions(myUser.getMyAuctions());
-				
-			}
+		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction");
+		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item");
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		
+		ArrayList<AnchorPane> buttons = new ArrayList<>();
+		buttons.add(viewAuctionsButton);
+		buttons.add(requestNewAuctionButton);
+		buttons.add(requestNewItemButton);
+		buttons.add(logOutButton);
+		
+		
+		
+		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			removeActiveClassFromButtons(buttons);
+			infoViewController.showAuctions(myUser.getMyAuctions());
+			addActiveCssClass(viewAuctionsButton);
+			
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
 		
-		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		requestNewAuctionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			removeActiveClassFromButtons(buttons);
+			infoViewController.showNewAuctionRequest();
+			addActiveCssClass(requestNewAuctionButton);
+		});
+		theController.addMenuButton(requestNewAuctionButton);
+		
+		
+		requestNewItemButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
+			if (auction != null) {
+				removeActiveClassFromButtons(buttons);
+				infoViewController.showNewItemRequest(auction);
+				addActiveCssClass(requestNewItemButton);
+			}
+		});
+		theController.addMenuButton(requestNewItemButton);
+		
+		
+		
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
@@ -204,6 +235,7 @@ public class SessionController {
 		
 		// go to default screen
 		infoViewController.showAuctions(myUser.getMyAuctions());
+		addActiveCssClass(viewAuctionsButton);
 	}
 	
 	/**

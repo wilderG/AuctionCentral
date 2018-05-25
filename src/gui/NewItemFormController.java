@@ -41,7 +41,10 @@ public class NewItemFormController {
 	private void initialize() {
         myErrorLabel.setVisible(false);
         mySubmitButton.setOnMouseClicked(event -> {
-        	pressButton();
+
+
+            pressButton();
+
         });
 	}
 	
@@ -65,9 +68,14 @@ public class NewItemFormController {
 	        BigDecimal minBidValue = new BigDecimal(myMinimumBid.getText());
 	        NewItemRequest itemRequest = new NewItemRequest(myItemDescription.getText(), minBidValue, myAuction);
 	        SessionController.getManager().processNewItem(itemRequest);
+
+
+            myErrorLabel.setText("Item successfully submitted to your auction!");
 	    } catch (IllegalArgumentException e) {
 	        myErrorLabel.setText(e.getMessage());
-	        myErrorLabel.setVisible(true);
+	    } finally {
+            myErrorLabel.setVisible(true);
+
 	    }
 	}
 	
@@ -83,11 +91,14 @@ public class NewItemFormController {
 	 */
     private void validateInput(TextField theItemDescription, TextField theMinimumBid) {
         // exception 1
-        if (theItemDescription.getText() == null) {
+
+
+        if (theItemDescription.getText().equals("")) {
             throw new IllegalArgumentException("Item Description is missing!");
         }
         // exception 2
-        if (theMinimumBid.getText() == null) {
+        if (theMinimumBid.getText().equals("")) {
+
             throw new IllegalArgumentException("Minimum bid is missing!");
         }
         // exception 3
@@ -95,7 +106,10 @@ public class NewItemFormController {
         try {
             minBidValue = new BigDecimal(myMinimumBid.getText());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Minimum bid entered is not formattable, please re-enter.");
+
+
+            throw new IllegalArgumentException("Minimum bid entered is not formattable!");
+
         }
         // exception 4
         if (minBidValue.compareTo(BigDecimal.ZERO) < 0) {

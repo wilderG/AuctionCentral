@@ -16,6 +16,7 @@ import model.AuctionItem;
 import model.AuctionManager;
 import model.Bid;
 import model.Bidder;
+import model.NonProfitContact;
 
 /**
  * A controller for the informationContainer which is used to hold various auctionTiles.
@@ -35,9 +36,12 @@ public class InformationContainerViewController extends Observable {
 	 * new forms for user input.
 	 */
 	private Auction myActiveAuction;
-	
-	
+		
 	private static String NEW_BID_REQUEST = "NewBidForm.fxml";
+	
+	private static String NEW_AUCTION_REQUEST = "NewAuctionForm.fxml";
+	
+	private static String NEW_ITEM_REQUEST = "NewItemForm.fxml";
 	
 	/**
 	 * Constructor for the controller. It is called before the initialize() method.
@@ -168,10 +172,28 @@ public class InformationContainerViewController extends Observable {
 		controller.setItem(theItem);
 	}
 
-	public void showNewItemRequest() {
+	public void showNewItemRequest(Auction theAuction) {
+		FXMLLoader loader = 
+				new FXMLLoader(InformationContainerViewController
+						.class.getResource(NEW_ITEM_REQUEST));
 		
+		this.clear();
+		this.addNode(TileFactory.createAuctionTile(theAuction));
+		this.addNode(loadForm(loader));
+		
+		NewItemFormController controller = (NewItemFormController) loader.getController();
+		controller.setAuction(((NonProfitContact) 
+				SessionController.getUser()).getFutureAuction());
 	}
 	
+	public void showNewAuctionRequest() {
+		FXMLLoader loader = 
+				new FXMLLoader(InformationContainerViewController
+						.class.getResource(NEW_AUCTION_REQUEST));
+		
+		this.clear();
+		this.addNode(loadForm(loader));
+	}
 	
 	private Pane loadForm(final FXMLLoader theLoader) {
 		Pane form = null;
