@@ -232,6 +232,10 @@ public class SessionController {
 		// go to default screen
 		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
 		theController.showDatePicker(infoViewController, myManager);
+		
+//		ScrollPane scrollPane = theController.getMyScrollPane();
+//		scrollPane.setContent(infoViewController);
+//		infoViewController.prefWidthProperty().bind(scrollPane.widthProperty().subtract(20));
 	}
 	
 
@@ -316,7 +320,8 @@ public class SessionController {
 		
 		ScrollPane scrollPane = theUserViewController.getMyScrollPane();
 		scrollPane.setContent(informationContainerView);
-		informationContainerView.prefWidthProperty().bind(scrollPane.widthProperty().subtract(20));
+		informationContainerView.prefWidthProperty().bind(scrollPane.widthProperty().subtract(0));
+		informationContainerView.prefHeightProperty().bind(scrollPane.heightProperty().subtract(20));
 		informationContainerViewController = 
 				(InformationContainerViewController) informationContainerLoader.getController();
 		
