@@ -8,34 +8,53 @@ import javafx.scene.control.Label;
 import model.Auction;
 import model.NewItemRequest;
 
+/**
+ * The form in which a user will submit an item to an auction that is valid.
+ * 
+ * @author Steven Golob 
+ * @version 25, May 2018
+ */
 public class NewItemFormController {
 
+    /** The auction item is being added to. */
 	private Auction myAuction;
 
+    /** The description of the item to be added. */
     @FXML
 	private Label myItemDescription;
 
+    /** The minimum bid of the item to be added. */
     @FXML
 	private Label myMinimumBid;
 
+    /** The button to submit the new item. */
     @FXML
     private Button mySubmitButton;
-    
+
+    /** The error message. */
     @FXML
     private Label myErrorLabel;
+
     
 	@FXML
 	private void initialize() {
         myErrorLabel.setVisible(false);
 	}
 	
+	/**
+	 * Sets the auction to be added to.
+	 * 
+	 * @param theAuction the auction to be added to 
+	 */
 	public void setAuction(final Auction theAuction) {
 		myAuction = theAuction;
 	}
 	
+	/**
+	 * Submits the new item for this auction if text fields are valid.
+	 */
 	@FXML
 	private void pressButton() {
-	    System.out.println(" hi ");
 	    try {
 	        validateInput(myItemDescription, myMinimumBid);
 	        myErrorLabel.setVisible(false);
@@ -52,20 +71,31 @@ public class NewItemFormController {
 	// if it throws an exception then display an error so the user can try
 	// again.
 
-    private void validateInput(Label theItemDescription, Label theMinimumBid) throws NumberFormatException {
+	/**
+	 * Checks that the entered data is valid.
+	 * 
+	 * @param theItemDescription the item description
+	 * @param theMinimumBid the Minimum bid value of the item
+	 */
+    private void validateInput(Label theItemDescription, Label theMinimumBid) {
         // exception 1
         if (theItemDescription == null) {
-            throw new IllegalArgumentException("Item Description is missing");
+            throw new IllegalArgumentException("Item Description is missing!");
         }
         // exception 2
         if (theMinimumBid == null) {
-            throw new IllegalArgumentException("Minimum bid is missing");
+            throw new IllegalArgumentException("Minimum bid is missing!");
         }
         // exception 3
+        BigDecimal minBidValue;
         try {
-            new BigDecimal(myMinimumBid.getText());
+            minBidValue = new BigDecimal(myMinimumBid.getText());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Minimum bid entered is not formattable, please re-enter.");
+        }
+        // exception 4
+        if (minBidValue.compareTo(BigDecimal.ZERO) < 0) {
+            throw new IllegalArgumentException("Cannot have a negative minimum bid value!");
         }
     }
 }
