@@ -2,18 +2,10 @@ package gui;
 
 
 
-import java.awt.color.ICC_Profile;
-import java.io.FileNotFoundException;
 import java.util.Collection;
-import java.util.Iterator;
 
-import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -130,37 +122,6 @@ public class InformationContainerViewController {
 		for (Auction auction : theAuctions) {
 			
 			AnchorPane tile = TileFactory.createAdminAuctionTile(auction, theManager, this);
-//			for (Node node: tile.getChildren()) {
-//				String id = node.getId();
-//				if (id.equals("deleteIcon")) {
-//					if (auction.isContaingBids()) {
-//						node.setOnMouseClicked(event -> {
-//							theManager.removeAuction(auction);	
-//							this.removeNode(tile);
-//						});
-//
-//						node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-//							node.
-//						});
-//					} else {
-//						
-//					}
-//					node.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//							System.out.println("Clicked");
-//							if (!auction.isContaingBids()) {
-//							theManager.removeAuction(auction);	
-//							this.removeNode(tile);
-//						}
-//					});
-//				}
-//			}
-//			tile.get
-//			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//				if (!auction.isContaingBids()) {
-//					theManager.removeAuction(auction);	
-//					this.removeNode(tile);
-//				}
-//			});
 			this.addNode(tile);
 		}
 		

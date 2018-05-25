@@ -1,10 +1,10 @@
 package gui;
 
 
+import java.awt.List;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.ArrayList;
 
-import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,13 +12,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.AuctionManager;
 import model.Bidder;
 import model.Employee;
-import model.Manager;
 import model.NonProfitContact;
 import model.User;
 
@@ -127,24 +125,43 @@ public class SessionController {
 	 */
 	private static void loadBidderMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		
+		ArrayList<AnchorPane> buttons = new ArrayList<>();
+		buttons.add(viewAuctionsButton);
+		buttons.add(viewBidsButton);
+		buttons.add(logOutButton);
+		
+
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+			
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
 		
-		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctionBids(myUser.getMyAuctions());
 		});
 		theController.addMenuButton(viewBidsButton);
 		
-		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
+			removeActiveClassFromButtons(buttons);
 			SessionController.userLogout();
 		});
 
 		theController.addMenuButton(logOutButton);
+	}
+	
+	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> theButtons) {
+		for (AnchorPane button: theButtons) {
+			button.getStyleClass().clear(); // Removes all class styles from the button
+			// Add the default
+			button.getStyleClass().add("myPane");
+		}
 	}
 	
 	/**
