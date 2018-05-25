@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.TreeSet;
 
+
 /**
  * Provides common implementations of some user behaviors.
  * @author Jim Rosales

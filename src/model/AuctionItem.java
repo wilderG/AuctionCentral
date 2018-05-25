@@ -59,4 +59,8 @@ public class AuctionItem implements Serializable, Comparable<AuctionItem> {
 		return myDescription.compareTo(theOther.myDescription);
 	}
 	
+	@Override
+	public String toString() {
+		return myDescription;
+	}
 }

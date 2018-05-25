@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.TreeSet;
 
 import backend.StorageIO;
@@ -35,6 +34,7 @@ public class AuctionManager implements Manager {
 	public AuctionManager() {
 		storage = new StorageIO(FILE_NAME);
 		myCalendar = storage.getCalendar();
+		System.out.println(this.getClass().getSimpleName() + ".construct");
 	}
 	
 	/**
@@ -222,7 +222,7 @@ public class AuctionManager implements Manager {
 			theAuction.getOwner().removeAuction(theAuction);
 			
 			// remove auction from calendar
-			
+			myCalendar.deleteAuction(theAuction);
 		}
 	}
 	
