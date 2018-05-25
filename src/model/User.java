@@ -6,11 +6,7 @@ package model;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.TreeSet;
-import javafx.beans.property.StringProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+
 
 /**
  * Provides common implementations of some user behaviors.
@@ -92,4 +88,7 @@ public class User implements Serializable, Comparable<User> {
 		}
 	}
 	
+	public void removeAuction(final Auction theAuction) {
+		myAuctions.remove(theAuction);
+    }
 }

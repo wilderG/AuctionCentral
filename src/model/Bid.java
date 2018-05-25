@@ -56,10 +56,7 @@ public class Bid implements Serializable, Comparable<Bid> {
 		return myItem;
 	}
 
-	public BigDecimal getAmount() {
-		return null;
-	}
-
+	
 	@Override
 	public int compareTo(Bid theOther) {
 		if (myItem.equals(theOther.myItem)) {

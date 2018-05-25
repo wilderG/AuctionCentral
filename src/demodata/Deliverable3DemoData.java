@@ -11,16 +11,15 @@ import model.AuctionCalendar;
 import model.AuctionItem;
 import model.Bid;
 import model.Bidder;
+import model.Employee;
 import model.NonProfitContact;
 
 /**
- * DemoData class
- * 
+ * Demo Data which is similar to the DemoData class except modified for Deliverable 3
  * @author Jim Rosales
- *
+ * @version May 20, 2018
  */
-
-public class DemoData {
+public class Deliverable3DemoData {
 	/**
 	 * The main method for running Demo Data.
 	 * 
@@ -152,6 +151,8 @@ public class DemoData {
 		Bidder bidder2 = new Bidder("bidder2", "Jane Doe");
 		Bidder bidder3 = new Bidder("bidder3", "John Jacob");
 		Bidder bidder4 = new Bidder("bidder4", "Art Vandelay");
+		
+		Employee employee1 = new Employee("employee1", "Jane Jacob");
 		
 		
 		// Auction 1
@@ -293,17 +294,17 @@ public class DemoData {
 				nonProfit3, auction2Items, bidSet2);
 		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9),
 				nonProfit1, auction3Items, bidSet3);
-		Auction auction4 = new Auction(LocalDate.of(2018, 6, 4),
+		Auction auction4 = new Auction(LocalDate.of(2018, 6, 11),
 				nonProfit4, auction4Items, bidSet4);
-		Auction auction5 = new Auction(LocalDate.of(2018, 6, 4),
+		Auction auction5 = new Auction(LocalDate.of(2018, 6, 11),
 				nonProfit5, auction5Items, bidSet5);
-		Auction auction6 = new Auction(LocalDate.of(2018, 6, 5),
+		Auction auction6 = new Auction(LocalDate.of(2018, 6, 12),
 				nonProfit6, auction6Items, bidSet6);
-		Auction auction7 = new Auction(LocalDate.of(2018, 6, 6),
+		Auction auction7 = new Auction(LocalDate.of(2018, 6, 13),
 				nonProfit13);
-		Auction auction8 = new Auction(LocalDate.of(2018, 6, 7),
+		Auction auction8 = new Auction(LocalDate.of(2018, 6, 14),
 				nonProfit14);
-		Auction auction9 = new Auction(LocalDate.of(2018, 6, 8),
+		Auction auction9 = new Auction(LocalDate.of(2018, 6, 15),
 				nonProfit15);
         Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
                 nonProfit16, new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
@@ -376,6 +377,7 @@ public class DemoData {
         		auction9Date.getMonthValue(), auction9Date.getYear());
 				
 		//final store
+        storage.storeUser(employee1);
 		storage.storeUser(bidder1);
 		storage.storeUser(bidder2);
 		storage.storeUser(bidder3);
@@ -400,5 +402,4 @@ public class DemoData {
 		
 		storage.setCalendar(calendar);
 	}
-
 }

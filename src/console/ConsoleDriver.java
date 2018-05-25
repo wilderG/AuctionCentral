@@ -274,6 +274,18 @@ public class ConsoleDriver {
 	}
 	
 	/**
+	 * Returns a string value containing the formatted date. The format follows
+	 * the pattern of "January 2018".
+	 * @param theDate LocalDate instance
+	 * @return formatted String
+	 * @author Jared Malone
+	 */
+	public static String formatDateMonthYear(final LocalDate theDate) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMMM u");
+		return theDate.format(formatter);
+	}
+	
+	/**
 	 * Returns a string value containing the formatted currency. The format
 	 * uses the local default format of the user's computer.
 	 * @param theAmount to format

@@ -15,6 +15,7 @@
 	-fx-background-color: #53B799;
 }
 
+
  #rightInfo {
 	-fx-background-color: #FCFEFC;
 }
@@ -30,6 +31,7 @@
 #leftTopInfo {
 	-fx-font-weight: bold;
 	-fx-font-size: 24px;
+
 }
 
 #leftBottomInfo {
@@ -37,5 +39,5 @@
 }
 
 #rightTopInfo {
-	-fx-font-size: 24px;
+	-fx-font-size: 18px;
 }
