@@ -3,7 +3,6 @@ package gui;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import java.util.ResourceBundle;
 
@@ -12,9 +11,6 @@ import javafx.scene.control.DateCell;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableObjectValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -46,28 +42,31 @@ public class UserViewController implements Initializable {
 	 * The label that is used to display the users name.
 	 */
 	@FXML
-	private Label theUserDisplayName;
+	private Label myUserDisplayName;
 	
+	/**
+	 * The root pane for the UserView being displayed.
+	 */
 	@FXML
-	private AnchorPane rootPane;
+	private AnchorPane myRootPane;
 
 	/**
 	 * The button used by the user to logout.
 	 */
 	@FXML
-	private Label theLogoutButton;
+	private Label myLogoutButton;
 	
+	/**
+	 * The scroll pane used by the UserView to hold the myInformationContainerView
+	 */
 	@FXML
 	private ScrollPane myScrollPane;
-
-	@FXML
-	private FlowPane mySubMenuBar;
 	
 	/**
 	 * The container that will hold the information presented to the user.
 	 */
 	@FXML
-	private FlowPane informationContainerView;
+	private FlowPane myInformationContainerView;
 	
 	/**
 	 * The grid pane that will hold the views various components.
@@ -75,20 +74,41 @@ public class UserViewController implements Initializable {
 	@FXML
 	private GridPane myGridPane;
 	
+	/**
+	 * The main menu bar that holds the main controls for any particular user.
+	 */
 	@FXML
-	private FlowPane menuButtonBar;
+	private FlowPane myMenuButtonBar;
 	
-//	@FXML
+	/**
+	 * The menu bar that holds the sub controls for any particular user.
+	 */
+	@FXML
+	private FlowPane mySubMenuBar;
+	
+	/**
+	 * The date picker used to allow the user to enter a start date for a range of dates.
+	 */
 	private DatePicker myStartRangeDatePicker;
-//	
-//	@FXML
+
+	/**
+	 * The date picker used to allow the user to enter an end date for a range of dates.
+	 */
 	private DatePicker myEndRangeDatePicker;
-//	
-//	@FXML
+	
+	/**
+	 * The label used to add an action description to the date pickers.
+	 */
 	private Label myDatePickerTitle;
 
+	/**
+	 * LocalDate used to capture the date chosen by the user using the myStartRangeDatePicker.
+	 */
 	private LocalDate myStartRangeDate;
-//	
+	
+	/**
+	 * LocalDate used to capture the date chosen by the user using the myEndRangeDatePicker.
+	 */
 	private LocalDate myEndRangeDate;
 	
 	/**
@@ -98,23 +118,13 @@ public class UserViewController implements Initializable {
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		System.out.println(this.getClass().getSimpleName() + ".initialize");
 		myUser = SessionController.getUser();
-	//	configureEventListeners();
 		updateDisplayName();
-		rootPane.getStyleClass().add("rootPane");
+		myRootPane.getStyleClass().add("rootPane");
 		myScrollPane.getStyleClass().add("rootPane");
 		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 		mySubMenuBar.getStyleClass().add("subMenuBar");
-
-
-		//myStartRangeDatePicker.setVisible(false);
-		initializeDateObjects();
-		//myEndRangeDatePicker.setVisible(false);
-		//myDatePickerTitle.setVisible(false);
-
-//		myStartRangeDate = null;
-//		myEndRangeDate = null;
-		
+		initializeDateObjects();		
 		
 	}
 	
@@ -126,7 +136,7 @@ public class UserViewController implements Initializable {
 	 * Post-Condition: theUserDisplay label will be initialized with the current users name.
 	 */
 	private void updateDisplayName() {
-		theUserDisplayName.setText(myUser.getDisplayName());
+		myUserDisplayName.setText(myUser.getDisplayName());
 	}
 
 	/**
@@ -150,8 +160,14 @@ public class UserViewController implements Initializable {
 		return myGridPane;
 	}
 	
+	/**
+	 * Adds the given node to the userViews menuButtonBar
+	 * Pre-Condition: 
+	 * Post-Condition:
+	 * @param theButton
+	 */
 	public void addMenuButton(final Node theButton) {
-		menuButtonBar.getChildren().add(theButton);
+		myMenuButtonBar.getChildren().add(theButton);
 	}
 	
 	/**
@@ -163,8 +179,14 @@ public class UserViewController implements Initializable {
 		return myScrollPane;
 	}
 	
+	/**
+	 * 
+	 * Pre-Condition: 
+	 * Post-Condition:
+	 * @param infoViewController
+	 * @param myManager
+	 */
 	public void showDatePicker(InformationContainerViewController infoViewController, AuctionManager myManager) {
-		//myDatePickerTitle.setVisible(true);
         addActionsToDatePickers(infoViewController, myManager);
         
         mySubMenuBar.getChildren().add(myDatePickerTitle);
@@ -173,13 +195,15 @@ public class UserViewController implements Initializable {
 		myStartRangeDatePicker.setVisible(true);
 		myEndRangeDatePicker.setVisible(true);
 		
-//		myStartRangeDate.addListener(new ChangeListener<Boolean>() {
-//            public void changed(ObservableValue ov,Boolean old_val, Boolean new_val) {
-//                    System.out.println(new_val);
-//            }
-//        });
+
 	}
 	
+	/**
+	 * By default the startDate picker is in focus when the view is loaded.
+	 * This method removed focus from the myStartDatePicker and places it on myGridPane
+	 * Pre-Condition: myGridPane != null & myStartRangeDatePicker != null
+	 * Post-Condition: Focused will be removed from myStartDatePicker on view load.
+	 */
 	private void removeFocusFromStarDatePicker() {
 		final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
 		myStartRangeDatePicker.focusedProperty().addListener((observable,  oldValue,  newValue) -> {
@@ -190,9 +214,17 @@ public class UserViewController implements Initializable {
         });
 	}
 	
+	/**
+	 * Adds actions to date picker in order to allow a user to filter auctions by a date range.
+	 * 
+	 * Pre-Condition: myStartRangeDatePicker != null & myEndRangeDatePicker != null
+	 * 			      myStartRangeDate != null & myEndRangeDate != null
+	 * Post-Condition: Both date pickers will have actions events for initiating the limit auctions by range method
+	 * @param theInfoViewController that contains all the tiles being displayed. 
+	 * @param theManager to be used to get auctions within a certain date range.
+	 */
 	private void addActionsToDatePickers(InformationContainerViewController theInfoViewController, AuctionManager theManager) {
 		myStartRangeDatePicker.setOnAction(event -> {
-//			myStartRangeDate = myStartRangeDatePicker.getValue();
 			myStartRangeDate = myStartRangeDatePicker.getValue();
 			disableDaysOnMyEndRangeDatePicker();
 			System.out.println("The start date chosen is " + myStartRangeDate);
@@ -200,7 +232,6 @@ public class UserViewController implements Initializable {
 		});
 		
 		myEndRangeDatePicker.setOnAction(event -> {
-//			myEndRangeDate = myEndRangeDatePicker.getValue();
 			myEndRangeDate = myEndRangeDatePicker.getValue();
 			disableDaysOnMyStartRangeDatePicker();
 			attemptToGrabAuctionsWithinRange(theInfoViewController, theManager);
@@ -208,6 +239,14 @@ public class UserViewController implements Initializable {
 				
 	}
 	
+	/**
+	 * Retrieves auctions within myStartRangeDate and myEndRangeDate is possible, and then using said auctions
+	 * displays then using theInfoViewController.
+	 * Post-Condition: theInfoViewContainer associated with theInfoViewController will display auctions within
+	 * a certain date range if possible
+	 * @param theInfoViewController used to display the new auctionTiles if applicable
+	 * @param theManager used to retrieve auctions withing a certain date range if applicable
+	 */
 	private void attemptToGrabAuctionsWithinRange(InformationContainerViewController theInfoViewController, AuctionManager theManager) {
 	    Collection<Auction> auctionsWithinRange;
 	    if (myStartRangeDate != null && myEndRangeDate != null) {
@@ -233,6 +272,13 @@ public class UserViewController implements Initializable {
 		removeFocusFromStarDatePicker();
 	}
 	
+	/**
+	 * After a date has been chosen using the myStartRangeDatePicker, disables and dates in the myEndRangeDatePicker
+	 * that might conflict with the date chosen in myStartRangeDatePicker.
+	 * Pre-Condition: myStartRangeDatePicker != null
+	 * Post-Condition: Dates on myEndRangeDatePicker will be disabled if they are before the value chosen by
+	 * myStartRangeDatePicker.
+	 */
 	private void disableDaysOnMyEndRangeDatePicker() {
 		final Callback<DatePicker, DateCell> endDatePickerCellFactory = 
 	            new Callback<DatePicker, DateCell>() {
@@ -256,6 +302,13 @@ public class UserViewController implements Initializable {
 	        
 	}
 	
+	/**
+	 * After a date has been chosen using the myEndRangeDatePicker, disables and dates in the myStartRangeDatePicker
+	 * that might conflict with the date chosen in myEndRangeDatePicker.
+	 * Pre-Condition: myEndRangeDatePicker != null
+	 * Post-Condition: Dates on myStartRangeDatePicker will be disabled if they are after the value chosen by
+	 * myEndRangeDatePicker.
+	 */
 	private void disableDaysOnMyStartRangeDatePicker () {
 		final Callback<DatePicker, DateCell> startDatePickerCellFactory = 
                 new Callback<DatePicker, DateCell>() {

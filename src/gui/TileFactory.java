@@ -10,7 +10,6 @@ import console.ConsoleDriver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.Auction;
 import model.AuctionItem;

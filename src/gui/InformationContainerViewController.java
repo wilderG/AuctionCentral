@@ -149,37 +149,6 @@ public class InformationContainerViewController extends Observable {
 		for (Auction auction : theAuctions) {
 			
 			AnchorPane tile = TileFactory.createAdminAuctionTile(auction, theManager, this);
-//			for (Node node: tile.getChildren()) {
-//				String id = node.getId();
-//				if (id.equals("deleteIcon")) {
-//					if (auction.isContaingBids()) {
-//						node.setOnMouseClicked(event -> {
-//							theManager.removeAuction(auction);	
-//							this.removeNode(tile);
-//						});
-//
-//						node.addEventHandler(MouseEvent.MOUSE_ENTERED, event -> {
-//							node.
-//						});
-//					} else {
-//						
-//					}
-//					node.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//							System.out.println("Clicked");
-//							if (!auction.isContaingBids()) {
-//							theManager.removeAuction(auction);	
-//							this.removeNode(tile);
-//						}
-//					});
-//				}
-//			}
-//			tile.get
-//			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-//				if (!auction.isContaingBids()) {
-//					theManager.removeAuction(auction);	
-//					this.removeNode(tile);
-//				}
-//			});
 			this.addNode(tile);
 		}
 		

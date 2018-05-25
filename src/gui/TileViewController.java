@@ -1,9 +1,5 @@
 package gui;
 
-import java.awt.Image;
-
-import javax.swing.plaf.basic.BasicTreeUI.TreeCancelEditingAction;
-
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -12,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
-import javafx.scene.media.Media;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
 

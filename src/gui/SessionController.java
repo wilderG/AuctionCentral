@@ -1,26 +1,27 @@
 package gui;
 
 
+import java.awt.List;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 import javafx.beans.value.ChangeListener;
 import javafx.css.PseudoClass;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import model.AuctionManager;
 import model.Bidder;
 import model.Employee;
-import model.Manager;
 import model.NonProfitContact;
 import model.User;
 
@@ -47,20 +48,25 @@ public class SessionController {
 	 */
 	private static User myUser;
 
-	
+	/**
+	 * The informationViewController used in conjunction with the infoViewContainer being displayed.
+	 */
 	private static InformationContainerViewController infoViewController;
 	
 	
 	/**
-	 * The file name for the LoginView
+	 * The file name for the LoginView.
 	 */
 	private static final String LOGIN_VIEW = "LoginView.fxml";
 
 	/**
-	 * The file name for the UserView
+	 * The file name for the UserView.
 	 */
 	private static final String USER_VIEW = "UserView.fxml";
 
+	/**
+	 * The file name for the InformationContainerView.
+	 */
 	private static final String INFORMATION_CONTAINER_VIEW = "InformationContainerView.fxml";
 	
 	/**
@@ -108,31 +114,45 @@ public class SessionController {
 		infoViewController = loadInformationContainerView(userViewController);
 		if (theUser instanceof Bidder) {
 			loadBidderMenu(userViewController);
-			//loadBidderAuctionInformation();	
 		} else if (theUser instanceof NonProfitContact) {
 			loadNonProfitMenu(userViewController);
 		} else if (theUser instanceof Employee) {
 			loadEmployeeMenu(userViewController);
-			//loadNonProfitAuctionInformation(infoViewController);
 		}
 
 	}
 
+	/**
+	 * Loads a menu that contains all the main controls that can be used by a bidder
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A menu that is appropriate for a bidder user will be present in theUserView
+	 * @param theController associated with the UserView where the bidder menu will be added.
+	 */
 	private static void loadBidderMenu(final UserViewController theController) {
-		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions",
-				infoViewController);
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
+		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		
+		ArrayList<AnchorPane> buttons = new ArrayList<>();
+		buttons.add(viewAuctionsButton);
+		buttons.add(viewBidsButton);
+		buttons.add(logOutButton);
+		
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+			addActiveCssClass(viewAuctionsButton);
 		});
 		theController.addMenuButton(viewAuctionsButton);
 		
-		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
+
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctionBids(myUser.getMyAuctions());
+			addActiveCssClass(viewBidsButton);
 		});
 		theController.addMenuButton(viewBidsButton);
 		
-		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
@@ -140,8 +160,30 @@ public class SessionController {
 		
 		// go to default screen
 		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
+		addActiveCssClass(viewAuctionsButton);
 	}
 	
+	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> thePanes) {
+		
+		for (AnchorPane pane: thePanes) {
+			Node button = pane.getChildren().get(0);
+			button.getStyleClass().clear(); // Removes all class styles from the button
+			// Add the default
+			button.getStyleClass().add("menuButton");
+		}
+	}
+	
+	private static void addActiveCssClass(AnchorPane thePane) {
+		Node button = thePane.getChildren().get(0);
+		button.getStyleClass().add("active");
+	}
+	
+	/**
+	 * Loads a menu that contains all the main controls that can be used by a non profit contact
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A menu that is appropriate for a non profit contact user will be present in theUserView
+	 * @param theController associated with the UserView where the non profit contact menu will be added.
+	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -164,6 +206,12 @@ public class SessionController {
 		infoViewController.showAuctions(myUser.getMyAuctions());
 	}
 	
+	/**
+	 * Loads a menu and a sub-menu that contains all the main controls that can be used by an employee
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A menu and sub-menu that is appropriate for an employee user will be present in theUserView
+	 * @param theController associated with the UserView where the employee menus will be added.
+	 */
 	private static void loadEmployeeMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
@@ -186,24 +234,6 @@ public class SessionController {
 		theController.showDatePicker(infoViewController, myManager);
 	}
 	
-	
-//	private static void addRangeButton(final UserViewController theController) {
-//		AnchorPane viewAuctionsByRangeButton = MenuButton.newMenuButton("View Auctions by Date Range");
-//		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-//			@Override
-//			public void handle(MouseEvent theEvent) {
-//				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-//			}
-//		});
-//		theController.addMenuButton(viewAuctionsButton);
-//		
-//		
-//		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
-//		logOutButton.setOnMouseClicked(event -> {
-//			SessionController.userLogout();
-//		});
-//		theController.addMenuButton(logOutButton);
-//	}
 
 	
 
@@ -292,29 +322,5 @@ public class SessionController {
 		
 		return informationContainerViewController;
 	}
-	
-//	private static class MenuButton {
-//		
-//		private static AnchorPane newMenuButton(String theTitle) {
-//			FXMLLoader buttonLoader = new FXMLLoader(SessionController.class.getResource("ViewMenuButton.fxml"));
-//			AnchorPane button = null;
-//			try {
-//				button = (AnchorPane) buttonLoader.load();
-//			} catch (IOException e) {
-//				System.err.println("Button Error");
-//				//e.printStackTrace();
-//			}	
-//			
-//			ViewMenuButtonController buttonCtrl = (ViewMenuButtonController) buttonLoader.getController();
-//			buttonCtrl.setText(theTitle);
-//			return button;
-//		}
-//
-//		public static AnchorPane newMenuButton(String string, InformationContainerViewController infoViewController) {
-//			// TODO Auto-generated method stub
-//			return null;
-//		}
-//		
-//	}
 
 }

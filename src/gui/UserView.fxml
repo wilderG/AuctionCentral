@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="rootPane" minWidth="650.0" prefHeight="680.0" prefWidth="1024.0" stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserViewController">
+<AnchorPane fx:id="myRootPane" minWidth="650.0" prefHeight="680.0" prefWidth="1024.0" stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.UserViewController">
    <children>
       <GridPane fx:id="myGridPane" layoutX="100.0" layoutY="155.0" maxHeight="40.0" minHeight="40.0" prefHeight="40.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columnConstraints>
@@ -30,7 +30,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="theUserDisplayName" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="240.0" stylesheets="@menuBar.css" text="Peter Piper" GridPane.columnIndex="1">
+                  <Label fx:id="myUserDisplayName" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefWidth="240.0" styleClass="userName" stylesheets="@menuBar.css" text="Peter Piper" GridPane.columnIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -38,7 +38,7 @@
                         <Insets left="8.0" right="8.0" top="5.0" />
                      </padding>
                   </Label>
-                  <FlowPane fx:id="menuButtonBar" stylesheets="@menuBar.css">
+                  <FlowPane fx:id="myMenuButtonBar" stylesheets="@menuBar.css">
                      <padding>
                         <Insets left="8.0" right="8.0" top="5.0" />
                      </padding>
