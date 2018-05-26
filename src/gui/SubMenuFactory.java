@@ -3,6 +3,10 @@ package gui;
 import java.time.LocalDate;
 import java.util.Collection;
 
+import javax.swing.text.View;
+
+import org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
@@ -66,16 +70,9 @@ public class SubMenuFactory {
 		mySubMenu = theUserView.getMySubMenuBar();
 //		mySubMenuContainer = theUserView.getMySubMenuBarContainer();
 		mySubMenu.getChildren().clear();
-		if (theUser instanceof Bidder) {
-			createBidderSubMenu(mySubMenu);
-		} else if (theUser instanceof NonProfitContact) {
-			createNonProfitSubMenu(mySubMenu);
-		} else if (theUser instanceof Employee) {
-			createAdminSubMenu(mySubMenu);
-		}
 	}
 	
-	private static void createAdminSubMenu(FlowPane theSubMenu) {
+	private static void showAdminSubMenu(FlowPane theSubMenu) {
 		
 		showDatePicker(theSubMenu);
 		
@@ -100,7 +97,8 @@ public class SubMenuFactory {
 		mySubMenuContainer.getChildren().add(configButton);
 	}
 
-	private static void createBidderSubMenu(FlowPane theSubMenu) {
+	public static void showBidderAuctionSubMenu() {
+		mySubMenu.getChildren().clear();
 		Button viewAllAuctionsButton = new Button("View All Auctions");
 		Button viewAllBiddableAuctions = new Button("View All Biddable Auctions");
 		
@@ -127,11 +125,37 @@ public class SubMenuFactory {
 		});
 	}
 	
-	private static void createNonProfitSubMenu(FlowPane theSubMenu) {
-		
-		
-		
+	public static void showBidderBidSubMenu() {
+		mySubMenu.getChildren().clear();
 	}
+	
+	public static void showNonProfitAuctionViewSubMenu() {
+		mySubMenu.getChildren().clear();
+		
+		Button viewAllAuctionsButton = new Button("View All My Auctions");
+		
+		viewAllAuctionsButton.setOnMouseClicked(event -> {
+			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
+			User user = SessionController.getUser();
+			infoViewController.showAuctions(user.getMyAuctions());
+		});
+		
+		Button auctionRequestButton = new Button("Request New Auction");
+		
+		auctionRequestButton.setOnMouseClicked(event -> {
+			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
+			NonProfitContact user = (NonProfitContact) SessionController.getUser();
+			Auction auction = user.getFutureAuction();
+			if (auction == null) {
+				infoViewController.showNewAuctionRequest();
+			}
+		});
+		mySubMenu.getChildren().add(viewAllAuctionsButton);
+		mySubMenu.getChildren().add(auctionRequestButton);
+	}
+	
+	
+	
 
 	
 	/**

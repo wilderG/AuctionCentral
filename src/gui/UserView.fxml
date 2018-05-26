@@ -54,8 +54,11 @@
                </padding></ScrollPane>
             <FlowPane fx:id="mySubMenuBar" alignment="CENTER_LEFT" hgap="10.0" styleClass="subMenuBar" stylesheets="@menuBar.css" GridPane.rowIndex="1">
                <padding>
-                  <Insets left="20.0" />
+                  <Insets bottom="2.0" left="20.0" />
                </padding>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
             </FlowPane>
          </children>
       </GridPane>

@@ -148,6 +148,7 @@ public class SessionController {
 		buttons.add(logOutButton);
 		
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			SubMenuFactory.showBidderAuctionSubMenu();
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 			addActiveCssClass(viewAuctionsButton);
@@ -156,6 +157,7 @@ public class SessionController {
 		
 
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+			SubMenuFactory.showBidderBidSubMenu();
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctionBids(myUser.getMyAuctions());
 			addActiveCssClass(viewBidsButton);
@@ -171,6 +173,7 @@ public class SessionController {
 		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 		addActiveCssClass(viewAuctionsButton);
 		SubMenuFactory.createSubMenu(myUser, theController);
+		SubMenuFactory.showBidderAuctionSubMenu();
 	}
 	
 	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> thePanes) {
@@ -196,32 +199,33 @@ public class SessionController {
 	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction");
+//		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction");
 		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item");
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
-		buttons.add(requestNewAuctionButton);
+//		buttons.add(requestNewAuctionButton);
 		buttons.add(requestNewItemButton);
 		buttons.add(logOutButton);
 		
 		viewAuctionsButton.setOnMouseClicked(event -> {
+			SubMenuFactory.showNonProfitAuctionViewSubMenu();
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myUser.getMyAuctions());
 			addActiveCssClass(viewAuctionsButton);
 		});
 		theController.addMenuButton(viewAuctionsButton);
 				
-		requestNewAuctionButton.setOnMouseClicked(event -> {
-			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
-			if (auction == null) {
-				removeActiveClassFromButtons(buttons);
-				infoViewController.showNewAuctionRequest();
-				addActiveCssClass(requestNewAuctionButton);
-			}
-		});
-		theController.addMenuButton(requestNewAuctionButton);
+//		requestNewAuctionButton.setOnMouseClicked(event -> {
+//			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
+//			if (auction == null) {
+//				removeActiveClassFromButtons(buttons);
+//				infoViewController.showNewAuctionRequest();
+//				addActiveCssClass(requestNewAuctionButton);
+//			}
+//		});
+//		theController.addMenuButton(requestNewAuctionButton);
 		
 		requestNewItemButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
@@ -243,6 +247,7 @@ public class SessionController {
 		// go to default screen
 		infoViewController.showAuctions(myUser.getMyAuctions());
 		addActiveCssClass(viewAuctionsButton);
+		SubMenuFactory.showNonProfitAuctionViewSubMenu();
 	}
 	
 	/**
