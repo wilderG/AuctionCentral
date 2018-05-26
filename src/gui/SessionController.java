@@ -211,22 +211,19 @@ public class SessionController {
 			infoViewController.showAuctions(myUser.getMyAuctions());
 			addActiveCssClass(viewAuctionsButton);
 		});
-		
-		
 		theController.addMenuButton(viewAuctionsButton);
-		
-		
+				
 		requestNewAuctionButton.setOnMouseClicked(event -> {
-			removeActiveClassFromButtons(buttons);
-			infoViewController.showNewAuctionRequest();
-			addActiveCssClass(requestNewAuctionButton);
+			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
+			if (auction == null) {
+				removeActiveClassFromButtons(buttons);
+				infoViewController.showNewAuctionRequest();
+				addActiveCssClass(requestNewAuctionButton);
+			}
 		});
-		
-
 		theController.addMenuButton(requestNewAuctionButton);
-		SubMenuFactory.createSubMenu(myUser, theController);
 		
-		requestNewAuctionButton.setOnMouseClicked(event -> {
+		requestNewItemButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
 			if (auction != null && SessionController.getManager().isNewItemRequestAllowed(auction)) {
 				removeActiveClassFromButtons(buttons);
@@ -234,16 +231,14 @@ public class SessionController {
 				addActiveCssClass(requestNewItemButton);
 			}
 		});
-		
-		
 		theController.addMenuButton(requestNewItemButton);
-		
-		
 		
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
+		
+		SubMenuFactory.createSubMenu(myUser, theController);
 		
 		// go to default screen
 		infoViewController.showAuctions(myUser.getMyAuctions());

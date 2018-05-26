@@ -12,7 +12,8 @@
 	-fx-font-size: 18px;
 }
 
-.root {
+#main,
+#root {
 	-fx-background-color: white;
 }
 
