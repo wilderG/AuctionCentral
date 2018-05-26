@@ -128,7 +128,9 @@ public class UserViewController implements Initializable {
 		
 	}
 	
-	
+	public FlowPane getMenuButtonBar() {
+	    return myMenuButtonBar;
+	}
 
 	/**
 	 * Updates theUserDisplay label to show the current users name.s

@@ -54,7 +54,7 @@ public class SessionController {
 	 */
 	private static InformationContainerViewController infoViewController;
 	
-	
+	private static UserViewController myUserViewController;
 	/**
 	 * The file name for the LoginView.
 	 */
@@ -111,16 +111,20 @@ public class SessionController {
 	 */
 	public static void userLogin(User theUser) {
 		myUser = theUser;
-		UserViewController userViewController = loadUserView();
-		infoViewController = loadInformationContainerView(userViewController);
+		myUserViewController = loadUserView();
+		infoViewController = loadInformationContainerView(myUserViewController);
 		if (theUser instanceof Bidder) {
-			loadBidderMenu(userViewController);
+			loadBidderMenu(myUserViewController);
 		} else if (theUser instanceof NonProfitContact) {
-			loadNonProfitMenu(userViewController);
+			loadNonProfitMenu(myUserViewController);
 		} else if (theUser instanceof Employee) {
-			loadEmployeeMenu(userViewController);
+			loadEmployeeMenu(myUserViewController);
 		}
 
+	}
+	
+	public static UserViewController getUserViewController() {
+	    return myUserViewController;
 	}
 
 	/**

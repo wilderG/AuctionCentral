@@ -35,6 +35,10 @@ public class NewItemFormController {
     /** The error message. */
     @FXML
     private Label myErrorLabel;
+    
+    /** The success message. */
+    @FXML
+    private Label mySuccessLabel;
 
     
 	@FXML
@@ -66,10 +70,13 @@ public class NewItemFormController {
 	        NewItemRequest itemRequest = new NewItemRequest(myItemDescription.getText(), minBidValue, myAuction);
 	        SessionController.getManager().processNewItem(itemRequest);
 
-            myErrorLabel.setText("Item successfully submitted to your auction!");
+            mySuccessLabel.setText("Item successfully submitted to your auction!");
+            myErrorLabel.setVisible(true);
+            
+//            Node button = SessionController.getUserViewController().getMenuButtonBar().getChildren().get(0);
+//            button.fireEvent();
 	    } catch (IllegalArgumentException e) {
 	        myErrorLabel.setText(e.getMessage());
-	    } finally {
             myErrorLabel.setVisible(true);
 	    }
 	}
