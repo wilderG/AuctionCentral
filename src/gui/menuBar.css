@@ -1,6 +1,6 @@
 #menuButtonBar,
 #main {
-	-fx-background-color: #53B799;
+	-fx-background-color: #033d9b;
 }
 
 .menuContainer,
@@ -25,6 +25,7 @@
 .userName,
 #main {
 	-fx-text-fill: white;
+	
 }
 
 .subMenuBar .button {
@@ -49,7 +50,7 @@
 .subMenuBar .label,
 .subMenuBar .date-picker-popup > * > .date-cell,
 .date-picker .text-field {
-	-fx-text-fill: #59AECC;
+	-fx-text-fill: #033d9b;
 	
 }
 
@@ -64,7 +65,7 @@
 .root,
 .background,
 #pane {
-	-fx-background-color: white;
+	-fx-background-color: #033d9b;
 }
 
 
