@@ -72,9 +72,15 @@ public class NewItemFormController {
 	        NewItemRequest itemRequest = new NewItemRequest(myItemDescription.getText(), minBidValue, myAuction);
 	        SessionController.getManager().processNewItem(itemRequest);
 	        
+	        myItemDescription.setText("");
+	        myMinimumBid.setText("");
             mySuccessLabel.setText("Item successfully submitted to your auction!");
             mySuccessLabel.setVisible(true);
             
+            if (!myAuction.isAllowingNewItem()) {
+                myErrorLabel.setText("Auction now has the maximum number of items.");
+                myErrorLabel.setVisible(true);
+            }
 //            Node button = SessionController.getUserViewController().getMenuButtonBar().getChildren().get(0);
 //            button.fireEvent();
 	    } catch (IllegalArgumentException e) {
@@ -95,21 +101,25 @@ public class NewItemFormController {
 	 */
     private void validateInput(TextField theItemDescription, TextField theMinimumBid) {
         // exception 1
+        if (!myAuction.isAllowingNewItem()) {
+            throw new IllegalArgumentException("Auction already has the maximum number of items!");
+        }
+        // exception 2
         if (theItemDescription.getText().equals("")) {
             throw new IllegalArgumentException("Item Description is missing!");
         }
-        // exception 2
+        // exception 3
         if (theMinimumBid.getText().equals("")) {
             throw new IllegalArgumentException("Minimum bid is missing!");
         }
-        // exception 3
+        // exception 4
         BigDecimal minBidValue;
         try {
             minBidValue = new BigDecimal(myMinimumBid.getText());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Minimum bid entered is not formattable!");
         }
-        // exception 4
+        // exception 5
         if (minBidValue.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Cannot have a negative minimum bid value!");
         }
