@@ -50,6 +50,10 @@ public class NewBidFormController {
 		});
 	}
 	
+	@FXML
+	private void onEnter() {
+		makeBid();
+	}
 	
 	@FXML
 	public void makeBid() {

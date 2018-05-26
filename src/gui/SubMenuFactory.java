@@ -53,6 +53,8 @@ public class SubMenuFactory {
 	private static FlowPane mySubMenu;
 	
 	private static FlowPane mySubMenuContainer;
+	
+	private static Label myMessageLabel;
 
 
 	private static final String SUB_MENU_VIEW = "SubMenuView.fxml";
@@ -266,8 +268,13 @@ public class SubMenuFactory {
 	 * @param theMessage that will be used to create a label
 	 */
 	public static void addMessage(String theMessage) {
-		Label messageLabel = new Label(theMessage);
-		
+		if (myMessageLabel == null) {
+			myMessageLabel = new Label(theMessage);
+			mySubMenu.getChildren().add(myMessageLabel);
+		} else {
+			myMessageLabel.setText(theMessage);
+		}
+
 	}
 	
 	

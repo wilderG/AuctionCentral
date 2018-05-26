@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.text.*?>
-<?import javafx.scene.control.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="550.0" prefWidth="678.0" stylesheets="@form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.NewBidFormController">
+<AnchorPane id="main" prefHeight="550.0" prefWidth="500.0" stylesheets="@form.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.NewBidFormController">
    <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
+      <BorderPane prefHeight="200.0" prefWidth="200.0" stylesheets="@form.css">
          <top>
             <Label prefHeight="75.0" prefWidth="192.0" text="New bid" textFill="#3ba399" BorderPane.alignment="CENTER">
                <font>
-                  <Font name="System Bold Italic" size="48.0" />
+                  <Font name="System Bold Italic" size="33.0" />
                </font>
             </Label>
          </top>
       </BorderPane>
-      <TextField layoutX="228.0" layoutY="100.0" prefHeight="33.0" prefWidth="151.0" />
-      <Button fx:id="mySubmitButton" layoutX="264.0" layoutY="175.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" text="Make a bid" />
-      <Label fx:id="myWarningLabel" alignment="CENTER" layoutX="83.0" layoutY="141.0" prefHeight="26.0" prefWidth="442.0" text="Your bid is less than minimu value!" textFill="#e11212">
+      <TextField fx:id="myBidLabel" layoutX="160.0" layoutY="167.0" onAction="#onEnter" prefHeight="33.0" prefWidth="182.0" promptText="Bid Value" stylesheets="@form.css" />
+      <Button fx:id="mySubmitButton" layoutX="160.0" layoutY="290.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="182.0" text="Make a bid" />
+      <Label fx:id="myWarningLabel" alignment="CENTER" layoutX="29.0" layoutY="228.0" prefHeight="26.0" prefWidth="442.0" text="Your bid is less than minimum bid!" textFill="#e11212">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="mySuccessfulLabel" alignment="CENTER" layoutX="30.0" layoutY="389.0" prefHeight="26.0" prefWidth="442.0" text="Bid Successfully Placed!" textFill="#3de014">
          <font>
             <Font size="18.0" />
          </font>

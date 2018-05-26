@@ -187,6 +187,13 @@ public class AuctionManager implements Manager {
 	    myCalendar.setMaximumUpcomingAuctions(theNewCap);
 	}
 	
+	/**
+	 * Getter for the current number of max auctions accepted by the calendar
+	 */
+	public int getFutureAuctionCapacity() {
+		return myCalendar.getMaximumUpcomingAuctions();
+	}
+	
     /**
      * Gets all auctions within a specified range of dates, inclusive.
      * 
