@@ -6,16 +6,23 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane stylesheets="@form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.NewBidFormController">
+<AnchorPane prefHeight="550.0" prefWidth="678.0" stylesheets="@form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.NewBidFormController">
    <children>
-      <Pane layoutX="20.0" prefHeight="575.0" prefWidth="625.0" id="main">
-         <children>
-            <Label layoutX="14.0" layoutY="6.0" text="Make a Bid">
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <top>
+            <Label prefHeight="75.0" prefWidth="192.0" text="New bid" textFill="#3ba399" BorderPane.alignment="CENTER">
                <font>
-                  <Font size="24.0" />
+                  <Font name="System Bold Italic" size="48.0" />
                </font>
             </Label>
-         </children>
-      </Pane>
+         </top>
+      </BorderPane>
+      <TextField layoutX="228.0" layoutY="100.0" prefHeight="33.0" prefWidth="151.0" />
+      <Button fx:id="mySubmitButton" layoutX="264.0" layoutY="175.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="80.0" text="Make a bid" />
+      <Label fx:id="myWarningLabel" alignment="CENTER" layoutX="83.0" layoutY="141.0" prefHeight="26.0" prefWidth="442.0" text="Your bid is less than minimu value!" textFill="#e11212">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

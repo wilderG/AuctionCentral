@@ -29,7 +29,7 @@
                <items>
                   <AnchorPane prefHeight="46.0" prefWidth="206.0">
                      <children>
-                        <Label id="rightTopInfo" fx:id="myTopRightField" alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutY="39.0" prefHeight="49.0" prefWidth="206.0" stylesheets="@tile.css" text="Red Cross" textAlignment="CENTER">
+                        <Label id="rightTopInfo" fx:id="myTopRightField" alignment="BOTTOM_LEFT" contentDisplay="CENTER" layoutY="1.0" prefHeight="87.0" prefWidth="206.0" stylesheets="@tile.css" text="Red Cross" textAlignment="CENTER">
                            <padding>
                               <Insets left="15.0" />
                            </padding>
