@@ -5,8 +5,14 @@ import java.math.BigDecimal;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import model.Auction;
 import model.AuctionItem;
+import model.AuctionManager;
+import model.Bid;
+import model.Bidder;
+import model.NewBidRequest;
+import model.User;
 
 
 /**
@@ -25,10 +31,12 @@ public class NewBidFormController {
 	private Label myWarningLabel;
 	
 	@FXML
-	private Label myBidLabel;
+	private TextField myBidLabel;
 	
 	@FXML
 	private Button mySubmitButton;
+	
+	
 	
 	@FXML
 	private void initialize() {
@@ -43,11 +51,23 @@ public class NewBidFormController {
 	public void makeBid() {
 		String userInput = myBidLabel.getText();
 		int bidValue = Integer.valueOf(userInput);	
-		BigDecimal bV = new BigDecimal(bidValue);
-		if(bV.compareTo(myItem.getMinimumAcceptableBidValue()) >=1) {	
-		} else {
+		try {
+		BigDecimal userBidValue = new BigDecimal(bidValue);
+		
+		if(userBidValue.compareTo(myItem.getMinimumAcceptableBidValue()) < 0) {
 			myWarningLabel.setVisible(true);
+		} else {
+			myWarningLabel.setVisible(false);
+			Bidder bidder = (Bidder) SessionController.getUser();
+			
+			NewBidRequest theNewBidRequest = new NewBidRequest(bidder, myAuction, myItem, userBidValue);
+			AuctionManager theAuctionManager = new AuctionManager();
+			theAuctionManager.processNewBid(theNewBidRequest);
 		}
+		} catch (Exception e) {
+			System.out.println("It's not valid numbers!");
+		}
+		
 	}
 	
 	public void setAuction(final Auction theAuction) {
