@@ -1,14 +1,15 @@
 #menuButtonBar,
-#theUserDisplayName,
+.userName,
 #main,
-#menuContainer,
+.menuContainer,
 .menuButton {
 	-fx-background-color: #53B799;
 }
 
 #main,
 .menuButton,
-.userName {
+.userName,
+.subMenuBar {
 	-fx-font-family: 'Helvetica', Arial, sans-serif;
 }
 
@@ -26,17 +27,26 @@
 
 
 .menuButton:hover,
-.active {
+.active,
+.subMenuBar {
 	-fx-font-size: 18px;
 	-fx-text-fill: #53B799;
 	-fx-background-color: white;	
 }
 
-.rootPane {
+.root,
+.background,
+#pane {
 	-fx-background-color: #8C8E8C;
 }
 
+
 .subMenuBar {
 	-fx-background-color: white;
+}
+
+.subMenuBar * {
+	-fx-font-size: 16px;
+	-fx-text-fill: #53B799;
 }
 

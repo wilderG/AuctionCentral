@@ -34,7 +34,6 @@ public class AuctionManager implements Manager {
 	public AuctionManager() {
 		storage = new StorageIO(FILE_NAME);
 		myCalendar = storage.getCalendar();
-		System.out.println(this.getClass().getSimpleName() + ".construct");
 	}
 	
 	/**
@@ -107,8 +106,7 @@ public class AuctionManager implements Manager {
 	@Override
 	public boolean isNewItemRequestAllowed(Auction theAuction) {
 		// check auction
-		theAuction.isAllowingNewItem();
-		return false;
+		return theAuction.isAllowingNewItem();
 	}
 
 	/**
@@ -187,6 +185,13 @@ public class AuctionManager implements Manager {
      */
 	public void setFutureAuctionCapacity(final int theNewCap) {
 	    myCalendar.setMaximumUpcomingAuctions(theNewCap);
+	}
+	
+	/**
+	 * Getter for the current number of max auctions accepted by the calendar
+	 */
+	public int getFutureAuctionCapacity() {
+		return myCalendar.getMaximumUpcomingAuctions();
 	}
 	
     /**

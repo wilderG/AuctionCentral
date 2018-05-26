@@ -1,6 +1,36 @@
-#main {
+#formTitle {
+	fx-font-size: 24px;
+}
+
+
+.detail,
+.container,
+.messageLabel {
 	-fx-background-color: white;
 	-fx-font-family: 'Helvetica', Arial, sans-serif;
 	-fx-text-fill: black;
 	-fx-font-size: 18px;
+}
+
+.root {
+	-fx-background-color: white;
+}
+
+.capacityField {
+	-fx-border-style: hidden hidden solid hidden;
+	-fx-border-color: black;
+	-fx-border-width: 1px;
+}
+
+.button {
+	-fx-text-fill: white;
+	-fx-background-color: gray;
+}
+
+.error {
+	-fx-text-fill: red;
+}
+
+.success {
+	-fx-text-fill: green;
 }

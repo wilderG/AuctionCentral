@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="579.0" prefWidth="769.0" styleClass="container" stylesheets="@form.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ModifySystemViewController">
+   <children>
+      <Pane layoutX="37.0" layoutY="4.0" prefHeight="579.0" prefWidth="662.0" styleClass="container" stylesheets="@form.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label id="formTitle" layoutX="14.0" layoutY="6.0" stylesheets="@form.css" text="Modify System">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Button fx:id="mySubmitButton" layoutX="159.0" layoutY="142.0" mnemonicParsing="false" stylesheets="@form.css" text="Submit">
+               <styleClass>
+                  <String fx:value="detail" />
+                  <String fx:value="button" />
+               </styleClass>
+            </Button>
+            <Label layoutX="48.0" layoutY="65.0" styleClass="detail" stylesheets="@form.css" text="Change Maximum Number of Upcoming Auctions:" />
+            <Label fx:id="myMessageLabel" layoutX="370.0" layoutY="100.0" styleClass="messageLabel" stylesheets="@form.css" text="Please enter an integer!" textFill="#ff0000bd" />
+            <TextField fx:id="myChangeMaxUpcomingAuctionsField" layoutX="48.0" layoutY="94.0" onAction="#onEnter" onKeyTyped="#showSubmitButton" prefHeight="27.0" prefWidth="302.0" stylesheets="@form.css">
+               <styleClass>
+                  <String fx:value="detail" />
+                  <String fx:value="capacityField" />
+               </styleClass>
+            </TextField>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
