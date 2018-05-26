@@ -25,7 +25,7 @@
             </Button>
             <Label layoutX="48.0" layoutY="65.0" styleClass="detail" stylesheets="@form.css" text="Change Maximum Number of Upcoming Auctions:" />
             <Label fx:id="myMessageLabel" layoutX="370.0" layoutY="100.0" styleClass="messageLabel" stylesheets="@form.css" text="Please enter an integer!" textFill="#ff0000bd" />
-            <TextField fx:id="myChangeMaxUpcomingAuctionsField" layoutX="48.0" layoutY="94.0" onAction="#onEnter" onKeyTyped="#showSubmitButton" prefHeight="27.0" prefWidth="302.0" stylesheets="@form.css">
+            <TextField fx:id="myChangeMaxUpcomingAuctionsField" layoutX="48.0" layoutY="94.0" onAction="#onEnter" prefHeight="27.0" prefWidth="302.0" stylesheets="@form.css">
                <styleClass>
                   <String fx:value="detail" />
                   <String fx:value="capacityField" />
