@@ -72,12 +72,10 @@ public class SubMenuFactory {
 		mySubMenu.getChildren().clear();
 	}
 	
-	private static void showAdminSubMenu(FlowPane theSubMenu) {
-		
-		showDatePicker(theSubMenu);
-		
-		// Add the configurations button
-//		addConfigurationsButton();
+	public static void showAdminSubMenu() {
+		mySubMenu.getChildren().clear();
+		showDatePicker();
+
 		
 	}
 	
@@ -188,13 +186,13 @@ public class SubMenuFactory {
 	 * @param infoViewController
 	 * @param myManager
 	 */
-	public static void showDatePicker(FlowPane theSubMenu) {
+	public static void showDatePicker() {
 		initializeDateObjects();
         addActionsToDatePickers();
         
-        theSubMenu.getChildren().add(myDatePickerTitle);
-        theSubMenu.getChildren().add(myStartRangeDatePicker);
-        theSubMenu.getChildren().add(myEndRangeDatePicker);
+        mySubMenu.getChildren().add(myDatePickerTitle);
+        mySubMenu.getChildren().add(myStartRangeDatePicker);
+        mySubMenu.getChildren().add(myEndRangeDatePicker);
 		myStartRangeDatePicker.setVisible(true);
 		myEndRangeDatePicker.setVisible(true);
 		

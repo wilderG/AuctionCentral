@@ -199,13 +199,11 @@ public class SessionController {
 	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-//		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction");
 		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item");
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
-//		buttons.add(requestNewAuctionButton);
 		buttons.add(requestNewItemButton);
 		buttons.add(logOutButton);
 		
@@ -216,16 +214,6 @@ public class SessionController {
 			addActiveCssClass(viewAuctionsButton);
 		});
 		theController.addMenuButton(viewAuctionsButton);
-				
-//		requestNewAuctionButton.setOnMouseClicked(event -> {
-//			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
-//			if (auction == null) {
-//				removeActiveClassFromButtons(buttons);
-//				infoViewController.showNewAuctionRequest();
-//				addActiveCssClass(requestNewAuctionButton);
-//			}
-//		});
-//		theController.addMenuButton(requestNewAuctionButton);
 		
 		requestNewItemButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
@@ -264,14 +252,14 @@ public class SessionController {
 		buttons.add(modifySystemButton);
 		viewAuctionsButton.setOnMouseClicked(event -> {
 			infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-			SubMenuFactory.createSubMenu(myUser, theController);
 			removeActiveClassFromButtons(buttons);
 			addActiveCssClass(viewAuctionsButton);
+			SubMenuFactory.showAdminSubMenu();
 		});
 		
 		
 		modifySystemButton.setOnMouseClicked(event -> {
-			
+			theController.getMySubMenuBar().getChildren().clear();
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showModifySystemView();
 			addActiveCssClass(modifySystemButton);
@@ -291,7 +279,7 @@ public class SessionController {
 		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
 		SubMenuFactory.createSubMenu(myUser, theController);
 		addActiveCssClass(viewAuctionsButton);
-
+		SubMenuFactory.showAdminSubMenu();
 	}
 	
 
