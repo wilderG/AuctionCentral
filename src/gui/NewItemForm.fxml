@@ -15,11 +15,11 @@
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="myItemDescription" layoutX="208.0" layoutY="129.0" promptText="Item Name" />
-            <TextField fx:id="myMinimumBid" layoutX="208.0" layoutY="181.0" promptText="Minimum bid" />
+            <TextField fx:id="myItemDescription" layoutX="223.0" layoutY="129.0" promptText="Item Name" />
+            <TextField fx:id="myMinimumBid" layoutX="223.0" layoutY="181.0" promptText="Minimum bid" />
             <Button fx:id="mySubmitButton" layoutX="276.0" layoutY="302.0" mnemonicParsing="false" text="Submit" />
-            <Label fx:id="myErrorLabel" alignment="CENTER" layoutX="60.0" layoutY="266.0" prefHeight="22.0" prefWidth="511.0" text="Label" textAlignment="CENTER" textFill="#eb1010" />
-            <Label fx:id="mySuccessLabel" alignment="BOTTOM_CENTER" layoutX="284.0" layoutY="229.0" text="Label" textAlignment="CENTER" textFill="#038a3b">
+            <Label fx:id="myErrorLabel" alignment="CENTER" layoutX="51.0" layoutY="266.0" prefHeight="22.0" prefWidth="511.0" text="Label" textAlignment="CENTER" textFill="#eb1010" />
+            <Label fx:id="mySuccessLabel" alignment="CENTER" layoutX="276.0" layoutY="229.0" text="Label" textAlignment="CENTER" textFill="#038a3b">
                <font>
                   <Font size="24.0" />
                </font>

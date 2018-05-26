@@ -44,11 +44,9 @@ public class NewItemFormController {
 	@FXML
 	private void initialize() {
         myErrorLabel.setVisible(false);
+        mySuccessLabel.setVisible(false);
         mySubmitButton.setOnMouseClicked(event -> {
-
-
             pressButton();
-
         });
 	}
 	
@@ -66,22 +64,22 @@ public class NewItemFormController {
 	 */
 	@FXML
 	private void pressButton() {
+        myErrorLabel.setVisible(false);
+        mySuccessLabel.setVisible(false);
 	    try {
 	        validateInput(myItemDescription, myMinimumBid);
-	        myErrorLabel.setVisible(false);
 	        BigDecimal minBidValue = new BigDecimal(myMinimumBid.getText());
 	        NewItemRequest itemRequest = new NewItemRequest(myItemDescription.getText(), minBidValue, myAuction);
 	        SessionController.getManager().processNewItem(itemRequest);
 	        
             mySuccessLabel.setText("Item successfully submitted to your auction!");
-            myErrorLabel.setVisible(true);
+            mySuccessLabel.setVisible(true);
             
 //            Node button = SessionController.getUserViewController().getMenuButtonBar().getChildren().get(0);
 //            button.fireEvent();
 	    } catch (IllegalArgumentException e) {
 	        myErrorLabel.setText(e.getMessage());
             myErrorLabel.setVisible(true);
-
 	    }
 	}
 	
@@ -97,14 +95,11 @@ public class NewItemFormController {
 	 */
     private void validateInput(TextField theItemDescription, TextField theMinimumBid) {
         // exception 1
-
-
         if (theItemDescription.getText().equals("")) {
             throw new IllegalArgumentException("Item Description is missing!");
         }
         // exception 2
         if (theMinimumBid.getText().equals("")) {
-
             throw new IllegalArgumentException("Minimum bid is missing!");
         }
         // exception 3
@@ -112,10 +107,7 @@ public class NewItemFormController {
         try {
             minBidValue = new BigDecimal(myMinimumBid.getText());
         } catch (NumberFormatException e) {
-
-
             throw new IllegalArgumentException("Minimum bid entered is not formattable!");
-
         }
         // exception 4
         if (minBidValue.compareTo(BigDecimal.ZERO) < 0) {
