@@ -107,8 +107,7 @@ public class AuctionManager implements Manager {
 	@Override
 	public boolean isNewItemRequestAllowed(Auction theAuction) {
 		// check auction
-		theAuction.isAllowingNewItem();
-		return false;
+		return theAuction.isAllowingNewItem();
 	}
 
 	/**

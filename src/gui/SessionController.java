@@ -218,7 +218,7 @@ public class SessionController {
 		
 		requestNewItemButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
-			if (auction != null) {
+			if (auction != null && SessionController.getManager().isNewItemRequestAllowed(auction)) {
 				removeActiveClassFromButtons(buttons);
 				infoViewController.showNewItemRequest(auction);
 				addActiveCssClass(requestNewItemButton);
