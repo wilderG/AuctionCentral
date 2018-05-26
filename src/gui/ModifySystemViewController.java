@@ -1,5 +1,8 @@
 package gui;
 
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +29,21 @@ public class ModifySystemViewController {
 		mySubmitButton.setOnMouseClicked(event -> {
 			processNewMaxCapacity();
 		});
+		
+		myChangeMaxUpcomingAuctionsField.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable,
+		            String oldValue, String newValue) {
+		    	mySubmitButton.setVisible(!newValue.isEmpty());
+		    	myMessageLabel.setVisible(newValue.isEmpty());
+		    }
+		});
+		
+		myChangeMaxUpcomingAuctionsField.setOnMouseClicked(event -> {
+			myMessageLabel.setVisible(false);
+			myMessageLabel.getStyleClass().clear();;
+		});
+		
 	}
 	
 	@FXML
@@ -47,25 +65,18 @@ public class ModifySystemViewController {
 			myChangeMaxUpcomingAuctionsField.setPromptText("Current Max: " + manager.getFutureAuctionCapacity());
 			myChangeMaxUpcomingAuctionsField.clear();
 			myChangeMaxUpcomingAuctionsField.getParent().requestFocus();
-			myMessageLabel.getStyleClass().removeAll();
+			myMessageLabel.getStyleClass().clear();;
 			myMessageLabel.getStyleClass().add("success");
+			myMessageLabel.setVisible(true);
 			
 		} catch (Exception e) {
-			myMessageLabel.setText("Invalid, Please enter a positive number!");
-			myChangeMaxUpcomingAuctionsField.clear();
-			myMessageLabel.getStyleClass().removeAll();
 			myMessageLabel.getStyleClass().add("error");
 			myMessageLabel.setVisible(true);
+			myMessageLabel.setText("Invalid, Please enter a positive number!");
+			myChangeMaxUpcomingAuctionsField.clear();
+			
 		}
 		
 	}
 	
-	@FXML
-	private void showSubmitButton() {
-		System.out.println("Method called");
-		if (!myChangeMaxUpcomingAuctionsField.getText().isEmpty()) {
-			mySubmitButton.setVisible(true);
-		}
-		
-	}
 }

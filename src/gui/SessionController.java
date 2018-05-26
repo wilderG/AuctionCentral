@@ -269,7 +269,7 @@ public class SessionController {
 			
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showModifySystemView();
-			addActiveCssClass(viewAuctionsButton);
+			addActiveCssClass(modifySystemButton);
 		});
 		
 		
