@@ -69,8 +69,15 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isNewAuctionRequestAllowed() {
-		return myCalendar.isAllowingNewAuction();
+	public boolean isNewAuctionRequestAllowed(User theUser) {
+		boolean result = false;
+		if (theUser instanceof NonProfitContact && myCalendar.isAllowingNewAuction()) {
+			 LocalDate latestAvailableDateInCalendar = 
+			            LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
+			 result = ((NonProfitContact) theUser).isDateSpecifiedTimeAfterPreviousAuction
+			            (latestAvailableDateInCalendar);
+		}
+		return result;
 	}
 
 	/**
@@ -185,6 +192,7 @@ public class AuctionManager implements Manager {
      */
 	public void setFutureAuctionCapacity(final int theNewCap) {
 	    myCalendar.setMaximumUpcomingAuctions(theNewCap);
+	    storage.writeData();
 	}
 	
 	/**

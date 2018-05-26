@@ -1,15 +1,7 @@
 package gui;
 
-
-import java.awt.List;
 import java.io.IOException;
 import java.util.ArrayList;
-
-
-import javafx.beans.value.ChangeListener;
-import javafx.css.PseudoClass;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -139,7 +131,7 @@ public class SessionController {
 	 */
 	private static void loadBidderMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids");
+		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids", myUser, true);
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
@@ -160,7 +152,11 @@ public class SessionController {
 			infoViewController.showAuctionBids(myUser.getMyAuctions());
 			addActiveCssClass(viewBidsButton);
 		});
+		if (!myUser.isUserHasAuction()) {
+			viewBidsButton.setVisible(false);
+		}
 		theController.addMenuButton(viewBidsButton);
+		
 		
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
@@ -196,8 +192,8 @@ public class SessionController {
 	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction");
-		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item");
+		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction", myUser, false);
+		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item", myUser, true);
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
@@ -221,6 +217,8 @@ public class SessionController {
 				addActiveCssClass(requestNewAuctionButton);
 			}
 		});
+		requestNewAuctionButton.setVisible(
+				(myManager.isNewAuctionRequestAllowed(myUser)));
 		theController.addMenuButton(requestNewAuctionButton);
 		
 		requestNewItemButton.setOnMouseClicked(event -> {
@@ -231,6 +229,8 @@ public class SessionController {
 				addActiveCssClass(requestNewItemButton);
 			}
 		});
+		requestNewItemButton.setVisible(
+				myUser.isUserHasFutureAuction());
 		theController.addMenuButton(requestNewItemButton);
 		
 		logOutButton.setOnMouseClicked(event -> {

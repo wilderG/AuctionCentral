@@ -28,10 +28,11 @@ public interface Manager extends Serializable {
 	User getUser(String theUsername);
 	
 	/**
-	 * Pre-check if the schedule is at capacity.
+	 * Pre-check if the schedule is at capacity and if the specified
+	 * User is eligible to add an auction.
 	 * @return true if the schedule is not full
 	 */
-	boolean isNewAuctionRequestAllowed(); 
+	boolean isNewAuctionRequestAllowed(User theUser); 
 	
 	/**
 	 * Submits a new auction using the given auction request.

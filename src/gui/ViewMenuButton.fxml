@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewMenuButtonController">
+<AnchorPane fx:id="myPane" stylesheets="@menuBar.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ViewMenuButtonController">
    <children>
       <Label fx:id="myTitle" prefHeight="40.0" prefWidth="170.0" styleClass="menuButton" stylesheets="@menuBar.css" />
    </children>
