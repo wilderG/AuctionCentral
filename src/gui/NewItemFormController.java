@@ -72,15 +72,9 @@ public class NewItemFormController {
 	        NewItemRequest itemRequest = new NewItemRequest(myItemDescription.getText(), minBidValue, myAuction);
 	        SessionController.getManager().processNewItem(itemRequest);
 	        
-	        myItemDescription.setText("");
-	        myMinimumBid.setText("");
-            mySuccessLabel.setText("Item successfully submitted to your auction!");
-            mySuccessLabel.setVisible(true);
+	        successfulItemSubmission();
+	        displayErrorIfItemsNowFull();
             
-            if (!myAuction.isAllowingNewItem()) {
-                myErrorLabel.setText("Auction now has the maximum number of items.");
-                myErrorLabel.setVisible(true);
-            }
 //            Node button = SessionController.getUserViewController().getMenuButtonBar().getChildren().get(0);
 //            button.fireEvent();
 	    } catch (IllegalArgumentException e) {
@@ -88,10 +82,19 @@ public class NewItemFormController {
             myErrorLabel.setVisible(true);
 	    }
 	}
-	
-	// we need code here to create a NewItemRequest and send it to manager.
-	// if it throws an exception then display an error so the user can try
-	// again.
+
+    private void successfulItemSubmission() {
+        myItemDescription.setText("");
+        myMinimumBid.setText("");
+        mySuccessLabel.setVisible(true);
+    }
+    
+    private void displayErrorIfItemsNowFull() {
+        if (!myAuction.isAllowingNewItem()) {
+            myErrorLabel.setText("Auction now has the maximum number of items.");
+            myErrorLabel.setVisible(true);
+        }
+    }
 
 	/**
 	 * Checks that the entered data is valid.
