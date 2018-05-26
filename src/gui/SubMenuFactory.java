@@ -6,11 +6,14 @@ import java.util.Collection;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Callback;
 import model.Auction;
@@ -98,7 +101,30 @@ public class SubMenuFactory {
 	}
 
 	private static void createBidderSubMenu(FlowPane theSubMenu) {
+		Button viewAllAuctionsButton = new Button("View All Auctions");
+		Button viewAllBiddableAuctions = new Button("View All Biddable Auctions");
 		
+		
+		mySubMenu.getChildren().add(viewAllAuctionsButton);
+		mySubMenu.getChildren().add(viewAllBiddableAuctions);
+		
+		// Remove default focus from the viewAllAuctionsButton
+		viewAllAuctionsButton.getParent().requestFocus();
+				
+		viewAllAuctionsButton.setOnMouseClicked(event -> {
+			InformationContainerViewController informationContainerViewController =
+					SessionController.getInformationContainerView();
+			AuctionManager manager = SessionController.getManager();
+			informationContainerViewController.showAuctions(manager.getAllAuctionsSorted());
+		});		
+		
+		viewAllBiddableAuctions.setOnMouseClicked(event -> {
+			InformationContainerViewController informationContainerViewController =
+					SessionController.getInformationContainerView();
+			AuctionManager manager = SessionController.getManager();
+			Bidder bidder = (Bidder) SessionController.getUser();
+			informationContainerViewController.showAuctions(manager.getAvailableAuctions(bidder));
+		});
 	}
 	
 	private static void createNonProfitSubMenu(FlowPane theSubMenu) {
