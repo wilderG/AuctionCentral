@@ -4,7 +4,9 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Collection;
+import java.util.Observable;
 import java.util.TreeSet;
 
 
@@ -12,7 +14,7 @@ import java.util.TreeSet;
  * Provides common implementations of some user behaviors.
  * @author Jim Rosales
  */
-public class User implements Serializable, Comparable<User> {
+public class User extends Observable implements Serializable, Comparable<User> {
 	
 	/**
 	 * Generated Serial Version UID
@@ -42,6 +44,7 @@ public class User implements Serializable, Comparable<User> {
 	 * @param theDisplayName for the user.
 	 */
 	public User(String theUsername, String theDisplayName) {
+		super();
 		myUsername = theUsername;
 		myDisplayName = theDisplayName;
 		myAuctions = new TreeSet<>();
@@ -69,6 +72,8 @@ public class User implements Serializable, Comparable<User> {
 	 */
 	public void addAuction(Auction theAuction) {
 		myAuctions.add(theAuction);
+		setChanged();
+		notifyObservers("hasAuction");
 	}
 	
 	/**
@@ -77,6 +82,23 @@ public class User implements Serializable, Comparable<User> {
 	 */
 	public Collection<Auction> getMyAuctions() {
 		return myAuctions;
+	}
+	
+	/**
+	 * Returns true if a user has at least one auction it is interested in.
+	 * @return
+	 */
+	public boolean isUserHasAuction() {
+		return (!myAuctions.isEmpty());
+	}
+	
+	public boolean isUserHasFutureAuction() {
+		for (Auction e : myAuctions) {
+			if (e.getDate().isAfter(LocalDate.now())) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	@Override

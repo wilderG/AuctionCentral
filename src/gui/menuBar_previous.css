@@ -21,18 +21,12 @@
 
 .subMenuBar .date-picker-popup > * > .date-cell:hover,
 .subMenuBar .date-picker-popup > * > .date-cell.selected,
+.subMenuBar .button,
 .menuButton,
 .userName,
 #main {
 	-fx-text-fill: white;
 }
-
-.subMenuBar .button {
-	-fx-background-color: white;
-	-fx-font-fill: black;
-}
-
-
 
 #main {
 	-fx-font-size: 18px;
@@ -64,11 +58,11 @@
 .root,
 .background,
 #pane {
-	-fx-background-color: white;
+	-fx-background-color: #8C8E8C;
 }
 
 
-subMenuBar {
+.subMenuBar {
 	-fx-background-color: white;
 }
 
@@ -93,9 +87,12 @@ subMenuBar {
 	-fx-background-radius: 0px;
 }
 
+.subMenuBar .button:hover {
+	-fx-background-color: #5FB9D9;
+}
 
 .subMenuBar * {
 	-fx-font-size: 16px;
-	-fx-text-fill: black;
+	-fx-text-fill: #53B799;
 }
 

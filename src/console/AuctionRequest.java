@@ -125,7 +125,7 @@ public class AuctionRequest {
 	 * attempting to schedule an auction.
 	 */
     private void displayPrecheckError() {
-	    if (!myManager.isNewAuctionRequestAllowed()) {
+	    if (!myManager.isNewAuctionRequestAllowed(myNonprof)) {
             System.out.println("We're sorry, "
             		+ "but AuctionCentral is currently not \n"
                     + "accepting new auction "
@@ -156,7 +156,7 @@ public class AuctionRequest {
 	private boolean isSchedulingAllowedForNonprof() {
 	    LocalDate latestAvailableDateInCalendar = 
 	            LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
-	    return myManager.isNewAuctionRequestAllowed() 
+	    return myManager.isNewAuctionRequestAllowed(myNonprof) 
 	            && myNonprof.isDateSpecifiedTimeAfterPreviousAuction
 	            (latestAvailableDateInCalendar);
     }

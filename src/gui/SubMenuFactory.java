@@ -138,18 +138,18 @@ public class SubMenuFactory {
 			infoViewController.showAuctions(user.getMyAuctions());
 		});
 		
-		Button auctionRequestButton = new Button("Request New Auction");
-		
-		auctionRequestButton.setOnMouseClicked(event -> {
-			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
-			NonProfitContact user = (NonProfitContact) SessionController.getUser();
-			Auction auction = user.getFutureAuction();
-			if (auction == null) {
-				infoViewController.showNewAuctionRequest();
-			}
-		});
+//		Button auctionRequestButton = new Button("Request New Auction");
+//		
+//		auctionRequestButton.setOnMouseClicked(event -> {
+//			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
+//			NonProfitContact user = (NonProfitContact) SessionController.getUser();
+//			Auction auction = user.getFutureAuction();
+//			if (auction == null) {
+//				infoViewController.showNewAuctionRequest();
+//			}
+//		});
 		mySubMenu.getChildren().add(viewAllAuctionsButton);
-		mySubMenu.getChildren().add(auctionRequestButton);
+//		mySubMenu.getChildren().add(auctionRequestButton);
 	}
 	
 	

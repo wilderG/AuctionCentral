@@ -32,6 +32,7 @@ public class AuctionManager implements Manager {
 	 * Constructs a new manager object.
 	 */
 	public AuctionManager() {
+		System.out.println("AuctionManager.construct");
 		storage = new StorageIO(FILE_NAME);
 		myCalendar = storage.getCalendar();
 	}
@@ -69,8 +70,15 @@ public class AuctionManager implements Manager {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public boolean isNewAuctionRequestAllowed() {
-		return myCalendar.isAllowingNewAuction();
+	public boolean isNewAuctionRequestAllowed(User theUser) {
+		boolean result = false;
+		if (theUser instanceof NonProfitContact && myCalendar.isAllowingNewAuction()) {
+			 LocalDate latestAvailableDateInCalendar = 
+			            LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT);
+			 result = ((NonProfitContact) theUser).isDateSpecifiedTimeAfterPreviousAuction
+			            (latestAvailableDateInCalendar);
+		}
+		return result;
 	}
 
 	/**
@@ -97,6 +105,8 @@ public class AuctionManager implements Manager {
 				
 		sponsor.addAuction(newAuction);
 		storage.writeData();
+		
+		
 		return newAuction;
 	}
 
@@ -185,6 +195,7 @@ public class AuctionManager implements Manager {
      */
 	public void setFutureAuctionCapacity(final int theNewCap) {
 	    myCalendar.setMaximumUpcomingAuctions(theNewCap);
+	    storage.writeData();
 	}
 	
 	/**
