@@ -1,9 +1,12 @@
 #menuButtonBar,
-.userName,
-#main,
-.menuContainer,
-.menuButton {
+#main {
 	-fx-background-color: #53B799;
+}
+
+.menuContainer,
+.menuButton,
+.userName {
+	-fx-background-color: #59AECC;
 }
 
 #main,
@@ -30,7 +33,7 @@
 .active,
 .subMenuBar {
 	-fx-font-size: 18px;
-	-fx-text-fill: #53B799;
+	-fx-text-fill: #59AECC;
 	-fx-background-color: white;	
 }
 
@@ -46,12 +49,13 @@
 }
 
 .subMenuBar .button {
-	-fx-background-color: gray;
+	-fx-background-color: #59AECC;
 	-fx-text-fill: white;
+	-fx-background-radius: 0px;
 }
 
 .subMenuBar .button:hover {
-	-fx-background-color: orange;
+	-fx-background-color: #5FB9D9;
 }
 
 .subMenuBar * {
