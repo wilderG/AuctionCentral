@@ -31,6 +31,9 @@ public class NewBidFormController {
 	private Label myWarningLabel;
 	
 	@FXML
+	private Label mySuccessfulLabel;
+	
+	@FXML
 	private TextField myBidLabel;
 	
 	@FXML
@@ -41,6 +44,7 @@ public class NewBidFormController {
 	@FXML
 	private void initialize() {
 		myWarningLabel.setVisible(false);
+		mySuccessfulLabel.setVisible(false);
 		mySubmitButton.setOnMouseClicked(event -> {
 			makeBid();
 		});
@@ -56,8 +60,10 @@ public class NewBidFormController {
 		
 		if(userBidValue.compareTo(myItem.getMinimumAcceptableBidValue()) < 0) {
 			myWarningLabel.setVisible(true);
+			mySuccessfulLabel.setVisible(false);
 		} else {
 			myWarningLabel.setVisible(false);
+			mySuccessfulLabel.setVisible(true);
 			Bidder bidder = (Bidder) SessionController.getUser();
 			
 			NewBidRequest theNewBidRequest = new NewBidRequest(bidder, myAuction, myItem, userBidValue);
