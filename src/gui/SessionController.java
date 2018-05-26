@@ -100,6 +100,10 @@ public class SessionController {
 	public static AuctionManager getManager() {
 		return myManager;
 	}
+	
+	public static InformationContainerViewController getInformationContainerView() {
+		return infoViewController;
+	}
 
 	/**
 	 * Logs the given user into the system and initializes the appropraite informationContainer depending on the
@@ -218,7 +222,10 @@ public class SessionController {
 			@Override
 			public void handle(MouseEvent theEvent) {
 				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-				theController.showDatePicker(infoViewController, myManager);
+				
+				SubMenuFactory.createSubMenu(myUser, theController);
+				
+//				theController.showDatePicker(infoViewController, myManager);
 			}
 		});
 		theController.addMenuButton(viewAuctionsButton);
@@ -231,11 +238,9 @@ public class SessionController {
 		
 		// go to default screen
 		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-		theController.showDatePicker(infoViewController, myManager);
+		SubMenuFactory.createSubMenu(myUser, theController);
 		
-//		ScrollPane scrollPane = theController.getMyScrollPane();
-//		scrollPane.setContent(infoViewController);
-//		infoViewController.prefWidthProperty().bind(scrollPane.widthProperty().subtract(20));
+
 	}
 	
 
