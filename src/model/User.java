@@ -72,6 +72,8 @@ public class User extends Observable implements Serializable, Comparable<User> {
 	 */
 	public void addAuction(Auction theAuction) {
 		myAuctions.add(theAuction);
+		setChanged();
+		notifyObservers("hasAuction");
 	}
 	
 	/**

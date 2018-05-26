@@ -11,6 +11,7 @@ import javafx.scene.control.DateCell;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -21,6 +22,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import model.AuctionManager;
 import model.Auction;
 import model.User;
@@ -182,7 +184,14 @@ public class UserViewController implements Initializable {
 //		return mySubMenuBarContainer;
 //	}
 	
-	
+	public void refreshMenuBar() {
+		ObservableList<Node> buttons = myMenuButtonBar.getChildren();
+		
+		myMenuButtonBar.getChildren().clear();
+		for (Node e : buttons)
+			myMenuButtonBar.getChildren().add(e);
+		
+	}
 	
 
 		
