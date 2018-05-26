@@ -43,6 +43,8 @@ public class InformationContainerViewController extends Observable {
 	
 	private static String NEW_ITEM_REQUEST = "NewItemForm.fxml";
 	
+	private static String MODIFY_SYSTEM_VIEW = "ModifySystemView.fxml";
+	
 	/**
 	 * Constructor for the controller. It is called before the initialize() method.
 	 */
@@ -114,10 +116,13 @@ public class InformationContainerViewController extends Observable {
 			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-					if (auction.getAllItems().size() > 0) {
-						myActiveAuction = auction;
-						showItems(auction.getAllItems());
-					}
+				String auctionName = auction.getName();
+				SubMenuFactory.addMessage(auctionName);
+				if (auction.getAllItems().size() > 0) {
+					myActiveAuction = auction;
+					showItems(auction.getAllItems());
+					
+				}
 			});
 			
 			this.addNode(tile);
@@ -134,6 +139,7 @@ public class InformationContainerViewController extends Observable {
 			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 				showBids(auction.getAllBidsWithBidder((Bidder) SessionController.getUser()));
+
 			});
 			
 			this.addNode(tile);
@@ -190,6 +196,15 @@ public class InformationContainerViewController extends Observable {
 		FXMLLoader loader = 
 				new FXMLLoader(InformationContainerViewController
 						.class.getResource(NEW_AUCTION_REQUEST));
+		
+		this.clear();
+		this.addNode(loadForm(loader));
+	}
+	
+	public void showModifySystemView() {
+		FXMLLoader loader = 
+				new FXMLLoader(InformationContainerViewController
+						.class.getResource(MODIFY_SYSTEM_VIEW));
 		
 		this.clear();
 		this.addNode(loadForm(loader));

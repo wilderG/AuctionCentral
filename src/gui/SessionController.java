@@ -54,7 +54,7 @@ public class SessionController {
 	 */
 	private static InformationContainerViewController infoViewController;
 	
-	
+	private static UserViewController myUserViewController;
 	/**
 	 * The file name for the LoginView.
 	 */
@@ -101,6 +101,10 @@ public class SessionController {
 	public static AuctionManager getManager() {
 		return myManager;
 	}
+	
+	public static InformationContainerViewController getInformationContainerView() {
+		return infoViewController;
+	}
 
 	/**
 	 * Logs the given user into the system and initializes the appropraite informationContainer depending on the
@@ -111,16 +115,20 @@ public class SessionController {
 	 */
 	public static void userLogin(User theUser) {
 		myUser = theUser;
-		UserViewController userViewController = loadUserView();
-		infoViewController = loadInformationContainerView(userViewController);
+		myUserViewController = loadUserView();
+		infoViewController = loadInformationContainerView(myUserViewController);
 		if (theUser instanceof Bidder) {
-			loadBidderMenu(userViewController);
+			loadBidderMenu(myUserViewController);
 		} else if (theUser instanceof NonProfitContact) {
-			loadNonProfitMenu(userViewController);
+			loadNonProfitMenu(myUserViewController);
 		} else if (theUser instanceof Employee) {
-			loadEmployeeMenu(userViewController);
+			loadEmployeeMenu(myUserViewController);
 		}
 
+	}
+	
+	public static UserViewController getUserViewController() {
+	    return myUserViewController;
 	}
 
 	/**
@@ -162,6 +170,7 @@ public class SessionController {
 		// go to default screen
 		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 		addActiveCssClass(viewAuctionsButton);
+		SubMenuFactory.createSubMenu(myUser, theController);
 	}
 	
 	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> thePanes) {
@@ -197,26 +206,27 @@ public class SessionController {
 		buttons.add(requestNewItemButton);
 		buttons.add(logOutButton);
 		
-		
-		
-		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+		viewAuctionsButton.setOnMouseClicked(event -> {
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myUser.getMyAuctions());
 			addActiveCssClass(viewAuctionsButton);
-			
 		});
+		
+		
 		theController.addMenuButton(viewAuctionsButton);
 		
 		
-		requestNewAuctionButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+		requestNewAuctionButton.setOnMouseClicked(event -> {
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showNewAuctionRequest();
 			addActiveCssClass(requestNewAuctionButton);
 		});
+		
+
 		theController.addMenuButton(requestNewAuctionButton);
+		SubMenuFactory.createSubMenu(myUser, theController);
 		
-		
-		requestNewItemButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+		requestNewAuctionButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
 			if (auction != null && SessionController.getManager().isNewItemRequestAllowed(auction)) {
 				removeActiveClassFromButtons(buttons);
@@ -224,6 +234,8 @@ public class SessionController {
 				addActiveCssClass(requestNewItemButton);
 			}
 		});
+		
+		
 		theController.addMenuButton(requestNewItemButton);
 		
 		
@@ -245,15 +257,29 @@ public class SessionController {
 	 * @param theController associated with the UserView where the employee menus will be added.
 	 */
 	private static void loadEmployeeMenu(final UserViewController theController) {
+		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent theEvent) {
-				infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-				theController.showDatePicker(infoViewController, myManager);
-			}
+		AnchorPane modifySystemButton = MenuButton.newMenuButton("Modify System");
+		buttons.add(viewAuctionsButton);
+		buttons.add(modifySystemButton);
+		viewAuctionsButton.setOnMouseClicked(event -> {
+			infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
+			SubMenuFactory.createSubMenu(myUser, theController);
+			removeActiveClassFromButtons(buttons);
+			addActiveCssClass(viewAuctionsButton);
 		});
+		
+		
+		modifySystemButton.setOnMouseClicked(event -> {
+			
+			removeActiveClassFromButtons(buttons);
+			infoViewController.showModifySystemView();
+			addActiveCssClass(viewAuctionsButton);
+		});
+		
+		
 		theController.addMenuButton(viewAuctionsButton);
+		theController.addMenuButton(modifySystemButton);
 		
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
@@ -263,11 +289,9 @@ public class SessionController {
 		
 		// go to default screen
 		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
-		theController.showDatePicker(infoViewController, myManager);
-		
-//		ScrollPane scrollPane = theController.getMyScrollPane();
-//		scrollPane.setContent(infoViewController);
-//		infoViewController.prefWidthProperty().bind(scrollPane.widthProperty().subtract(20));
+		SubMenuFactory.createSubMenu(myUser, theController);
+		addActiveCssClass(viewAuctionsButton);
+
 	}
 	
 

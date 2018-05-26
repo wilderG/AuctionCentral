@@ -8,17 +8,22 @@
 
 <AnchorPane stylesheets="@form.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.NewItemFormController">
    <children>
-      <Pane id="main" layoutX="20.0" prefHeight="575.0" prefWidth="625.0">
+      <Pane id="main" prefHeight="575.0" prefWidth="645.0">
          <children>
             <Label layoutX="175.0" layoutY="14.0" text="Add Item to this Auction:">
                <font>
                   <Font size="24.0" />
                </font>
             </Label>
-            <TextField fx:id="myItemDescription" layoutX="208.0" layoutY="92.0" promptText="Item Name" />
+            <TextField fx:id="myItemDescription" layoutX="208.0" layoutY="129.0" promptText="Item Name" />
             <TextField fx:id="myMinimumBid" layoutX="208.0" layoutY="181.0" promptText="Minimum bid" />
             <Button fx:id="mySubmitButton" layoutX="276.0" layoutY="302.0" mnemonicParsing="false" text="Submit" />
-            <Label fx:id="myErrorLabel" alignment="CENTER" layoutX="60.0" layoutY="248.0" prefHeight="22.0" prefWidth="511.0" text="Label" textAlignment="CENTER" textFill="#eb1010" />
+            <Label fx:id="myErrorLabel" alignment="CENTER" layoutX="60.0" layoutY="266.0" prefHeight="22.0" prefWidth="511.0" text="Label" textAlignment="CENTER" textFill="#eb1010" />
+            <Label fx:id="mySuccessLabel" alignment="BOTTOM_CENTER" layoutX="284.0" layoutY="229.0" text="Label" textAlignment="CENTER" textFill="#038a3b">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>
