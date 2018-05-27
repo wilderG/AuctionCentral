@@ -1,30 +1,23 @@
 package gui;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
-
-import javax.swing.text.View;
-
-import org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Callback;
 import model.Auction;
 import model.AuctionManager;
+import model.Bid;
 import model.Bidder;
-import model.Employee;
-import model.NonProfitContact;
 import model.User;
 
 public class SubMenuFactory {
@@ -79,22 +72,7 @@ public class SubMenuFactory {
 		
 	}
 	
-	private static void addConfigurationsButton() {
-		// TODO Auto-generated method stub
-		ImageView configButton = new ImageView();
-		configButton.setImage(new Image("/icons/settings.png"));
-		
-		configButton.setOnMouseEntered(EventHandler -> {
-			configButton.setImage(new Image("/icons/settings-hover.png"));
-		});
-		
-		configButton.setOnMouseExited(event -> {
-			configButton.setImage(new Image("/icons/settings.png"));
-		});
-		
-		mySubMenuContainer.getChildren().add(configButton);
-	}
-
+	
 	public static void showBidderAuctionSubMenu() {
 		mySubMenu.getChildren().clear();
 		Button viewAllAuctionsButton = new Button("View All Auctions");
@@ -123,8 +101,24 @@ public class SubMenuFactory {
 		});
 	}
 	
+	
+	
 	public static void showBidderBidSubMenu() {
 		mySubMenu.getChildren().clear();
+		
+		Button viewAllBids = new Button("View All Items");
+		
+		viewAllBids.setOnMouseClicked(event -> {
+			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
+			Bidder user = (Bidder) SessionController.getUser();
+			ArrayList<Bid> allBids = new ArrayList<>();
+			for (Auction auction: user.getMyAuctions()) {
+				allBids.addAll(auction.getAllBidsWithBidder(user));
+			}
+			infoViewController.showBids(allBids);
+		});
+		
+		mySubMenu.getChildren().add(viewAllBids);
 	}
 	
 	public static void showNonProfitAuctionViewSubMenu() {
