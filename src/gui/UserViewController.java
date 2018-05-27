@@ -2,29 +2,19 @@ package gui;
 
 
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
-import javafx.util.Callback;
-import javafx.scene.control.DateCell;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import model.AuctionManager;
-import model.Auction;
 import model.User;
 
 /**

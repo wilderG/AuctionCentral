@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Observable;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -37,16 +36,27 @@ public class InformationContainerViewController extends Observable {
 	 * new forms for user input.
 	 */
 	private Auction myActiveAuction;
-		
+	
+	/**
+	 * File path for a new bid request form.
+	 */
 	private static String NEW_BID_REQUEST = "NewBidForm.fxml";
 	
+	/**
+	 * File path for a new auction request form.
+	 */
 	private static String NEW_AUCTION_REQUEST = "NewAuctionForm.fxml";
 	
+	/**
+	 * File path for a new item request form.
+	 */
 	private static String NEW_ITEM_REQUEST = "NewItemForm.fxml";
 	
+	/**
+	 * File path for a modify system view.
+	 */
 	private static String MODIFY_SYSTEM_VIEW = "ModifySystemView.fxml";
 	
-	private static String HEADER_PANE = "HeaderPane.fxml";
 	
 	/**
 	 * Constructor for the controller. It is called before the initialize() method.
@@ -65,6 +75,7 @@ public class InformationContainerViewController extends Observable {
 
 	/**
 	 * Adds the given node to the containers flow pane.
+	 * 
 	 * Pre-Condition: theNode != null
 	 * Post-Condition: The given node will be added to the nodes flow pane.
 	 * @param theNode that will be added to the InformationContainerControllers flow pane.
@@ -75,6 +86,7 @@ public class InformationContainerViewController extends Observable {
 	
 	/**
 	 * Removes the given node to the containers flow pane.
+	 * 
 	 * Pre-Condition: theNode != null
 	 * Post-Condition: The given node will be removed from the flow pane.
 	 * @param theNode that will be removed from the InformationContainerControllers flow pane.
@@ -83,11 +95,21 @@ public class InformationContainerViewController extends Observable {
 		myFlowPane.getChildren().remove(theNode);
 	}
 
+	/**
+	 * Clears all nodes in my FlowPane.
+	 * Pre-Condition: myFlowPane != null
+	 * Post-Condition: All noded in myFlowPane will be removed
+	 */
 	private void clear() {
 		myFlowPane.getChildren().clear();
 	}
 	
-	
+	/**
+	 * Using theItems given creates ItemTiles attaching an appropriate event handler for the tiles and adds them to
+	 * myFlowPane
+	 * Post-Condition: An ItemTile will be created for each AuctionItem in theItems and will be added to myFlowPane
+	 * @param theItems who for a new item tile will be created and added to the informationViewContainer.
+	 */
 	public void showItems(final Collection<AuctionItem> theItems) {
 		this.clear();
 		
@@ -109,6 +131,7 @@ public class InformationContainerViewController extends Observable {
 	
 	/**
 	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
+	 * 
 	 * Pre-Condition: theController != null
 	 * Post-Condition: An autionTile will be created for each auction associated with the user and added to
 	 * the flowPane of the InformationContainerView
@@ -137,6 +160,15 @@ public class InformationContainerViewController extends Observable {
 		
 	}
 	
+	/**
+	 * Loads all the auctions for the given collection into the informationContainerView by creating a new AuctionTile
+	 * for each auction.
+	 * 
+	 * Pre-Condition: theController != null
+	 * Post-Condition: An autionTile will be created for each auction and added to
+	 * the flowPane of the InformationContainerView
+	 * @param theAuctions containing all the Auction objects for an auctionTile will be created. 
+	 */
 	public void showAuctionBids(final Collection<Auction> theAuctions) {
 		this.clear();
 		for (Auction auction: theAuctions) {
@@ -150,7 +182,15 @@ public class InformationContainerViewController extends Observable {
 		}
 	}
 	
-	
+	/**
+	 * Loads all the bids in the given collection onto the systems InformationContainerView.
+	 * 
+	 * Pre-Condition: theController != null
+	 * Post-Condition: A bid tile will be created for each bid in the given collection and added to
+	 * the flowPane of the InformationContainerView
+	 * @param theBids containing all the bids for which a bid tile will be created and added to the 
+	 * informationContainerView.
+	 */
 	public void showBids(final Collection<Bid> theBids) {
 		this.clear();
 		for (Bid bid: theBids) {
@@ -163,6 +203,15 @@ public class InformationContainerViewController extends Observable {
 		}
 	}
 
+	/**
+	 * Loads all the auctions in the system into the informationContainerView. 
+	 * 
+	 * Pre-Condition: theController != null
+	 * Post-Condition: An autionTile will be created for each auction in the system and added to
+	 * the flowPane of the InformationContainerView.
+	 * @param theAuctions containing all auction object for which an admin Auction tile will be created.
+	 * @param theManager currently being used by the system.
+	 */
 	public void showAdminAuctions(Collection<Auction> theAuctions, AuctionManager theManager) {
 		this.clear();
 		for (Auction auction : theAuctions) {

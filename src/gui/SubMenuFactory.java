@@ -10,8 +10,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.util.Callback;
 import model.Auction;
@@ -20,6 +18,11 @@ import model.Bid;
 import model.Bidder;
 import model.User;
 
+/**
+ * Factory used to add controls to the sub menu.
+ * @author Jim Rosales
+ *
+ */
 public class SubMenuFactory {
 	
 	/**
@@ -52,27 +55,41 @@ public class SubMenuFactory {
 	 */
 	private static FlowPane mySubMenu;
 	
-	private static FlowPane mySubMenuContainer;
-	
+	/**
+	 * Label used to present a message to the user in the subMenu.
+	 */
 	private static Label myMessageLabel;
 
-
-	private static final String SUB_MENU_VIEW = "SubMenuView.fxml";
 	
+	/**
+	 * Initializes and clears the current subMenu used by theUserView.
+	 * 
+	 * Pre-Condition: theUserView != null
+	 * Post-Condition: The current subMenu used by the view will be cleared.
+	 * @param theUser The user currently logged into the system.
+	 * @param theUserView The current view being presented to the user.
+	 */
 	public static void createSubMenu(User theUser, UserViewController theUserView) {
 		mySubMenu = theUserView.getMySubMenuBar();
-//		mySubMenuContainer = theUserView.getMySubMenuBarContainer();
 		mySubMenu.getChildren().clear();
 	}
 	
+	/**
+	 * Shows and initializes a subMenu for an admin user.
+	 * 
+	 * Post-Condition: All the sub controls needed for an admin user will be added to the subMenu.
+	 */
 	public static void showAdminSubMenu() {
 		mySubMenu.getChildren().clear();
 		showDatePicker();
-
-		
 	}
 	
-	
+	/**
+	 * Shows and initializes a subMenu for a bidder user when in the view Auctions screen.
+	 * 
+	 * Post-Condition: All the sub controls needed for a bidder user will be added to the subMenu. Any previous controls
+	 * before this operation found in the subMenu will be cleared beforehand.
+	 */
 	public static void showBidderAuctionSubMenu() {
 		mySubMenu.getChildren().clear();
 		Button viewAllAuctionsButton = new Button("View All Auctions");
@@ -102,7 +119,12 @@ public class SubMenuFactory {
 	}
 	
 	
-	
+	/**
+	 * Shows and initializes a subMenu for a bidder user when in the view Bid screen.
+	 * 
+	 * Post-Condition: All the sub controls needed for a bidder user will be added to the subMenu. Any previous controls
+	 * before this operation found in the subMenu will be cleared beforehand.
+	 */
 	public static void showBidderBidSubMenu() {
 		mySubMenu.getChildren().clear();
 		
@@ -121,6 +143,13 @@ public class SubMenuFactory {
 		mySubMenu.getChildren().add(viewAllBids);
 	}
 	
+	
+	/**
+	 * Shows and initializes a subMenu for a non profit user when in the view Auctions screen.
+	 * 
+	 * Post-Condition: All the sub controls needed for a bidder user will be added to the subMenu. Any previous controls
+	 * before this operation found in the subMenu will be cleared beforehand.
+	 */
 	public static void showNonProfitAuctionViewSubMenu() {
 		mySubMenu.getChildren().clear();
 		
@@ -174,11 +203,7 @@ public class SubMenuFactory {
 	}
 	
 	/**
-	 * 
-	 * Pre-Condition: 
-	 * Post-Condition:
-	 * @param infoViewController
-	 * @param myManager
+	 * Initializes all datePicker object that are used by the admin SubMenu.
 	 */
 	public static void showDatePicker() {
 		initializeDateObjects();
@@ -196,6 +221,7 @@ public class SubMenuFactory {
 	/**
 	 * By default the startDate picker is in focus when the view is loaded.
 	 * This method removed focus from the myStartDatePicker and places it on myGridPane
+	 * 
 	 * Pre-Condition: myGridPane != null & myStartRangeDatePicker != null
 	 * Post-Condition: Focused will be removed from myStartDatePicker on view load.
 	 */
@@ -214,6 +240,7 @@ public class SubMenuFactory {
 	/**
 	 * Retrieves auctions within myStartRangeDate and myEndRangeDate if possible, and then using said auctions
 	 * displays then using theInfoViewController.
+	 * 
 	 * Post-Condition: theInfoViewContainer associated with theInfoViewController will display auctions within
 	 * a certain date range if possible
 	 */
@@ -228,6 +255,10 @@ public class SubMenuFactory {
 	    }
 	}
 	
+	/**
+	 * Initializes all Date objects needed to capture both the start and end date for a range that can be chosen by a
+	 * user.
+	 */
 	private static void initializeDateObjects() {
 		myStartRangeDatePicker = new DatePicker();
 		myStartRangeDatePicker.setPromptText("Start Date");
@@ -248,6 +279,7 @@ public class SubMenuFactory {
 	/**
 	 * After a date has been chosen using the myStartRangeDatePicker, disables and dates in the myEndRangeDatePicker
 	 * that might conflict with the date chosen in myStartRangeDatePicker.
+	 * 
 	 * Pre-Condition: myStartRangeDatePicker != null
 	 * Post-Condition: Dates on myEndRangeDatePicker will be disabled if they are before the value chosen by
 	 * myStartRangeDatePicker.
@@ -278,6 +310,7 @@ public class SubMenuFactory {
 	/**
 	 * After a date has been chosen using the myEndRangeDatePicker, disables and dates in the myStartRangeDatePicker
 	 * that might conflict with the date chosen in myEndRangeDatePicker.
+	 * 
 	 * Pre-Condition: myEndRangeDatePicker != null
 	 * Post-Condition: Dates on myStartRangeDatePicker will be disabled if they are after the value chosen by
 	 * myEndRangeDatePicker.
@@ -306,6 +339,7 @@ public class SubMenuFactory {
 	
 	/**
 	 * Adds a label with a message that will be presented to the user in the subMenu
+	 * 
 	 * Post-Condition: A label with the given message will be added to the subMenu
 	 * @param theMessage that will be used to create a label
 	 */

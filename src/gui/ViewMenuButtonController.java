@@ -8,11 +8,23 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * Controller used for the ViewMenuButton.fxml. Controller allows modifications to be made to the button 
+ * programmatically.
+ * @author Jared Malone
+ *
+ */
 public class ViewMenuButtonController implements Observer {
 	
+	/*
+	 * The title used by the ViewMenuButton.
+	 */
 	@FXML
 	private Label myTitle;
 	
+	/**
+	 * The pane that will represent the button.
+	 */
 	@FXML
 	private AnchorPane myPane;
 
@@ -33,6 +45,7 @@ public class ViewMenuButtonController implements Observer {
 		myTitle.setText(theText);
 		myTitle.setAlignment(Pos.CENTER);
 	}
+	
 	
 	public void setVisible(boolean theFlag) {
 		myPane.setVisible(theFlag);

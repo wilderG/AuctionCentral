@@ -8,28 +8,57 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.util.Callback;
-import model.Auction;
 import model.AuctionCalendar;
-import model.AuctionItem;
 import model.AuctionManager;
 import model.NewAuctionRequest;
 import model.NonProfitContact;
 
+/**
+ * Controller for the new Auction Form that is used y a nonprofit contact to submit a new auction.
+ * @author Wilder Garcia
+ * @author Steven Golob
+ *
+ */
 public class NewAuctionFormController {
 
-	private Auction myAuction;
-	private AuctionItem myItem;
+		
+	/**
+	 * The users NewAuctionRequest.
+	 */
     private NewAuctionRequest myForm;
+    
+    /**
+     * The user who is logged into the system and submitting a new auction request form.
+     */
     private NonProfitContact myUser; 
 
+    /**
+     * Date Picker that allows a user to choose a valid date for the new auction they are requesting.
+     */
 	@FXML
 	private DatePicker myDatePicker;
+	
+	/**
+	 * Button used to submit the users new auction request.
+	 */
 	@FXML
 	private Button mySubmitButton;
+	
+	/**
+	 * Local Date used to capture the chosen date by the user for the new auction.
+	 */
 	@FXML
     private LocalDate myDate;
+	
+	/**
+	 * Label that is used to present an error message to the user.
+	 */
 	@FXML
     private Label myErrorLableMsg;
+	
+	/**
+	 * Label that is used to present a success message to the user.
+	 */
 	@FXML
 	private Label mySucessMsg;
 	
@@ -76,13 +105,10 @@ public class NewAuctionFormController {
         });     
     }
 
-	public void setAuction(final Auction theAuction) {
-		myAuction = theAuction;
-	}
 
-	public void setItem(final AuctionItem theItem) {
-		myItem = theItem;
-	}
+	/**
+	 * Submits the users new auction request.
+	 */
 	@FXML
 	public void SubmitNewAuctionRequestEvents() {
 	
