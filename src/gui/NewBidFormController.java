@@ -58,7 +58,7 @@ public class NewBidFormController {
 	@FXML
 	public void makeBid() {
 		String userInput = myBidLabel.getText();
-		int bidValue = Integer.valueOf(userInput);	
+		double bidValue = Double.valueOf(userInput);	
 		try {
 		BigDecimal userBidValue = new BigDecimal(bidValue);
 		
