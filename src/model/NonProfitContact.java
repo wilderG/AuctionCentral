@@ -105,16 +105,25 @@ public class NonProfitContact extends User {
         return mostRecentDate;
     }
     
+    public LocalDate getSoonestPossibleNewAuctionDate() {
+        LocalDate soonestDate = getLatestDate()
+                .plusMonths(AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF);
+        if (LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT).isAfter(soonestDate)) {
+            soonestDate = LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT);
+        }
+        return soonestDate;
+    }
+    
     public Auction getFutureAuction() {
-    	Collection<Auction> existingAuctions = super.getMyAuctions();
-    	Auction futureAuction = null;
-    	if (!existingAuctions.isEmpty()) {
-    		for (Auction e : existingAuctions) {
-    			if (e.getDate().isAfter(LocalDate.now())) {
-    				futureAuction = e;
-    			}
-    		}
-    	}
+        	Collection<Auction> existingAuctions = super.getMyAuctions();
+        	Auction futureAuction = null;
+        	if (!existingAuctions.isEmpty()) {
+        		for (Auction e : existingAuctions) {
+        			if (e.getDate().isAfter(LocalDate.now())) {
+        				futureAuction = e;
+        			}
+        		}
+        	}
     	return futureAuction;
     }
 

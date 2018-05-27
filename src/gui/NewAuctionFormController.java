@@ -79,6 +79,7 @@ public class NewAuctionFormController {
 		disableOutOfRangeDaysOnDatePicker();
 	}
 	
+	
     /**
      * Disables possibility of choosing dates out of eligible range from current date.
      * 
@@ -93,9 +94,10 @@ public class NewAuctionFormController {
                 return new DateCell() {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
+                        myUser = (NonProfitContact)SessionController.getUser();
                         super.updateItem(item, empty);
                         if (item.isAfter(LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))
-                            || item.isBefore(LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT))) {
+                            || item.isBefore(myUser.getSoonestPossibleNewAuctionDate())) {
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
