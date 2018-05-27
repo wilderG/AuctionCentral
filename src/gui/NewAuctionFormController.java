@@ -30,12 +30,16 @@ public class NewAuctionFormController {
     private LocalDate myDate;
 	@FXML
     private Label myErrorLableMsg;
+	@FXML
+	private Label mySucessMsg;
+	
 
 	@FXML
 	private void initialize() {
 		mySubmitButton.setOnMouseClicked(event -> {
 			SubmitNewAuctionRequestEvents();
 		});
+		mySucessMsg.setVisible(false);
 		mySubmitButton.setDisable(true);
 		myErrorLableMsg.setVisible(false);
 		myDatePicker.setOnAction(event -> {
@@ -87,6 +91,7 @@ public class NewAuctionFormController {
 			myForm = new NewAuctionRequest(myUser, myDate);
 			AuctionManager manager = SessionController.getManager();
 			manager.processNewAuctionRequest(myForm);
+			mySucessMsg.setVisible(true);
 		
 		} catch(Exception theEvent) {
 			myErrorLableMsg.setVisible(true);
