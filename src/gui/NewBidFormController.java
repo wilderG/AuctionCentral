@@ -40,9 +40,9 @@ public class NewBidFormController {
 	private Button mySubmitButton;
 	
 	
-	
 	@FXML
 	private void initialize() {
+		
 		myWarningLabel.setVisible(false);
 		mySuccessfulLabel.setVisible(false);
 		mySubmitButton.setOnMouseClicked(event -> {
