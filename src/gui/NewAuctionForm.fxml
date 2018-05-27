@@ -20,6 +20,7 @@
             <Label layoutX="77.0" layoutY="95.0" text="Select date:" />
             <DatePicker fx:id="myDatePicker" layoutX="188.0" layoutY="92.0" />
             <Label fx:id="myErrorLableMsg" layoutX="159.0" layoutY="203.0" text="Date is out of the allowed range" textFill="#ff0000bd" />
+            <Label fx:id="mySucessMsg" layoutX="140.0" layoutY="323.0" text="New Auction  sucessfully been added." textFill="#33da0d" />
          </children>
       </Pane>
    </children>
