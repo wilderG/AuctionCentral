@@ -243,4 +243,7 @@ public class AuctionManager implements Manager {
         storage.writeData();
 	}
 	
+	public AuctionDate getAuctionDate(LocalDate theDate) {
+	    return myCalendar.getAuctionDate(theDate);
+	}
 }

@@ -9,6 +9,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.util.Callback;
 import model.AuctionCalendar;
+import model.AuctionDate;
 import model.AuctionManager;
 import model.NewAuctionRequest;
 import model.NonProfitContact;
@@ -95,9 +96,11 @@ public class NewAuctionFormController {
                     @Override
                     public void updateItem(LocalDate item, boolean empty) {
                         myUser = (NonProfitContact)SessionController.getUser();
+                        AuctionDate auctionDate = SessionController.getManager().getAuctionDate(item);
                         super.updateItem(item, empty);
                         if (item.isAfter(LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))
-                            || item.isBefore(myUser.getSoonestPossibleNewAuctionDate())) {
+                            || item.isBefore(myUser.getSoonestPossibleNewAuctionDate())
+                            || auctionDate.isAtCapacity()) {
                             setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
