@@ -39,7 +39,7 @@
             <Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
          </opaqueInsets>
          <children>
-            <ImageView fitHeight="626.0" fitWidth="892.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
+            <ImageView fitHeight="663.0" fitWidth="889.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
                   <Image url="@logo1.png" />
                </image>
@@ -50,9 +50,9 @@
                </font>
             </Label>
             <Label text="User Name:" textFill="#030303" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="usernameField" onAction="#onEnter" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <Button fx:id="loginButton" mnemonicParsing="false" text="Login" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
-            <Text fx:id="actionTarget" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <TextField fx:id="usernameField" onAction="#onEnter" prefHeight="42.0" prefWidth="288.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Button fx:id="loginButton" mnemonicParsing="false" stylesheets="@logging.css" text="Login" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3" GridPane.valignment="TOP" />
+            <Text fx:id="actionTarget" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="152.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
          </children>
       </GridPane>
    </children>
