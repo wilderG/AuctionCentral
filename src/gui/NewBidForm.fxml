@@ -15,7 +15,7 @@
    <children>
       <Pane id="main" prefHeight="575.0" prefWidth="645.0">
          <children>
-            <Label alignment="CENTER" prefHeight="75.0" prefWidth="192.0" text="New bid">
+            <Label alignment="CENTER" layoutX="155.0" prefHeight="75.0" prefWidth="192.0" text="New bid">
               <font>
                  <Font name="System Bold Italic" size="33.0" />
               </font>
