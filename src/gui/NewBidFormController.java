@@ -71,7 +71,7 @@ public class NewBidFormController {
 			Bidder bidder = (Bidder) SessionController.getUser();
 			
 			NewBidRequest theNewBidRequest = new NewBidRequest(bidder, myAuction, myItem, userBidValue);
-			AuctionManager theAuctionManager = new AuctionManager();
+			AuctionManager theAuctionManager = SessionController.getManager();
 			theAuctionManager.processNewBid(theNewBidRequest);
 		}
 		} catch (Exception e) {
