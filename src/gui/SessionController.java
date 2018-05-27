@@ -205,7 +205,6 @@ public class SessionController {
 		buttons.add(logOutButton);
 		
 		viewAuctionsButton.setOnMouseClicked(event -> {
-			SubMenuFactory.showNonProfitAuctionViewSubMenu();
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myUser.getMyAuctions());
 			addActiveCssClass(viewAuctionsButton);
@@ -246,7 +245,6 @@ public class SessionController {
 		// go to default screen
 		infoViewController.showAuctions(myUser.getMyAuctions());
 		addActiveCssClass(viewAuctionsButton);
-		SubMenuFactory.showNonProfitAuctionViewSubMenu();
 	}
 	
 	/**
