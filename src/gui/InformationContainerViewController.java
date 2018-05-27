@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Observable;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -44,6 +45,8 @@ public class InformationContainerViewController extends Observable {
 	private static String NEW_ITEM_REQUEST = "NewItemForm.fxml";
 	
 	private static String MODIFY_SYSTEM_VIEW = "ModifySystemView.fxml";
+	
+	private static String HEADER_PANE = "HeaderPane.fxml";
 	
 	/**
 	 * Constructor for the controller. It is called before the initialize() method.
@@ -87,6 +90,7 @@ public class InformationContainerViewController extends Observable {
 	
 	public void showItems(final Collection<AuctionItem> theItems) {
 		this.clear();
+		
 		for (AuctionItem item : theItems) {
 			
 			AnchorPane tile = TileFactory.createItemTile(item);
@@ -102,6 +106,7 @@ public class InformationContainerViewController extends Observable {
 		}
 	}
 	
+	
 	/**
 	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
 	 * Pre-Condition: theController != null
@@ -112,6 +117,7 @@ public class InformationContainerViewController extends Observable {
 	 */
 	public void showAuctions(final Collection<Auction> theAuctions) {
 		this.clear();
+		
 		for (Auction auction: theAuctions) {
 			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			
@@ -127,9 +133,7 @@ public class InformationContainerViewController extends Observable {
 			
 			this.addNode(tile);
 		}
-		System.out.println("notify " + countObservers());
-		setChanged();
-		notifyObservers("showAuctions");
+
 		
 	}
 	
@@ -146,10 +150,15 @@ public class InformationContainerViewController extends Observable {
 		}
 	}
 	
+	
 	public void showBids(final Collection<Bid> theBids) {
 		this.clear();
 		for (Bid bid: theBids) {
 			AnchorPane tile = TileFactory.createBidTile(bid);
+			// Override the default onMouseEntered event (currently we don't want one)
+			tile.setOnMouseEntered(event -> {
+				
+			});
 			this.addNode(tile);
 		}
 	}

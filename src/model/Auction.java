@@ -128,7 +128,7 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	public boolean isAllowingNewBid(final Bidder theBidder) {
 		boolean result = true;
 		
-		if (myDate.equals(LocalDate.now())) {
+		if (!myDate.isAfter(LocalDate.now())) {
 			result = false;
 		} else if (myBids.containsKey(theBidder)) {
 			int bidCount = myBids.get(theBidder).size(); 
