@@ -101,6 +101,7 @@ public class AuctionCalendar implements Serializable {
      * @return whether or not the schedule is at capacity yet
      */
     public boolean isAllowingNewAuction() {
+        updateDate();
         return myNumberOfFutureAuctions < myMaximumUpcomingAuctions;
     }
     
@@ -150,7 +151,7 @@ public class AuctionCalendar implements Serializable {
     		myCurrentDate = LocalDate.now();
         myNumberOfFutureAuctions = 0;
         for (AuctionDate date : myDates) {
-            if (date.compareToToday() >= 0)
+            if (date.getDate().isAfter(LocalDate.now()))
                 myNumberOfFutureAuctions += date.getNumberOfAuctions();
         }
     }

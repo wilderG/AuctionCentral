@@ -173,7 +173,7 @@ public class Deliverable3DemoData {
 		NonProfitContact nonProfit12 = new NonProfitContact("nonprof12",
 				"The Fund for Birds");
 		NonProfitContact nonProfit13 = new NonProfitContact("nonprof13",
-				"UNICEF");
+				"The Fund for Fairytale creatures");
 		NonProfitContact nonProfit14 = new NonProfitContact("nonprof14",
 				"Human Rights Watch");
 		NonProfitContact nonProfit15 = new NonProfitContact("nonprof15",
@@ -186,6 +186,10 @@ public class Deliverable3DemoData {
                 "The Fly Fund");
         NonProfitContact nonProfit19 = new NonProfitContact("nonprof19",
                 "The Fund for Flies");
+        NonProfitContact nonProfit20 = new NonProfitContact("nonprof20",
+                "The Fund for Funds");
+        NonProfitContact nonProfit21 = new NonProfitContact("nonprof21",
+                "The Bologna Fund");
 
 		Bidder bidder1 = new Bidder("bidder1", "Ivan Ooze");
 		Bidder bidder2 = new Bidder("bidder2", "Biddy B. Bidderson");
@@ -374,15 +378,15 @@ public class Deliverable3DemoData {
 		// Make Auctions
 		Auction auction0 = new Auction(LocalDate.of(2018, 4, 10),
 				nonProfit1);
-		Auction auction1 = new Auction(LocalDate.of(2017, 6, 15),
+		Auction auction1 = new Auction(LocalDate.of(2017, 6, 17),
 				nonProfit2, auction1Items, bidSet1);
 		Auction auction2 = new Auction(LocalDate.of(2018, 5, 8),
 				nonProfit3, auction2Items, bidSet2);
 		Auction auction3 = new Auction(LocalDate.of(2018, 5, 9),
 				nonProfit1, auction3Items, bidSet3);
-		Auction auction4 = new Auction(LocalDate.of(2018, 6, 11),
+		Auction auction4 = new Auction(LocalDate.of(2018, 6, 20),
 				nonProfit4, auction4Items, bidSet4);
-		Auction auction5 = new Auction(LocalDate.of(2018, 6, 11),
+		Auction auction5 = new Auction(LocalDate.of(2018, 6, 20),
 				nonProfit5, auction5Items, bidSet5);
 		Auction auction6 = new Auction(LocalDate.of(2018, 6, 12),
 				nonProfit6, auction6Items, bidSet6);
@@ -498,6 +502,10 @@ public class Deliverable3DemoData {
 		storage.storeUser(nonProfit15);
 		storage.storeUser(nonProfit16);
 		storage.storeUser(nonProfit17);
+        storage.storeUser(nonProfit18);
+        storage.storeUser(nonProfit19);
+        storage.storeUser(nonProfit20);
+        storage.storeUser(nonProfit21);
 		
 		storage.setCalendar(calendar);
 	}
