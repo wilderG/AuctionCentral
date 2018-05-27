@@ -9,10 +9,8 @@ import javafx.scene.control.TextField;
 import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
-import model.Bid;
 import model.Bidder;
 import model.NewBidRequest;
-import model.User;
 
 
 /**
@@ -23,26 +21,43 @@ import model.User;
  */
 public class NewBidFormController {
 
+	/**
+	 * The auction where the new bid will be submitted to.
+	 */
 	private Auction myAuction;
 	
+	/**
+	 * The item being bid on.
+	 */
 	private AuctionItem myItem;
 	
+	/**
+	 * Label used to present a warning label to the user.
+	 */
 	@FXML
 	private Label myWarningLabel;
 	
+	/**
+	 * Label used to present a success label to the user.
+	 */
 	@FXML
 	private Label mySuccessfulLabel;
 	
+	/**
+	 * TextField used to allow a user to enter their bid for the item.
+	 */
 	@FXML
 	private TextField myBidLabel;
 	
+	/**
+	 * Button used to submit the users bid for an item.
+	 */
 	@FXML
 	private Button mySubmitButton;
 	
 	
 	@FXML
 	private void initialize() {
-		
 		myWarningLabel.setVisible(false);
 		mySuccessfulLabel.setVisible(false);
 		mySubmitButton.setOnMouseClicked(event -> {
@@ -50,11 +65,26 @@ public class NewBidFormController {
 		});
 	}
 	
+	/**
+	 * Method called when a user is focused on the myBidLabel and presses the enter key. This allows a user to submit
+	 * their new bid request without needing to press the submit button.
+	 * 
+	 * Post-Condition: The users bid will be processed.
+	 */
 	@FXML
 	private void onEnter() {
 		makeBid();
 	}
 	
+	/**
+	 * Method processes the value found in the myBidLabel to create a NewBidRequest for the user on a particular item.
+	 * If the given value given by the user is not value (i.e not a double) an error message will be presented to the
+	 * user. This error message will also be presented if their bid is not above the minimum bid value for the item.
+	 * Otherwise if a valid value is given in the text field then a new bid will be submitted to the system.
+	 * 
+	 * Pre-Condition: 
+	 * Post-Condition:
+	 */
 	@FXML
 	public void makeBid() {
 		String userInput = myBidLabel.getText();
@@ -88,8 +118,5 @@ public class NewBidFormController {
 		myItem = theItem;
 	}
 	
-	// we need code here to create a NewBidRequest and send it to manager.
-	// if it throws an exception then display an error so the user can try
-	// again.
 	
 }

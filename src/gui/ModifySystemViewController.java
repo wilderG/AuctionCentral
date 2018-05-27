@@ -9,17 +9,34 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.AuctionManager;
 
+/**
+ * Class represents a view which contains all the modifications an admin user can make to the system.
+ * @author Jim Rosales
+ *
+ */
 public class ModifySystemViewController {
 	
+	/**
+	 * TextField which allows a user to enter the new max capacity for the system for upcoming future auctions.
+	 */
 	@FXML
 	private TextField myChangeMaxUpcomingAuctionsField;
 	
+	/**
+	 * Submit button that allows the user to submit their desired change.
+	 */
 	@FXML
 	private Button mySubmitButton;
 	
+	/**
+	 * A generic label used to deliver success or error messages to the user.
+	 */
 	@FXML
 	private Label myMessageLabel;
 	
+	/**
+	 * Method that is called when the view is constructed.
+	 */
 	@FXML
 	private void initialize() {
 		AuctionManager manager = SessionController.getManager();
@@ -46,12 +63,24 @@ public class ModifySystemViewController {
 		
 	}
 	
+	/**
+	 * Method that is called when a user is focused on the myChangeMaxUpcomingAuctions field and they press enter. This
+	 * can be used instead of pressing the submit button to process their request.
+	 * Post-Condition: The value in the myChangeMaxUpcomingAuctions will be processed and if a valid input is given
+	 * will be applied.
+	 */
 	@FXML
 	private void onEnter() {
-		System.out.println("On enter called");
 		processNewMaxCapacity();
 	}
 	
+	/**
+	 * Processes the text in the myChangeMaxUpcomingAuctionsField.
+	 * Pre-Condition: myChangeMaxUpcomingAuctionsField != null
+	 * Post-Condition: If an valid value is found in the text field the max capacity for the system will be applied.
+	 * Otherwise the max capacity won't be modified and a message to the user will be given notifying them of thier
+	 * invalid input.
+	 */
 	private void processNewMaxCapacity() {
 		mySubmitButton.setVisible(false);
 		try {

@@ -2,9 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.EventListener;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -48,7 +46,7 @@ public class SessionController {
 	 * The informationViewController used in conjunction with the infoViewContainer being displayed.
 	 */
 	private static InformationContainerViewController infoViewController;
-	
+
 	private static UserViewController myUserViewController;
 	/**
 	 * The file name for the LoginView.
@@ -64,7 +62,7 @@ public class SessionController {
 	 * The file name for the InformationContainerView.
 	 */
 	private static final String INFORMATION_CONTAINER_VIEW = "InformationContainerView.fxml";
-	
+
 	/**
 	 * Initializes the session controller by setting the stage to the given stage.
 	 * Loads the loginView to start the session
@@ -96,7 +94,7 @@ public class SessionController {
 	public static AuctionManager getManager() {
 		return myManager;
 	}
-	
+
 	public static InformationContainerViewController getInformationContainerView() {
 		return infoViewController;
 	}
@@ -120,9 +118,9 @@ public class SessionController {
 			loadEmployeeMenu(myUserViewController);
 		}
 	}
-	
+
 	public static UserViewController getUserViewController() {
-	    return myUserViewController;
+		return myUserViewController;
 	}
 
 	/**
@@ -135,12 +133,12 @@ public class SessionController {
 		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
 		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids", myUser, true);
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
-		
+
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
 		buttons.add(viewBidsButton);
 		buttons.add(logOutButton);
-		
+
 		viewAuctionsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			SubMenuFactory.showBidderAuctionSubMenu();
 			removeActiveClassFromButtons(buttons);
@@ -148,7 +146,7 @@ public class SessionController {
 			addActiveCssClass(viewAuctionsButton);
 		});
 		theController.addMenuButton(viewAuctionsButton);
-		
+
 
 		viewBidsButton.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 			SubMenuFactory.showBidderBidSubMenu();
@@ -160,35 +158,21 @@ public class SessionController {
 			viewBidsButton.setVisible(false);
 		}
 		theController.addMenuButton(viewBidsButton);
-		
-		
+
+
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
-		
+
 		// go to default screen
 		infoViewController.showAuctions(myManager.getAvailableAuctions((Bidder) myUser));
 		addActiveCssClass(viewAuctionsButton);
 		SubMenuFactory.createSubMenu(myUser, theController);
 		SubMenuFactory.showBidderAuctionSubMenu();
 	}
-	
-	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> thePanes) {
-		
-		for (AnchorPane pane: thePanes) {
-			Node button = pane.getChildren().get(0);
-			button.getStyleClass().clear(); // Removes all class styles from the button
-			// Add the default
-			button.getStyleClass().add("menuButton");
-		}
-	}
-	
-	private static void addActiveCssClass(AnchorPane thePane) {
-		Node button = thePane.getChildren().get(0);
-		button.getStyleClass().add("active");
-	}
-	
+
+
 	/**
 	 * Loads a menu that contains all the main controls that can be used by a non profit contact
 	 * Pre-Condition: theController != null
@@ -200,12 +184,12 @@ public class SessionController {
 		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction", myUser, false);
 		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item", myUser, true);
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
-		
+
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
 		buttons.add(requestNewItemButton);
 		buttons.add(logOutButton);
-		
+
 		viewAuctionsButton.setOnMouseClicked(event -> {
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myUser.getMyAuctions());
@@ -214,7 +198,7 @@ public class SessionController {
 		theController.addMenuButton(viewAuctionsButton);
 		viewAuctionsButton.setVisible(
 				myUser.isUserHasAuction());
-				
+
 		requestNewAuctionButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
 			if (auction == null) {
@@ -226,7 +210,7 @@ public class SessionController {
 		requestNewAuctionButton.setVisible(
 				(myManager.isNewAuctionRequestAllowed(myUser)));
 		theController.addMenuButton(requestNewAuctionButton);
-		
+
 		requestNewItemButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
 			if (auction != null && SessionController.getManager().isNewItemRequestAllowed(auction)) {
@@ -238,14 +222,14 @@ public class SessionController {
 		requestNewItemButton.setVisible(
 				myUser.isUserHasFutureAuction());
 		theController.addMenuButton(requestNewItemButton);
-		
+
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
-		
+
 		SubMenuFactory.createSubMenu(myUser, theController);
-		
+
 		// go to default screen
 		if (myUser.isUserHasAuction()) {
 			infoViewController.showAuctions(myUser.getMyAuctions());
@@ -255,7 +239,7 @@ public class SessionController {
 			addActiveCssClass(requestNewAuctionButton);
 		}
 	}
-	
+
 	/**
 	 * Loads a menu and a sub-menu that contains all the main controls that can be used by an employee
 	 * Pre-Condition: theController != null
@@ -274,34 +258,34 @@ public class SessionController {
 			addActiveCssClass(viewAuctionsButton);
 			SubMenuFactory.showAdminSubMenu();
 		});
-		
-		
+
+
 		modifySystemButton.setOnMouseClicked(event -> {
 			theController.getMySubMenuBar().getChildren().clear();
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showModifySystemView();
 			addActiveCssClass(modifySystemButton);
 		});
-		
-		
+
+
 		theController.addMenuButton(viewAuctionsButton);
 		theController.addMenuButton(modifySystemButton);
-		
+
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
 		theController.addMenuButton(logOutButton);
-		
+
 		// go to default screen
 		infoViewController.showAdminAuctions(myManager.getAllAuctionsSorted(), myManager);
 		SubMenuFactory.createSubMenu(myUser, theController);
 		addActiveCssClass(viewAuctionsButton);
 		SubMenuFactory.showAdminSubMenu();
 	}
-	
 
-	
+
+
 
 	/**
 	 * Logs the user out of the current session.
@@ -330,8 +314,8 @@ public class SessionController {
 			e.printStackTrace();
 		}
 	}
-	
-		
+
+
 	/**
 	 * Loads a userView onto myStage.
 	 * Pre-Condition: myStage != null
@@ -355,7 +339,7 @@ public class SessionController {
 		}
 		return userViewController;
 	}
-	
+
 
 	/**
 	 * Loads an InformationContainerView into theUserView associated with the given userViewController.
@@ -379,15 +363,43 @@ public class SessionController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		ScrollPane scrollPane = theUserViewController.getMyScrollPane();
 		scrollPane.setContent(informationContainerView);
 		informationContainerView.prefWidthProperty().bind(scrollPane.widthProperty().subtract(0));
 		informationContainerView.prefHeightProperty().bind(scrollPane.heightProperty().subtract(20));
 		informationContainerViewController = 
 				(InformationContainerViewController) informationContainerLoader.getController();
-		
+
 		return informationContainerViewController;
+	}
+
+	/**
+	 * Method removes all supplement styles to the given anchorPanes are applies the default on used by menu buttons
+	 * Pre-Condition: thePanes != null
+	 * Post-Condition: All the panes in the given list will have the default styling class applied
+	 * @param thePanes whose styling will be reset to the default one
+	 */
+	private static void removeActiveClassFromButtons(ArrayList<AnchorPane> thePanes) {
+
+		for (AnchorPane pane: thePanes) {
+			Node button = pane.getChildren().get(0);
+			button.getStyleClass().clear(); // Removes all class styles from the button
+			// Add the default
+			button.getStyleClass().add("menuButton");
+		}
+	}
+
+	/**
+	 * Adds the active css style class to the given anchor pane.
+	 * The active class can be found in menuBar.css
+	 * Pre-Condition: thePane != null
+	 * Post-Condition: thePane will have the active style class applied
+	 * @param thePane who will have the active style class added to.
+	 */
+	private static void addActiveCssClass(AnchorPane thePane) {
+		Node button = thePane.getChildren().get(0);
+		button.getStyleClass().add("active");
 	}
 
 }
