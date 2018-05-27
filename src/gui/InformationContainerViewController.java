@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Collection;
 import java.util.Observable;
 
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -102,6 +103,7 @@ public class InformationContainerViewController extends Observable {
 		}
 	}
 	
+	
 	/**
 	 * Loads all the auctions associated with the current bidder onto an InformationContainerView.
 	 * Pre-Condition: theController != null
@@ -146,10 +148,15 @@ public class InformationContainerViewController extends Observable {
 		}
 	}
 	
+	
 	public void showBids(final Collection<Bid> theBids) {
 		this.clear();
 		for (Bid bid: theBids) {
 			AnchorPane tile = TileFactory.createBidTile(bid);
+			// Override the default onMouseEntered event (currently we don't want one)
+			tile.setOnMouseEntered(event -> {
+				
+			});
 			this.addNode(tile);
 		}
 	}
