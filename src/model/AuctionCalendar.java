@@ -255,11 +255,11 @@ public class AuctionCalendar implements Serializable {
      * @return all auctions between the two dates inclusive
      * @throws IllegalArgumentException if start date is after end date
      */
-    public List<Auction> getAuctionsWithinRange(final LocalDate theStart, final LocalDate theEnd) {
+    public Collection<Auction> getAuctionsWithinRange(final LocalDate theStart, final LocalDate theEnd) {
         if (theStart.isAfter(theEnd))
             throw new IllegalArgumentException("Start Date is after end date!");
         
-        List<Auction> auctionsWithinRange = new LinkedList<>();
+        Set<Auction> auctionsWithinRange = new TreeSet<>();
         for (AuctionDate date : myDates) {
             if ((date.getDate().plusDays(1)).isAfter(theStart) 
                     && (date.getDate().minusDays(1)).isBefore(theEnd)) {

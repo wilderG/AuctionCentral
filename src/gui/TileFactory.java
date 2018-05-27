@@ -98,7 +98,7 @@ public class TileFactory {
 		controller.setTopRightLabel(theBid.getAuctionItem().getDescription());
 		controller.setFirstBottomRightLabel("Minimum Bid: " + getMoneyFormat(minBid));
 		controller.setTopLeftLabel(getMoneyFormat(theBid.getValue()));
-		controller.setBottomLeft("Bid\nAmount");
+		controller.setBottomLeft("My Bid\nAmount");
 		
 		return tile;
 	}

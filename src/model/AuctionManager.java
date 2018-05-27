@@ -240,6 +240,7 @@ public class AuctionManager implements Manager {
 			// remove auction from calendar
 			myCalendar.deleteAuction(theAuction);
 		}
+        storage.writeData();
 	}
 	
 }

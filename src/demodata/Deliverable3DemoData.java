@@ -147,12 +147,13 @@ public class Deliverable3DemoData {
 		NonProfitContact nonProfit17 = new NonProfitContact("nonprof17",
 				"The Newer Old Fund");
 
-		Bidder bidder1 = new Bidder("bidder1", "Peter Piper");
-		Bidder bidder2 = new Bidder("bidder2", "Jane Doe");
-		Bidder bidder3 = new Bidder("bidder3", "John Jacob");
+		Bidder bidder1 = new Bidder("bidder1", "Ivan Ooze");
+		Bidder bidder2 = new Bidder("bidder2", "Biddy B. Bidderson");
+		Bidder bidder3 = new Bidder("bidder3", "John Jacob Jingleheimerschmidt");
 		Bidder bidder4 = new Bidder("bidder4", "Art Vandelay");
+		Bidder bidder5 = new Bidder("bidder5", "C-3P0");
 		
-		Employee employee1 = new Employee("employee1", "Jane Jacob");
+		Employee employee1 = new Employee("employee1", "Gilderoy Lockhart");
 		
 		
 		// Auction 1
@@ -168,6 +169,12 @@ public class Deliverable3DemoData {
 		bidSetbidder2auction1.add(new Bid(bidder2, item2,
 				BigDecimal.valueOf(5000.00)));
 		
+        TreeSet<Bid> bidSetbidder5auction1 = new TreeSet<>();
+        bidSetbidder5auction1.add(new Bid(bidder5, item1,
+                BigDecimal.valueOf(13.00)));
+        bidSetbidder5auction1.add(new Bid(bidder5, item2,
+                BigDecimal.valueOf(5000.00)));
+		
 		// Auction 2
 		TreeSet<Bid> bidSetbidder1auction2 = new TreeSet<>();
 		bidSetbidder1auction2.add(new Bid(bidder1, item3,
@@ -180,6 +187,12 @@ public class Deliverable3DemoData {
 				BigDecimal.valueOf(35.00)));
 		bidSetbidder2auction2.add(new Bid(bidder2, item4,
 				BigDecimal.valueOf(100.00)));
+
+        TreeSet<Bid> bidSetbidder5auction2 = new TreeSet<>();
+        bidSetbidder5auction2.add(new Bid(bidder5, item3,
+                BigDecimal.valueOf(35.00)));
+        bidSetbidder5auction2.add(new Bid(bidder5, item4,
+                BigDecimal.valueOf(100.00)));
 		
 		// Auction 3
 		TreeSet<Bid> bidSetbidder1auction3 = new TreeSet<>();
@@ -202,15 +215,15 @@ public class Deliverable3DemoData {
 		bidSetbidder2auction3.add(new Bid(bidder2, item8,
 				BigDecimal.valueOf(1.00)));
 	
-		TreeSet<Bid> bidSetbidder4auction3 = new TreeSet<>();
-		bidSetbidder4auction3.add(new Bid(bidder4, item5,
-				BigDecimal.valueOf(1300.00)));
-		bidSetbidder4auction3.add(new Bid(bidder4, item6,
-				BigDecimal.valueOf(70.00)));
-		bidSetbidder4auction3.add(new Bid(bidder4, item7,
-				BigDecimal.valueOf(6.00)));
-		bidSetbidder4auction3.add(new Bid(bidder4, item8,
-				BigDecimal.valueOf(1.00)));
+//		TreeSet<Bid> bidSetbidder4auction3 = new TreeSet<>();
+//		bidSetbidder4auction3.add(new Bid(bidder4, item5,
+//				BigDecimal.valueOf(1300.00)));
+//		bidSetbidder4auction3.add(new Bid(bidder4, item6,
+//				BigDecimal.valueOf(70.00)));
+//		bidSetbidder4auction3.add(new Bid(bidder4, item7,
+//				BigDecimal.valueOf(6.00)));
+//		bidSetbidder4auction3.add(new Bid(bidder4, item8,
+//				BigDecimal.valueOf(1.00)));
 		
 		// Auction 4
 		TreeSet<Bid> bidSetbidder1auction4 = new TreeSet<>();
@@ -261,15 +274,17 @@ public class Deliverable3DemoData {
 		TreeMap<Bidder, TreeSet<Bid>> bidSet1 = new TreeMap<>();
 		bidSet1.put(bidder1, bidSetbidder1auction1);
 		bidSet1.put(bidder2, bidSetbidder2auction1);
+		bidSet1.put(bidder5, bidSetbidder5auction1);
 		
 		TreeMap<Bidder, TreeSet<Bid>> bidSet2 = new TreeMap<>();
 		bidSet2.put(bidder1, bidSetbidder1auction2);
 		bidSet2.put(bidder2, bidSetbidder2auction2);
+        bidSet2.put(bidder5, bidSetbidder5auction2);
 		
 		TreeMap<Bidder, TreeSet<Bid>> bidSet3 = new TreeMap<>();
 		bidSet3.put(bidder1, bidSetbidder1auction3);
 		bidSet3.put(bidder2, bidSetbidder2auction3);
-		bidSet3.put(bidder4, bidSetbidder4auction3);
+//		bidSet3.put(bidder4, bidSetbidder4auction3);
 		
 		TreeMap<Bidder, TreeSet<Bid>> bidSet4 = new TreeMap<>();
 		bidSet4.put(bidder1, bidSetbidder1auction4);
@@ -307,9 +322,9 @@ public class Deliverable3DemoData {
 		Auction auction9 = new Auction(LocalDate.of(2018, 6, 15),
 				nonProfit15);
         Auction auction2222 = new Auction(LocalDate.of(2017, 5, 8),
-                nonProfit16, new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
+                nonProfit16);
         Auction auction3333 = new Auction(LocalDate.of(2017, 5, 9),
-                nonProfit17, new TreeSet<AuctionItem>(), new TreeMap<Bidder, TreeSet<Bid>>());
+                nonProfit17);
 		
 		
 		
@@ -330,9 +345,12 @@ public class Deliverable3DemoData {
 		bidder2.addAuction(auction5);
 		bidder2.addAuction(auction6);
 		
-		bidder4.addAuction(auction3);
+//		bidder4.addAuction(auction3);
 		bidder4.addAuction(auction6);
 		
+        bidder5.addAuction(auction1);
+        bidder5.addAuction(auction2);
+        
 		nonProfit1.addAuction(auction0);
 		nonProfit1.addAuction(auction3);
 		nonProfit2.addAuction(auction1);
@@ -382,6 +400,7 @@ public class Deliverable3DemoData {
 		storage.storeUser(bidder2);
 		storage.storeUser(bidder3);
 		storage.storeUser(bidder4);
+        storage.storeUser(bidder5);
 		storage.storeUser(nonProfit1);
 		storage.storeUser(nonProfit2);
 		storage.storeUser(nonProfit3);
