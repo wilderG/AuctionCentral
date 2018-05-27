@@ -2,6 +2,9 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EventListener;
+
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -116,7 +119,6 @@ public class SessionController {
 		} else if (theUser instanceof Employee) {
 			loadEmployeeMenu(myUserViewController);
 		}
-
 	}
 	
 	public static UserViewController getUserViewController() {
@@ -194,7 +196,7 @@ public class SessionController {
 	 * @param theController associated with the UserView where the non profit contact menu will be added.
 	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
-		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
+		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions", myUser, true);
 		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction", myUser, false);
 		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item", myUser, true);
 		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
@@ -211,6 +213,8 @@ public class SessionController {
 			addActiveCssClass(viewAuctionsButton);
 		});
 		theController.addMenuButton(viewAuctionsButton);
+		viewAuctionsButton.setVisible(
+				myUser.isUserHasAuction());
 				
 		requestNewAuctionButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
@@ -244,9 +248,14 @@ public class SessionController {
 		SubMenuFactory.createSubMenu(myUser, theController);
 		
 		// go to default screen
-		infoViewController.showAuctions(myUser.getMyAuctions());
-		addActiveCssClass(viewAuctionsButton);
-		SubMenuFactory.showNonProfitAuctionViewSubMenu();
+		if (myUser.isUserHasAuction()) {
+			infoViewController.showAuctions(myUser.getMyAuctions());
+			addActiveCssClass(viewAuctionsButton);
+			SubMenuFactory.showNonProfitAuctionViewSubMenu();
+		} else {
+			infoViewController.showNewAuctionRequest();
+			addActiveCssClass(requestNewAuctionButton);
+		}
 	}
 	
 	/**
