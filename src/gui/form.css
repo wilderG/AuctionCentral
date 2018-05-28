@@ -35,3 +35,43 @@
 .success {
 	-fx-text-fill: green;
 }
+
+.date-picker-popup > * > .spinner > .button:hover > .left-arrow,
+.date-picker-popup > * > .spinner > .button:hover > .right-arrow {
+	-fx-background-color: #347C94;
+}
+
+.date-picker-popup > * > .date-cell:hover,
+.date-picker-popup > * > .date-cell.selected {
+	-fx-text-fill: white;
+	
+}
+
+.date-picker-popup * {
+	-fx-text-fill: #347C94;
+}
+
+.date-picker-popup > * > .previous-month:hover,
+.date-picker-popup > * > .next-month:hover {
+    
+}
+
+.date-picker-popup > * > .spinner > .button {
+    -fx-background-color: none;
+}
+
+
+.date-picker-popup > * > .spinner > .button:pressed > .left-arrow,
+.date-picker-popup > * > .spinner > .button:pressed > .right-arrow {
+    -fx-background-color: #4E98B2;
+}
+
+.date-picker-popup > * > .disabled {
+	-fx-text-fill: #B6A5BB;
+	-fx-background-color: #ffc0cb;
+}
+
+
+.date-picker-popup > * > .disabled:hover {
+	-fx-text-fill: #B6A5BB;
+}
