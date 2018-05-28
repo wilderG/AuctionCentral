@@ -5,9 +5,13 @@ import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Locale;
+import java.util.Optional;
 
 import console.ConsoleDriver;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -59,8 +63,10 @@ public class TileFactory {
 		ImageView icon = controller.getDeleteIcon();
 		if (!theAuction.isContaingBids()) {
 			icon.setOnMouseClicked(event -> {
-				theManager.removeAuction(theAuction);	
-				theInformationContainerViewController.removeNode(tile);
+				if (showConfirmationDialog()) {
+					theManager.removeAuction(theAuction);	
+					theInformationContainerViewController.removeNode(tile);
+				}
 			});
 			icon.setOnMouseEntered(event -> {
 				icon.setImage(new Image("/icons/delete-hover.png"));
@@ -74,6 +80,17 @@ public class TileFactory {
 
 
 		return tile;
+	}
+	
+	private static boolean showConfirmationDialog() {
+		Alert alert = new Alert(AlertType.CONFIRMATION, "Please click Yes to confirm.", ButtonType.YES, ButtonType.CANCEL);
+		alert.setTitle("Confirm Auction Deletion");
+		alert.setHeaderText("Are you sure you want to delete this auction?");
+		
+
+		Optional<ButtonType> result = alert.showAndWait();
+		return result.get() == ButtonType.YES;
+
 	}
 	
 	public static AnchorPane createItemTile(final AuctionItem theItem) {
