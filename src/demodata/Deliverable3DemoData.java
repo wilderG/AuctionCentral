@@ -140,7 +140,10 @@ public class Deliverable3DemoData {
         
         AuctionItem item30 = new AuctionItem(BigDecimal.valueOf(20.00), 
                 "Blue Cheese Crumbles");
+        AuctionItem item32 = new AuctionItem(BigDecimal.valueOf(20.00), 
+                "Dockers");
         auction10Items.add(item30);
+        auction10Items.add(item32);
 
         AuctionItem item31 = new AuctionItem(BigDecimal.valueOf(20.00), 
                 "Elbow Grease");
@@ -335,6 +338,13 @@ public class Deliverable3DemoData {
 		bidSetBidder2auction7.add(new Bid(bidder2, item26,
                 BigDecimal.valueOf(10000)));
 		
+		// Auction 10
+        TreeSet<Bid> bidSetBidder1auction10 = new TreeSet<>();
+        bidSetBidder1auction10.add(new Bid(bidder1, item30,
+                BigDecimal.valueOf(100)));
+        bidSetBidder1auction10.add(new Bid(bidder1, item32,
+                BigDecimal.valueOf(95)));
+		
 		
 		
 				
@@ -371,6 +381,7 @@ public class Deliverable3DemoData {
 		bidSet7.put(bidder2, bidSetBidder2auction7);
 		
         TreeMap<Bidder, TreeSet<Bid>> bidSet10 = new TreeMap<>();
+        bidSet10.put(bidder1, bidSetBidder1auction10);
         
         TreeMap<Bidder, TreeSet<Bid>> bidSet11 = new TreeMap<>();
 		
@@ -416,6 +427,7 @@ public class Deliverable3DemoData {
 		bidder1.addAuction(auction4);
 		bidder1.addAuction(auction5);
 		bidder1.addAuction(auction6);
+		bidder1.addAuction(auction10);
 		
 		bidder2.addAuction(auction1);
 		bidder2.addAuction(auction2);
