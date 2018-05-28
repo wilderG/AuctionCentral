@@ -65,11 +65,19 @@ public class NewAuctionFormController {
 	@FXML
     private Label myErrorLableMsg;
 	
+    /**
+     * Label that is used to present an error message to the user.
+     */
+    @FXML
+    private Label myAtCapacityLabel;
+	
 	/**
 	 * Label that is used to present a success message to the user.
 	 */
 	@FXML
 	private Label mySucessMsg;
+
+    private boolean myAllDatesDisabled;
 	
 
 	@FXML
@@ -86,6 +94,8 @@ public class NewAuctionFormController {
 			mySubmitButton.setDisable(false);
 		});
 		disableOutOfRangeDaysOnDatePicker();
+		myAllDatesDisabled = SessionController.getManager().isAtCapacity();
+	    myAtCapacityLabel.setVisible(myAllDatesDisabled);
 	}
 	
 	
@@ -107,11 +117,9 @@ public class NewAuctionFormController {
                         super.updateItem(theDate, empty);
                         String failureMessage = getIneligableDateMessage(theDate);
                         if (failureMessage != null) {
-                        	
-                        	getStyleClass().add("disabled");
+                            getStyleClass().add("disabled");
                             setTooltip(new Tooltip(failureMessage));
                             //setDisable(true);
-                            
                         }
                     }
                     
@@ -119,7 +127,9 @@ public class NewAuctionFormController {
                         String message = null;
                         AuctionDate auctionDate = SessionController.getManager().getAuctionDate(theDate);
                         myUser = (NonProfitContact)SessionController.getUser();
-                        if (theDate.isAfter(LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))) {
+                        if (myAllDatesDisabled) {
+                            message = "Auction central is not accepting auctions at this time due to capacity constraints.";
+                        } else if (theDate.isAfter(LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))) {
                             message = "Auction cannot be scheduled more than "
                                     + AuctionCalendar.MAXIMUM_DAYS_OUT
                                     + " days out";

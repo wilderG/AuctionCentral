@@ -246,4 +246,8 @@ public class AuctionManager implements Manager {
 	public AuctionDate getAuctionDate(LocalDate theDate) {
 	    return myCalendar.getAuctionDate(theDate);
 	}
+	
+	public boolean isAtCapacity() {
+	    return !myCalendar.isAllowingNewAuction();
+	}
 }
