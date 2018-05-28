@@ -242,10 +242,12 @@ public class SessionController {
 			addActiveCssClass(requestNewAuctionButton);
 		} 
 		
+		SubMenuFactory.createSubMenu(myUser, myUserViewController);
 		
 		// show message if not accepting auctions
-		if (!(myUser.isUserHasFutureAuction() || myManager.isNewAuctionRequestAllowed(myUser))) {
-			SubMenuFactory.createSubMenu(myUser, myUserViewController);
+		if (!(myUser.isUserHasFutureAuction() ||
+				myManager.isNewAuctionRequestAllowed(myUser) ||
+			    myUser.isUserHasAuction())) {
 			SubMenuFactory.addMessage("AuctionCentral is not accepting new"
 					+ " auctions at this time. Please try back later.");
 		}
