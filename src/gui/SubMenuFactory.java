@@ -346,12 +346,14 @@ public class SubMenuFactory {
 	public static void addMessage(String theMessage) {
 		if (myMessageLabel == null) {
 			myMessageLabel = new Label(theMessage);
-			mySubMenu.getChildren().add(myMessageLabel);
 		} else {
 			myMessageLabel.setText(theMessage);
 		}
 
+		if (!mySubMenu.getChildren().contains(myMessageLabel)) {
+			mySubMenu.getChildren().add(myMessageLabel);	
+		}
+		
 	}
-	
 	
 }

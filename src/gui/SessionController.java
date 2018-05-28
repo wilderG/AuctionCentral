@@ -237,12 +237,15 @@ public class SessionController {
 		} else if (myManager.isNewAuctionRequestAllowed(myUser)) {
 			infoViewController.showNewAuctionRequest();
 			addActiveCssClass(requestNewAuctionButton);
-		} else {
+		} 
+		
+		
+		// show message if not accepting auctions
+		if (!(myUser.isUserHasFutureAuction() || myManager.isNewAuctionRequestAllowed(myUser))) {
 			SubMenuFactory.createSubMenu(myUser, myUserViewController);
 			SubMenuFactory.addMessage("AuctionCentral is not accepting new"
 					+ " auctions at this time. Please try back later.");
-			
-			
+			System.out.println("no add hit");
 		}
 	}
 
