@@ -1,17 +1,33 @@
+.root {
+	-fx-font-family: 'Helvetica', Arial, sans-serif;
+	-fx-text-fill: black;
+}
+
+.welcome {
+	-fx-font-size: 24px;
+}
+
+.loginField {
+	-fx-font-size: 16px;
+}
+
+.userName,
+.error {
+	-fx-font-size: 18px;
+}
 
 .button:hover {
     -fx-background-color:#B7A57A;
     -fx-background-radius:0;
-    -fx-border-color:black;
-    -fx-border-width: 0 3 3 0;
-    -fx-background-insets: 0;
 }
 .hyperlink:hover {
     -fx-underline: true;
 }
 .button {
-    -fx-font: bold italic 20pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , Purple , 16 , 0.0 , 2 , 0 );
+	-fx-font-size: 18px;
+	-fx-background-radius:0px;
+	-fx-border-radius: 0px;
+	-fx-background-insets: 0px;
 }
 .actionTarget{
      color:red;
