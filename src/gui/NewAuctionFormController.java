@@ -2,12 +2,19 @@ package gui;
 
 import java.time.LocalDate;
 
+import org.omg.CosNaming._BindingIteratorImplBase;
+
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import model.AuctionCalendar;
 import model.AuctionDate;
@@ -93,15 +100,18 @@ public class NewAuctionFormController {
         myDatePicker.setDayCellFactory(new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
+      
                 return new DateCell() {
                     @Override
                     public void updateItem(LocalDate theDate, boolean empty) {
                         super.updateItem(theDate, empty);
                         String failureMessage = getIneligableDateMessage(theDate);
                         if (failureMessage != null) {
+                        	
+                        	getStyleClass().add("disabled");
                             setTooltip(new Tooltip(failureMessage));
-//                            setDisable(true);
-                            setStyle("-fx-background-color: #ffc0cb;");
+                            //setDisable(true);
+                            
                         }
                     }
                     
