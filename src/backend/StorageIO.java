@@ -143,8 +143,8 @@ public class StorageIO implements Handler {
 			in.close();
 			fileIn.close();
 			
-			myUsers = data.users;
-			myCalendar = data.calendar;
+			myUsers = data.myUsers;
+			myCalendar = data.myCalendar;
 			
 		} catch (IOException i) {
 			initializeNewData();
