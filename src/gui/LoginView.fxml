@@ -37,7 +37,7 @@
          <children>
             <ImageView fitHeight="663.0" fitWidth="889.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
-                  <Image url="@logo1-alt.png" />
+                  <Image url="@logo.png" />
                </image>
             </ImageView>
             <Label alignment="BOTTOM_LEFT" prefHeight="60.0" prefWidth="216.0" styleClass="welcome" stylesheets="@logging.css" text="Welcome" GridPane.columnIndex="1">
