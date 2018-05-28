@@ -32,7 +32,6 @@ public class AuctionManager implements Manager {
 	 * Constructs a new manager object.
 	 */
 	public AuctionManager() {
-		System.out.println("AuctionManager.construct");
 		storage = new StorageIO(FILE_NAME);
 		myCalendar = storage.getCalendar();
 	}

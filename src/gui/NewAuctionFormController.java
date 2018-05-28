@@ -77,7 +77,9 @@ public class NewAuctionFormController {
 	@FXML
 	private Label mySucessMsg;
 
-    private boolean myAllDatesDisabled;
+	private final AuctionManager myManager = SessionController.getManager();
+	
+	private boolean myAllDatesDisabled;
 	
 
 	@FXML
@@ -85,22 +87,35 @@ public class NewAuctionFormController {
 		myUser = (NonProfitContact)SessionController.getUser();
 		
 		mySubmitButton.setOnMouseClicked(event -> {
+			myDate = myDatePicker.getValue();
 			SubmitNewAuctionRequestEvents();
 		});
 		mySucessMsg.setVisible(false);
-		mySubmitButton.setDisable(true);
 		myErrorLableMsg.setVisible(false);
 		myDatePicker.setOnAction(event -> {
-			myDate = myDatePicker.getValue();
 			myErrorLableMsg.setVisible(false);
-			mySubmitButton.setDisable(false);
 		});
 		disableOutOfRangeDaysOnDatePicker();
 		myAllDatesDisabled = SessionController.getManager().isAtCapacity();
 	    myAtCapacityLabel.setVisible(myAllDatesDisabled);
-		myDatePicker.setValue(myUser.getSoonestPossibleNewAuctionDate());
+		
+	    myDatePicker.setValue(getEarliestAvailableDate());
 	}
 	
+	
+	/**
+	 * Returns the earliest date that an auction may be requested.
+	 * @return LocalDate earliest valid date
+	 */
+	private LocalDate getEarliestAvailableDate() {
+		LocalDate result = myUser.getSoonestPossibleNewAuctionDate();
+		
+		while (myManager.getAuctionDate(result).isAtCapacity()) {
+			result = result.plusDays(1);
+		}
+		return result;
+	}
+		
 	
     /**
      * Disables possibility of choosing dates out of eligible range from current date.
@@ -128,7 +143,7 @@ public class NewAuctionFormController {
                     
                     private String getIneligableDateMessage(LocalDate theDate) {
                         String message = null;
-                        AuctionDate auctionDate = SessionController.getManager().getAuctionDate(theDate);
+                        AuctionDate auctionDate = myManager.getAuctionDate(theDate);
                         myUser = (NonProfitContact)SessionController.getUser();
                         if (myAllDatesDisabled) {
                             message = "Auction central is not accepting auctions at this time due to capacity constraints.";
@@ -164,8 +179,7 @@ public class NewAuctionFormController {
 	
 		try {
 			myForm = new NewAuctionRequest(myUser, myDate);
-			AuctionManager manager = SessionController.getManager();
-			manager.processNewAuctionRequest(myForm);
+			myManager.processNewAuctionRequest(myForm);
 			mySucessMsg.setVisible(true);
 		
 		} catch(Exception theEvent) {
