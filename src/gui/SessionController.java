@@ -192,6 +192,7 @@ public class SessionController {
 		buttons.add(logOutButton);
 
 		viewAuctionsButton.setOnMouseClicked(event -> {
+			SubMenuFactory.createSubMenu(myUser, myUserViewController);
 			removeActiveClassFromButtons(buttons);
 			infoViewController.showAuctions(myUser.getMyAuctions());
 			addActiveCssClass(viewAuctionsButton);
@@ -202,6 +203,7 @@ public class SessionController {
 
 		requestNewAuctionButton.setOnMouseClicked(event -> {
 			if (myManager.isNewAuctionRequestAllowed(myUser)) {
+				SubMenuFactory.createSubMenu(myUser, myUserViewController);
 				removeActiveClassFromButtons(buttons);
 				infoViewController.showNewAuctionRequest();
 				addActiveCssClass(requestNewAuctionButton);
@@ -214,6 +216,7 @@ public class SessionController {
 		requestNewItemButton.setOnMouseClicked(event -> {
 			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
 			if (auction != null && SessionController.getManager().isNewItemRequestAllowed(auction)) {
+				SubMenuFactory.createSubMenu(myUser, myUserViewController);
 				removeActiveClassFromButtons(buttons);
 				infoViewController.showNewItemRequest(auction);
 				addActiveCssClass(requestNewItemButton);

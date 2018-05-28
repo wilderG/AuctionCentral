@@ -1,9 +1,12 @@
 package gui;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 import java.util.Observable;
 
+import console.ConsoleDriver;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -145,12 +148,18 @@ public class InformationContainerViewController extends Observable {
 			AnchorPane tile = TileFactory.createAuctionTile(auction);
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-				String auctionName = auction.getName();
 				if (auction.getAllItems().size() > 0) {
+					String auctionName = auction.getName() + ": " 
+							+ Formatter.formatDate(auction.getDate());
 					SubMenuFactory.addMessage(auctionName);
 					myActiveAuction = auction;
 					showItems(auction.getAllItems());
-					
+				} else {
+					String message = "The auction for " +  
+							auction.getName() + " on " +
+							Formatter.formatDate(auction.getDate()) +
+							" has no items.";
+					SubMenuFactory.addMessage(message);
 				}
 			});
 			

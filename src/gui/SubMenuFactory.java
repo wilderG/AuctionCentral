@@ -93,8 +93,8 @@ public class SubMenuFactory {
 	 */
 	public static void showBidderAuctionSubMenu() {
 		mySubMenu.getChildren().clear();
-		Button viewAllAuctionsButton = new Button("View All Auctions");
-		Button viewAllBiddableAuctions = new Button("View All Biddable Auctions");
+		Button viewAllAuctionsButton = new Button("Show All Auctions");
+		Button viewAllBiddableAuctions = new Button("Show Biddable Auctions");
 		
 		
 		mySubMenu.getChildren().add(viewAllAuctionsButton);
@@ -108,6 +108,7 @@ public class SubMenuFactory {
 					SessionController.getInformationContainerView();
 			AuctionManager manager = SessionController.getManager();
 			informationContainerViewController.showAuctions(manager.getAllAuctionsSorted());
+			clearMessage();
 		});		
 		
 		viewAllBiddableAuctions.setOnMouseClicked(event -> {
@@ -116,6 +117,7 @@ public class SubMenuFactory {
 			AuctionManager manager = SessionController.getManager();
 			Bidder bidder = (Bidder) SessionController.getUser();
 			informationContainerViewController.showAuctions(manager.getAvailableAuctions(bidder));
+			clearMessage();
 		});
 	}
 	
@@ -357,4 +359,9 @@ public class SubMenuFactory {
 		
 	}
 	
+	public static void clearMessage() {
+		if (myMessageLabel != null) {
+			myMessageLabel.setText("");
+		}
+	}
 }

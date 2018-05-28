@@ -35,7 +35,7 @@ public class TileFactory {
 		controller.setTopRightLabel(theAuction.getName());
 		controller.setFirstBottomRightLabel(itemField);
 		controller.setTopLeftLabel("" + date.getDayOfMonth());
-		controller.setBottomLeft(ConsoleDriver.formatDateMonthYear(date));
+		controller.setBottomLeft(Formatter.formatDateMonthYear(date));
 
 		return tile;
 	}
@@ -99,7 +99,8 @@ public class TileFactory {
 		TileViewController controller = getTileController(loader);
 		
 		controller.setTopRightLabel(theItem.getDescription());
-		controller.setTopLeftLabel(getMoneyFormat(theItem.getMinimumAcceptableBidValue()));
+		controller.setTopLeftLabel(
+				Formatter.getMoneyFormat(theItem.getMinimumAcceptableBidValue()));
 		controller.setBottomLeft("Minimum\nBid");
 		
 		return tile;
@@ -113,33 +114,16 @@ public class TileFactory {
 		BigDecimal minBid = theBid.getAuctionItem().getMinimumAcceptableBidValue();
 		
 		controller.setTopRightLabel(theBid.getAuctionItem().getDescription());
-		controller.setFirstBottomRightLabel("Minimum Bid: " + getMoneyFormat(minBid));
-		controller.setTopLeftLabel(getMoneyFormat(theBid.getValue()));
+		controller.setFirstBottomRightLabel(
+				"Minimum Bid: " + Formatter.getMoneyFormat(minBid));
+		controller.setTopLeftLabel(Formatter.getMoneyFormat(theBid.getValue()));
 		controller.setBottomLeft("My Bid\nAmount");
 		
 		return tile;
 	}
 	
 	
-	/**
-	 * Returns a string formatted currency value. If the amount is less than
-	 * $1.00 then cents are displayed.
-	 * @param theAmount
-	 * @return
-	 */
-	private static String getMoneyFormat(final BigDecimal theAmount) {
-		String result;
-		NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
-		
-		if (theAmount.stripTrailingZeros().scale() <= 0) {
-			formatter.setMaximumFractionDigits(0);
-			result = formatter.format(theAmount);
-		} else {
-			result = NumberFormat.getCurrencyInstance(Locale.getDefault()).
-					format(theAmount);
-		}
-		return result; 
-	}
+	
 	
 	
 	
