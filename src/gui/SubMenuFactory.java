@@ -3,6 +3,7 @@ package gui;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.TreeSet;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -133,7 +134,7 @@ public class SubMenuFactory {
 		viewAllBids.setOnMouseClicked(event -> {
 			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
 			Bidder user = (Bidder) SessionController.getUser();
-			ArrayList<Bid> allBids = new ArrayList<>();
+			TreeSet<Bid> allBids = new TreeSet<>();
 			for (Auction auction: user.getMyAuctions()) {
 				allBids.addAll(auction.getAllBidsWithBidder(user));
 			}

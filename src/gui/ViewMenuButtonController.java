@@ -53,9 +53,7 @@ public class ViewMenuButtonController implements Observer {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println(arg1);
 		if ((arg1 instanceof String) && ((String) arg1).equals("hasAuction")) {
-			System.out.println(arg1);
 			setVisible(activeWithAuction);
 		}
 	}

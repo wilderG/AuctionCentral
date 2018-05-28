@@ -146,8 +146,8 @@ public class InformationContainerViewController extends Observable {
 			
 			tile.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
 				String auctionName = auction.getName();
-				SubMenuFactory.addMessage(auctionName);
 				if (auction.getAllItems().size() > 0) {
+					SubMenuFactory.addMessage(auctionName);
 					myActiveAuction = auction;
 					showItems(auction.getAllItems());
 					
