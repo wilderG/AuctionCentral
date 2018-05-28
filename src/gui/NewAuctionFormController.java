@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.Tooltip;
 import javafx.util.Callback;
 import model.AuctionCalendar;
 import model.AuctionDate;
@@ -94,20 +95,41 @@ public class NewAuctionFormController {
             public DateCell call(final DatePicker datePicker) {
                 return new DateCell() {
                     @Override
-                    public void updateItem(LocalDate item, boolean empty) {
-                        myUser = (NonProfitContact)SessionController.getUser();
-                        AuctionDate auctionDate = SessionController.getManager().getAuctionDate(item);
-                        super.updateItem(item, empty);
-                        if (item.isAfter(LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))
-                            || item.isBefore(myUser.getSoonestPossibleNewAuctionDate())
-                            || auctionDate.isAtCapacity()) {
-                            setDisable(true);
+                    public void updateItem(LocalDate theDate, boolean empty) {
+                        super.updateItem(theDate, empty);
+                        String failureMessage = getIneligableDateMessage(theDate);
+                        if (failureMessage != null) {
+                            setTooltip(new Tooltip(failureMessage));
+//                            setDisable(true);
                             setStyle("-fx-background-color: #ffc0cb;");
                         }
                     }
+                    
+                    private String getIneligableDateMessage(LocalDate theDate) {
+                        String message = null;
+                        AuctionDate auctionDate = SessionController.getManager().getAuctionDate(theDate);
+                        myUser = (NonProfitContact)SessionController.getUser();
+                        if (theDate.isAfter(LocalDate.now().plusDays(AuctionCalendar.MAXIMUM_DAYS_OUT))) {
+                            message = "Auction cannot be scheduled more than "
+                                    + AuctionCalendar.MAXIMUM_DAYS_OUT
+                                    + " days out";
+                        } else if (theDate.isBefore(LocalDate.now().plusDays(AuctionCalendar.MINIMUM_DAYS_OUT))) {
+                            message = "Auction cannot be scheduled less than "
+                                    + AuctionCalendar.MINIMUM_DAYS_OUT
+                                    + " days out";
+                        } else if (theDate.isBefore(myUser.getLatestDate().plusMonths(
+                                AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF))) {
+                            message = "Auction cannot be scheduled within "
+                                    + AuctionCalendar.MIN_MONTHS_BETWEEN_AUCTIONS_FOR_NONPROF
+                                    + " months of previous auction";
+                        } else if (auctionDate.isAtCapacity()) {
+                            message = "This date already holds the maximum amount of auctions";
+                        }
+                        return message;
+                    }
                 };
             }
-        });     
+        });  
     }
 
 

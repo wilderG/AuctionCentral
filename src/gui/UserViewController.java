@@ -15,7 +15,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import model.User;
+import model.*;
 
 /**
  * View constructs a user view interface where the various users of the system can accomplish all necessary tasks
@@ -111,7 +111,8 @@ public class UserViewController implements Initializable {
 	 * Post-Condition: theUserDisplay label will be initialized with the current users name.
 	 */
 	private void updateDisplayName() {
-		myUserDisplayName.setText(myUser.getDisplayName());
+	    String userType = myUser.getClass().getSimpleName();
+		myUserDisplayName.setText(myUser.getDisplayName() + ", " + userType);
 	}
 
 	/**
