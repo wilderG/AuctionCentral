@@ -187,6 +187,7 @@ public class SessionController {
 
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
+		buttons.add(requestNewAuctionButton);
 		buttons.add(requestNewItemButton);
 		buttons.add(logOutButton);
 
@@ -200,8 +201,7 @@ public class SessionController {
 				myUser.isUserHasAuction());
 
 		requestNewAuctionButton.setOnMouseClicked(event -> {
-			Auction auction = ((NonProfitContact) myUser).getFutureAuction();
-			if (auction == null) {
+			if (myManager.isNewAuctionRequestAllowed(myUser)) {
 				removeActiveClassFromButtons(buttons);
 				infoViewController.showNewAuctionRequest();
 				addActiveCssClass(requestNewAuctionButton);
@@ -234,9 +234,15 @@ public class SessionController {
 		if (myUser.isUserHasAuction()) {
 			infoViewController.showAuctions(myUser.getMyAuctions());
 			addActiveCssClass(viewAuctionsButton);
-		} else {
+		} else if (myManager.isNewAuctionRequestAllowed(myUser)) {
 			infoViewController.showNewAuctionRequest();
 			addActiveCssClass(requestNewAuctionButton);
+		} else {
+			SubMenuFactory.createSubMenu(myUser, myUserViewController);
+			SubMenuFactory.addMessage("AuctionCentral is not accepting new"
+					+ " auctions at this time. Please try back later.");
+			
+			
 		}
 	}
 

@@ -82,6 +82,8 @@ public class NewAuctionFormController {
 
 	@FXML
 	private void initialize() {
+		myUser = (NonProfitContact)SessionController.getUser();
+		
 		mySubmitButton.setOnMouseClicked(event -> {
 			SubmitNewAuctionRequestEvents();
 		});
@@ -96,6 +98,7 @@ public class NewAuctionFormController {
 		disableOutOfRangeDaysOnDatePicker();
 		myAllDatesDisabled = SessionController.getManager().isAtCapacity();
 	    myAtCapacityLabel.setVisible(myAllDatesDisabled);
+		myDatePicker.setValue(myUser.getSoonestPossibleNewAuctionDate());
 	}
 	
 	
@@ -160,7 +163,6 @@ public class NewAuctionFormController {
 	public void SubmitNewAuctionRequestEvents() {
 	
 		try {
-			myUser = (NonProfitContact)SessionController.getUser();
 			myForm = new NewAuctionRequest(myUser, myDate);
 			AuctionManager manager = SessionController.getManager();
 			manager.processNewAuctionRequest(myForm);
