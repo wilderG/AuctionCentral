@@ -30,7 +30,7 @@
 
 .subMenuBar .button {
 	-fx-background-color: white;
-	-fx-font-fill: black;
+	-fx-text-fill: black;
 }
 
 
