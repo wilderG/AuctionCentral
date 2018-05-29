@@ -183,8 +183,6 @@ public class NewAuctionFormController {
 		
 		} catch(Exception theEvent) {
 			myErrorLableMsg.setVisible(true);
-			mySubmitButton.setDisable(true);
-			
 		}
 	}
 
