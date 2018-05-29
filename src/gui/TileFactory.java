@@ -15,11 +15,25 @@ import model.Auction;
 import model.AuctionItem;
 import model.AuctionManager;
 import model.Bid;
+/**
+ * Static factory class is used to create tiles for the view display.
+ * Tiles can be created for an Auction, AuctionItem and Bid.
+ * @author Jared Malone
+ * @version 5/29/2018
+ */
+public final class TileFactory {
 
-public class TileFactory {
-
+	/** The location of the tile fxml file. **/
 	private static final String TILE_VIEW = "TileView.fxml";
 		
+	/** Static class cannot be constructed. **/
+	private TileFactory() {}
+	
+	/**
+	 * Returns an auction display tile.
+	 * @param theAuction must not be null.
+	 * @return An AnchorPane showing auction information.
+	 */
 	public static AnchorPane createAuctionTile(final Auction theAuction) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
@@ -36,6 +50,13 @@ public class TileFactory {
 		return tile;
 	}
 	
+	/**
+	 * Returns an Auction tile with an icon/option to delete the auction.
+	 * @param theAuction
+	 * @param theManager
+	 * @param theInformationContainerViewController
+	 * @return An AnchorPane containing auction information and a delete button.
+	 */
 	public static AnchorPane createAdminAuctionTile(final Auction theAuction, AuctionManager theManager,
 			InformationContainerViewController theInformationContainerViewController) {
 		FXMLLoader loader = getLoader();
@@ -73,8 +94,6 @@ public class TileFactory {
 		} else {
 			icon.setImage(new Image("/icons/delete-disabled.png"));
 		}
-
-
 		return tile;
 	}
 	
@@ -89,6 +108,12 @@ public class TileFactory {
 
 	}
 	
+	/**
+	 * Returns a tile displaying item information. Information includes
+	 * item description and minimum bid.
+	 * @param theItem is not null
+	 * @return an AnchorPane with item information.
+	 */
 	public static AnchorPane createItemTile(final AuctionItem theItem) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
@@ -102,6 +127,12 @@ public class TileFactory {
 		return tile;
 	}
 	
+	/**
+	 * Returns a tile displaying bid information. Information includes
+	 * bid amount, item description and minimum bid.
+	 * @param theBid is not null
+	 * @return an AnchorPane with bid information.
+	 */
 	public static AnchorPane createBidTile(final Bid theBid) {
 		FXMLLoader loader = getLoader();
 		AnchorPane tile = getNewTile(loader);
@@ -118,11 +149,7 @@ public class TileFactory {
 		return tile;
 	}
 	
-	
-	
-	
-	
-	
+	/** Helper method loads the tile fxml file. **/
 	private static AnchorPane getNewTile(final FXMLLoader theLoader) {
 		AnchorPane tile = null;
 		try {

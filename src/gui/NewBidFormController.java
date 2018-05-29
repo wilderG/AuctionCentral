@@ -1,7 +1,6 @@
 package gui;
 
 import java.math.BigDecimal;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,8 +10,6 @@ import model.AuctionItem;
 import model.AuctionManager;
 import model.Bidder;
 import model.NewBidRequest;
-
-
 /**
  * The form is for displaying new Bid form.
  * 
@@ -117,6 +114,5 @@ public class NewBidFormController {
 	public void setItem(final AuctionItem theItem) {
 		myItem = theItem;
 	}
-	
-	
+
 }

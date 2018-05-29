@@ -62,9 +62,7 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		myItems = theItems;
 		myBids = theBids;
 	}
-	
-	//________________________________________________________________________________________
-	
+		
 	/**
 	 * Adds an item to the auction if auction is allowing new items.
 	 * @param theItem
@@ -273,5 +271,6 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	        bidCount += myBids.get(bidder).size();
 	    }
 	    return bidCount != 0;
-	}	
+	}
+	
 }

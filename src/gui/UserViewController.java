@@ -1,11 +1,7 @@
 package gui;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
-
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -15,8 +11,7 @@ import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
-import model.*;
-
+import model.User;
 /**
  * View constructs a user view interface where the various users of the system can accomplish all necessary tasks
  * @author Jared Malone
@@ -78,9 +73,6 @@ public class UserViewController implements Initializable {
 	@FXML
 	private FlowPane mySubMenuBar;
 	
-	
-	
-	
 	/**
 	 * Initializes the view by constructing all appropriate view components. 
 	 */
@@ -92,12 +84,6 @@ public class UserViewController implements Initializable {
 		myScrollPane.getStyleClass().add("rootPane");
 		myScrollPane.setHbarPolicy(ScrollBarPolicy.NEVER);
 		myScrollPane.setVbarPolicy(ScrollBarPolicy.ALWAYS);
-//		mySubMenuBarContainer.prefWidthProperty().bind(myGridPane.widthProperty());
-//		mySubMenuBarContainer.prefHeightProperty().bind(myGridPane.get);
-
-//		mySubMenuBar.getStyleClass().add("subMenuBar");
-//		initializeDateObjects();		
-		
 	}
 	
 	public FlowPane getMenuButtonBar() {
@@ -164,27 +150,4 @@ public class UserViewController implements Initializable {
 		return mySubMenuBar;
 	}
 	
-	
-	/**
-	 * Getter for the views sub menu bar container flow pane.
-	 * Post-Condition: The object returned will the the one used by the view.
-	 * @return The views container flow pane for the sub menu bar.
-	 */
-//	public FlowPane getMySubMenuBarContainer() {
-//		return mySubMenuBarContainer;
-//	}
-	
-	public void refreshMenuBar() {
-		ObservableList<Node> buttons = myMenuButtonBar.getChildren();
-		
-		myMenuButtonBar.getChildren().clear();
-		for (Node e : buttons)
-			myMenuButtonBar.getChildren().add(e);
-		
-	}
-	
-
-		
-	
 }
-

@@ -9,10 +9,10 @@ import java.util.TreeSet;
 import backend.StorageIO;
 
 /**
- * Manages new object requests from the front-end and 
+ * Manages new object requests, creates new objects and reads/writes objects
+ * to the serialized file. 
  * @author Jared Malone
  * @version 5/5/2018
- *
  */
 public class AuctionManager implements Manager {
 	/** Generated Serial Version UID. */
@@ -26,7 +26,6 @@ public class AuctionManager implements Manager {
 		
 	/** The schedule of all past and future auctions. **/
 	private AuctionCalendar myCalendar;
-	
 	
 	/**
 	 * Constructs a new manager object.
@@ -126,10 +125,6 @@ public class AuctionManager implements Manager {
 		Auction auction = theNewItemRequest.getMyAuction();
 		String description = theNewItemRequest.getMyDescription();
 		BigDecimal minimumAmount = theNewItemRequest.getMyMinimumBid();
-		
-//		if (!isNewItemRequestAllowed(auction)) {
-//			throw new IllegalArgumentException("New item is not allowed.");
-//		}
 		
 		AuctionItem newItem = new AuctionItem(minimumAmount, description);
 		auction.addItem(newItem);

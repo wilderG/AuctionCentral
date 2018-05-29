@@ -25,8 +25,6 @@ public class SubMenuViewController {
 	 */
 	@FXML
 	private FlowPane myFlowPane;
-	// Needs to be added at 0,1
-	
 	
 	/**
 	 * Allows you to add a node (control) to the sub menu view
@@ -37,7 +35,5 @@ public class SubMenuViewController {
 	public void addNode(Node theMenuControl) {
 		myFlowPane.getChildren().add(theMenuControl);
 	}
-	
-	
 	
 }

@@ -76,10 +76,7 @@ public class NewItemFormController {
 	        
 	        successfulItemSubmission();
 	        displayErrorIfItemsNowFull();
-            
-//            Node button = SessionController.getUserViewController().getMenuButtonBar().getChildren().get(0);
-//            button.fireEvent();
-	    } catch (IllegalArgumentException e) {
+ 	    } catch (IllegalArgumentException e) {
 	        myErrorLabel.setText(e.getMessage());
             myErrorLabel.setVisible(true);
 	    }

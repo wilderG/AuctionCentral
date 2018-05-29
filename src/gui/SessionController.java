@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -18,7 +17,6 @@ import model.Bidder;
 import model.Employee;
 import model.NonProfitContact;
 import model.User;
-
 /**
  * Controller manages the various views that will be presented depending on user interactions.
  * @author Jared Malone
@@ -130,9 +128,9 @@ public class SessionController {
 	 * @param theController associated with the UserView where the bidder menu will be added.
 	 */
 	private static void loadBidderMenu(final UserViewController theController) {
-		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		AnchorPane viewBidsButton = MenuButton.newMenuButton("View Bids", myUser, true);
-		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		AnchorPane viewAuctionsButton = MainMenuButtonFactory.newMenuButton("View Auctions");
+		AnchorPane viewBidsButton = MainMenuButtonFactory.newMenuButton("View Bids", myUser, true);
+		AnchorPane logOutButton = MainMenuButtonFactory.newMenuButton("Log Out");
 
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
@@ -172,7 +170,6 @@ public class SessionController {
 		SubMenuFactory.showBidderAuctionSubMenu();
 	}
 
-
 	/**
 	 * Loads a menu that contains all the main controls that can be used by a non profit contact
 	 * Pre-Condition: theController != null
@@ -180,10 +177,10 @@ public class SessionController {
 	 * @param theController associated with the UserView where the non profit contact menu will be added.
 	 */
 	private static void loadNonProfitMenu(final UserViewController theController) {
-		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions", myUser, true);
-		AnchorPane requestNewAuctionButton = MenuButton.newMenuButton("Request Auction", myUser, false);
-		AnchorPane requestNewItemButton = MenuButton.newMenuButton("Add Item", myUser, true);
-		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		AnchorPane viewAuctionsButton = MainMenuButtonFactory.newMenuButton("View Auctions", myUser, true);
+		AnchorPane requestNewAuctionButton = MainMenuButtonFactory.newMenuButton("Request Auction", myUser, false);
+		AnchorPane requestNewItemButton = MainMenuButtonFactory.newMenuButton("Add Item", myUser, true);
+		AnchorPane logOutButton = MainMenuButtonFactory.newMenuButton("Log Out");
 
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
 		buttons.add(viewAuctionsButton);
@@ -261,8 +258,8 @@ public class SessionController {
 	 */
 	private static void loadEmployeeMenu(final UserViewController theController) {
 		ArrayList<AnchorPane> buttons = new ArrayList<>();
-		AnchorPane viewAuctionsButton = MenuButton.newMenuButton("View Auctions");
-		AnchorPane modifySystemButton = MenuButton.newMenuButton("Modify System");
+		AnchorPane viewAuctionsButton = MainMenuButtonFactory.newMenuButton("View Auctions");
+		AnchorPane modifySystemButton = MainMenuButtonFactory.newMenuButton("Modify System");
 		buttons.add(viewAuctionsButton);
 		buttons.add(modifySystemButton);
 		viewAuctionsButton.setOnMouseClicked(event -> {
@@ -284,7 +281,7 @@ public class SessionController {
 		theController.addMenuButton(viewAuctionsButton);
 		theController.addMenuButton(modifySystemButton);
 
-		AnchorPane logOutButton = MenuButton.newMenuButton("Log Out");
+		AnchorPane logOutButton = MainMenuButtonFactory.newMenuButton("Log Out");
 		logOutButton.setOnMouseClicked(event -> {
 			SessionController.userLogout();
 		});
@@ -296,10 +293,7 @@ public class SessionController {
 		addActiveCssClass(viewAuctionsButton);
 		SubMenuFactory.showAdminSubMenu();
 	}
-
-
-
-
+	
 	/**
 	 * Logs the user out of the current session.
 	 * Post-Condition: The load screen which will allow a user to login in will be loaded.
@@ -328,7 +322,6 @@ public class SessionController {
 		}
 	}
 
-
 	/**
 	 * Loads a userView onto myStage.
 	 * Pre-Condition: myStage != null
@@ -352,7 +345,6 @@ public class SessionController {
 		}
 		return userViewController;
 	}
-
 
 	/**
 	 * Loads an InformationContainerView into theUserView associated with the given userViewController.

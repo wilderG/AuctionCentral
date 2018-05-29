@@ -103,9 +103,7 @@ public class ModifySystemViewController {
 			myMessageLabel.setVisible(true);
 			myMessageLabel.setText("Invalid, Please enter a positive number!");
 			myChangeMaxUpcomingAuctionsField.clear();
-			
 		}
-		
 	}
 	
 }

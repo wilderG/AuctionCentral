@@ -2,7 +2,6 @@ package gui;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.Observable;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -22,7 +21,7 @@ import model.NonProfitContact;
  * @author Jim Rosales
  * @version May 19, 2018
  */
-public class InformationContainerViewController extends Observable {
+public final class InformationContainerViewController {
 
 	/**
 	 * The flowpane used by the informationContainer to hold auctionTiles.
@@ -229,6 +228,12 @@ public class InformationContainerViewController extends Observable {
 		
 	}
 
+	/**
+	 * Loads the new bid request form into the InformationContainerView.
+	 *
+	 * pre-condition: a user is permitted to make a bid for the item.
+	 * @param theItem is not null
+	 */
 	public void showNewBidRequest(AuctionItem theItem) {
 		FXMLLoader loader = 
 				new FXMLLoader(InformationContainerViewController
@@ -243,6 +248,12 @@ public class InformationContainerViewController extends Observable {
 		controller.setItem(theItem);
 	}
 
+	/**
+	 * Loads the new Item request form into the InformationContainerView. 
+	 * 
+	 * pre-condition: a user is permitted to request a new item. 
+	 * @param theAuction is not null
+	 */
 	public void showNewItemRequest(Auction theAuction) {
 		FXMLLoader loader = 
 				new FXMLLoader(InformationContainerViewController
@@ -257,6 +268,11 @@ public class InformationContainerViewController extends Observable {
 				SessionController.getUser()).getFutureAuction());
 	}
 	
+	/**
+	 * Loads the new Auction request form into the InformationContainerView.
+	 * 
+	 * pre-condition: a user is permitted to request a new auction.
+	 */
 	public void showNewAuctionRequest() {
 		FXMLLoader loader = 
 				new FXMLLoader(InformationContainerViewController
@@ -265,7 +281,12 @@ public class InformationContainerViewController extends Observable {
 		this.clear();
 		this.addNode(loadForm(loader));
 	}
-	
+
+	/**
+	 * Loads the system modification form into the InformationContainerView.
+	 * 
+	 * pre-condition: a user is permitted to change the system configuration.
+	 */
 	public void showModifySystemView() {
 		FXMLLoader loader = 
 				new FXMLLoader(InformationContainerViewController
@@ -275,16 +296,21 @@ public class InformationContainerViewController extends Observable {
 		this.addNode(loadForm(loader));
 	}
 	
-	private Pane loadForm(final FXMLLoader theLoader) {
+	/**
+	 * Helper method loads the specified FXML file. If any error occurs while
+	 * loading then an error is displayed to the console and null is returned.
+	 *
+	 * @param theFxmlFile a valid reference to an existing .fxml file
+	 * @return a JavaFX Pane presenting the specified file.
+	 */
+	private Pane loadForm(final FXMLLoader theFxmlFile) {
 		Pane form = null;
 		try {
-			form = (Pane) theLoader.load();
+			form = (Pane) theFxmlFile.load();
 		} catch (IOException e) {
 			System.err.println("Error in Method: loadForm, " + 
 					"Class: InformationContainerViewController");
-			e.printStackTrace();
 		}
-
 		return form;
 	}
 	

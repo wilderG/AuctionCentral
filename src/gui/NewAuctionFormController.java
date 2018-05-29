@@ -13,7 +13,6 @@ import model.AuctionDate;
 import model.AuctionManager;
 import model.NewAuctionRequest;
 import model.NonProfitContact;
-
 /**
  * Controller for the new Auction Form that is used y a nonprofit contact to submit a new auction.
  * @author Wilder Garcia
@@ -21,7 +20,6 @@ import model.NonProfitContact;
  *
  */
 public class NewAuctionFormController {
-
 		
 	/**
 	 * The users NewAuctionRequest.
@@ -132,7 +130,6 @@ public class NewAuctionFormController {
                         if (failureMessage != null) {
                             getStyleClass().add("disabled");
                             setTooltip(new Tooltip(failureMessage));
-                            //setDisable(true);
                         }
                     }
                     
@@ -192,5 +189,3 @@ public class NewAuctionFormController {
 	}
 
 }
-
-

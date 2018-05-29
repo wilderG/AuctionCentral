@@ -14,7 +14,7 @@ import javafx.scene.layout.AnchorPane;
  * @author Jared Malone
  *
  */
-public class ViewMenuButtonController implements Observer {
+public class MainMenuButtonController implements Observer {
 	
 	/*
 	 * The title used by the ViewMenuButton.
@@ -46,11 +46,14 @@ public class ViewMenuButtonController implements Observer {
 		myTitle.setAlignment(Pos.CENTER);
 	}
 	
-	
 	public void setVisible(boolean theFlag) {
 		myPane.setVisible(theFlag);
 	}
 
+	/**
+	 * Observable is used to set this button's visibility when the current
+	 * user adds an auction.
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if ((arg1 instanceof String) && ((String) arg1).equals("hasAuction")) {

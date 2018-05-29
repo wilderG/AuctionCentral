@@ -10,7 +10,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.scene.text.TextAlignment;
-
 /**
  * A controller for the auctionTileView
  * @author Jim Rosales
@@ -72,15 +71,6 @@ public class TileViewController {
 	 */
 	@FXML
 	private ImageView myDeleteIcon;
-
-
-	/**
-	 * The constructor.
-	 * The constructor is called before the initialize() method.
-	 */
-	public TileViewController() {
-		// TODO Auto-generated constructor stub
-	}
 
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -175,7 +165,5 @@ public class TileViewController {
 				new Background(new BackgroundFill(Color.web(DEFAULT_LEFT_INFO_PANE_COLOR),
 						CornerRadii.EMPTY, Insets.EMPTY)));
 	}
-	
-	
 	
 }

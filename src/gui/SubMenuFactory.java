@@ -172,22 +172,8 @@ public class SubMenuFactory {
 			infoViewController.showAuctions(user.getMyAuctions());
 		});
 		
-//		Button auctionRequestButton = new Button("Request New Auction");
-//		
-//		auctionRequestButton.setOnMouseClicked(event -> {
-//			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
-//			NonProfitContact user = (NonProfitContact) SessionController.getUser();
-//			Auction auction = user.getFutureAuction();
-//			if (auction == null) {
-//				infoViewController.showNewAuctionRequest();
-//			}
-//		});
 		mySubMenu.getChildren().add(viewAllAuctionsButton);
-//		mySubMenu.getChildren().add(auctionRequestButton);
 	}
-	
-	
-	
 
 	
 	/**
@@ -212,6 +198,7 @@ public class SubMenuFactory {
 		});
 				
 	}
+
 	
 	/**
 	 * Initializes all datePicker object that are used by the admin SubMenu.
@@ -225,9 +212,8 @@ public class SubMenuFactory {
         mySubMenu.getChildren().add(myEndRangeDatePicker);
 		myStartRangeDatePicker.setVisible(true);
 		myEndRangeDatePicker.setVisible(true);
-		
-
 	}
+
 	
 	/**
 	 * By default the startDate picker is in focus when the view is loaded.
@@ -245,8 +231,7 @@ public class SubMenuFactory {
             }
         });
 	}
-	
-	
+		
 	
 	/**
 	 * Retrieves auctions within myStartRangeDate and myEndRangeDate if possible, and then using said auctions
@@ -266,6 +251,7 @@ public class SubMenuFactory {
 	    }
 	}
 	
+	
 	/**
 	 * Initializes all Date objects needed to capture both the start and end date for a range that can be chosen by a
 	 * user.
@@ -281,11 +267,9 @@ public class SubMenuFactory {
 		
 		myStartRangeDate = null;
 		myEndRangeDate = null;
-		
-		
-		
 		removeFocusFromStarDatePicker();
 	}
+	
 	
 	/**
 	 * After a date has been chosen using the myStartRangeDatePicker, disables and dates in the myEndRangeDatePicker
@@ -315,7 +299,6 @@ public class SubMenuFactory {
 	            }
 	        };
 	        myEndRangeDatePicker.setDayCellFactory(endDatePickerCellFactory);
-	        
 	}
 	
 	/**

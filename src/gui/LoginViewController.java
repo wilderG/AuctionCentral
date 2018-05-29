@@ -13,9 +13,13 @@ import javafx.scene.text.Text;
 import model.AuctionManager;
 import model.User;
 
-public class LoginViewController implements Initializable {
-	
-	
+/**
+ * Handles user input for a login event. If the user is valid then 
+ * @author Jared
+ *
+ */
+public final class LoginViewController implements Initializable {
+	/** Manager is used to verify and retrieve a valid user. **/
 	private AuctionManager myManager;
 	
 	@FXML
@@ -36,7 +40,7 @@ public class LoginViewController implements Initializable {
 		configureEventListeners();
 	}
 
-	/*
+	/**
 	 * Setup listeners for login field and button press.
 	 */
 	private void configureEventListeners() {
@@ -55,12 +59,10 @@ public class LoginViewController implements Initializable {
 	 * @param theActionEvent that is being fired by the textfield
 	 */
 	@FXML
-    public void onEnter(ActionEvent theActionEvent){
+    private void onEnter(ActionEvent theActionEvent){
 		clearUserDisplay();
-
 		loginUser(usernameField.getText());
     }
-	
 	
 	private void clearUserDisplay() {
 		actionTarget.setText("");
@@ -75,11 +77,7 @@ public class LoginViewController implements Initializable {
 			actionTarget.setText("User not found.");
 			return;
 		}
-		
 		SessionController.userLogin(user);
 	}
-
-
-	
 	
 }
