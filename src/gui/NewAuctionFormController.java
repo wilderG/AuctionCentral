@@ -74,6 +74,9 @@ public class NewAuctionFormController {
 	private boolean myAllDatesDisabled;
 	
 
+	/**
+	 * Initializes the auqion request form.
+	 */
 	@FXML
 	private void initialize() {
 		myUser = (NonProfitContact)SessionController.getUser();
@@ -133,6 +136,13 @@ public class NewAuctionFormController {
                         }
                     }
                     
+                    /**
+                     * Gets the message to be displayed for a date if the date
+                     * is unavailable to be scheduled on for a new auction.
+                     * 
+                     * @param theDate the date to get message for.
+                     * @return the error message if there is an error.
+                     */
                     private String getIneligableDateMessage(LocalDate theDate) {
                         String message = null;
                         AuctionDate auctionDate = myManager.getAuctionDate(theDate);

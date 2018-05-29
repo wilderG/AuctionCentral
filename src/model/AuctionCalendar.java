@@ -209,7 +209,11 @@ public class AuctionCalendar implements Serializable {
                 theDate.getMonthValue(), theDate.getYear());
     }
     
-    
+    /**
+     * Forces this auctino to be added in the past for demonstration purposes.
+     * 
+     * @param theAuction the auction to be force added
+     */
     public void forceAddAuctionInThePast(Auction theAuction) {
         LocalDate pastDate = theAuction.getDate();
         AuctionDate dateForAuction = getAuctionDate(pastDate.getDayOfMonth(),

@@ -20,6 +20,7 @@ import model.NonProfitContact;
  * @version May 20, 2018
  */
 public class Deliverable3DemoData {
+    
 	/**
 	 * The main method for running Demo Data.
 	 * 
@@ -261,16 +262,6 @@ public class Deliverable3DemoData {
 				BigDecimal.valueOf(6.00)));
 		bidSetbidder2auction3.add(new Bid(bidder2, item8,
 				BigDecimal.valueOf(1.00)));
-	
-//		TreeSet<Bid> bidSetbidder4auction3 = new TreeSet<>();
-//		bidSetbidder4auction3.add(new Bid(bidder4, item5,
-//				BigDecimal.valueOf(1300.00)));
-//		bidSetbidder4auction3.add(new Bid(bidder4, item6,
-//				BigDecimal.valueOf(70.00)));
-//		bidSetbidder4auction3.add(new Bid(bidder4, item7,
-//				BigDecimal.valueOf(6.00)));
-//		bidSetbidder4auction3.add(new Bid(bidder4, item8,
-//				BigDecimal.valueOf(1.00)));
 		
 		// Auction 4
 		TreeSet<Bid> bidSetbidder1auction4 = new TreeSet<>();
@@ -362,7 +353,6 @@ public class Deliverable3DemoData {
 		TreeMap<Bidder, TreeSet<Bid>> bidSet3 = new TreeMap<>();
 		bidSet3.put(bidder1, bidSetbidder1auction3);
 		bidSet3.put(bidder2, bidSetbidder2auction3);
-//		bidSet3.put(bidder4, bidSetbidder4auction3);
 		
 		TreeMap<Bidder, TreeSet<Bid>> bidSet4 = new TreeMap<>();
 		bidSet4.put(bidder1, bidSetbidder1auction4);

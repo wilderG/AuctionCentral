@@ -231,6 +231,13 @@ public class AuctionManager implements Manager {
 	    return myCalendar.geAllAuctionsSorted();
 	}
 
+	/**
+	 * Removes the auction from the program.
+	 * 
+	 * pre-conditions: the auction has no bids
+	 * post-conditions: the auction will no longer exist in the program
+	 * @param theAuction the auction to be deleted
+	 */
 	public void removeAuction(final Auction theAuction) {
 		if (theAuction.isEmptyBids()) {
 			// remove auction from sponsor
@@ -242,10 +249,22 @@ public class AuctionManager implements Manager {
         storage.writeData();
 	}
 	
+	/**
+	 * Gets the auction date from the localDate.
+	 * 
+	 * @param theDate the date
+	 * @return the auction date
+	 */
 	public AuctionDate getAuctionDate(LocalDate theDate) {
 	    return myCalendar.getAuctionDate(theDate);
 	}
 	
+	/**
+	 * Returns whether the program has the current maximum or greater auctions.
+	 * 
+	 * @return whether or not the program is holding less than the maximum
+	 * auctions
+	 */
 	public boolean isAtCapacity() {
 	    return !myCalendar.isAllowingNewAuction();
 	}

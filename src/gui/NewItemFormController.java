@@ -40,7 +40,9 @@ public class NewItemFormController {
     @FXML
     private Label mySuccessLabel;
 
-    
+    /**
+     * initializes the form in the GUI.
+     */
 	@FXML
 	private void initialize() {
         myErrorLabel.setVisible(false);
@@ -83,12 +85,19 @@ public class NewItemFormController {
 	    }
 	}
 
+	/**
+	 * Adjusts the form for when an item is added succesfully.
+	 */
     private void successfulItemSubmission() {
         myItemDescription.setText("");
         myMinimumBid.setText("");
         mySuccessLabel.setVisible(true);
     }
     
+    /**
+     * Adjusts the form to display that items can no longer be added
+     * if the maximum number exist in this auction.
+     */
     private void displayErrorIfItemsNowFull() {
         if (!myAuction.isAllowingNewItem()) {
             myErrorLabel.setText("Auction now has the maximum number of items.");

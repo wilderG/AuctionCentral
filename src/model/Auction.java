@@ -41,24 +41,29 @@ public final class Auction implements Serializable, Comparable<Auction> {
 	 * @param theDate date of the auction.
 	 * @param theMaxItemCount the maximum number of items allowed.
 	 * @param theMaxBidCount the maximum number of bids allowed from a unique bidder.
-
 	 */
 	public Auction(final LocalDate theDate, NonProfitContact theNonProfit) {
-		myDate = theDate;
-		myOwner = theNonProfit;
-		myItems = new TreeSet<>();
-		myBids = new TreeMap<>();
+        this(theDate, theNonProfit, new TreeSet<AuctionItem>(), 
+                new TreeMap<Bidder, TreeSet<Bid>>());
 	}
 	
-	
+	/**
+	 * Overloaded constructor for auction with a predefined set of items and bids.
+	 * 
+	 * @param theDate
+	 * @param theNonProfit
+	 * @param theItems
+	 * @param theBids
+	 */
 	public Auction(final LocalDate theDate, NonProfitContact theNonProfit,
 			final TreeSet<AuctionItem> theItems, final TreeMap<Bidder, TreeSet<Bid>> theBids) {
-		this(theDate, theNonProfit);
+        myDate = theDate;
+        myOwner = theNonProfit;
 		myItems = theItems;
 		myBids = theBids;
 	}
 	
-	
+	//________________________________________________________________________________________
 	
 	/**
 	 * Adds an item to the auction if auction is allowing new items.
@@ -78,6 +83,11 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		return myOwner.getDisplayName();
 	}
 	
+	/**
+	 * Gets the nonprofit associated with this auction.
+	 * 
+	 * @return the auction owner
+	 */
 	public NonProfitContact getOwner() {
 		return myOwner;
 	}
@@ -194,14 +204,32 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		return myDate;
 	}
 
+	/**
+	 * Gets the number of items left available to be added to this auction 
+	 * currently.
+	 * @return
+	 */
 	public int getAvailableSpace() {
 		return MAXIMUM_ITEM_COUNT - myItems.size();
 	}
 	
+	/**
+	 * Gets all bids for this auction for this bidder.
+	 * 
+	 * @param theBidder the bidder with the bids.
+	 * @return the bids for the bidder
+	 */
 	public TreeSet<Bid> getMyBids(final Bidder theBidder) {		
 		return myBids.get(theBidder);
 	}
 	
+	/**
+	 * Gets this bidder's bid for the particular item.
+	 * 
+	 * @param theBidder that has the bid
+	 * @param theItem the item that is bid on
+	 * @return
+	 */
 	public Bid getBidForItem(final Bidder theBidder, AuctionItem theItem) {
 		Bid bid = null;
 		for (Bid potentialBid: myBids.get(theBidder)) {
@@ -213,10 +241,18 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		return bid;
 	}
 
+	/**
+	 * Gets whether or not bids yet exist for this auction.
+	 * 
+	 * @return whether or not this auction yet has bids
+	 */
 	public boolean isEmptyBids() {
 		return myBids.isEmpty();
 	}
 
+	/**
+	 * Compares auctions by date, then by owner.
+	 */
 	@Override
 	public int compareTo(Auction theOther) {
 		if (myDate.equals(theOther.myDate)) {
@@ -226,13 +262,16 @@ public final class Auction implements Serializable, Comparable<Auction> {
 		}
 	}
 	
-
+	/**
+     * Gets whether or not bids yet exist for this auction.
+     * 
+     * @return whether or not this auction yet has bids
+	 */
 	public boolean isContaingBids() {
 	    int bidCount = 0;
 	    for (Bidder bidder : myBids.keySet()) {
 	        bidCount += myBids.get(bidder).size();
 	    }
 	    return bidCount != 0;
-	}
-	
+	}	
 }
