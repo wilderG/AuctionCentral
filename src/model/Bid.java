@@ -46,17 +46,36 @@ public class Bid implements Serializable, Comparable<Bid> {
 		//myItem = theItem;
 	}
 	
+	/**
+	 * Gets the bid value.
+	 * 
+	 * @return the value of the bid
+	 */
 	public BigDecimal  getValue() {
 		return myValue;
 	}
+	
+	/**
+	 * Gets the bidder for this bid.
+	 * 
+	 * @return the bidder for this bid
+	 */
 	public Bidder getBidder() {
 		return myBidder;
 	}
+	
+	/**
+	 * Gets the item this bid is for.
+	 * 
+	 * @return the item this bid is for
+	 */
 	public AuctionItem getAuctionItem() {
 		return myItem;
 	}
 
-	
+	/**
+	 * Compares bids by their item, and then by their value.
+	 */
 	@Override
 	public int compareTo(Bid theOther) {
 		if (myItem.equals(theOther.myItem)) {
@@ -64,6 +83,5 @@ public class Bid implements Serializable, Comparable<Bid> {
 		} else {
 			return myItem.compareTo(theOther.myItem);
 		}
-	}
-	
+	}	
 }
