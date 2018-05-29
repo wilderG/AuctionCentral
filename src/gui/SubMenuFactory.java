@@ -1,10 +1,8 @@
 package gui;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.TreeSet;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Button;
@@ -93,24 +91,13 @@ public class SubMenuFactory {
 	 */
 	public static void showBidderAuctionSubMenu() {
 		mySubMenu.getChildren().clear();
-		Button viewAllAuctionsButton = new Button("Show All Auctions");
 		Button viewAllBiddableAuctions = new Button("Show Biddable Auctions");
+		Button viewAllAuctionsButton = new Button("Show All Auctions");
 		
-		
-		mySubMenu.getChildren().add(viewAllAuctionsButton);
 		mySubMenu.getChildren().add(viewAllBiddableAuctions);
+		mySubMenu.getChildren().add(viewAllAuctionsButton);
 		
 		// Remove default focus from the viewAllAuctionsButton
-		viewAllAuctionsButton.getParent().requestFocus();
-				
-		viewAllAuctionsButton.setOnMouseClicked(event -> {
-			InformationContainerViewController informationContainerViewController =
-					SessionController.getInformationContainerView();
-			AuctionManager manager = SessionController.getManager();
-			informationContainerViewController.showAuctions(manager.getAllAuctionsSorted());
-			clearMessage();
-		});		
-		
 		viewAllBiddableAuctions.setOnMouseClicked(event -> {
 			InformationContainerViewController informationContainerViewController =
 					SessionController.getInformationContainerView();
@@ -119,6 +106,17 @@ public class SubMenuFactory {
 			informationContainerViewController.showAuctions(manager.getAvailableAuctions(bidder));
 			clearMessage();
 		});
+		
+		viewAllAuctionsButton.getParent().requestFocus();
+		
+		viewAllAuctionsButton.setOnMouseClicked(event -> {
+			InformationContainerViewController informationContainerViewController =
+					SessionController.getInformationContainerView();
+			AuctionManager manager = SessionController.getManager();
+			informationContainerViewController.showAuctions(manager.getAllAuctionsSorted());
+			clearMessage();
+		});		
+		
 	}
 	
 	
@@ -131,9 +129,18 @@ public class SubMenuFactory {
 	public static void showBidderBidSubMenu() {
 		mySubMenu.getChildren().clear();
 		
-		Button viewAllBids = new Button("View All Items");
+		Button viewByAuction = new Button("View Bids By Auction");
+		viewByAuction.setOnMouseClicked(event -> {
+			clearMessage();
+			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
+			Bidder user = (Bidder) SessionController.getUser();
+			infoViewController.showAuctionBids(user.getMyAuctions());
+		});
+
 		
+		Button viewAllBids = new Button("View Bids For All Items");
 		viewAllBids.setOnMouseClicked(event -> {
+			clearMessage();
 			InformationContainerViewController infoViewController = SessionController.getInformationContainerView();
 			Bidder user = (Bidder) SessionController.getUser();
 			TreeSet<Bid> allBids = new TreeSet<>();
@@ -143,6 +150,7 @@ public class SubMenuFactory {
 			infoViewController.showBids(allBids);
 		});
 		
+		mySubMenu.getChildren().add(viewByAuction);
 		mySubMenu.getChildren().add(viewAllBids);
 	}
 	

@@ -1,20 +1,12 @@
 package gui;
 
 import java.time.LocalDate;
-
-import org.omg.CosNaming._BindingIteratorImplBase;
-
-import javafx.event.Event;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import model.AuctionCalendar;
 import model.AuctionDate;

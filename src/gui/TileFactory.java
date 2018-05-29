@@ -2,12 +2,8 @@ package gui;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.util.Optional;
-
-import console.ConsoleDriver;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -52,7 +48,7 @@ public class TileFactory {
 		controller.setTopRightLabel(theAuction.getName());
 		controller.setFirstBottomRightLabel(itemField);
 		controller.setTopLeftLabel("" + date.getDayOfMonth());
-		controller.setBottomLeft(ConsoleDriver.formatDateMonthYear(date)); 
+		controller.setBottomLeft(Formatter.formatDateMonthYear(date)); 
 		String doesHaveBids = theAuction.isContaingBids() ? "Yes":"No";
 		String bidField = "Has bids: " + doesHaveBids;
 		
